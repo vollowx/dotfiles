@@ -1,3 +1,3 @@
 set hidden
-set shell zsh
+set shell bash
 set scrolloff 5
