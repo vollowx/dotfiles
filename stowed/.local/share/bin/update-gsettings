@@ -1,0 +1,54 @@
+#!/bin/bash
+
+config="$HOME/.config/gtk-3.0/settings.ini"
+gset="gsettings set org.gnome.desktop.interface"
+
+try() {
+  local key
+  local value="$2"
+
+  case "$1" in
+  gtk-application-prefer-dark-theme)
+    key="color-scheme"
+    value="$([[ "$2" == "1" || "$2" == "true" ]] && echo "prefer-dark" || echo "prefer-light")"
+    ;;
+  gtk-font-name)
+    key="font-name"
+    ;;
+  gtk-theme-name)
+    key="gtk-theme"
+    ;;
+  gtk-icon-theme-name)
+    key="icon-theme"
+    ;;
+  gtk-cursor-theme-name)
+    key="cursor-theme"
+    ;;
+  gtk-cursor-theme-size)
+    key="cursor-size"
+    ;;
+  *)
+    echo "unsupported key read: $1"
+    return
+    ;;
+  esac
+
+  echo -n "setting $key to $value ... "
+  if $gset "$key" "$value" &>/dev/null; then
+    echo -e "\033[0;32mOK\033[0m"
+  else
+    echo -e "\033[0;31mFAILED\033[0m"
+  fi
+}
+
+if [[ ! -f "$config" ]]; then
+  echo "configuration file ($config) not found"
+  exit 1
+fi
+
+while IFS='=' read -r key value; do
+  [[ "$key" == "[Settings]" ]] && continue
+  key=$(echo "$key" | xargs)
+  value=$(echo "$value" | xargs)
+  try "$key" "$value"
+done < <(grep -v '^#' "$config")

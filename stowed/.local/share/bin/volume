@@ -1,0 +1,20 @@
+#!/bin/bash
+
+wpctl "$@"
+
+volume=$(wpctl get-volume @DEFAULT_SINK@ | awk '{printf "%.0f", $2 * 100}')
+state=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print ($NF == "[MUTED]") ? "true" : "false"}')
+
+if [ "$state" = "true" ]; then
+  notify-send -r 69 \
+    -a "volume" \
+    "muted" \
+    -t 888 \
+    -u low
+else
+  notify-send -r 69 \
+    -a "volume" "currently at ${volume}%" \
+    -h int:value:"$volume" \
+    -t 888 \
+    -u low
+fi

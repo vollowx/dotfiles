@@ -1,0 +1,10 @@
+#!/bin/bash
+
+brightnessctl "$@" --device='tpacpi::kbd_backlight'
+brightness=$(echo $(($(brightnessctl --device='tpacpi::kbd_backlight' g) * 100 / $(brightnessctl --device='tpacpi::kbd_backlight' m))))
+
+notify-send -r 69 \
+  -a "keyboard brightness" "currently at $brightness%" \
+  -h int:value:"$brightness" \
+  -t 888 \
+  -u low

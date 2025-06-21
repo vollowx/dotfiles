@@ -1,0 +1,3 @@
+set hidden
+set shell zsh
+set scrolloff 5
