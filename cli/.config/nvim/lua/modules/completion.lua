@@ -38,12 +38,4 @@ return {
       signature = { enabled = true },
     },
   },
-
-  {
-    'zbirenbaum/copilot.lua',
-    enabled = false,
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = load_plugin('copilot'),
-  },
 }
