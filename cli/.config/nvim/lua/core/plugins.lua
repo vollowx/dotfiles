@@ -31,7 +31,7 @@ local function bootstrap()
     return true
   end
 
-  local url = 'https://github.com/folke/lazy.nvim.git'
+  local url = 'git@github.com:folke/lazy.nvim.git'
   vim.notify('[packages] installing lazy.nvim...')
   vim.fn.mkdir(vim.g.package_path, 'p')
   if

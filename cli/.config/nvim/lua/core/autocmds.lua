@@ -176,20 +176,6 @@ augroup('AutoCreateDir', {
   },
 })
 
-augroup('LazyLoadSpell', {
-  'BufWinEnter',
-  {
-    desc = 'Lazy-load spell check',
-    callback = function()
-      vim.opt.spell = true
-      vim.opt.spellcapcheck = ''
-      vim.opt.spelllang = 'en,cjk'
-      vim.opt.spelloptions = 'camel'
-      vim.opt.spellsuggest = 'best,9'
-    end,
-  },
-})
-
 augroup('StatusColumn', {
   { 'BufWritePost', 'BufWinEnter' },
   {
@@ -208,25 +194,6 @@ augroup('TerminalSettings', {
     desc = 'Set terminal settings.',
     callback = function(info)
       require('core._internal.terminal').setup(info.buf)
-    end,
-  },
-})
-
-augroup('LspSettings', {
-  'LspAttach',
-  {
-    desc = 'Set LSP settings.',
-    once = true,
-    callback = function()
-      require('core._internal.lsp').setup()
-    end,
-  },
-}, {
-  'LspAttach',
-  {
-    desc = 'Set LSP per buffer settings.',
-    callback = function(info)
-      vim.lsp.inlay_hint.enable(true, { bufnr = info.buf })
     end,
   },
 })

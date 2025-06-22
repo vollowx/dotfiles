@@ -1,8 +1,9 @@
 return {
+  { 'sainnhe/everforest' },
+  { 'sainnhe/gruvbox-material' },
   {
-    'uncenter/ctp-nvim',
+    'catppuccin/nvim',
     name = 'catppuccin',
-    branch = 'patch-1',
     config = load_pkg('catppuccin'),
   },
 }

@@ -112,14 +112,6 @@ function statusline.fname()
     bname = require('oil').get_current_dir()
   end
 
-  if vim.bo.filetype == 'lazy' then
-    bname = 'Packages'
-  end
-
-  if vim.bo.filetype == 'lspinfo' then
-    bname = 'LSP Servers'
-  end
-
   return bname
 end
 
@@ -350,36 +342,6 @@ function statusline.lsp_progress()
   )
 end
 
--- TODO: Check if copilot.lua is available
--- TODO: Update with autocmd
-local ca = require('copilot.api')
-local cc = require('copilot.client')
-
-local copilot = {}
-copilot.is_enabled = function()
-  return (not cc.is_disabled())
-    and cc.buf_is_attached(vim.api.nvim_get_current_buf())
-end
-copilot.is_error = function()
-  return (not cc.is_disabled())
-    and cc.buf_is_attached(vim.api.nvim_get_current_buf())
-    and ca.status.data.status == 'Warning'
-end
-copilot.is_loading = function()
-  return (not cc.is_disabled())
-    and cc.buf_is_attached(vim.api.nvim_get_current_buf())
-    and ca.status.data.status == 'InProgress'
-end
-
----@return string
-function statusline.copilot()
-  local icon = copilot.is_loading() and icons.ui.CircleDots
-    or copilot.is_error() and icons.ui.Warning
-    or copilot.is_enabled() and icons.ui.Copilot
-    or icons.ui.CopilotError
-  return string.format('%s ', icon)
-end
-
 -- stylua: ignore start
 ---Statusline components
 ---@type table<string, string>
@@ -390,7 +352,6 @@ local components = {
   info         = [[%{%v:lua.require'core._internal.statusline'.info()%}]],
   lsp_progress = [[%{%v:lua.require'core._internal.statusline'.lsp_progress()%}]],
   mode         = [[%{%v:lua.require'core._internal.statusline'.mode()%}]],
-  copilot      = [[%{%v:lua.require'core._internal.statusline'.copilot()%}]],
   padding      = [[ ]],
   pos          = [[%{%&ru?"%l:%c ":""%}]],
   truncate     = [[%<]],
@@ -405,7 +366,6 @@ local stl = table.concat({
   components.truncate,
   components.lsp_progress,
   components.diag,
-  components.copilot,
   components.pos,
 })
 

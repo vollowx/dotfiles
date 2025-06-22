@@ -106,16 +106,19 @@ end
 local function setup_lsp_overrides()
   -- Show notification if no references, definition, declaration,
   -- implementation or type definition is found
-  local handlers = {
-    ['textDocument/references'] = vim.lsp.handlers['textDocument/references'],
-    ['textDocument/definition'] = vim.lsp.handlers['textDocument/definition'],
-    ['textDocument/declaration'] = vim.lsp.handlers['textDocument/declaration'],
-    ['textDocument/implementation'] = vim.lsp.handlers['textDocument/implementation'],
-    ['textDocument/typeDefinition'] = vim.lsp.handlers['textDocument/typeDefinition'],
+  local methods = {
+    'textDocument/references',
+    'textDocument/definition',
+    'textDocument/declaration',
+    'textDocument/implementation',
+    'textDocument/typeDefinition',
   }
-  for method, handler in pairs(handlers) do
+
+  for _, method in ipairs(methods) do
     local obj_name = method:match('/(%w*)$'):gsub('s$', '')
-    vim.lsp.handlers[method] = function(err, result, ctx, cfg)
+    local handler = vim.lsp.handlers[method]
+
+    vim.lsp.handlers[method] = function(err, result, ctx, ...)
       if not result or vim.tbl_isempty(result) then
         vim.notify('[LSP] no ' .. obj_name .. ' found')
         return
@@ -129,11 +132,12 @@ local function setup_lsp_overrides()
 
       if #result == 1 then
         local enc = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
+
         vim.lsp.util.jump_to_location(result[1], enc)
-        vim.notify('[LSP] found 1 ' .. obj_name)
         return
       end
-      handler(err, result, ctx, cfg)
+
+      handler(err, result, ctx, ...)
     end
   end
 
@@ -187,6 +191,8 @@ end
 ---@return nil
 local function setup_diagnostic()
   vim.diagnostic.config({
+    severity_sort = true,
+    jump = { float = true },
     virtual_text = {
       spacing = 4,
       prefix = vim.trim(icons.ui.AngleLeft),

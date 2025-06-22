@@ -2,24 +2,22 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
-    event = 'InsertEnter',
+    version = 'v1.*',
+    lazy = false,
+    opts_extend = { 'sources.default' },
     opts = {
-      keymap = 'default',
-      nerd_font_variant = 'mono',
-      accept = { auto_brackets = { enabled = true } },
-      trigger = { signature_help = { enabled = true } },
-      kind_icons = icons.kinds,
+      keymap = { preset = 'default' },
+      -- nerd_font_variant = 'mono',
+      -- accept = { auto_brackets = { enabled = true } },
+      -- signature = { enabled = true },
+      -- kind_icons = icons.kinds,
     },
-  },
-
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = { 'saghen/blink.cmp' },
+    enabled = false,
   },
 
   {
     'zbirenbaum/copilot.lua',
+    enabled = false,
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = load_pkg('copilot'),
