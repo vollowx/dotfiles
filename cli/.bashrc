@@ -1,6 +1,9 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
 alias grep='grep --color=auto'
 alias ga='git add'
 alias gaa='git add --all'
