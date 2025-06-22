@@ -1,18 +1,42 @@
 return {
   {
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+      'xzbdmw/colorful-menu.nvim',
+    },
     version = 'v1.*',
-    lazy = false,
+    event = 'InsertEnter',
     opts_extend = { 'sources.default' },
     opts = {
+      completion = {
+        menu = {
+          draw = {
+            -- We don't need label_description now because label and label_description are already
+            -- combined together in label by colorful-menu.nvim.
+            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+            components = {
+
+              label = {
+                text = function(ctx)
+                  return require('colorful-menu').blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require('colorful-menu').blink_components_highlight(
+                    ctx
+                  )
+                end,
+              },
+            },
+          },
+        },
+        documentation = {
+          auto_show = true,
+        },
+      },
       keymap = { preset = 'default' },
-      -- nerd_font_variant = 'mono',
-      -- accept = { auto_brackets = { enabled = true } },
-      -- signature = { enabled = true },
-      -- kind_icons = icons.kinds,
+      signature = { enabled = true },
     },
-    enabled = false,
   },
 
   {
@@ -20,6 +44,6 @@ return {
     enabled = false,
     cmd = 'Copilot',
     event = 'InsertEnter',
-    config = load_pkg('copilot'),
+    config = load_plugin('copilot'),
   },
 }

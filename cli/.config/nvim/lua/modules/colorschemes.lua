@@ -4,6 +4,6 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    config = load_pkg('catppuccin'),
+    config = load_plugin('catppuccin'),
   },
 }

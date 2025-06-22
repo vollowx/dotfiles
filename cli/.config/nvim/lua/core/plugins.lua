@@ -2,10 +2,10 @@ if vim.env.NVIM_NOTHIRDPARTY then
   return
 end
 
----Load configuration for a specified package
+---Load configuration for a specified plugin
 ---@param path string
 ---@param schedule_wrapped boolean|nil
-_G.load_pkg = function(path, schedule_wrapped)
+_G.load_plugin = function(path, schedule_wrapped)
   return schedule_wrapped
       and function()
         vim.schedule(function()
@@ -51,7 +51,7 @@ local function bootstrap()
 end
 
 if bootstrap() then
-  load_pkg('lazy')()
+  load_plugin('lazy')()
   vim.keymap.set('n', '<Leader>pp', '<Cmd>Lazy<CR>')
   vim.keymap.set('n', '<Leader>pi', '<Cmd>Lazy install<CR>')
   vim.keymap.set('n', '<Leader>pu', '<Cmd>Lazy update<CR>')

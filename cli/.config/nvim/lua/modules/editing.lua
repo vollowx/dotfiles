@@ -10,7 +10,7 @@ return {
   {
     'altermo/ultimate-autopair.nvim',
     event = { 'InsertEnter', 'CmdlineEnter' },
-    config = load_pkg('ultimate-autopair'),
+    config = load_plugin('ultimate-autopair'),
   },
 
   {

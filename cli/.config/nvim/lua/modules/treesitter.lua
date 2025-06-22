@@ -3,7 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = { 'BufRead', 'BufNewFile', 'VeryLazy' },
-    config = load_pkg('treesitter', true),
+    config = load_plugin('treesitter', true),
     dependencies = {
       'RRethy/nvim-treesitter-endwise',
       'windwp/nvim-ts-autotag',

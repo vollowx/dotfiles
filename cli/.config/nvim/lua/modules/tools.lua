@@ -37,7 +37,7 @@ return {
 
   {
     'echasnovski/mini.jump',
-    config = load_pkg('mini-jump'),
+    config = load_plugin('mini-jump'),
     keys = {
       { 'f', mode = { 'n', 'x' } },
       { 'F', mode = { 'n', 'x' } },
@@ -102,13 +102,13 @@ return {
         end,
       })
     end,
-    config = load_pkg('oil'),
+    config = load_plugin('oil'),
   },
 
   {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
-    config = load_pkg('gitsigns'),
+    config = load_plugin('gitsigns'),
     keys = {
       { '<Leader>g', '<Nop>', desc = 'Git...' },
       {
@@ -127,7 +127,7 @@ return {
   {
     'ibhagwan/fzf-lua',
     event = 'LspAttach',
-    config = load_pkg('fzf'),
+    config = load_plugin('fzf'),
     cmd = {
       'FzfLua',
       'FZF',
