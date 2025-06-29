@@ -1,6 +1,7 @@
 require('catppuccin').setup({
   term_colors = true,
   default_integrations = false,
+  auto_integrations = true,
   integrations = {
     treesitter = true,
     native_lsp = {
@@ -19,17 +20,6 @@ require('catppuccin').setup({
       },
       inlay_hints = { background = true },
     },
-    blink_cmp = true,
-    copilot_vim = true,
-    fzf = true,
-    gitsigns = true,
-    headlines = true,
-    indent_blankline = { enabled = true, scope_color = 'surface1' },
-    markdown = true,
-    mini = { enabled = true },
-    semantic_tokens = true,
-    telescope = { enabled = true, style = 'nvchad' },
-    treesitter_context = true,
   },
   styles = {
     comments = { 'italic' },
