@@ -9,9 +9,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     require('core._internal.lsp').setup()
   end,
 })
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = lsp_settings,
-  callback = function(info)
-    vim.lsp.inlay_hint.enable(true, { bufnr = info.buf })
-  end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   group = lsp_settings,
+--   callback = function(info)
+--     vim.lsp.inlay_hint.enable(true, { bufnr = info.buf })
+--   end,
+-- })
