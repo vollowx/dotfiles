@@ -1,5 +1,4 @@
-vim.lsp.enable('clangd')
-vim.lsp.enable('lua_ls')
+vim.lsp.enable({ 'clangd', 'qmlls', 'lua_ls' })
 
 local lsp_settings =
   vim.api.nvim_create_augroup('LspSettings', { clear = true })
