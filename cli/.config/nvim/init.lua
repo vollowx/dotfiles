@@ -12,7 +12,7 @@ _G.settings = {
     border_preview = 'solid',
     border_input = 'rounded',
     background = 'dark',
-    colorscheme = 'catppuccin-macchiato',
+    colorscheme = 'catppuccin-mocha',
   },
 }
 
