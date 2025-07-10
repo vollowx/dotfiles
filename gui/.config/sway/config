@@ -49,6 +49,9 @@ seat * xcursor_theme macOS 32
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] sticky enable
 for_window [class="QQ" title="图片查看器"]               floating enable
+for_window [class="QQ" title="文件管理器"]               floating enable
+for_window [class="QQ" title="收藏"]                     floating enable
+for_window [class="QQ" title="设置"]                     floating enable
 
 input type:keyboard {
   xkb_layout us
