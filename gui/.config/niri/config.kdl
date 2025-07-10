@@ -29,48 +29,60 @@ cursor {
     xcursor-size 32
 
     hide-when-typing
-    hide-after-inactive-ms 1000
+    hide-after-inactive-ms 5000
 }
 
-output "eDP-1" {
+output "eDP-1" { // Laptop integrated monitor
     mode "1920x1080@600.000"
+    scale 1
+    transform "normal"
+    position x=0 y=0
+    variable-refresh-rate
+}
+
+output "DP-3" { // Workstation monitor
+    mode "2560x1440@180.002"
     scale 1
     transform "normal"
     position x=0 y=0
 }
 
 layout {
-    gaps 16
-
     center-focused-column "never"
 
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
-        proportion 1.0
-
-        // Fixed sets the width in logical pixels exactly.
-        // fixed 1920
     }
 
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-    // preset-window-heights { }
-
-    // You can change the default width of the new windows.
     default-column-width { proportion 0.5; }
-    // If you leave the brackets empty, the windows themselves will decide their initial width.
-    // default-column-width {}
 
     focus-ring {
         width 4
-        active-color "#cba6f788"
-        inactive-color "#50505088"
+        active-color "#b4befe88"
+        inactive-color "#9399b288"
+    }
+
+    tab-indicator {
+        width 4
+        gap 16
+        length total-proportion=0.2
+        place-within-column
+        active-color "#b4befe88"
+        inactive-color "#18182588"
+        urgent-color "#f38ba888"
+    }
+
+    shadow {
+      on
     }
 
     insert-hint {
-        color "#cba6f788"
+        color "#b4befe88"
     }
+
+    gaps 16
 
     struts {
         left 32
@@ -80,22 +92,15 @@ layout {
     }
 }
 
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
-// spawn-at-startup "alacritty" "-e" "fish"
-
 prefer-no-csd
+
+clipboard {
+
+}
 
 screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S .niri.png"
 
 animations {
-}
-
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
 }
 
 window-rule {
@@ -114,8 +119,8 @@ switch-events {
 }
 
 binds {
-    Mod+W { spawn "notifystatus"; }
-    Mod+Return { spawn "kitty" "-1"; }
+    Mod+A { spawn "notifystatus"; }
+    Mod+Return { spawn "ghostty"; }
     Mod+D { spawn "wmenu-run" "-p" "" "-N" "1e1e2e" "-n" "cdd6f4" "-M" "cba6f7" "-m" "1e1e2e" "-S" "cba6f7" "-s" "1e1e2e"; }
     Super+Alt+L { spawn "swaylock"; }
 
@@ -153,14 +158,6 @@ binds {
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
-
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
     Mod+Ctrl+U         { move-column-to-workspace-down; }
@@ -173,12 +170,6 @@ binds {
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
 
-    // You can bind mouse wheel scroll ticks using the following syntax.
-    // These binds will change direction based on the natural-scroll setting.
-    //
-    // To avoid scrolling through workspaces really fast, you can use
-    // the cooldown-ms property. The bind will be rate-limited to this value.
-    // You can set a cooldown on any bind, but it's most useful for the wheel.
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
     Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
@@ -199,14 +190,6 @@ binds {
     Mod+TouchpadScrollDown { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%+"; }
     Mod+TouchpadScrollUp   { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%-"; }
 
-    // You can refer to workspaces by index. However, keep in mind that
-    // niri is a dynamic workspace system, so these commands are kind of
-    // "best effort". Trying to refer to a workspace index bigger than
-    // the current workspace count will instead refer to the bottommost
-    // (empty) workspace.
-    //
-    // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
-    // will all refer to the 3rd workspace.
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -226,16 +209,9 @@ binds {
     Mod+Ctrl+8 { move-column-to-workspace 8; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+1 { move-window-to-workspace 1; }
-
-    // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
-
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
 
-    // There are also commands that consume or expel a single window to the side.
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
@@ -244,6 +220,8 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { fullscreen-window; }
     Mod+C { center-column; }
+
+    Mod+W { toggle-column-tabbed-display; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -268,4 +246,11 @@ binds {
 
 hotkey-overlay {
     skip-at-startup
+}
+
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "swaybg" "-i" "/home/vollow/Downloads/wallhaven-w58vvr.jpg"
+
+environment {
+    DISPLAY ":0"
 }
