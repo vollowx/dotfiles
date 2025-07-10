@@ -4,7 +4,52 @@ vim.g.maplocalleader = ' '
 local map = vim.keymap.set
 local cmd = vim.api.nvim_create_user_command
 
--- More consistent behavior when &wrap is set
+map('n', 'q', '<Cmd>fclose<CR>', { desc = 'Close all floating windows' })
+map({ 'n', 'x' }, '-', '<Cmd>e%:p:h<CR>', { desc = 'Edit parent directory' })
+map('x', '/', '<Esc>/\\%V', { desc = 'Search within Visual selection' })
+
+-- Origin: https://www.reddit.com/r/neovim/comments/1k4efz8/comment/mola3k0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+function _G.duplicate_and_comment_lines()
+  local start_line, end_line =
+    vim.api.nvim_buf_get_mark(0, '[')[1], vim.api.nvim_buf_get_mark(0, ']')[1]
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  vim.cmd.normal({ 'gcc', range = { start_line, end_line } })
+  vim.api.nvim_buf_set_lines(0, end_line, end_line, false, lines)
+  vim.api.nvim_win_set_cursor(0, { end_line + 1, cursor[2] })
+end
+
+map({ 'n', 'x' }, 'yc', function()
+  vim.opt.operatorfunc = 'v:lua.duplicate_and_comment_lines'
+  return 'g@'
+end, {
+  expr = true,
+  desc = 'Duplicate selection and comment out the first instance',
+})
+
+map('n', 'ycc', function()
+  vim.opt.operatorfunc = 'v:lua.duplicate_and_comment_lines'
+  return 'g@_'
+end, {
+  expr = true,
+  desc = 'Duplicate [count] lines and comment out the first instance',
+})
+
+-- Add semicolon or comma at the end of the line in Insert and Normal modes
+map('i', ';;', '<ESC>A;')
+map('i', ',,', '<ESC>A,')
+map('n', ';;', 'A;<ESC>')
+map('n', ',,', 'A,<ESC>')
+
+-- Insert at the beginning/end of the first line in line Visual mode
+map('x', 'I', function()
+  return vim.fn.mode() == 'V' and '^<C-v>I' or 'I'
+end, { expr = true })
+map('x', 'A', function()
+  return vim.fn.mode() == 'V' and '$<C-v>A' or 'A'
+end, { expr = true })
+
+-- More consistent behavior of j/k when &wrap is set
 -- stylua: ignore start
 map({ 'n', 'x' }, 'j', 'v:count ? "j" : "gj"', { expr = true })
 map({ 'n', 'x' }, 'k', 'v:count ? "k" : "gk"', { expr = true })
@@ -76,12 +121,6 @@ map({ 'n', 'x' }, '<Leader>9', tabswitch(vim.cmd.tabnext, 9))
 map('i', '<C-g>+', '<Esc>[szg`]a')
 map('i', '<C-g>=', '<C-g>u<Esc>[s1z=`]a<C-G>u')
 
--- Close all floating windows
-map('n', 'q', '<Cmd>fclose<CR>')
-
--- Edit current file's directory
-map({ 'n', 'x' }, '-', '<Cmd>e%:p:h<CR>')
-
 -- Use 'g{' and 'g}' to move to the first/last line of a paragraph
 -- stylua: ignore start
 map({ 'o' }, 'g{', '<Cmd>silent! normal Vg{<CR>', { noremap = false })
@@ -90,6 +129,7 @@ map({ 'n', 'x' }, 'g{', function() require('utils.misc').goto_paragraph_firstlin
 map({ 'n', 'x' }, 'g}', function() require('utils.misc').goto_paragraph_lastline() end, { noremap = false })
 -- stylua: ignore end
 
+-- Sometimes we cannot release Shift so quickly
 cmd('Q', 'q', {})
 cmd('W', 'w', {})
 cmd('Qa', 'qa', {})
