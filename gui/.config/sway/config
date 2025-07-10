@@ -42,11 +42,13 @@ output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
 output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@144Hz position 0 0
 
 xwayland enabled
-seat * hide_cursor 8000
+seat * hide_cursor 10000
 seat * hide_cursor when-typing enable
 seat * xcursor_theme macOS 32
 
-for_window [shell="xwayland"] title_format "[XWayland] %title"
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] sticky enable
+for_window [class="QQ" title="图片查看器"]               floating enable
 
 input type:keyboard {
   xkb_layout us
