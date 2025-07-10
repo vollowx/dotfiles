@@ -1,0 +1,174 @@
+### Variables
+
+set $rosewater #f5e0dc
+set $flamingo #f2cdcd
+set $pink #f5c2e7
+set $mauve #cba6f7
+set $red #f38ba8
+set $maroon #eba0ac
+set $peach #fab387
+set $yellow #f9e2af
+set $green #a6e3a1
+set $teal #94e2d5
+set $sky #89dceb
+set $sapphire #74c7ec
+set $blue #89b4fa
+set $lavender #b4befe
+set $text #cdd6f4
+set $subtext1 #bac2de
+set $subtext0 #a6adc8
+set $overlay2 #9399b2
+set $overlay1 #7f849c
+set $overlay0 #6c7086
+set $surface2 #585b70
+set $surface1 #45475a
+set $surface0 #313244
+set $base #1e1e2e
+set $mantle #181825
+set $crust #11111b
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term ghostty
+set $menu wmenu-run -p "" -b -N 11111b -n cdd6f4 -M 585b70 -m 1e1e2e -S 45475a -s cdd6f4
+
+### Core
+
+output * bg ~/Pictures/Wallappers/wallhaven-w58vvr.jpg fill
+output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
+output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@144Hz position 0 0
+
+xwayland enabled
+seat * hide_cursor 8000
+seat * hide_cursor when-typing enable
+seat * xcursor_theme macOS 32
+
+for_window [shell="xwayland"] title_format "[XWayland] %title"
+
+input type:keyboard {
+  xkb_layout us
+  repeat_delay 300
+  repeat_rate 30
+}
+
+input type:touchpad {
+  dwt disabled
+  tap enabled
+  natural_scroll enabled
+  middle_emulation enabled
+}
+
+exec swayidle -w \
+              timeout 300 'swaylock -f -c 000000' \
+              timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+              before-sleep 'swaylock -f -c 000000'
+
+client.focused          $lavender $base $text  $lavender  $lavender88
+client.focused_inactive $overlay0 $base $text  $rosewater $overlay0
+client.unfocused        $overlay0 $base $text  $rosewater $overlay088
+client.urgent           $peach    $base $peach $overlay0  $peach
+client.placeholder      $overlay0 $base $text  $overlay0  $overlay0
+client.background       $base
+
+default_border pixel 2
+default_floating_border pixel 2
+
+gaps inner 8
+
+font pango:monospace 8
+
+exec dunst
+exec nm-applet
+exec blueman-applet
+exec fcitx5 -d
+
+### Key bindings
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+floating_modifier $mod normal
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You sure?' -B 'Yes' 'swaymsg exit'
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+mode "resize" {
+  bindsym $left resize shrink width 10px
+  bindsym $down resize grow height 10px
+  bindsym $up resize shrink height 10px
+  bindsym $right resize grow width 10px
+  bindsym Left resize shrink width 10px
+  bindsym Down resize grow height 10px
+  bindsym Up resize shrink height 10px
+  bindsym Right resize grow width 10px
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bar {
+  swaybar_command waybar
+}
+
+###
+
+include /etc/sway/config.d/*
