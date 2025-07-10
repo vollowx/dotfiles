@@ -1,0 +1,54 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 32,
+
+  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "sway/window"],
+  "modules-center": [],
+  "modules-right": ["tray", "wireplumber", "temperature", "cpu", "memory", "network", "clock"],
+
+   "sway/workspaces": {
+     "disable-scroll": true,
+     "all-outputs": true,
+  },
+  "sway/mode": {
+    "format": "<span color='#b4befe' font-weight='bold'>mod</span> {}",
+  },
+  "sway/scratchpad": {
+    "format": "<span color='#b4befe' font-weight='bold'>pad</span> {count}",
+    "show-empty": false,
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+  "wireplumber": {
+    "scroll-step": 5,
+    "format": "<span color='#b4befe' font-weight='bold'>vol</span> {volume}%",
+    "format-muted": "<span color='#b4befe' font-weight='bold'>mut</span>"
+  },
+  "cpu": {
+    "format": "<span color='#b4befe' font-weight='bold'>cpu</span> {usage}%",
+    "interval": 2,
+    "tooltip": true
+  },
+  "memory": {
+    "format": "<span color='#b4befe' font-weight='bold'>mem</span> {}%",
+    "interval": 2
+  },
+  "temperature": {
+    "format": "<span color='#b4befe' font-weight='bold'>tem</span> {temperatureC}°C",
+    "interval": 2
+  },
+  "network": {
+    "format-wifi": "<span color='#b4befe' font-weight='bold'>{essid}</span> {signalStrength}%",
+    "format-disconnected": "<span color='#b4befe' font-weight='bold'>dis</span>",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "clock": {
+    "format": "<span color='#b4befe' font-weight='bold'>{:%H:%M}</span>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  }
+}
