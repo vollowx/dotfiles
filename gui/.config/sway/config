@@ -46,12 +46,17 @@ seat * hide_cursor 10000
 seat * hide_cursor when-typing enable
 seat * xcursor_theme macOS 32
 
-for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
-for_window [app_id="firefox" title="Picture-in-Picture"] sticky enable
-for_window [class="QQ" title="图片查看器"]               floating enable
-for_window [class="QQ" title="文件管理器"]               floating enable
-for_window [class="QQ" title="收藏"]                     floating enable
-for_window [class="QQ" title="设置"]                     floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"]    floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"]    sticky enable
+for_window [class="QQ" title="图片查看器"]                  floating enable
+for_window [class="QQ" title="文件管理器"]                  floating enable
+for_window [class="QQ" title="收藏"]                        floating enable
+for_window [class="QQ" title="设置"]                        floating enable
+for_window [class="steam" title="Friends List"]             floating enable
+for_window [class="steam" title="Game Servers"]             floating enable
+for_window [class="steam" title="Players"]                  floating enable
+for_window [class="steam" title="Recordings & Screenshots"] floating enable
+for_window [class="steam" title="Steam Settings"]           floating enable
 
 input type:keyboard {
   xkb_layout us
