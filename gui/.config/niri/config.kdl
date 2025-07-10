@@ -1,3 +1,5 @@
+//////////////// IO
+
 input {
     keyboard {
         xkb {
@@ -24,14 +26,6 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
-cursor {
-    xcursor-theme "macOS"
-    xcursor-size 32
-
-    hide-when-typing
-    hide-after-inactive-ms 5000
-}
-
 output "eDP-1" { // Laptop integrated monitor
     mode "1920x1080@600.000"
     scale 1
@@ -40,11 +34,24 @@ output "eDP-1" { // Laptop integrated monitor
     variable-refresh-rate
 }
 
-output "DP-3" { // Workstation monitor
-    mode "2560x1440@180.002"
+output "HDMI-A-1" { // Workstation monitor
+    // Somehow X11 programs have no audio output using DP cable,
+    // yet 2K 180Hz is not supported on the HDMI cable. Might
+    // need to switch a HDMI 2.1 cable.
+    mode "2560x1440@144.001"
     scale 1
     transform "normal"
     position x=0 y=0
+}
+
+//////////////// UI
+
+cursor {
+    xcursor-theme "macOS"
+    xcursor-size 32
+
+    hide-when-typing
+    hide-after-inactive-ms 5000
 }
 
 layout {
@@ -93,8 +100,30 @@ layout {
 }
 
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 0
     clip-to-geometry true
+}
+
+prefer-no-csd
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+overview {
+  zoom 0.5
+}
+
+//////////////// Behavior
+
+window-rule {
+    match app-id="steam" title="Friends List"
+    open-floating true
+}
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
 window-rule {
@@ -102,21 +131,26 @@ window-rule {
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
     block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
 }
 
-prefer-no-csd
-
-clipboard {
-
-}
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "swaybg" "-i" "/home/vollow/Pictures/Wallappers/wallhaven-w58vvr.jpg"
 
 screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S .niri.png"
 
-animations {
+environment {
+    DISPLAY                      ":0"
+    QT_QPA_PLATFORM              "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
+
+xwayland-satellite {
+    path "xwayland-satellite"
+}
+
+clipboard {}
+
+//////////////// Mappings
 
 switch-events {
     lid-close { spawn "notify-send" "-r" "69" "-a" "niri" "laptop lid closed" "-t" "888" "-u" "low"; }
@@ -124,10 +158,90 @@ switch-events {
 }
 
 binds {
-    Mod+A { spawn "notifystatus"; }
-    Mod+Return { spawn "ghostty"; }
-    Mod+D { spawn "wmenu-run" "-p" "" "-N" "1e1e2e" "-n" "cdd6f4" "-M" "cba6f7" "-m" "1e1e2e" "-S" "cba6f7" "-s" "1e1e2e"; }
-    Super+Alt+L { spawn "swaylock"; }
+    Mod+A            { spawn "notifystatus"; }
+    Mod+Return       { spawn "ghostty"; }
+    Mod+D            { spawn "wmenu-run" "-p" "" "-N" "1e1e2e" "-n" "cdd6f4" "-M" "cba6f7" "-m" "1e1e2e" "-S" "cba6f7" "-s" "1e1e2e"; }
+    Super+Alt+L      { spawn "swaylock"; }
+
+    Mod+Q            { close-window; }
+
+    Mod+H            { focus-column-left; }
+    Mod+J            { focus-window-or-workspace-down; }
+    Mod+K            { focus-window-or-workspace-up; }
+    Mod+L            { focus-column-right; }
+
+    Mod+Shift+H      { move-column-left; }
+    Mod+Shift+J      { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K      { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L      { move-column-right; }
+
+    Mod+Home         { focus-column-first; }
+    Mod+End          { focus-column-last; }
+    Mod+Ctrl+Home    { move-column-to-first; }
+    Mod+Ctrl+End     { move-column-to-last; }
+
+    Mod+Ctrl+H       { focus-monitor-left; }
+    Mod+Ctrl+J       { focus-monitor-down; }
+    Mod+Ctrl+K       { focus-monitor-up; }
+    Mod+Ctrl+L       { focus-monitor-right; }
+
+    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+
+    Mod+U            { focus-workspace-down; }
+    Mod+I            { focus-workspace-up; }
+    Mod+Ctrl+U       { move-column-to-workspace-down; }
+    Mod+Ctrl+I       { move-column-to-workspace-up; }
+
+    Mod+Shift+U      { move-workspace-down; }
+    Mod+Shift+I      { move-workspace-up; }
+
+    Mod+1            { focus-workspace 1; }
+    Mod+2            { focus-workspace 2; }
+    Mod+3            { focus-workspace 3; }
+    Mod+4            { focus-workspace 4; }
+    Mod+5            { focus-workspace 5; }
+    Mod+6            { focus-workspace 6; }
+    Mod+7            { focus-workspace 7; }
+    Mod+8            { focus-workspace 8; }
+    Mod+9            { focus-workspace 9; }
+    Mod+Ctrl+1       { move-column-to-workspace 1; }
+    Mod+Ctrl+2       { move-column-to-workspace 2; }
+    Mod+Ctrl+3       { move-column-to-workspace 3; }
+    Mod+Ctrl+4       { move-column-to-workspace 4; }
+    Mod+Ctrl+5       { move-column-to-workspace 5; }
+    Mod+Ctrl+6       { move-column-to-workspace 6; }
+    Mod+Ctrl+7       { move-column-to-workspace 7; }
+    Mod+Ctrl+8       { move-column-to-workspace 8; }
+    Mod+Ctrl+9       { move-column-to-workspace 9; }
+
+    Mod+Comma        { consume-window-into-column; }
+    Mod+Period       { expel-window-from-column; }
+
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+R            { switch-preset-column-width; }
+    Mod+Shift+R      { switch-preset-window-height; }
+    Mod+Ctrl+R       { reset-window-height; }
+    Mod+F            { fullscreen-window; }
+    Mod+C            { center-column; }
+
+    Mod+W            { toggle-column-tabbed-display; }
+
+    Mod+Minus        { set-column-width "-10%"; }
+    Mod+Equal        { set-column-width "+10%"; }
+
+    Mod+Shift+Minus  { set-window-height "-10%"; }
+    Mod+Shift+Equal  { set-window-height "+10%"; }
+
+    Print            { screenshot; }
+    Ctrl+Print       { screenshot-screen; }
+    Alt+Print        { screenshot-window; }
+
+    Mod+Shift+E      { quit; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%-"; }
@@ -135,45 +249,6 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "volume" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightness" "set" "1%+"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightness" "set" "1%-"; }
-
-    Mod+Q { close-window; }
-
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-or-workspace-down; }
-    Mod+K     { focus-window-or-workspace-up; }
-    Mod+L     { focus-column-right; }
-
-    Mod+Shift+H     { move-column-left; }
-    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
-    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
-    Mod+Shift+L     { move-column-right; }
-
-    Mod+Home { focus-column-first; }
-    Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
-
-    Mod+Ctrl+H     { focus-monitor-left; }
-    Mod+Ctrl+J     { focus-monitor-down; }
-    Mod+Ctrl+K     { focus-monitor-up; }
-    Mod+Ctrl+L     { focus-monitor-right; }
-
-    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
-
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
-
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
-
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
 
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
@@ -185,8 +260,6 @@ binds {
     Mod+Ctrl+WheelScrollRight { move-column-right; }
     Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
-    // Usually scrolling up and down with Shift in applications results in
-    // horizontal scrolling; these binds replicate that.
     Mod+Shift+WheelScrollDown      { focus-column-right; }
     Mod+Shift+WheelScrollUp        { focus-column-left; }
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
@@ -194,68 +267,4 @@ binds {
 
     Mod+TouchpadScrollDown { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%+"; }
     Mod+TouchpadScrollUp   { spawn "volume" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%-"; }
-
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
-
-    Mod+Comma  { consume-window-into-column; }
-    Mod+Period { expel-window-from-column; }
-
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
-
-    Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R { reset-window-height; }
-    Mod+F { fullscreen-window; }
-    Mod+C { center-column; }
-
-    Mod+W { toggle-column-tabbed-display; }
-
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
-
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
-
-    // Actions to switch layouts.
-    // Note: if you uncomment these, make sure you do NOT have
-    // a matching layout switch hotkey configured in xkb options above.
-    // Having both at once on the same hotkey will break the switching,
-    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
-
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
-
-    Mod+Shift+E { quit; }
-}
-
-hotkey-overlay {
-    skip-at-startup
-}
-
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swaybg" "-i" "/home/vollow/Downloads/wallhaven-w58vvr.jpg"
-
-environment {
-    DISPLAY ":0"
 }
