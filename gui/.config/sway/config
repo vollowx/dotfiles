@@ -46,6 +46,7 @@ seat * hide_cursor 10000
 seat * hide_cursor when-typing enable
 seat * xcursor_theme macOS 32
 
+for_window [app_id="blueman-manager"]                       floating enable
 for_window [app_id="firefox" title="Library"]               floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"]    floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"]    sticky enable
