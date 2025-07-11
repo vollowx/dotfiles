@@ -1,64 +1,48 @@
 ### Variables
 
-set $rosewater #f5e0dc
-set $flamingo #f2cdcd
-set $pink #f5c2e7
-set $mauve #cba6f7
-set $red #f38ba8
-set $maroon #eba0ac
-set $peach #fab387
-set $yellow #f9e2af
-set $green #a6e3a1
-set $teal #94e2d5
-set $sky #89dceb
-set $sapphire #74c7ec
-set $blue #89b4fa
-set $lavender #b4befe
-set $text #cdd6f4
-set $subtext1 #bac2de
-set $subtext0 #a6adc8
-set $overlay2 #9399b2
-set $overlay1 #7f849c
-set $overlay0 #6c7086
-set $surface2 #585b70
-set $surface1 #45475a
-set $surface0 #313244
-set $base #1e1e2e
-set $mantle #181825
-set $crust #11111b
-
-set $mod Mod4
-set $left h
-set $down j
-set $up k
-set $right l
-set $term ghostty
-set $menu wofi --show drun
+set {
+  $rosewater #f5e0dc
+  $flamingo  #f2cdcd
+  $pink      #f5c2e7
+  $mauve     #cba6f7
+  $red       #f38ba8
+  $maroon    #eba0ac
+  $peach     #fab387
+  $yellow    #f9e2af
+  $green     #a6e3a1
+  $teal      #94e2d5
+  $sky       #89dceb
+  $sapphire  #74c7ec
+  $blue      #89b4fa
+  $lavender  #b4befe
+  $text      #cdd6f4
+  $subtext1  #bac2de
+  $subtext0  #a6adc8
+  $overlay2  #9399b2
+  $overlay1  #7f849c
+  $overlay0  #6c7086
+  $surface2  #585b70
+  $surface1  #45475a
+  $surface0  #313244
+  $base      #1e1e2e
+  $mantle    #181825
+  $crust     #11111b
+  $mod       Mod4
+  $left      h
+  $down      j
+  $up        k
+  $right     l
+  $term      ghostty
+  $menu      wofi --show drun
+}
 
 ### Core
 
-output * bg ~/Pictures/Wallappers/wallhaven-w58vvr.jpg fill
-output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@144Hz position 0 0
-
-xwayland enabled
-seat * hide_cursor 10000
-seat * hide_cursor when-typing enable
-seat * xcursor_theme macOS 32
-
-for_window [app_id="blueman-manager"]                       floating enable
-for_window [app_id="firefox" title="Library"]               floating enable
-for_window [app_id="firefox" title="Picture-in-Picture"]    floating enable
-for_window [app_id="firefox" title="Picture-in-Picture"]    sticky enable
-for_window [class="QQ" title="图片查看器"]                  floating enable
-for_window [class="QQ" title="文件管理器"]                  floating enable
-for_window [class="QQ" title="收藏"]                        floating enable
-for_window [class="QQ" title="设置"]                        floating enable
-for_window [class="steam" title="Friends List"]             floating enable
-for_window [class="steam" title="Game Servers"]             floating enable
-for_window [class="steam" title="Players"]                  floating enable
-for_window [class="steam" title="Recordings & Screenshots"] floating enable
-for_window [class="steam" title="Steam Settings"]           floating enable
+output {
+  * bg ~/Pictures/Wallappers/wallhaven-w58vvr.jpg fill
+  eDP-1 resolution 1920x1080 position 0 0 scale 1.00
+  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@144Hz position 0 0
+}
 
 input type:keyboard {
   xkb_layout us
@@ -72,6 +56,34 @@ input type:touchpad {
   tap enabled
   natural_scroll enabled
   middle_emulation enabled
+}
+
+xwayland enabled
+seat * hide_cursor 10000
+seat * hide_cursor when-typing enable
+seat * xcursor_theme macOS 32
+
+for_window {
+  [window_role="pop-up"]                           floating enable
+  [window_role="bubble"]                           floating enable
+  [window_role="dialog"]                           floating enable
+  [window_type="dialog"]                           floating enable
+  [shell="xwayland"]                               title_format "%title [XWayland]"
+  [app_id="blueman-manager"]                       floating enable
+  [app_id="firefox"]                               inhibit_idle fullscreen
+  [app_id="firefox" title="Library"]               floating enable
+  [app_id="firefox" title="Picture-in-Picture"]    floating enable
+  [app_id="firefox" title="Picture-in-Picture"]    sticky enable
+  [class="QQ" title="图片查看器"]                  floating enable
+  [class="QQ" title="文件管理器"]                  floating enable
+  [class="QQ" title="收藏"]                        floating enable
+  [class="QQ" title="设置"]                        floating enable
+  [class="steam" title="Friends List"]             floating enable
+  [class="steam" title="Game Servers"]             floating enable
+  [class="steam" title="Players"]                  floating enable
+  [class="steam" title="Recordings & Screenshots"] floating enable
+  [class="steam" title="Steam Settings"]           floating enable
+  [app_id="com.mitchellh.ghostty"]                 move to scratchpad, scratchpad show
 }
 
 exec swayidle -w \
@@ -93,10 +105,24 @@ gaps inner 8
 
 font pango:monospace 8
 
-exec dunst
-exec nm-applet
-exec blueman-applet
-exec fcitx5 -d
+exec --no-startup-id {
+  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+}
+
+exec {
+  systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
+  hash dbus-update-activation-environment 2>/dev/null
+  dbus-update-activation-environment --systemd SWAYSOCK WAYLAND_DISPLAY 2>/dev/null
+
+  dunst
+  nm-applet
+  blueman-applet
+  fcitx5 -d
+}
+
+bar {
+  swaybar_command waybar
+}
 
 ### Key bindings
 
@@ -182,10 +208,6 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-bar {
-  swaybar_command waybar
-}
 
 ###
 
