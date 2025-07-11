@@ -33,6 +33,7 @@ set {
   $up        k
   $right     l
   $term      ghostty
+  $term_id   com.mitchellh.ghostty
   $menu      wofi --show drun
 }
 
@@ -69,22 +70,23 @@ for_window {
   [window_role="dialog"]                           floating enable
   [window_type="dialog"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
+  [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
   [app_id="blueman-manager"]                       floating enable
   [app_id="firefox"]                               inhibit_idle fullscreen
   [app_id="firefox" title="Library"]               floating enable
-  [app_id="firefox" title="Picture-in-Picture"]    floating enable
-  [app_id="firefox" title="Picture-in-Picture"]    sticky enable
+  [app_id="firefox" title="Picture-in-Picture"]    floating enable, sticky enable, resize set 640 360, move position 100 ppt 100 ppt, move left 652, move up 372
   [class="QQ" title="图片查看器"]                  floating enable
   [class="QQ" title="文件管理器"]                  floating enable
   [class="QQ" title="收藏"]                        floating enable
   [class="QQ" title="设置"]                        floating enable
-  [class="steam" title="Friends List"]             floating enable
+  [class="steam" title="Friends List"]             floating enable, resize set 300 1000, move position 100 ppt 0 ppt, move left 312, move down 38
   [class="steam" title="Game Servers"]             floating enable
   [class="steam" title="Players"]                  floating enable
   [class="steam" title="Recordings & Screenshots"] floating enable
   [class="steam" title="Steam Settings"]           floating enable
-  [app_id="com.mitchellh.ghostty"]                 move to scratchpad, scratchpad show
 }
+# Firefox PiP: bottom-right, 12px from the corner of the window
+# Steam Friends List: top-right, 12px from the corner (right), avoiding overlapping the Steam titlebar (top)
 
 exec swayidle -w \
               timeout 300 'swaylock -f -c 000000' \
@@ -100,6 +102,9 @@ client.background       $base
 
 default_border pixel 2
 default_floating_border pixel 2
+for_window [class=".*"]  border pixel 2
+for_window [app_id=".*"] border pixel 2
+# Clients who want to draw their own CSD doesn't follow this when floating
 
 gaps inner 8
 
