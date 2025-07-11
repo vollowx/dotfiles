@@ -107,6 +107,11 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You sure?' -B 'Yes' 'swaymsg exit'
 
+bindsym $mod+z exec dunstctl history-pop
+bindsym $mod+x exec dunstctl close
+bindsym $mod+Shift+x exec dunstctl close-all
+bindsym $mod+c exec dunstctl context
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up

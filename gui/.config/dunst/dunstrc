@@ -1,10 +1,10 @@
 [global]
 follow = "mouse"
-width = 330
-origin = "top-left"
-notification_limit = 2
+width = 320
+origin = "top-right"
+notification_limit = 8
 offset = "20x20"
-icon_position = "off"
+icon_position = "left"
 line_height = 8
 
 progress_bar_height = 4
@@ -12,8 +12,8 @@ progress_bar_frame_width = 0
 
 padding = 18
 horizontal_padding = 18
-frame_width = 4
-gap_size = 9
+frame_width = 2
+gap_size = 8
 font = "monospace 10"
 format = "<span font_desc='monospace 10' foreground='#cdd6f4'>%a</span>\n%s%b"
 show_indicators = false
@@ -23,23 +23,25 @@ mouse_right_click = "close_current"
 ellipsize = "end"
 markup = "full"
 
+dmenu = "wofi --dmenu dunst"
+
 [urgency_low]
 timeout = 8
 background = "#1e1e2e"
 foreground = "#cdd6f4"
-highlight = "#cba6f7"
-frame_color = "#cba6f788"
+highlight = "#fab387"
+frame_color = "#fab38780"
 
 [urgency_normal]
 timeout = 8
 background = "#1e1e2e"
 foreground = "#cdd6f4"
-highlight = "#cba6f7"
-frame_color = "#cba6f788"
+highlight = "#fab387"
+frame_color = "#fab38780"
 
 [urgency_critical]
 timeout = 8
 background = "#1e1e2e"
 foreground = "#cdd6f4"
 highlight = "#f38ba8"
-frame_color = "#f38ba888"
+frame_color = "#f38ba880"
