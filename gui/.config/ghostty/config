@@ -1,4 +1,4 @@
-font-family                = Sarasa Fixed SC
+font-family                = monospace
 theme                      = catppuccin-mocha.conf
 cursor-style               = block
 cursor-style-blink         = false
