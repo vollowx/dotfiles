@@ -33,7 +33,7 @@ set $down j
 set $up k
 set $right l
 set $term ghostty
-set $menu wmenu-run -p "" -b -N 11111b -n cdd6f4 -M 585b70 -m 1e1e2e -S 45475a -s cdd6f4
+set $menu wofi --show drun
 
 ### Core
 
@@ -78,9 +78,9 @@ exec swayidle -w \
               timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
               before-sleep 'swaylock -f -c 000000'
 
-client.focused          $lavender $base $text  $lavender  $lavender88
+client.focused          $lavender $base $text  $lavender  $lavender80
 client.focused_inactive $overlay0 $base $text  $rosewater $overlay0
-client.unfocused        $overlay0 $base $text  $rosewater $overlay088
+client.unfocused        $overlay0 $base $text  $rosewater $overlay080
 client.urgent           $peach    $base $peach $overlay0  $peach
 client.placeholder      $overlay0 $base $text  $overlay0  $overlay0
 client.background       $base
