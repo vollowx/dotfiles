@@ -1,47 +1,38 @@
 [global]
-follow = "mouse"
-width = 320
-origin = "top-right"
-notification_limit = 8
-offset = "20x20"
-icon_position = "left"
-line_height = 8
-
-progress_bar_height = 4
-progress_bar_frame_width = 0
-
-padding = 18
-horizontal_padding = 18
-frame_width = 2
-gap_size = 8
-font = "monospace 10"
-format = "<span font_desc='monospace 10' foreground='#cdd6f4'>%a</span>\n%s%b"
-show_indicators = false
-mouse_left_click = "do_action"
-mouse_middle_click = "close_all"
-mouse_right_click = "close_current"
-ellipsize = "end"
-markup = "full"
-
-dmenu = "wofi --dmenu dunst"
+follow                   = "mouse"
+font                     = "sans-serif 10"
+format                   = "<span font_desc='sans-serif 12' font-weight='bold'>%s %p</span>\n%b"
+line_height              = 8
+width                    = 320
+offset                   = (16, 16)
+origin                   = "top-right"
+icon_position            = "left"
+min_icon_size            = 48
+max_icon_size            = 48
+corner_radius            = 20
+padding                  = 24
+horizontal_padding       = 24
+frame_width              = 0
+sort                     = true
+show_indicators          = true
+indicate_hidden          = yes
+show_age_threshold       = 60
+idle_threshold           = 120
+notification_limit       = 8
+markup                   = "full"
+dmenu                    = "wofi --dmenu dunst"
+background               = "#585b70"
+foreground               = "#cdd6f4"
+highlight                = "#74c7ec"
+separator_color          = "#00000000"
 
 [urgency_low]
 timeout = 8
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-highlight = "#fab387"
-frame_color = "#fab38780"
 
 [urgency_normal]
 timeout = 8
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-highlight = "#fab387"
-frame_color = "#fab38780"
 
 [urgency_critical]
 timeout = 8
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-highlight = "#f38ba8"
-frame_color = "#f38ba880"
+background = "#f38ba8"
+foreground = "#1e1e2e"
