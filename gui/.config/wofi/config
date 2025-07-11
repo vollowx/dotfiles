@@ -1,0 +1,8 @@
+width         = 16%
+height        = 36%
+allow_images  = true
+hide_scroll   = true
+hide_search   = true
+no_actions    = true
+insensitive   = true
+dynamic_lines = true
