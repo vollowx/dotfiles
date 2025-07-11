@@ -66,14 +66,13 @@ window#waybar {
 #mode,
 #scratchpad,
 #window,
+#tray,
+#wireplumber,
+#temperature,
+#disk,
 #cpu,
 #memory,
-#disk,
-#temperature,
 #network,
-#wireplumber,
-#tray,
-#custom-notification,
 #clock {
   padding: 0px 8px;
 }
