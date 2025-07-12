@@ -6,17 +6,26 @@ _GNU/Stow-managed dotfiles for *nix systems_
 
 ## Installation
 
+```bash
+git clone git@github.com:vollowx/Stowed.git ~/Stowed
+cd ~/Stowed
+stow cli
+stow gui
+```
+
+__Packages needed__:
+
 `stow bash-completion unzip unrar 7zip`
 
 `lf htop neovim-git`
-`lua-language-server stylua`
+`lua-language-server stylua shfmt prettier`
 
 `sway waybar dunst wofi network-manager-applet blueman`
 `ghostty zathura`
 
 `fcitx5 firefox nemo file-roller mission-center krita`
 
-## Additional
+## Addition
 
 ### Bluetooth
 
