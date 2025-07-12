@@ -26,7 +26,8 @@ The ones run in command line
 
 The ones run in GUI
 
-`sway waybar dunst wofi network-manager-applet blueman`
+`sway swaybg swayidle swaylock-effects`
+`waybar dunst wofi network-manager-applet blueman`
 `xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit-gnome`
 `ghostty zathura`
 

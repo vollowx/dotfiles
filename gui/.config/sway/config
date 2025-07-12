@@ -89,9 +89,9 @@ for_window {
 # Steam Friends List: top-right, 12px from the corner (right), avoiding overlapping the Steam titlebar (top)
 
 exec swayidle -w \
-              timeout 300 'swaylock -f -c 000000' \
+              timeout 300 'swaylock --grace 8 --fade-in 8' \
               timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-              before-sleep 'swaylock -f -c 000000'
+              before-sleep 'swaylock --grace 8 --fade-in 8'
 
 client.focused          $lavender $base $text  $lavender  $lavender80
 client.focused_inactive $overlay0 $base $text  $rosewater $overlay0
