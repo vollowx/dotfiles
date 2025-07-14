@@ -35,6 +35,7 @@ set {
   $term      ghostty
   $term_id   com.mitchellh.ghostty
   $menu      wofi --show drun
+  $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 }
 
 ### Core
@@ -140,6 +141,9 @@ bindsym $mod+d exec $menu
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You sure?' -B 'Yes' 'swaymsg exit'
+
+bindsym $mod+p exec /usr/share/sway-contrib/grimshot savecopy screen $shot_path
+bindsym $mod+Shift+p exec /usr/share/sway-contrib/grimshot savecopy anything $shot_path
 
 bindsym $mod+z exec dunstctl history-pop
 bindsym $mod+x exec dunstctl close

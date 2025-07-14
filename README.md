@@ -21,12 +21,12 @@ Basic ones:
 
 The ones run in command line
 
-`lf htop neovim-git`
+`lf htop neovim-git fd ripgrep`
 `lua-language-server stylua shfmt prettier`
 
 The ones run in GUI
 
-`sway swaybg swayidle swaylock-effects`
+`sway swaybg swayidle swaylock-effects sway-contrib`
 `waybar dunst wofi network-manager-applet blueman`
 `xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit-gnome`
 `ghostty zathura`
