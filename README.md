@@ -58,6 +58,8 @@ This also installs `pipewire-audio pipewire-session-manager wireplumber`
 
 `steam proton-ge-custom-bin`
 
+`usermod -a -G games`
+
 Proton GE is used just because it magically solves this error:
 
 `wine: failed to open "c:\\windows\\system32\\steam.exe": c0000135`
