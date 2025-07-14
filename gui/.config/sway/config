@@ -75,18 +75,21 @@ for_window {
   [app_id="firefox"]                               inhibit_idle fullscreen
   [app_id="firefox" title="Library"]               floating enable
   [app_id="firefox" title="Picture-in-Picture"]    floating enable, sticky enable, resize set 640 360, move position 100 ppt 100 ppt, move left 652, move up 372
-  [class="QQ" title="图片查看器"]                  floating enable
-  [class="QQ" title="文件管理器"]                  floating enable
-  [class="QQ" title="收藏"]                        floating enable
-  [class="QQ" title="设置"]                        floating enable
+  [class="QQ"]                                     floating enable
   [class="steam" title="Friends List"]             floating enable, resize set 300 1000, move position 100 ppt 0 ppt, move left 312, move down 38
   [class="steam" title="Game Servers"]             floating enable
   [class="steam" title="Players"]                  floating enable
   [class="steam" title="Recordings & Screenshots"] floating enable
   [class="steam" title="Steam Settings"]           floating enable
+  [app_id="Waydroid"]                              floating enable, resize set 480 1080
 }
 # Firefox PiP: bottom-right, 12px from the corner of the window
 # Steam Friends List: top-right, 12px from the corner (right), avoiding overlapping the Steam titlebar (top)
+
+for_window {
+  [class="portal2_linux"]        inhibit_idle focus
+  [class="steam_app_1293830"]    inhibit_idle focus # Forza Horizon 4
+}
 
 exec swayidle -w \
               timeout 300 'swaylock --grace 8 --fade-in 8' \
