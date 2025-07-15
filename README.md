@@ -60,7 +60,8 @@ This also installs `pipewire-audio pipewire-session-manager wireplumber`
 
 ```bash
 ./update-gsettings.sh
-./install-adw-firefox-theme.sh
+./install-adw-firefox.sh
+./install-adw-steam.sh
 ```
 
 ### Gaming
