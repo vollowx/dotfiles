@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+INFO_INDICATOR='\033[0;34m::\033[0m '
+WARN_INDICATOR='\033[0;33mwarning:\033[0m '
+ERROR_INDICATOR='\033[0;31merror:\033[0m '
 
 config="$HOME/.config/gtk-3.0/settings.ini"
 gset="gsettings set org.gnome.desktop.interface"
@@ -28,24 +32,24 @@ try() {
     key="cursor-size"
     ;;
   *)
-    echo "unsupported key read: $1"
+    echo -e "${WARN_INDICATOR}unsupported key read: $1"
     return
     ;;
   esac
 
-  echo -n "setting $key to $value ... "
   if $gset "$key" "$value" &>/dev/null; then
-    echo -e "\033[0;32mOK\033[0m"
+    echo -e " $key: $value"
   else
-    echo -e "\033[0;31mFAILED\033[0m"
+    echo -e "${ERROR_INDICATOR}failed to set $key: $value"
   fi
 }
 
 if [[ ! -f "$config" ]]; then
-  echo "configuration file ($config) not found"
+  echo -e "${ERROR_INDICATOR}configuration file ($config) not found"
   exit 1
 fi
 
+echo -e "${INFO_INDICATOR}Resolving GTK 3.0 configuration..."
 while IFS='=' read -r key value; do
   [[ "$key" == "[Settings]" ]] && continue
   key=$(echo "$key" | xargs)

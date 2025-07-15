@@ -54,6 +54,15 @@ This also installs `pipewire-audio pipewire-session-manager wireplumber`
 
 `blueman` is for the GUI configurator and applet, used in Waybar.
 
+### GTK
+
+`adw-gtk-theme`
+
+```bash
+./update-gsettings.sh
+./install-adw-firefox-theme.sh
+```
+
 ### Gaming
 
 `steam proton-ge-custom-bin`
