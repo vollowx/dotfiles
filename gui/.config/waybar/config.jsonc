@@ -3,8 +3,8 @@
   "position": "bottom",
   "height": 32,
 
-  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "sway/window"],
-  "modules-center": [],
+  "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
+  "modules-center": ["sway/window"],
   "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "memory", "network", "clock"],
 
    "sway/workspaces": {
@@ -43,7 +43,8 @@
   },
   "temperature": {
     "format": "<span color='#b4befe' font-weight='bold'>tem</span> {temperatureC}°C",
-    "interval": 2
+    "interval": 2,
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input"
   },
   "network": {
     "format-wifi": "<span color='#b4befe' font-weight='bold'>{essid}</span> {signalStrength}%",
