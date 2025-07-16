@@ -54,16 +54,6 @@ This also installs `pipewire-audio pipewire-session-manager wireplumber`
 
 `blueman` is for the GUI configurator and applet, used in Waybar.
 
-### GTK
-
-`adw-gtk-theme`
-
-```bash
-./update-gsettings.sh
-./install-adw-firefox.sh
-./install-adw-steam.sh
-```
-
 ### Gaming
 
 `steam proton-ge-custom-bin`
@@ -87,3 +77,17 @@ For Xbox controllers e.g. Xbox Series X/S Controller,
 function. Without it, they can only be used plugging in, and (at least) Forza
 Horizon 4 cannot read controller input.
 <del>Stay sway from me cables :)</del>
+
+### GTK
+
+`adw-gtk-theme`
+
+```bash
+./update-gsettings.sh
+./install-adw-firefox.sh
+./install-adw-steam.sh
+```
+
+### QT
+
+`kvantum kvantum-theme-libadwaita-git`
