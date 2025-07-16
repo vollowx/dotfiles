@@ -71,6 +71,7 @@ window#waybar {
 #temperature,
 #disk,
 #cpu,
+#custom-gpu,
 #memory,
 #network,
 #clock {

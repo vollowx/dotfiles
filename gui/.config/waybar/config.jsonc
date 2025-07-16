@@ -5,7 +5,7 @@
 
   "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
   "modules-center": ["sway/window"],
-  "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "memory", "network", "clock"],
+  "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "custom/gpu", "memory", "network", "clock"],
 
    "sway/workspaces": {
      "disable-scroll": true,
@@ -36,6 +36,12 @@
     "format": "<span color='#b4befe' font-weight='bold'>cpu</span> {usage}%",
     "interval": 2,
     "tooltip": true
+  },
+  "custom/gpu": {
+    "exec": "cat /sys/class/hwmon/hwmon2/device/gpu_busy_percent",
+    "format": "<span color='#b4befe' font-weight='bold'>gpu</span> {}%",
+    "return-type": "",
+    "interval": 2
   },
   "memory": {
     "format": "<span color='#b4befe' font-weight='bold'>mem</span> {}%",
