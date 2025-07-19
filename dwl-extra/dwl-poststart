@@ -1,0 +1,2 @@
+wlr-randr --output DP-3 --mode 2560x1440@180Hz
+foot --server <&-

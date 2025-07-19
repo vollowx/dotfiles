@@ -11,8 +11,8 @@ _GNU/Stow-managed dotfiles for *nix systems_
 ```bash
 git clone git@github.com:vollowx/Stowed.git ~/Stowed
 cd ~/Stowed
-stow cli
-stow gui
+stow stow-cli
+stow stow-gui
 ```
 
 Basic ones:
@@ -83,9 +83,9 @@ Horizon 4 cannot read controller input.
 `adw-gtk-theme`
 
 ```bash
-./update-gsettings.sh
-./install-adw-firefox.sh
-./install-adw-steam.sh
+./scripts/update-gsettings.sh
+./scripts/install-adw-firefox.sh
+./scripts/install-adw-steam.sh
 ```
 
 ### QT

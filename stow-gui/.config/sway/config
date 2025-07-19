@@ -41,9 +41,9 @@ set {
 ### Core
 
 output {
-  * bg ~/Pictures/Wallappers/wallhaven-yqjdpd.jpg fill
+  * bg $mantle solid_color
   eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@144Hz position 0 0
+  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0
 }
 
 input type:keyboard {
@@ -104,10 +104,10 @@ client.urgent           $peach    $base $peach $overlay0  $peach
 client.placeholder      $overlay0 $base $text  $overlay0  $overlay0
 client.background       $base
 
-default_border pixel 2
-default_floating_border pixel 2
-for_window [class=".*"]  border pixel 2
-for_window [app_id=".*"] border pixel 2
+default_border pixel 1
+default_floating_border pixel 1
+for_window [class=".*"]  border pixel 1
+for_window [app_id=".*"] border pixel 1
 # Clients who want to draw their own CSD doesn't follow this when floating
 
 gaps inner 8
@@ -140,7 +140,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 floating_modifier $mod normal
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You sure?' -B 'Yes' 'swaymsg exit'
+bindsym $mod+Shift+e exit
 
 bindsym $mod+p exec /usr/share/sway-contrib/grimshot savecopy screen $shot_path
 bindsym $mod+Shift+p exec /usr/share/sway-contrib/grimshot savecopy anything $shot_path

@@ -33,7 +33,7 @@ window#waybar {
   background: transparent;
   color: @text;
   font-family: monospace;
-  box-shadow: inset 0 -20px 20px alpha(white, 0.2);
+  background-color: @mantle;
 }
 
 #workspaces button {
@@ -45,16 +45,16 @@ window#waybar {
 
 #workspaces button.focused {
   font-weight: bold;
-  background-color: alpha(@surface1, 0.5);
-  box-shadow: inset 0 -2px alpha(@surface1, 0.5);
+  background-color: @surface1;
+  box-shadow: inset 0 2px @surface2;
 }
 
 #workspaces button:hover {
-  background-color: alpha(@surface0, 0.5);
+  background-color: @surface0;
 }
 
 #workspaces button.urgent {
-  background-color: alpha(@red, 0.5);
+  background-color: @red;
   color: @base;
 }
 
