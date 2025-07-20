@@ -3,7 +3,7 @@
 INFO_INDICATOR='\033[0;34m::\033[0m '
 ERROR_INDICATOR='\033[0;31merror:\033[0m '
 
-TMP_DIR="/tmp/Adwaita-for-Steam-$(date +%s)"
+TMP_DIR="$(mktemp -d /tmp/Adwaita-for-Steam-XXXXXXXXXX)"
 REPO_URL="https://github.com/tkashkin/Adwaita-for-Steam.git"
 
 echo -e "${INFO_INDICATOR}Downloading the theme repository..."

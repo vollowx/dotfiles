@@ -3,7 +3,7 @@
 INFO_INDICATOR='\033[0;34m::\033[0m '
 ERROR_INDICATOR='\033[0;31merror:\033[0m '
 
-TMP_DIR="/tmp/firefox-gnome-theme-$(date +%s)"
+TMP_DIR="$(mktemp -d /tmp/firefox-gnome-theme-XXXXXXXXXX)"
 REPO_URL="https://github.com/rafaelmardojai/firefox-gnome-theme.git"
 
 echo -e "${INFO_INDICATOR}Downloading the theme repository..."
