@@ -222,6 +222,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Useful for virtual machines and some games
+mode "focus" {
+  bindsym Super+Shift+Delete mode "default"
+}
+bindsym $mod+Shift+f mode "focus"
+
 ###
 
 include /etc/sway/config.d/*
