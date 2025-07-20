@@ -33,7 +33,8 @@ window#waybar {
   background: transparent;
   color: @text;
   font-family: monospace;
-  background-color: @mantle;
+  background-color: alpha(@mantle, 0.999999);
+  /* Workaround for https://github.com/Alexays/Waybar/issues/3750 */
 }
 
 #workspaces button {

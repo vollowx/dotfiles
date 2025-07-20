@@ -1,4 +1,7 @@
 {
+  "name": "main",
+  "id": "bar-0",
+  "ipc": true,
   "layer": "top",
   "position": "bottom",
   "height": 32,

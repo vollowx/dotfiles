@@ -132,6 +132,9 @@ exec {
 
 bar {
   swaybar_command waybar
+  mode dock
+  modifier Mod4
+  position bottom
 }
 
 ### Key bindings
