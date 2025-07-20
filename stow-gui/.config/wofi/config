@@ -1,6 +1,7 @@
-width         = 16%
-height        = 36%
-allow_images  = true
+width         = 240
+height        = 398
+x=8
+y=1009
 hide_scroll   = true
 hide_search   = true
 no_actions    = true

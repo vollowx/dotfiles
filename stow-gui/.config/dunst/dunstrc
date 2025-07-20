@@ -1,6 +1,6 @@
 [global]
 follow                   = "mouse"
-font                     = "monospace 10"
+font                     = "sans-serif 10"
 format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
