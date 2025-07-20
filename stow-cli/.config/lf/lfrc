@@ -1,4 +1,6 @@
+set icons
 set hidden
+set drawbox
 set shell bash
 set scrolloff 5
 
