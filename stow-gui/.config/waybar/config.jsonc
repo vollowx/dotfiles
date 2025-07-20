@@ -1,21 +1,21 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
   "height": 32,
 
   "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
-  "modules-center": ["sway/window"],
+  "modules-center": [],
   "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "custom/gpu", "memory", "network", "clock"],
 
-   "sway/workspaces": {
+  "sway/workspaces": {
      "disable-scroll": true,
      "all-outputs": true,
   },
   "sway/mode": {
-    "format": "<span color='#78a9ff' font-weight='bold'>mod</span> {}",
+    "format": "<span color='#adadad' font-weight='bold'>mod</span> {}",
   },
   "sway/scratchpad": {
-    "format": "<span color='#78a9ff' font-weight='bold'>pad</span> {count}",
+    "format": "<span color='#adadad' font-weight='bold'>pad</span> {count}",
     "show-empty": false,
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
@@ -26,39 +26,39 @@
   },
   "wireplumber": {
     "scroll-step": 5,
-    "format": "<span color='#78a9ff' font-weight='bold'>vol</span> {volume}%",
-    "format-muted": "<span color='#78a9ff' font-weight='bold'>mut</span>"
+    "format": "<span color='#adadad' font-weight='bold'>vol</span> {volume}%",
+    "format-muted": "<span color='#adadad' font-weight='bold'>mut</span>"
   },
   "disk": {
-    "format": "<span color='#78a9ff' font-weight='bold'>dis</span> {percentage_used}%",
+    "format": "<span color='#adadad' font-weight='bold'>dis</span> {percentage_used}%",
   },
   "cpu": {
-    "format": "<span color='#78a9ff' font-weight='bold'>cpu</span> {usage}%",
+    "format": "<span color='#adadad' font-weight='bold'>cpu</span> {usage}%",
     "interval": 2,
     "tooltip": true
   },
   "custom/gpu": {
     "exec": "cat /sys/class/hwmon/hwmon2/device/gpu_busy_percent",
-    "format": "<span color='#78a9ff' font-weight='bold'>gpu</span> {}%",
+    "format": "<span color='#adadad' font-weight='bold'>gpu</span> {}%",
     "return-type": "",
     "interval": 2
   },
   "memory": {
-    "format": "<span color='#78a9ff' font-weight='bold'>mem</span> {}%",
+    "format": "<span color='#adadad' font-weight='bold'>mem</span> {}%",
     "interval": 2
   },
   "temperature": {
-    "format": "<span color='#78a9ff' font-weight='bold'>tem</span> {temperatureC}°C",
+    "format": "<span color='#adadad' font-weight='bold'>tem</span> {temperatureC}°C",
     "interval": 2,
     "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input"
   },
   "network": {
-    "format-wifi": "<span color='#78a9ff' font-weight='bold'>{essid}</span> {signalStrength}%",
-    "format-disconnected": "<span color='#78a9ff' font-weight='bold'>dis</span>",
+    "format-wifi": "<span color='#adadad' font-weight='bold'>{essid}</span> {signalStrength}%",
+    "format-disconnected": "<span color='#adadad' font-weight='bold'>dis</span>",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "clock": {
-    "format": "<span color='#78a9ff' font-weight='bold'>{:%H:%M}</span>",
+    "format": "<span color='#adadad' font-weight='bold'>{:%H:%M}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }

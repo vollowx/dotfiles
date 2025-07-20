@@ -39,27 +39,19 @@ window#waybar {
 #workspaces button {
   all: unset;
   padding: 0 0.7em;
+  background-color: @surface0;
   color: @text;
-  box-shadow: inset 0 -2px transparent;
 }
 
 #workspaces button.focused {
   font-weight: bold;
   background-color: @surface1;
-  box-shadow: inset 0 2px @surface2;
-}
-
-#workspaces button:hover {
-  background-color: @surface0;
+  box-shadow: inset 0 -2px @surface2;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
+  background-color: @peach;
   color: @base;
-}
-
-#window {
-  font-weight: bold;
 }
 
 #workspaces,
@@ -76,11 +68,4 @@ window#waybar {
 #network,
 #clock {
   padding: 0px 8px;
-}
-
-#workspaces {
-  margin-left: 4px;
-}
-#clock {
-  margin-right: 4px;
 }
