@@ -1,7 +1,7 @@
 [global]
 follow                   = "mouse"
-font                     = "sans-serif 10"
-format                   = "<span font_desc='sans-serif 12' font-weight='bold'>%s %p</span>\n%b"
+font                     = "monospace 10"
+format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
 offset                   = (16, 16)
@@ -12,7 +12,8 @@ max_icon_size            = 48
 corner_radius            = 20
 padding                  = 24
 horizontal_padding       = 24
-frame_width              = 0
+frame_width              = 1
+separator_height         = 1
 sort                     = true
 show_indicators          = true
 indicate_hidden          = yes
@@ -21,10 +22,10 @@ idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
 dmenu                    = "wofi --dmenu dunst"
-background               = "#585b70"
-foreground               = "#cdd6f4"
-highlight                = "#74c7ec"
-separator_color          = "#00000000"
+background               = "#000000"
+foreground               = "#ffffff"
+highlight                = "#78a9ff"
+frame_color              = "#2e2e2e"
 
 [urgency_low]
 timeout = 8
@@ -34,5 +35,5 @@ timeout = 8
 
 [urgency_critical]
 timeout = 8
-background = "#f38ba8"
-foreground = "#1e1e2e"
+background = "#d44a1c"
+foreground = "#000000"

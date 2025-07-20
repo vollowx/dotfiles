@@ -1,5 +1,5 @@
 font-family                = monospace
-theme                      = catppuccin-mocha.conf
+theme                      = oxocarbon-dark.conf
 cursor-style               = block
 cursor-style-blink         = false
 shell-integration-features = no-cursor

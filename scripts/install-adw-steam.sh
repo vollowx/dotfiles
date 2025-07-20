@@ -16,4 +16,4 @@ fi
 cd "$TMP_DIR"
 
 echo -e "${INFO_INDICATOR}Running auto-install script..."
-./install.py -c catppuccin-mocha
+./install.py

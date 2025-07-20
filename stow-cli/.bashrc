@@ -5,7 +5,14 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
 alias grep='grep --color=auto'
-PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h: \[\033[1;35m\]\w\[\033[1;31m\] \$\[\033[0m\] '
+
+export EDITOR='nvim'
+export MANPAGER='nvim +Man!'
+export QT_STYLE_OVERRIDE='kvantum'
+
+source /usr/share/git/completion/git-prompt.sh
+export GIT_PS1_SHOWCOLORHINTS=true
+export PS1='\n\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1)\n\$ '
 
 # if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
 #   exec tmux new-session -A -s ${USER} >/dev/null 2>&1

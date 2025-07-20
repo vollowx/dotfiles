@@ -1,14 +1,14 @@
-/* Catppuccin mocha theme
+/* Oxocarbon dark theme
 based on the solarized dark colours from adw-colors: https://github.com/lassekongo83/adw-colors/tree/main/themes/solarized-dark */
 
-/* Catppuccin colors */
-@define-color accent #b4befe;
-@define-color red #f38ba8;
-@define-color green #a6e3a1;
-@define-color text #cdd6f4;
-@define-color surface_0 #313244;
-@define-color base #1e1e2e;
-@define-color crust #11111b;
+/* Oxocarbon colors */
+@define-color accent #78a9ff;
+@define-color red #ff8389;
+@define-color green #08bdba;
+@define-color text #ffffff;
+@define-color surface_0 #2e2e2e;
+@define-color base #161616;
+@define-color crust #000000;
 
 /* Adwaita stuff */
 @define-color accent_color @accent;
