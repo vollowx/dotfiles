@@ -97,11 +97,11 @@ exec swayidle -w \
               timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
               before-sleep 'swaylock --grace 8 --fade-in 8'
 
-client.focused          $surface2 $base $text  $overlay0  $surface2
-client.focused_inactive $surface1 $base $text  $overlay0  $surface1
-client.unfocused        $surface0 $base $text  $overlay0  $surface0
-client.urgent           $peach    $base $peach $overlay0  $peach
-client.placeholder      $overlay0 $base $text  $overlay0  $overlay0
+client.focused          $surface2 $surface1 $text  $overlay0  $surface2
+client.focused_inactive $surface1 $surface0 $text  $overlay0  $surface1
+client.unfocused        $surface0 $base     $text  $overlay0  $surface0
+client.urgent           $peach    $surface2 $peach $overlay0  $peach
+client.placeholder      $overlay0 $base     $text  $overlay0  $overlay0
 client.background       $base
 
 default_border normal 1
