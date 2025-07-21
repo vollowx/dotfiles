@@ -32,8 +32,8 @@ set {
   $down      j
   $up        k
   $right     l
-  $term      ghostty
-  $term_id   com.mitchellh.ghostty
+  $term      footclient
+  $term_id   foot
   $menu      wofi --show drun
   $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 }
@@ -128,6 +128,7 @@ exec {
   nm-applet
   blueman-applet
   fcitx5 -d
+  foot --server
 }
 
 bar {
