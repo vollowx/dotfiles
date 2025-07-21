@@ -20,7 +20,7 @@ Basic ones:
 The ones run in command line
 
 `htop fd ripgrep`
-`lf catimg chafa ffmpegthumbnailer transmission-cli`
+`lf bat catimg chafa ffmpegthumbnailer transmission-cli`
 `neovim lua-language-server stylua shfmt prettier`
 
 The ones run in GUI
