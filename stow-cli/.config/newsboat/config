@@ -9,6 +9,8 @@ bind-key l open
 bind-key g home
 bind-key G end
 bind-key S save-all
+bind-key ^u halfpageup
+bind-key ^d halfpagedown
 
 color listnormal         color15 default
 color listnormal_unread  color2  default
