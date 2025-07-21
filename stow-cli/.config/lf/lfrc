@@ -1,7 +1,156 @@
-set icons
-set hidden
-set drawbox
 set shell bash
-set scrolloff 5
+set hidden
+set watch
 
+set icons
+set drawbox
+set scrolloff 5
+set info size
+set dircounts
+
+set sixel
+set preview
+set previewer ~/.config/lf/preview
+
+set borderfmt "\033[90m"
+set timefmt "2006-01-02 15:04"
+set statfmt "\033[32m%p\033[0m| %c| %u| %g| %S| %t| -> %l"
+
+# git prompt on every changing directory
+cmd on-cd &{{
+  bash -c '
+  source /usr/share/git/completion/git-prompt.sh
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWSTASHSTATE=1
+  GIT_PS1_SHOWUNTRACKEDFILES=1
+  GIT_PS1_SHOWUPSTREAM=1
+  GIT_PS1_STATESEPARATOR=" "
+  GIT_PS1_DESCRIBE_STYLE=1
+  GIT_PS1_SHOWCOLORHINTS=1
+
+  fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f\033[0m$(__git_ps1)"
+  sleep 0.1 # or it will not show up at the first run
+  lf -remote "send $id set promptfmt \"$fmt\""
+  '
+}}
+on-cd
+
+cmd open &{{
+  case $(file --mime-type -Lb $f) in
+    image/x-xcf)
+      gimp $fx
+      ;;
+    image/*)
+      [ "$XDG_SESSION_TYPE" = "tty" ] && mpv --loop $fx || SWAYSOCK=/dev/null swayimg $fx
+      ;;
+    video/*)
+      mpv --loop $fx
+      ;;
+    audio/*)
+      [ "$XDG_SESSION_TYPE" = "tty" ] && mpv --loop --audio-display=no $fx || footclient mpv --loop --audio-display=no $fx
+      ;;
+    */pdf|*/epub*)
+      zathura $fx
+      ;;
+    application/*opendocument*|*officedocument*)
+      libreoffice $fx
+      ;;
+    application/gzip)
+      lf -remote "send $id \$zless \$f"
+      ;;
+    application/zip)
+      lf -remote "send $id \$zipinfo \$f | less -i"
+      ;;
+    application/*tar|application/*zip*|application/zstd|application/*xz)
+      lf -remote "send $id \$tar vvtf \$f | less -i"
+      ;;
+    text/html)
+      firejail firefox $fx
+      ;;
+    text/*|*/json|inode/x-empty|application/javascript)
+      lf -remote "send $id \$$EDITOR -p \$fx"
+      ;;
+    esac
+}}
+
+cmap <tab> cmd-menu-complete
+cmap <backtab> cmd-menu-complete-back
+
+map a rename
 map D delete
+
+# touch and focus
+cmd touch %{{
+  IFS=" "
+  file="$*"
+  touch -- "$file"
+  lf -remote "send $id select \"$(printf '%s' "$file" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
+}}
+map o push :touch<space>
+
+# mkdir and focus
+cmd mkdir %{{
+  IFS=" "
+  file="$*"
+  mkdir -p -- "$file"
+  lf -remote "send $id select \"$(printf '%s' "$file" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
+}}
+map O push :mkdir<space>
+
+set ifs "\n"
+cmd bulk-rename ${{
+  old="$(mktemp)"
+  new="$(mktemp)"
+  if [ -n "$fs" ]; then
+    fs="$(basename -a -- $fs)"
+  else
+    fs="$(ls)"
+  fi
+  printf '%s\n' "$fs" > "$old"
+  printf '%s\n' "$fs" > "$new"
+  $EDITOR "$new"
+  [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+  paste "$old" "$new" | while IFS= read -r names; do
+    src="$(printf '%s' "$names" | cut -f1)"
+    dst="$(printf '%s' "$names" | cut -f2)"
+    if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+      continue
+    fi
+    mv -- "$src" "$dst"
+  done
+  rm -- "$old" "$new"
+  lf -remote "send $id unselect"
+}}
+map xb bulk-rename
+
+cmd extract %{{
+  printf "extract file? [y/N] "
+  read choice
+  if [ "$choice" = "y" ]; then
+    case "$f" in
+      *.tar)     tar xf "$f" ;;
+      *.zip)     unzip "$f" ;;
+      *.gz)      gunzip -k "$f" ;;
+      *.tar.gz)  tar xzf "$f" ;;
+      *.tar.bz2) tar xjf "$f" ;;
+      *.tar.xz)  tar xJf "$f" ;;
+      *.tar.zst) tar xf "$f" --zstd ;;
+    esac
+  fi
+  lf -remote "send clear"
+}}
+map xx extract
+
+cmd fzf_jump ${{
+  res="$(find . | FZF_LEVEL=1 fzf --reverse --prompt "lf>" --preview 'scope {}' --bind=ctrl-j:preview-down,ctrl-k:preview-up)"
+  if [ -n "$res" ]; then
+    if [ -d "$res" ]; then
+      cmd="cd"
+    else
+      cmd="select"
+    fi
+    res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id $cmd \"$res\""
+  fi
+}}
+map f fzf_jump

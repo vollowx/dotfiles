@@ -19,8 +19,9 @@ Basic ones:
 
 The ones run in command line
 
-`lf htop neovim-git fd ripgrep`
-`lua-language-server stylua shfmt prettier`
+`htop fd ripgrep`
+`lf catimg chafa ffmpegthumbnailer transmission-cli`
+`neovim lua-language-server stylua shfmt prettier`
 
 The ones run in GUI
 
