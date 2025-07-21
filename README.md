@@ -28,7 +28,11 @@ Basic ones:
 The ones run in command line
 
 `htop fd ripgrep`
+
 `lf bat catimg chafa ffmpegthumbnailer transmission-cli`
+
+`newsboat w3m`
+
 `neovim lua-language-server stylua shfmt prettier`
 
 The ones run in GUI

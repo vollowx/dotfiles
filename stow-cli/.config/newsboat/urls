@@ -1,0 +1,12 @@
+http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml news ~BBC
+
+https://archlinux.org/feeds/news/ news "~Arch Linux"
+https://www.archlinuxcn.org/feed/ news "~Arch Linux Chinese"
+https://news.ycombinator.com/rss news "~Hacker News"
+
+https://github.com/neovim/neovim/releases.atom releases ~Neovim
+https://github.com/swaywm/sway/releases.atom releases ~Sway
+https://codeberg.org/dnkl/foot/releases.rss releases ~foot
+https://github.com/gokcehan/lf/releases.atom releases ~lf
+
+https://dmhy.anoneko.com/topics/rss/rss.xml "~Anime Garden Resources"
