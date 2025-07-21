@@ -258,7 +258,7 @@ Vagrantfile                 00;38;2;21;99;255
 *.dwm   󰗄
 *.esd   󰗄
 
-# image formats (extensions from dircolors defaults)
+# image/video formats
 *.jpg   󰋩
 *.jpeg  󰋩
 *.mjpg  󰋩
@@ -310,22 +310,22 @@ Vagrantfile                 00;38;2;21;99;255
 *.ogx   󰋩
 
 # audio formats (extensions from dircolors defaults)
-*.aac   󰋩
-*.au    󰋩
-*.flac  󰋩
-*.m4a   󰋩
-*.mid   󰋩
-*.midi  󰋩
-*.mka   󰋩
-*.mp3   󰋩
-*.mpc   󰋩
-*.ogg   󰋩
-*.ra    󰋩
-*.wav   󰋩
-*.oga   󰋩
-*.opus  󰋩
-*.spx   󰋩
-*.xspf  󰋩
+*.aac   󰎄
+*.au    󰎄
+*.flac  󰎄
+*.m4a   󰎄
+*.mid   󰎄
+*.midi  󰎄
+*.mka   󰎄
+*.mp3   󰎄
+*.mpc   󰎄
+*.ogg   󰎄
+*.ra    󰎄
+*.wav   󰎄
+*.oga   󰎄
+*.opus  󰎄
+*.spx   󰎄
+*.xspf  󰎄
 
 # other formats
 *.pdf   󰈦     00;38;2;179;11;0

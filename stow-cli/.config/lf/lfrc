@@ -76,7 +76,6 @@ cmd open &{{
 cmap <tab> cmd-menu-complete
 cmap <backtab> cmd-menu-complete-back
 
-map a rename
 map D delete
 
 # touch and focus

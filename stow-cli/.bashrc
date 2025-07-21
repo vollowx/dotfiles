@@ -1,6 +1,6 @@
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --group-directories-first'
 alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
@@ -20,3 +20,5 @@ export GIT_PS1_STATESEPARATOR=" "
 export GIT_PS1_DESCRIBE_STYLE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export PS1='\033[32;1m\u@\h\033[0m:\033[34;1m\w\[\033[00m\]$(__git_ps1) \$ '
+
+eval $(dircolors "$HOME/.config/dircolors")
