@@ -1,23 +1,23 @@
 # vim:ft=dircolors
 
 # default values from dircolors
-# (entries with a leading # are not implemented in lf)
-#no     00              # NORMAL
+# (entries with a trailing # are not implemented in lf)
+no      00              # NORMAL #
 fi      00              # FILE
-#rs     0               # RESET
+rs      0               # RESET #
 di      01;34           # DIR
 ln      01;36           # LINK
-#mh     00              # MULTIHARDLINK
+mh      00              # MULTIHARDLINK #
 pi      40;33           # FIFO
 so      01;35           # SOCK
-#do     01;35           # DOOR
+do      01;35           # DOOR #
 bd      40;33;01        # BLK
 cd      40;33;01        # CHR
 or      40;31;01        # ORPHAN
-#mi     00              # MISSING
+mi      00              # MISSING #
 su      37;41           # SETUID
 sg      30;43           # SETGID
-#ca     30;41           # CAPABILITY
+ca      30;41           # CAPABILITY #
 tw      30;42           # STICKY_OTHER_WRITABLE
 ow      34;42           # OTHER_WRITABLE
 st      37;44           # STICKY
@@ -104,6 +104,7 @@ fi      00      # FILE
 *.esd   01;31
 
 # image/video formats
+.face   01;35
 *.jpg   01;35
 *.jpeg  01;35
 *.mjpg  01;35
