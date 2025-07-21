@@ -39,8 +39,11 @@ The ones run in command line
 The ones run in GUI
 
 `sway swaybg swayidle swaylock-effects sway-contrib`
+
 `waybar dunst wofi network-manager-applet blueman`
+
 `xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit-gnome`
+
 `ghostty zathura`
 
 ## Addition
