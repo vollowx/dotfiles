@@ -48,7 +48,7 @@ output {
 
 input type:keyboard {
   xkb_layout us
-  xkb_options caps:escape
+  # xkb_options caps:escape
   repeat_delay 300
   repeat_rate 30
 }
@@ -129,6 +129,10 @@ exec {
   blueman-applet
   fcitx5 -d
   foot --server
+}
+
+exec {
+  foot newsboat -r
 }
 
 bar {
