@@ -1,3 +1,10 @@
-if [[ $- == *i* && -f ~/.bashrc ]]; then
+export PATH=$PATH:~/.local/share/bin
+export EDITOR='nvim'
+export MANPAGER='nvim +Man!'
+export BAT_THEME='base16'
+export QT_STYLE_OVERRIDE='kvantum'
+eval $(dircolors "$HOME/.config/dircolors")
+
+if [[ -f ~/.bashrc ]]; then
   . ~/.bashrc
 fi
