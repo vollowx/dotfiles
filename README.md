@@ -6,6 +6,14 @@ _GNU/Stow-managed dotfiles for *nix systems_
 
 *Package names are those in Arch Linux and AUR by default
 
+## Showcasee
+
+<img width="2560" height="1440" alt="qutebrowser with another terminal" src="https://github.com/user-attachments/assets/74d0205a-eecb-4288-a573-09c497e7880e" />
+<img width="2560" height="1440" alt="two lf window showing PDF and image previewer" src="https://github.com/user-attachments/assets/ab892ecc-1799-4dd9-a699-8eb71f17d819" />
+
+I don't use floating windows so often actually, this is just for a better look
+in screenshots.
+
 ## Installation
 
     git clone git@github.com:vollowx/Stowed.git ~/Stowed
