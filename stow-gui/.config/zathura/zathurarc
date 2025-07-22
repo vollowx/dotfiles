@@ -1,5 +1,7 @@
 set page-padding 10
 set selection-clipboard clipboard
+set font "monospace normal 10"
+set statusbar-v-padding 7 # to keep the same height as qutebrowser
 
 map H zoom in
 map L zoom out
@@ -19,7 +21,7 @@ set completion-group-bg       "#2e2e2e"
 set completion-group-fg       "#78a9ff"
 
 set statusbar-fg              "#ffffff"
-set statusbar-bg              "#2e2e2e"
+set statusbar-bg              "#0d0d0d"
 
 set notification-bg           "#2e2e2e"
 set notification-fg           "#ffffff"
