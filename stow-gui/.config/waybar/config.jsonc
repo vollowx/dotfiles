@@ -61,7 +61,7 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "clock": {
-    "format": "<span color='#adadad' font-weight='bold'>{:%H:%M}</span>",
+    "format": "<span color='#adadad' font-weight='bold' text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }
