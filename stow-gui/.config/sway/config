@@ -70,20 +70,20 @@ for_window {
   [window_role="bubble"]                           floating enable
   [window_role="dialog"]                           floating enable
   [window_type="dialog"]                           floating enable
-  [class="Pinentry-gtk"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
   [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
   [app_id="blueman-manager"]                       floating enable
   [app_id="firefox"]                               inhibit_idle fullscreen
   [app_id="firefox" title="Library"]               floating enable
   [app_id="firefox" title="Picture-in-Picture"]    floating enable, sticky enable, resize set 640 360, move position 100 ppt 100 ppt, move left 652, move up 372
+  [app_id="qutebrowser"]                           inhibit_idle fullscreen
   [class="QQ"]                                     floating enable
   [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0 ppt, move left 332, move down 58
   [class="steam" title="Game Servers"]             floating enable
   [class="steam" title="Players"]                  floating enable
   [class="steam" title="Recordings & Screenshots"] floating enable
   [class="steam" title="Steam Settings"]           floating enable
-  [app_id="Waydroid"]                              floating enable, resize set 480 1080
+  [class="Pinentry-gtk"]                           floating enable
 }
 # Firefox PiP: bottom-right, 12px from the corner of the window
 # Steam Friends List: top-right, 12px from the corner (right), avoiding overlapping the Steam titlebar (top)
@@ -94,9 +94,9 @@ for_window {
 }
 
 exec swayidle -w \
-              timeout 300 'swaylock --grace 8 --fade-in 8' \
+              timeout 300 'swaylock' \
               timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-              before-sleep 'swaylock --grace 8 --fade-in 8'
+              before-sleep 'swaylock'
 
 #                       tb border titlebar  tb text overlay    border
 client.focused          $surface2 $surface1 $text   $overlay0  $surface2

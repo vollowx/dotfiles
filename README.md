@@ -38,7 +38,7 @@ The ones run in command line
 
 The ones run in GUI
 
-`sway swaybg swayidle swaylock-effects sway-contrib`
+`sway swaybg swayidle swaylock sway-contrib`
 
 `waybar dunst wofi network-manager-applet blueman`
 
