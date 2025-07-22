@@ -1,3 +1,11 @@
+window decoration {
+  box-shadow: none;
+}
+.titlebar,
+.titlebar .background {
+  border-radius: 0px 0px 0px 0px;
+}
+
 /* Oxocarbon dark theme
 based on the solarized dark colours from adw-colors: https://github.com/lassekongo83/adw-colors/tree/main/themes/solarized-dark */
 
