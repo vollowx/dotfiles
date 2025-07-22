@@ -128,3 +128,7 @@ To use tools like OpenSSH with virtual machines, here is how to get the IP:
 
     sudo virsh net-list
     sudo virsh net-dhcp-leases default
+
+## Acknowledgements
+
+[marie's dotfiles](https://github.com/mariesavch/dotfiles), for the Oxocarbon override layer over Catppuccin integrations
