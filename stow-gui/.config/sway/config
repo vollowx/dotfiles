@@ -70,6 +70,7 @@ for_window {
   [window_role="bubble"]                           floating enable
   [window_role="dialog"]                           floating enable
   [window_type="dialog"]                           floating enable
+  [class="Pinentry-gtk"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
   [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
   [app_id="blueman-manager"]                       floating enable
