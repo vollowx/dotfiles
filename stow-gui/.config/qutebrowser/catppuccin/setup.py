@@ -1,7 +1,8 @@
 # vim:fileencoding=utf-8:foldmethod=marker
+# Lines end with * are those different to the original file
 
 
-def setup(c, flavour, samecolorrows = False):
+def setup(c, flavour, samecolorrows=False):
     palette = {}
 
     # flavours {{{
@@ -270,16 +271,16 @@ def setup(c, flavour, samecolorrows = False):
     # }}}
 
     # statusbar {{{
-    ## Background color of the statusbar.
-    c.colors.statusbar.normal.bg = palette["base"]
-    ## Background color of the statusbar in insert mode.
-    c.colors.statusbar.insert.bg = palette["crust"]
-    ## Background color of the statusbar in command mode.
-    c.colors.statusbar.command.bg = palette["base"]
-    ## Background color of the statusbar in caret mode.
-    c.colors.statusbar.caret.bg = palette["base"]
-    ## Background color of the statusbar in caret mode with a selection.
-    c.colors.statusbar.caret.selection.bg = palette["base"]
+    ## Background color of the statusbar.*
+    c.colors.statusbar.normal.bg = palette["mantle"]
+    ## Background color of the statusbar in insert mode.*
+    c.colors.statusbar.insert.bg = palette["mantle"]
+    ## Background color of the statusbar in command mode.*
+    c.colors.statusbar.command.bg = palette["mantle"]
+    ## Background color of the statusbar in caret mode.*
+    c.colors.statusbar.caret.bg = palette["mantle"]
+    ## Background color of the statusbar in caret mode with a selection.*
+    c.colors.statusbar.caret.selection.bg = palette["mantle"]
 
     ## Background color of the progress bar.
     c.colors.statusbar.progress.bg = palette["base"]
