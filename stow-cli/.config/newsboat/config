@@ -1,4 +1,4 @@
-browser "w3m %u"
+browser "$BROWSER %u"
 cleanup-on-quit yes
 datetime-format "%Y-%m-%d"
 
