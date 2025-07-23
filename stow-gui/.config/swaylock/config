@@ -6,6 +6,7 @@ show-failed-attempts
 ignore-empty-password
 font=monospace
 font-size=24
+image=~/Pictures/Wallappers/wallhaven-yqjdpd.jpg
 
 key-hl-color=08bdba
 bs-hl-color=ff8389
@@ -33,9 +34,9 @@ text-ver-color=78a9ff
 text-wrong-color=ff8389
 separator-color=00000000
 
-# 161616 means waiting for input, 00000000 means not listening to input
-ring-color=161616
-ring-clear-color=161616
-ring-caps-lock-color=161616
-ring-wrong-color=161616
+# 16161680 means waiting for input, 00000000 means not listening to input
+ring-color=16161680
+ring-clear-color=16161680
+ring-caps-lock-color=16161680
+ring-wrong-color=16161680
 ring-ver-color=00000000
