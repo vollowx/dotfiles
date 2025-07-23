@@ -7,6 +7,12 @@ alias lla='ls -la'
 alias grep='grep --color=auto'
 . /etc/profile.d/lfcd.sh
 
+clear-screen-keep-sb() {
+  printf '\e[%dS' $((LINES - 1))
+  tput -x clear
+}
+bind -x '"\C-l":"clear-screen-keep-sb"'
+
 . /usr/share/git/completion/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
