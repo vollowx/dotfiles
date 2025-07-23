@@ -1,4 +1,4 @@
-export PATH=$PATH:~/.local/share/bin
+export PATH=$PATH:~/.local/bin
 export EDITOR='nvim'
 export VISUAL='nvim'
 export SUDO_EDITOR='nvim'
