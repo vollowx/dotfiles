@@ -3,8 +3,8 @@
   "id": "bar-0",
   "ipc": true,
   "layer": "top",
-  "position": "bottom",
-  "height": 32,
+  "position": "top",
+  "height": 24,
 
   "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
   "modules-center": [],
