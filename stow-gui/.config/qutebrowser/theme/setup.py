@@ -264,8 +264,8 @@ def setup(c, flavour):
     c.colors.tabs.even.bg = palette["crust"]
     c.colors.tabs.odd.bg = palette["crust"]
 
-    c.colors.tabs.even.fg = palette["subtext0"]
-    c.colors.tabs.odd.fg = palette["subtext0"]
+    c.colors.tabs.even.fg = palette["overlay2"]
+    c.colors.tabs.odd.fg = palette["overlay2"]
 
     c.colors.tabs.indicator.error = palette["red"]
     c.colors.tabs.indicator.start = palette["blue"]
@@ -281,8 +281,8 @@ def setup(c, flavour):
     c.colors.tabs.pinned.even.bg = palette["crust"]
     c.colors.tabs.pinned.odd.bg = palette["crust"]
 
-    c.colors.tabs.pinned.even.fg = palette["subtext0"]
-    c.colors.tabs.pinned.odd.fg = palette["subtext0"]
+    c.colors.tabs.pinned.even.fg = palette["overlay2"]
+    c.colors.tabs.pinned.odd.fg = palette["overlay2"]
 
     c.colors.tabs.pinned.selected.even.bg = palette["base"]
     c.colors.tabs.pinned.selected.odd.bg = palette["base"]
