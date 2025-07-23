@@ -75,8 +75,9 @@ for_window {
   [app_id="firefox" title="Library"]               floating enable
   [app_id="firefox" title="Picture-in-Picture"]    floating enable, sticky enable, resize set 640 360, move position 100 ppt 100 ppt, move left 652, move up 372
   [app_id="qutebrowser"]                           inhibit_idle fullscreen
+  [class="discord"]                                floating enable
   [class="QQ"]                                     floating enable
-  [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0 ppt, move left 332, move down 58
+  [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0, move left 332, move down 100
   [class="steam" title="Game Servers"]             floating enable
   [class="steam" title="Players"]                  floating enable
   [class="steam" title="Recordings & Screenshots"] floating enable
