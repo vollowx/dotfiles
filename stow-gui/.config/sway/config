@@ -32,23 +32,20 @@ set {
   $down      j
   $up        k
   $right     l
-  $term      footclient
-  $term_id   foot
-  $menu      wofi --show drun
   $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 }
 
 ### Core
 
 output {
-  * bg $mantle solid_color
+  * bg ~/Pictures/Wallappers/wallhaven-yqjdpd.jpg fill
   eDP-1 resolution 1920x1080 position 0 0 scale 1.00
   "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0
 }
 
 input type:keyboard {
   xkb_layout us
-  # xkb_options caps:escape
+  xkb_options caps:escape
   repeat_delay 300
   repeat_rate 30
 }
@@ -71,7 +68,8 @@ for_window {
   [window_role="dialog"]                           floating enable
   [window_type="dialog"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
-  [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
+  # [app_id=$term_id]                              floating enable, move to scratchpad, scratchpad show
+  [app_id="launcher"]                              floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 0
   [app_id="blueman-manager"]                       floating enable
   [app_id="firefox"]                               inhibit_idle fullscreen
   [app_id="firefox" title="Library"]               floating enable
@@ -99,41 +97,38 @@ exec swayidle -w \
               before-sleep 'swaylock'
 
 #                       tb border titlebar  tb text overlay    border
-client.focused          $surface2 $surface1 $text   $overlay0  $surface2
-client.focused_inactive $surface1 $surface0 $text   $overlay0  $surface1
-client.unfocused        $surface0 $base     $text   $overlay0  $surface0
+client.focused          $surface2 $base     $text   $overlay0  $surface2
+client.focused_inactive $surface1 $mantle   $text   $overlay0  $surface1
+client.unfocused        $surface0 $crust    $text   $overlay0  $surface0
 client.urgent           $peach    $surface2 $peach  $overlay0  $peach
 client.placeholder      $overlay0 $base     $text   $overlay0  $overlay0
 client.background       $base
 
+font pango:monospace 8
 default_border normal 1
 default_floating_border normal 1
 for_window [class=".*"]  border normal 1
 for_window [app_id=".*"] border normal 1
 # Clients who want to draw their own CSD doesn't follow this when floating
 
-gaps inner 8
+workspace_layout tabbed
+gaps inner 16
 
-font pango:monospace 8
-
-exec --no-startup-id {
-  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-}
-
-exec {
+exec_always {
   systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
   hash dbus-update-activation-environment 2>/dev/null
   dbus-update-activation-environment --systemd SWAYSOCK WAYLAND_DISPLAY 2>/dev/null
+}
 
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+exec {
+  wl-paste --watch cliphist store
   dunst
   nm-applet
   blueman-applet
   fcitx5 -d
   foot --server
-}
-
-exec {
-  foot newsboat -r
 }
 
 bar {
@@ -145,10 +140,13 @@ bar {
 
 ### Key bindings
 
-bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
+bindsym $mod+d exec dmenu-launch
+bindsym $mod+v exec dmenu-clipboard
+bindsym $mod+o exec dmenu-wireplumber
+
 floating_modifier $mod normal
+bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
 
@@ -199,17 +197,17 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+n splith
+bindsym $mod+m splitv
 
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space floating toggle
+bindsym $mod+Tab focus mode_toggle
 
 bindsym $mod+a focus parent
 

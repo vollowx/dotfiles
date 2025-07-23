@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+command="$(compgen -c | sort -u | dmenu application\> | tail -1)"
+
+swaymsg exec -- "$command"

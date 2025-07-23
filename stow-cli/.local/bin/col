@@ -1,0 +1,96 @@
+// https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
+
+//usr/bin/env go-script "$0" "$@"; exit $?
+// vi: ft=go
+
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+// $ col [ in delim [ out delim ] ] [ col ... ]
+
+// $ printf "%s\t%s\n" one two | col
+// one	two
+// $ printf "%s\t%s\n" one two | col 1 2
+// one	two
+// $ printf "%s\t%s\n" one two | col 2
+// two
+// $ printf "%s;%s\n" one two | col ';' 2
+// two
+// $ printf "%s;%s\n" one two | col ';' 1 2
+// one	two
+// $ printf "%s\t%s\t%s\n" 1 2 3 11 22 33 111 222 333 | col 2
+// 2
+// 22
+// 222
+// $ echo 1 2 3 4 5 | col ' ' -1
+// 5
+// $ echo 1:2:3 | col : . 1 2 3
+// 1.2.3
+
+func main() {
+	var inDelim = "\t"
+	var outDelim = "\t"
+
+	var args = os.Args[1:]
+	for _, p := range []*string{&inDelim, &outDelim} {
+		if len(args) > 0 {
+			if _, err := strconv.Atoi(args[0]); err != nil {
+				*p, args = args[0], args[1:]
+			}
+		}
+	}
+
+	var indexes []int // 1-indexed
+	for _, is := range args {
+		if i, _ := strconv.Atoi(is); i != 0 {
+			indexes = append(indexes, i)
+		}
+	}
+
+Row:
+	for sc := bufio.NewScanner(os.Stdin); sc.Scan(); {
+		columns := smartSplit(sc.Text(), inDelim)
+		if len(indexes) == 0 {
+			fmt.Println(strings.Join(columns, outDelim))
+			continue
+		}
+
+		var selected []string
+		for _, i := range indexes {
+			if i < 0 {
+				i = len(columns) + 1 + i
+			}
+			if i <= 0 || i > len(columns) {
+				continue Row
+			}
+			selected = append(selected, columns[i-1])
+		}
+		fmt.Println(strings.Join(selected, outDelim))
+	}
+}
+
+// TODO: grapheme-cluster aware []rune delim split
+func smartSplit(text, delim string) []string {
+	switch delim {
+	case "\t", ";":
+		return strings.Split(text, delim)
+	}
+	if runes := []rune(delim); len(runes) == 1 {
+		return trim(strings.FieldsFunc(text, func(r rune) bool { return r == runes[0] }))
+	}
+	return trim(strings.Split(text, delim))
+}
+
+func trim(in []string) []string {
+	for i := range in {
+		in[i] = strings.TrimSpace(in[i])
+	}
+	return in
+}

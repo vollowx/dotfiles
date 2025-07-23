@@ -24,7 +24,9 @@ in screenshots.
 
 Basic ones:
 
-`stow bash-completion unzip unrar 7zip`
+`stow bash-completion unzip unrar 7zip go`
+
+    go install go.senan.xyz/untree@latest
 
 The ones run in command line
 
