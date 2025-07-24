@@ -38,7 +38,7 @@ set {
 ### Core
 
 output {
-  * bg ~/Pictures/Wallappers/wallhaven-yqjdpd.jpg fill
+  * bg ~/Pictures/wallpaper fill
   eDP-1 resolution 1920x1080 position 0 0 scale 1.00
   "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0
 }
@@ -69,7 +69,7 @@ for_window {
   [window_type="dialog"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
   # [app_id=$term_id]                              floating enable, move to scratchpad, scratchpad show
-  [app_id="launcher"]                              floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 0
+  [app_id="launcher"]                              floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
   [app_id="blueman-manager"]                       floating enable
   [app_id="firefox"]                               inhibit_idle fullscreen
   [app_id="firefox" title="Library"]               floating enable
@@ -106,10 +106,10 @@ client.placeholder      $overlay0 $base     $text   $overlay0  $overlay0
 client.background       $base
 
 font pango:monospace 8
-default_border normal 1
-default_floating_border normal 1
-for_window [class=".*"]  border normal 1
-for_window [app_id=".*"] border normal 1
+default_border pixel 1
+default_floating_border pixel 1
+for_window [class=".*"]  border pixel 1
+for_window [app_id=".*"] border pixel 1
 # Clients who want to draw their own CSD doesn't follow this when floating
 
 workspace_layout tabbed
@@ -125,11 +125,13 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec {
   wl-paste --watch cliphist store
-  dunst
   nm-applet
   blueman-applet
   fcitx5 -d
-  foot --server
+}
+
+exec_always {
+  pkill dunst; dunst
 }
 
 bar {
@@ -142,6 +144,7 @@ bar {
 ### Key bindings
 
 bindsym $mod+d exec dmenu-launch
+bindsym $mod+b exec dmenu-bluetooth
 bindsym $mod+v exec dmenu-clipboard
 bindsym $mod+o exec dmenu-wireplumber
 
@@ -150,6 +153,7 @@ bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
+bindsym $mod+Delete exec swaylock
 
 bindsym $mod+p exec /usr/share/sway-contrib/grimshot savecopy screen $shot_path
 bindsym $mod+Shift+p exec /usr/share/sway-contrib/grimshot savecopy anything $shot_path
