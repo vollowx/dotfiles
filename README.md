@@ -105,6 +105,18 @@ in that case).
     ./scripts/install-adw-firefox.sh
     ./scripts/install-adw-steam.sh
 
+### Hibernate
+
+```
+# /etc/systemd/logind.conf
+HandlePowerKey=hibernate
+```
+
+```
+# /etc/mkinitcpio.conf
+HOOKS=(...filesystems resume fsck...)
+```
+
 ### QT
 
 `kvantum kvantum-theme-libadwaita-git`
