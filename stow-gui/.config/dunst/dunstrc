@@ -4,12 +4,11 @@ font                     = "sans-serif 10"
 format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
-offset                   = (16, 16)
-origin                   = "top-right"
+offset                   = (32, 32)
+origin                   = "bottom-right"
 icon_position            = "left"
 min_icon_size            = 48
 max_icon_size            = 48
-corner_radius            = 20
 padding                  = 24
 horizontal_padding       = 24
 frame_width              = 1
@@ -21,11 +20,11 @@ show_age_threshold       = 60
 idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
-dmenu                    = "wofi --dmenu dunst"
+dmenu                    = "dmenu dunst" # FIXME
 background               = "#000000"
 foreground               = "#ffffff"
 highlight                = "#78a9ff"
-frame_color              = "#2e2e2e"
+frame_color              = "#7a7a7a"
 
 [urgency_low]
 timeout = 8
