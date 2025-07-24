@@ -17,7 +17,7 @@ c.content.canvas_reading = False
 c.content.geolocation = False
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 
-config.bind("si", "hint image download")
+config.bind("si", "hint images download")
 
 config.bind("<Ctrl+p>", "completion-item-focus prev", mode="command")
 config.bind("<Ctrl+n>", "completion-item-focus next", mode="command")
