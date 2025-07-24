@@ -68,6 +68,7 @@ for_window {
   [window_type="dialog"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
   # [app_id=$term_id]                              floating enable, move to scratchpad, scratchpad show
+  [app_id="gterm"]                                 floating enable
   [app_id="launcher"]                              floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
   [app_id="blueman-manager"]                       floating enable
   [app_id="firefox"]                               inhibit_idle fullscreen
