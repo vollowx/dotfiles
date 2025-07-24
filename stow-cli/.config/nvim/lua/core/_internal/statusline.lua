@@ -417,8 +417,11 @@ local function set_default_hlgroups()
   sethl('StatusLineDiagnosticError', { fg = 'DiagnosticSignError' })
   sethl('StatusLineLspProgressMsg', { fg = 'NonText' })
   sethl('StatusLineLspProgressIcon', { fg = 'Constant' })
-  sethl('StatusLineHeader', { fg = 'Keyword', bold = true })
-  sethl('StatusLineHeaderModified', { fg = 'Function', bold = true })
+  sethl('StatusLineHeader', { fg = 'Keyword', bg = 'CursorLine', bold = true })
+  sethl(
+    'StatusLineHeaderModified',
+    { fg = 'Function', bg = 'CursorLine', bold = true }
+  )
 end
 set_default_hlgroups()
 

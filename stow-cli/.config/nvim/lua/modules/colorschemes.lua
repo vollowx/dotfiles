@@ -1,9 +1,7 @@
 return {
   { 'sainnhe/everforest' },
-  { 'sainnhe/gruvbox-material' },
   {
-    '0xmayro/ctp-nvim',
-    branch = 'feat/auto-integrations',
+    'catppuccin/nvim',
     name = 'catppuccin',
     config = load_plugin('catppuccin'),
   },

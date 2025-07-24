@@ -1,5 +1,5 @@
 require('catppuccin').setup({
-  term_c = true,
+  term_colors = true,
   default_integrations = false,
   auto_integrations = true,
   integrations = {
@@ -90,7 +90,6 @@ require('catppuccin').setup({
   highlight_overrides = {
     all = function(c)
       return {
-        FloatBorder = { bg = c.mantle, fg = c.mantle },
         CursorLineNr = { fg = c.mauve, style = { 'bold' } },
         PmenuSel = { bg = c.surface0, fg = '' },
         Pmenu = { bg = c.mantle },
