@@ -8,6 +8,9 @@ row="$(wpctl status |
   dmenu sink\>)"
 
 id="$(echo "$row" | grep -Eo "[0-9]+")"
-test -z "$id" && exit
+
+if [ -z "$id" ]; then
+  exit
+fi
 
 wpctl set-default "$id"
