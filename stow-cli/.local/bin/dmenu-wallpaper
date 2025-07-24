@@ -2,8 +2,16 @@
 
 base=$(xdg-user-dir PICTURES)
 
-cd $base/Wallappers/
-choice=$(fd | dmenu)
+if [ ! -d "$base/Wallpapers" ]; then
+  exit 1
+fi
 
-ln -sf $base/Wallappers/$choice $base/wallpaper
+cd "$base/Wallpapers/"
+choice=$(fd | dmenu wallpaper\>)
+
+if [ -z "$choice" ]; then
+  exit 1
+fi
+
+ln -sf "$base/Wallpapers/$choice" "$base/wallpaper"
 swaymsg reload
