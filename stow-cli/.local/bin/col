@@ -1,7 +1,6 @@
-// https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
-
 //usr/bin/env go-script "$0" "$@"; exit $?
 // vi: ft=go
+// https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
 
 package main
 
