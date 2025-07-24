@@ -151,7 +151,7 @@ bindsym $mod+o exec dmenu-wireplumber
 floating_modifier $mod normal
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c exec swaymsg reload && notify-send Sway 'Configuration reloaded'
 bindsym $mod+Shift+e exit
 bindsym $mod+Delete exec swaylock
 

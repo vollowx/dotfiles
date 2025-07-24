@@ -7,7 +7,7 @@ if [ ! -d "$base/Wallpapers" ]; then
 fi
 
 cd "$base/Wallpapers/"
-choice=$(find -type f | dmenu wallpaper\>)
+choice=$(find -type f -printf '%P\n' | dmenu wallpaper\>)
 
 if [ -z "$choice" ]; then
   exit 1
@@ -15,3 +15,4 @@ fi
 
 ln -sf "$base/Wallpapers/$choice" "$base/wallpaper"
 swaymsg reload
+notify-send "Sway" "Wallpaper is now\n$choice"
