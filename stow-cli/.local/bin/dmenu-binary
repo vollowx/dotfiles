@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --print-query"
+
 command="$(compgen -c | sort -u | dmenu binary\> | tail -1)"
 
 swaymsg exec -- "$command"
