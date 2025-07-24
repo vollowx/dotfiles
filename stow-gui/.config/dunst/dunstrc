@@ -36,3 +36,7 @@ timeout = 8
 timeout = 8
 background = "#d44a1c"
 foreground = "#000000"
+
+[play_sound]
+summary = "*"
+script = notify-sound

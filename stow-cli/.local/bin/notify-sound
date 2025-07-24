@@ -1,0 +1,3 @@
+#!/bin/env sh
+
+paplay ~/Stowed/sounds/LTTP_Text_Done.wav

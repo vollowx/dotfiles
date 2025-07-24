@@ -57,7 +57,6 @@ input type:touchpad {
   middle_emulation enabled
 }
 
-xwayland enabled
 seat * hide_cursor 10000
 seat * hide_cursor when-typing enable
 seat * xcursor_theme macOS 24
@@ -131,7 +130,7 @@ exec {
 }
 
 exec_always {
-  pkill dunst; dunst
+  pkill dunst && dunst
 }
 
 bar {
