@@ -1,0 +1,9 @@
+.cache/
+.config/discordcanary/
+.config/QQ/
+.local/share/
+.local/state/
+
+.git/
+.mozilla/
+.steam/
