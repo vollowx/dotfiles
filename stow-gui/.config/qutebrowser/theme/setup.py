@@ -187,9 +187,9 @@ def setup(c, flavour):
 
     # hints {{{
     c.colors.hints.bg = palette["peach"]
-    c.colors.hints.fg = palette["mantle"]
+    c.colors.hints.fg = palette["crust"]
 
-    c.hints.border = "1px solid " + palette["mantle"]
+    c.hints.border = "1px solid " + palette["crust"]
 
     c.colors.hints.match.fg = palette["subtext1"]
     # }}}
