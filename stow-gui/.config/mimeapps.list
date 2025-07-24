@@ -1,3 +1,6 @@
 [Default Applications]
-x-scheme-handler/discord-1216669957799018608=discord-1216669957799018608.desktop
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop
+image/png=swayimg.desktop
+
+[Added Associations]
+image/png=swayimg.desktop;
