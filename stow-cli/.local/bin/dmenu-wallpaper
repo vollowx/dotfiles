@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+base=$(xdg-user-dir PICTURES)
+
+cd $base/Wallappers/
+choice=$(fd | dmenu)
+
+ln -sf $base/Wallappers/$choice $base/wallpaper
+swaymsg reload

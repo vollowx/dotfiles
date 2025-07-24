@@ -146,6 +146,7 @@ bar {
 bindsym $mod+d exec dmenu-binary
 bindsym $mod+b exec dmenu-bluetooth
 bindsym $mod+v exec dmenu-clipboard
+bindsym $mod+w exec dmenu-wallpaper
 bindsym $mod+o exec dmenu-wireplumber
 
 floating_modifier $mod normal
