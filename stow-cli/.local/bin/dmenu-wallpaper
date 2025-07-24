@@ -7,7 +7,7 @@ if [ ! -d "$base/Wallpapers" ]; then
 fi
 
 cd "$base/Wallpapers/"
-choice=$(fd | dmenu wallpaper\>)
+choice=$(find -type f | dmenu wallpaper\>)
 
 if [ -z "$choice" ]; then
   exit 1
