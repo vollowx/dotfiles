@@ -8,9 +8,9 @@ _GNU/Stow-managed dotfiles for *nix systems_
 
 ## Showcasee
 
-<img width="2560" height="1440" alt="qutebrowser with another terminal" src="https://github.com/user-attachments/assets/74d0205a-eecb-4288-a573-09c497e7880e" />
-<img width="2560" height="1440" alt="Neovim checking dwl code and newsboat showing Arch Linux news" src="https://github.com/user-attachments/assets/4b837acf-deba-499f-bb0f-c0d966e70d9c" />
-<img width="2560" height="1440" alt="Two windows with lf running inside, showing PDF and image previewer" src="https://github.com/user-attachments/assets/ab892ecc-1799-4dd9-a699-8eb71f17d819" />
+<img width="2560" height="1440" alt="qutebrowser and newsboat" src="https://github.com/user-attachments/assets/9773a6a8-13d9-4ad7-93f2-6d9a515e4688" />
+<img width="2560" height="1440" alt="Neovim checking dwl source code and lf previewing image" src="https://github.com/user-attachments/assets/f9ae9a7e-47a9-4593-8d97-10a605f93074" />
+<img width="2560" height="1440" alt="lf previewing PDF and zathura viewing PDF, with dmenu selecting default audio input/output at the bottom of the screen" src="https://github.com/user-attachments/assets/ba42e4f5-afdf-4579-a71e-69f2af48ce08" />
 
 I don't use floating windows so often actually, this is just for a better look
 in screenshots.
