@@ -15,4 +15,4 @@ fi
 
 ln -sf "$base/Wallpapers/$choice" "$base/wallpaper"
 swaymsg reload
-notify-send "Sway" "$choice\nis the wallpaper now"
+notify-send -r 667 -t 1000 "Sway" "$choice\nis the wallpaper now"

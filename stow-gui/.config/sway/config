@@ -128,10 +128,7 @@ exec {
   nm-applet
   blueman-applet
   fcitx5 -d
-}
-
-exec_always {
-  pkill dunst && dunst
+  dunst
 }
 
 bar {
@@ -152,9 +149,11 @@ bindsym $mod+o exec dmenu-wireplumber
 floating_modifier $mod normal
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+c exec swaymsg reload && notify-send Sway 'Configuration reloaded'
+bindsym $mod+Shift+c exec swaymsg reload && notify-send -r 667 -t 1000 Sway 'Configuration reloaded'
 bindsym $mod+Shift+e exit
 bindsym $mod+Delete exec swaylock
+
+bindsym $mod+space exec fcitx5-remote -t && notify-send -r 668 -t 1000 "IME" $(fcitx5-remote -n)
 
 bindsym $mod+p exec /usr/share/sway-contrib/grimshot savecopy screen $shot_path
 bindsym $mod+Shift+p exec /usr/share/sway-contrib/grimshot savecopy anything $shot_path
@@ -212,7 +211,7 @@ bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 
-bindsym $mod+space floating toggle
+bindsym $mod+Shift+Tab floating toggle
 bindsym $mod+Tab focus mode_toggle
 
 bindsym $mod+a focus parent
