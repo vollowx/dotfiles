@@ -50,8 +50,14 @@ input type:keyboard {
   repeat_rate 30
 }
 
+input type:pointer {
+  dwt disabled
+  dwtp disabled
+}
+
 input type:touchpad {
   dwt disabled
+  dwtp disabled
   tap enabled
   natural_scroll enabled
   middle_emulation enabled
