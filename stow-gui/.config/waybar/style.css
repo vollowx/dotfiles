@@ -33,25 +33,24 @@ window#waybar {
   background: transparent;
   color: @text;
   font-family: monospace;
-  background-color: alpha(@mantle, 0.999999);
+  background-color: transparent;
   /* Workaround for https://github.com/Alexays/Waybar/issues/3750 */
 }
 
 #workspaces button {
   all: unset;
-  padding: 0 8px;
-  background-color: @surface0;
-  color: @text;
+  padding: 0 4px;
+  color: @subtext0;
 }
 
 #workspaces button.focused {
   font-weight: bold;
-  background-color: @surface2;
+  color: @lavender;
 }
 
 #workspaces button.urgent {
-  background-color: @peach;
-  color: @base;
+  font-weight: bold;
+  color: @peach;
 }
 
 #workspaces,
