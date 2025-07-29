@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-paplay ~/Stowed/sounds/notify.ogg
+# paplay ~/Stowed/sounds/LTTP_Text_Done.wav
