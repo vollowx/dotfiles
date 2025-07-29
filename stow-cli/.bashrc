@@ -6,6 +6,7 @@ alias ll='ls -l'
 alias lla='ls -la'
 alias grep='grep --color=auto'
 . /etc/profile.d/lfcd.sh
+eval "$(zoxide init bash)"
 
 clear-screen-keep-sb() {
   printf '\e[%dS' $((LINES - 1))
