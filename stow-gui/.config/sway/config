@@ -157,7 +157,8 @@ bar {
 
 ### Key bindings
 
-bindsym $mod+d exec dmenu-binary
+bindsym $mod+d exec dmenu-application
+bindsym $mod+q exec dmenu-power
 bindsym $mod+b exec dmenu-bluetooth
 bindsym $mod+v exec dmenu-clipboard
 bindsym $mod+w exec dmenu-wallpaper
