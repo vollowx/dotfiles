@@ -11,6 +11,7 @@ eval "$(zoxide init bash)"
 [[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
 
 export FZF_CTRL_T_OPTS="--walker-skip .cache,.config/discordcanary,.config/QQ,.local/share,.local/state,.mozilla,.steam,.git,node_modules"
+export FZF_ALT_C_OPTS="--walker-skip .cache,.config/discordcanary,.config/QQ,.local/share,.local/state,.mozilla,.steam,.git,node_modules"
 
 export HISTCONTROL="erasedups:ignorespace"
 shopt -s autocd
