@@ -24,4 +24,4 @@ export FZF_DEFAULT_OPTS="--info hidden \
 eval $(dircolors "$HOME/.config/dircolors")
 export QT_STYLE_OVERRIDE='kvantum'
 
-[[ -f ~/.bashrc ]]; && . ~/.bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc
