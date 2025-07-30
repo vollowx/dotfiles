@@ -4,6 +4,8 @@
 .local/share/
 .local/state/
 
-.git/
 .mozilla/
 .steam/
+
+.git/
+node_modules/

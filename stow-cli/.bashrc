@@ -5,14 +5,16 @@ alias la='ls -a'
 alias ll='ls -l'
 alias lla='ls -la'
 alias grep='grep --color=auto'
+eval "$(fzf --bash)"
 eval "$(zoxide init bash)"
 [[ -f /etc/profile.d/lfcd.sh ]] && . /etc/profile.d/lfcd.sh
 [[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
 
-export HISTCONTROL="erasedups:ignorespace"
+export FZF_CTRL_T_OPTS="--walker-skip .cache,.config/discordcanary,.config/QQ,.local/share,.local/state,.mozilla,.steam,.git,node_modules"
 
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
+export HISTCONTROL="erasedups:ignorespace"
+shopt -s autocd
+shopt -s checkwinsize
 
 clear-screen-keep-sb() {
   printf '\e[%dS' $((LINES - 1))
