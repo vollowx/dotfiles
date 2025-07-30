@@ -14,8 +14,11 @@ export FZF_CTRL_T_OPTS="--walker-skip .cache,.config/discordcanary,.config/QQ,.l
 export FZF_ALT_C_OPTS="--walker-skip .cache,.config/discordcanary,.config/QQ,.local/share,.local/state,.mozilla,.steam,.git,node_modules"
 
 export HISTCONTROL="erasedups:ignorespace"
+
 shopt -s autocd
 shopt -s checkwinsize
+shopt -s extglob
+complete -f -X '*.@(jpg|jpeg|mjpg|mjpeg|gif|bmp|pbm|pgm|ppm|tga|xbm|xpm|tif|tiff|png|svg|svgz|mng|pcx|mov|mpg|mpeg|m2v|mkv|webm|ogm|mp4|m4v|mp4v|vob|qt|nuv|wmv|asf|rm|rmvb|flc|avi|fli|flv|gl|dl|ogv|ogx|aac|au|flac|m4a|mid|midi|mka|mp3|mpc|ogg|ra|wav|oga|opus|spx|xspf|pdf)' nvim grep
 
 clear-screen-keep-sb() {
   printf '\e[%dS' $((LINES - 1))
