@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-command="$(echo -e "swaylock\nsuspend\nhibernate\nterminate\nshutdown" | dmenu power\>)"
+command="$(echo -e "swaylock\nsuspend\nhibernate\nterminate\nreboot\nshutdown" | dmenu power\>)"
 
 [[ ! -z "$command" ]] && swaymsg exec -- "$command"
