@@ -1,6 +1,8 @@
 [Default Applications]
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop
 image/png=swayimg.desktop
+x-scheme-handler/acmanager=Assetto Corsa.desktop
 
 [Added Associations]
 image/png=swayimg.desktop;
+x-scheme-handler/acmanager=Assetto Corsa.desktop;
