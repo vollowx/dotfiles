@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+keep_swayidle() {
+  running_swayidle="$(ps aux | grep swayidle | grep -v grep | grep -v swayidled)"
+  [[ ! -z $running_swayidle ]] && return
+  swayidle -w \
+    timeout 300 'swaylock' \
+    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock' &
+}
+
+kill_swayidle() {
+  pkill swayidle
+}
+
+while [[ true ]]; do
+  active_streams="$(wpctl status |
+    sed -E 's/[└─│├]/ /g; s/\[vol.*//; s/\*(.*)/ \1 */; s/([0-9 ]{4})\./ \1/; s/:\s*$//; s/.*/\L\0/' |
+    untree |
+    col ' ' ' ' |
+    grep -Ei "^audio streams " |
+    grep -i "active")"
+
+  if [[ -z $active_streams ]]; then
+    keep_swayidle
+  else
+    kill_swayidle
+  fi
+
+  sleep $1
+done

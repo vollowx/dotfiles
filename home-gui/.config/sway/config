@@ -109,11 +109,6 @@ for_window {
   [class="steam_app_244210"]     inhibit_idle focus, floating enable
 }
 
-exec swayidle -w \
-              timeout 300 'swaylock' \
-              timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-              before-sleep 'swaylock'
-
 #                       tb border titlebar  tb text overlay    border
 client.focused          $surface2 $base     $text   $overlay0  $surface2
 client.focused_inactive $surface1 $mantle   $text   $overlay0  $surface1
@@ -141,6 +136,7 @@ exec_always {
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec {
+  swayidled 60
   wl-paste --watch cliphist store
   blueman-applet
   fcitx5 -d
