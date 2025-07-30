@@ -21,3 +21,5 @@ config.bind("si", "hint images download")
 
 config.bind("<Ctrl+p>", "completion-item-focus prev", mode="command")
 config.bind("<Ctrl+n>", "completion-item-focus next", mode="command")
+
+config.set("content.javascript.clipboard", "access-paste", "https://music.apple.com")
