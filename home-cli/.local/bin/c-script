@@ -17,11 +17,10 @@ test -f "$bin" &&
   dir="$(mktemp -d)"
   cd "$dir" || exit 1
 
-  cp "$src" "$dir/m.go"
+  cp "$src" "$dir/m.c"
 
-  go mod init tmp
-  go get ./...
-  go build -o "$bin"
+  args=$(eval "echo -e \"$(sed -n '2s/^...//p' $dir/m.c)\"")
+  gcc -o "$bin" "$dir/m.c" $args
 
   rm -r "$dir"
 } 1>&2

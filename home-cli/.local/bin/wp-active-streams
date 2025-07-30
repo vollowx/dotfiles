@@ -1,0 +1,120 @@
+//usr/bin/env c-script "$0" "$@"; exit $?
+// $(pkg-config --cflags --libs libpipewire-0.3 wireplumber-0.5)
+// vi: ft=c
+
+#include <pipewire/extensions/session-manager/keys.h>
+#include <pipewire/keys.h>
+#include <pipewire/pipewire.h>
+#include <spa/utils/defs.h>
+#include <spa/utils/string.h>
+#include <stdio.h>
+#include <wp/wp.h>
+
+typedef struct {
+  GMainLoop *loop;
+  WpCore *core;
+  WpObjectManager *om;
+  int active_streams;
+} Global;
+
+static void check_stream_node(const GValue *item, gpointer data) {
+  Global *self = data;
+  WpPipewireObject *obj = g_value_get_object(item);
+  guint32 id = wp_proxy_get_bound_id(WP_PROXY(obj));
+
+  g_autoptr(WpIterator) it = wp_object_manager_new_filtered_iterator(
+      self->om, WP_TYPE_PORT, WP_CONSTRAINT_TYPE_PW_PROPERTY, PW_KEY_NODE_ID,
+      "=u", id, NULL);
+  g_auto(GValue) val = G_VALUE_INIT;
+
+  for (; wp_iterator_next(it, &val); g_value_unset(&val)) {
+    WpPort *port = g_value_get_object(&val);
+    obj = WP_PIPEWIRE_OBJECT(port);
+    id = wp_proxy_get_bound_id(WP_PROXY(obj));
+    WpDirection dir = wp_port_get_direction(port);
+
+    g_autoptr(WpLink) link = wp_object_manager_lookup(
+        self->om, WP_TYPE_LINK, WP_CONSTRAINT_TYPE_PW_PROPERTY,
+        (dir == WP_DIRECTION_OUTPUT) ? PW_KEY_LINK_OUTPUT_PORT
+                                     : PW_KEY_LINK_INPUT_PORT,
+        "=u", id, NULL);
+    if (link) {
+      g_autoptr(GEnumClass) klass = g_type_class_ref(WP_TYPE_LINK_STATE);
+      GEnumValue *state =
+          g_enum_get_value(klass, wp_link_get_state(link, NULL));
+
+      if (dir == WP_DIRECTION_OUTPUT &&
+          strcmp(state->value_nick, "active") == 0)
+        self->active_streams++;
+    }
+  }
+}
+
+static void check_streams(Global *self) {
+  g_autoptr(WpPlugin) def_nodes_api =
+      wp_plugin_find(self->core, "default-nodes-api");
+
+  const gchar *MEDIA_TYPES[] = {"Audio", "Video"};
+
+  for (guint i = 0; i < G_N_ELEMENTS(MEDIA_TYPES); i++) {
+    const gchar *media_type = MEDIA_TYPES[i];
+    g_autoptr(WpIterator) child_it = NULL;
+
+    if (media_type && *media_type != '\0') {
+      gchar media_type_glob[16];
+
+      g_snprintf(media_type_glob, sizeof(media_type_glob), "*%s*", media_type);
+
+      child_it = wp_object_manager_new_filtered_iterator(
+          self->om, WP_TYPE_NODE, WP_CONSTRAINT_TYPE_PW_PROPERTY,
+          PW_KEY_MEDIA_CLASS, "#s", "Stream/*", WP_CONSTRAINT_TYPE_PW_PROPERTY,
+          PW_KEY_MEDIA_CLASS, "#s", media_type_glob,
+          WP_CONSTRAINT_TYPE_PW_PROPERTY, PW_KEY_NODE_LINK_GROUP, "-", NULL);
+      wp_iterator_foreach(child_it, check_stream_node, self);
+    }
+  }
+
+  g_main_loop_quit(self->loop);
+}
+
+static void on_plugin_loaded(WpCore *core, GAsyncResult *res, Global *global) {
+  wp_core_install_object_manager(global->core, global->om);
+}
+
+gint main(gint argc, gchar **argv) {
+  Global global = {0};
+
+  wp_init(WP_INIT_ALL);
+
+  global.loop = g_main_loop_new(NULL, FALSE);
+  global.core = wp_core_new(NULL, NULL, NULL);
+  global.om = wp_object_manager_new();
+
+  /* prepare om */
+  wp_object_manager_add_interest(global.om, WP_TYPE_NODE, NULL);
+  wp_object_manager_add_interest(global.om, WP_TYPE_PORT, NULL);
+  wp_object_manager_add_interest(global.om, WP_TYPE_LINK, NULL);
+  wp_object_manager_request_object_features(
+      global.om, WP_TYPE_GLOBAL_PROXY, WP_PIPEWIRE_OBJECT_FEATURES_MINIMAL);
+
+  /* load required API modules */
+  wp_core_load_component(global.core, "libwireplumber-module-default-nodes-api",
+                         "module", NULL, NULL, NULL,
+                         (GAsyncReadyCallback)on_plugin_loaded, &global);
+
+  /* connect */
+  if (!wp_core_connect(global.core)) {
+    fprintf(stderr, "Could not connect to PipeWire\n");
+    return 2;
+  }
+
+  /* run */
+  g_signal_connect_swapped(global.om, "installed", (GCallback)check_streams,
+                           &global);
+
+  g_main_loop_run(global.loop);
+
+  printf("%d\n", global.active_streams);
+
+  return 0;
+}

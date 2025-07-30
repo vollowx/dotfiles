@@ -1,16 +1,7 @@
-//usr/bin/env go-script "$0" "$@"; exit $?
-// vi: ft=go
-// https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
-
-package main
-
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strconv"
-	"strings"
-)
+//usr/bin/env c-script "$0" "$@"; exit $?
+//
+// vi: ft=c
+// Origin: https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
 
 // $ col [ in delim [ out delim ] ] [ col ... ]
 
@@ -33,63 +24,213 @@ import (
 // $ echo 1:2:3 | col : . 1 2 3
 // 1.2.3
 
-func main() {
-	var inDelim = "\t"
-	var outDelim = "\t"
+#include <ctype.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-	var args = os.Args[1:]
-	for _, p := range []*string{&inDelim, &outDelim} {
-		if len(args) > 0 {
-			if _, err := strconv.Atoi(args[0]); err != nil {
-				*p, args = args[0], args[1:]
-			}
-		}
-	}
-
-	var indexes []int // 1-indexed
-	for _, is := range args {
-		if i, _ := strconv.Atoi(is); i != 0 {
-			indexes = append(indexes, i)
-		}
-	}
-
-Row:
-	for sc := bufio.NewScanner(os.Stdin); sc.Scan(); {
-		columns := smartSplit(sc.Text(), inDelim)
-		if len(indexes) == 0 {
-			fmt.Println(strings.Join(columns, outDelim))
-			continue
-		}
-
-		var selected []string
-		for _, i := range indexes {
-			if i < 0 {
-				i = len(columns) + 1 + i
-			}
-			if i <= 0 || i > len(columns) {
-				continue Row
-			}
-			selected = append(selected, columns[i-1])
-		}
-		fmt.Println(strings.Join(selected, outDelim))
-	}
+bool isint(const char *s) {
+  if (!s || *s == '\0')
+    return false;
+  while (*s != '\0') {
+    if (!isdigit((unsigned char)*s) && *s != '-')
+      return false;
+    s++;
+  }
+  return true;
 }
 
-// TODO: grapheme-cluster aware []rune delim split
-func smartSplit(text, delim string) []string {
-	switch delim {
-	case "\t", ";":
-		return strings.Split(text, delim)
-	}
-	if runes := []rune(delim); len(runes) == 1 {
-		return trim(strings.FieldsFunc(text, func(r rune) bool { return r == runes[0] }))
-	}
-	return trim(strings.Split(text, delim))
+char *trim(char *s) {
+  if (!s)
+    return NULL;
+  char *end;
+  while (isspace((unsigned char)*s))
+    s++;
+  if (*s == 0)
+    return s;
+  end = s + strlen(s) - 1;
+  while (end > s && isspace((unsigned char)*end))
+    end--;
+  *(end + 1) = '\0';
+  return s;
 }
 
-func trim(in []string) []string {
-	for i := range in {
-		in[i] = strings.TrimSpace(in[i])
-	}
-	return in
+char **smart_split(const char *text, const char *delim, int *num_cols) {
+  char *text_copy = strdup(text);
+  if (!text_copy) {
+    perror("strdup");
+    exit(EXIT_FAILURE);
+  }
+  char **cols = NULL;
+  *num_cols = 0;
+
+  char *token;
+  char *rest = text_copy;
+
+  if (strcmp(delim, "\t") == 0 || strcmp(delim, ";") == 0 ||
+      strlen(delim) == 1) {
+    char *current_token_start = text_copy;
+    char actual_delim = delim[0];
+
+    for (int i = 0; text_copy[i] != '\0'; ++i) {
+      if (text_copy[i] == actual_delim) {
+        text_copy[i] = '\0'; // Null-terminate current token
+        token = trim(current_token_start);
+        cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
+        if (!cols) {
+          perror("realloc");
+          exit(EXIT_FAILURE);
+        }
+        cols[*num_cols - 1] = strdup(token);
+        if (!cols[*num_cols - 1]) {
+          perror("strdup");
+          exit(EXIT_FAILURE);
+        }
+        current_token_start = &text_copy[i + 1];
+      }
+    }
+    // Add the last token
+    token = trim(current_token_start);
+    cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
+    if (!cols) {
+      perror("realloc");
+      exit(EXIT_FAILURE);
+    }
+    cols[*num_cols - 1] = strdup(token);
+    if (!cols[*num_cols - 1]) {
+      perror("strdup");
+      exit(EXIT_FAILURE);
+    }
+
+  } else { // Multi-character delimiter fallback
+    while ((token = strstr(rest, delim)) != NULL) {
+      *token = '\0'; // Null-terminate current segment
+      cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
+      if (!cols) {
+        perror("realloc");
+        exit(EXIT_FAILURE);
+      }
+      cols[*num_cols - 1] = strdup(trim(rest));
+      if (!cols[*num_cols - 1]) {
+        perror("strdup");
+        exit(EXIT_FAILURE);
+      }
+      rest = token + strlen(delim);
+    }
+    // Add the last part
+    if (strlen(rest) > 0 ||
+        *num_cols == 0) { // Add last part or if no delimiters found
+      cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
+      if (!cols) {
+        perror("realloc");
+        exit(EXIT_FAILURE);
+      }
+      cols[*num_cols - 1] = strdup(trim(rest));
+      if (!cols[*num_cols - 1]) {
+        perror("strdup");
+        exit(EXIT_FAILURE);
+      }
+    }
+  }
+
+  free(text_copy);
+  return cols;
+}
+
+void free_cols(char **columns, int num_cols) {
+  if (!columns)
+    return;
+  for (int i = 0; i < num_cols; i++)
+    free(columns[i]);
+  free(columns);
+}
+
+int main(int argc, char *argv[]) {
+  char *in_delim = strdup("\t");
+  char *out_delim = strdup("\t");
+  int arg_index = 1;
+
+  if (arg_index < argc && !isint(argv[arg_index])) {
+    free(in_delim);
+    in_delim = strdup(argv[arg_index++]);
+  }
+  if (arg_index < argc && !isint(argv[arg_index])) {
+    free(out_delim);
+    out_delim = strdup(argv[arg_index++]);
+  }
+
+  int *indexes = NULL;
+  int numIndexes = 0;
+  for (int i = arg_index; i < argc; i++) {
+    if (isint(argv[i])) {
+      int val = atoi(argv[i]);
+      if (val != 0) {
+        indexes = (int *)realloc(indexes, (++numIndexes) * sizeof(int));
+        if (!indexes) {
+          perror("realloc");
+          exit(EXIT_FAILURE);
+        }
+        indexes[numIndexes - 1] = val;
+      }
+    }
+  }
+
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t read;
+
+  while ((read = getline(&line, &len, stdin)) != -1) {
+    if (read > 0 && line[read - 1] == '\n')
+      line[read - 1] = '\0';
+
+    int numColumns = 0;
+    char **columns = smart_split(line, in_delim, &numColumns);
+    if (!columns && numColumns > 0) {
+      perror("smart_split returned NULL with non-zero columns");
+      exit(EXIT_FAILURE);
+    }
+
+    if (numIndexes == 0) {
+      for (int i = 0; i < numColumns; i++) {
+        printf("%s%s", columns[i], (i == numColumns - 1) ? "" : out_delim);
+      }
+      printf("\n");
+    } else {
+      bool skipRow = false;
+      char **selected = NULL;
+      int numSelected = 0;
+
+      for (int i = 0; i < numIndexes; i++) {
+        int idx = indexes[i];
+        if (idx < 0)
+          idx = numColumns + 1 + idx;
+        if (idx <= 0 || idx > numColumns) {
+          skipRow = true;
+          break;
+        }
+        selected = (char **)realloc(selected, (++numSelected) * sizeof(char *));
+        if (!selected) {
+          perror("realloc");
+          exit(EXIT_FAILURE);
+        }
+        selected[numSelected - 1] = columns[idx - 1];
+      }
+
+      if (!skipRow) {
+        for (int i = 0; i < numSelected; i++) {
+          printf("%s%s", selected[i], (i == numSelected - 1) ? "" : out_delim);
+        }
+        printf("\n");
+      }
+      free(selected);
+    }
+    free_cols(columns, numColumns);
+  }
+
+  free(line);
+  free(in_delim);
+  free(out_delim);
+  free(indexes);
+  return 0;
 }
