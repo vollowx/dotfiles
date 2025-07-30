@@ -87,26 +87,20 @@ for_window {
   [app_id="gterm"]                                 floating enable
   [app_id="^launcher$"]                            floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
   [app_id="blueman-manager"]                       floating enable
-  [app_id="firefox"]                               inhibit_idle fullscreen
-  [app_id="firefox" title="Library"]               floating enable
-  [app_id="firefox" title="Picture-in-Picture"]    floating enable, sticky enable, resize set 640 360, move position 100 ppt 100 ppt, move left 652, move up 372
   [app_id="qutebrowser"]                           inhibit_idle fullscreen
   [class="discord"]                                floating enable
   [class="QQ"]                                     floating enable
+  [class="Pinentry-gtk"]                           floating enable
+}
+# Firefox PiP: bottom-right, 12px from the corner of the window
+
+for_window {
   [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0, move left 332, move down 100
   [class="steam" title="Game Servers"]             floating enable
   [class="steam" title="Players"]                  floating enable
   [class="steam" title="Recordings & Screenshots"] floating enable
   [class="steam" title="Steam Settings"]           floating enable
-  [class="Pinentry-gtk"]                           floating enable
-}
-# Firefox PiP: bottom-right, 12px from the corner of the window
-# Steam Friends List: top-right, 12px from the corner (right), avoiding overlapping the Steam titlebar (top)
-
-for_window {
-  [class="portal2_linux"]        inhibit_idle focus
-  [class="steam_app_1293830"]    inhibit_idle focus # Forza Horizon 4
-  [class="steam_app_244210"]     inhibit_idle focus, floating enable
+  [class="steam_app_244210"]                       floating enable
 }
 
 #                       tb border titlebar  tb text overlay    border
