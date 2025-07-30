@@ -28,7 +28,7 @@ cmd on-cd &{{
   GIT_PS1_DESCRIBE_STYLE=1
   GIT_PS1_SHOWCOLORHINTS=1
 
-  fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f\033[0m$(__git_ps1)"
+  fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0;1m%f\033[0m$(__git_ps1)"
   sleep 0.1 # or it will not show up at the first run
   lf -remote "send $id set promptfmt \"$fmt\""
   '
