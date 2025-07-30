@@ -32,11 +32,11 @@ set {
   $down      j
   $up        k
   $right     l
-  $ws1       "󱝆  surfing"
-  $ws2       "󰘬  coding"
-  $ws3       "󰊗  gaming"
-  $ws4       "󰝚  music"
-  $ws5       "󱔢  others"
+  $ws1       number 1
+  $ws2       number 2
+  $ws3       number 3
+  $ws4       number 4
+  $ws5       number 5
   # $ws6       number 6
   # $ws7       number 7
   # $ws8       number 8

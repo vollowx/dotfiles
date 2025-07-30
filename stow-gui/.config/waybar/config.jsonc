@@ -12,7 +12,6 @@
 
   "sway/workspaces": {
     "all-outputs": true,
-    "current-only": true,
   },
   "sway/mode": {
     "format": "<span color='#78a9ff' font-weight='bold'>mod</span> {}",
