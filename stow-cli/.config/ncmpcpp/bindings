@@ -9,10 +9,10 @@ def_key "["
 def_key "]"
   next
 
-def_key "R"
-  toggle_random
 def_key "r"
   toggle_repeat
+def_key "z"
+  toggle_random
 def_key "s"
   toggle_single
 
@@ -27,6 +27,8 @@ def_key "I"
   show_artist_info
 def_key "L"
   show_lyrics
+def_key "9"
+  show_clock
 
 def_key "d"
   delete_stored_playlist
