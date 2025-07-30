@@ -19,10 +19,10 @@ in screenshots.
 
     git clone git@github.com:vollowx/Stowed.git ~/Stowed
     cd ~/Stowed
-    stow -vR stow-cli
-    stow -vR stow-gui
     sudo rm /etc/systemd/logind.conf
-    sudo stow -vRt / stow-system
+    sudo stow -vRt / root
+    stow -vR home-cli
+    stow -vR home-gui
 
 Basic ones:
 
