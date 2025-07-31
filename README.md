@@ -1,4 +1,4 @@
-# Stowed
+# dotfiles
 
 _GNU/Stow-managed dotfiles for *nix systems_
 
@@ -17,12 +17,8 @@ in screenshots.
 
 ## Installation
 
-    git clone git@github.com:vollowx/Stowed.git ~/Stowed
-    cd ~/Stowed
-    sudo rm /etc/systemd/logind.conf
-    sudo stow -vRt / root
-    stow -vR home-cli
-    stow -vR home-gui
+    git clone git@github.com:vollowx/dotfiles.git && cd ~/dotfiles
+    ./scripts/install-desktop.sh
 
 Basic ones:
 
