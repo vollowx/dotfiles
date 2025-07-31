@@ -163,7 +163,6 @@ floating_modifier $mod normal
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c exec swaymsg reload && notify-send -r 667 -t 1000 Sway 'Configuration reloaded'
-bindsym $mod+Shift+e exit
 bindsym $mod+Delete exec swaylock
 
 bindsym $mod+Space exec fcitx5-remote -t && notify-send -r 668 -t 1000 "IME" $(fcitx5-remote -n)

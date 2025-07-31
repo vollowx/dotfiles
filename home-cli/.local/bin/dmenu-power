@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
-command="$(echo -e "swaylock\nsuspend\nhibernate\nterminate\nreboot\nshutdown" | dmenu power\>)"
+choice="$(echo -e "exit\nlock\nsuspend\nhibernate\nlogout\nreboot\nshutdown" | dmenu power\>)"
 
-[[ ! -z "$command" ]] && swaymsg exec -- "$command"
+[[ -z "$command" ]] && exit
+
+case "$choice" in
+"lock")
+  swaylock
+  ;;
+"exit")
+  swaymsg exit
+  ;;
+"logout")
+  loginctl terminate-user $USER
+  ;;
+*)
+  exec $choice
+  ;;
+esac
