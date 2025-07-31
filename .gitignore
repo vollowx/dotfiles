@@ -1,5 +1,5 @@
 **/__pycache__/
-stow-gui/.config/gtk-3.0/bookmarks
-stow-gui/.config/qutebrowser/bookmarks/urls
-stow-gui/.config/qutebrowser/quickmarks
-stow-gui/.config/qutebrowser/qsettings/QtProject.conf
+home-gui/.config/gtk-3.0/bookmarks
+home-gui/.config/qutebrowser/bookmarks/urls
+home-gui/.config/qutebrowser/quickmarks
+home-gui/.config/qutebrowser/qsettings/QtProject.conf
