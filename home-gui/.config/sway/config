@@ -129,8 +129,12 @@ exec_always {
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+exec wp-swayidle 3 -- -w timeout 900 'swaylock' \
+                         timeout 1800 'swaymsg "output * power off"' \
+                         resume 'swaymsg "output * power on"' \
+                         before-sleep 'swaylock'
+
 exec {
-  swayidled 60
   wl-paste --watch cliphist store
   blueman-applet
   fcitx5 -d
