@@ -1,7 +1,8 @@
 //usr/bin/env c-script "$0" "$@"; exit $?
 //
 // vi: ft=c
-// Origin: https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
+// Origin:
+// https://github.com/sentriz/dotfiles/blob/master/conf_common/.local/bin/col
 
 // $ col [ in delim [ out delim ] ] [ col ... ]
 
@@ -25,212 +26,90 @@
 // 1.2.3
 
 #include <ctype.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-bool isint(const char *s) {
-  if (!s || *s == '\0')
-    return false;
-  while (*s != '\0') {
-    if (!isdigit((unsigned char)*s) && *s != '-')
-      return false;
+static int is_number(const char *s) {
+  if (!s || !*s)
+    return 0;
+  if (*s == '-')
     s++;
-  }
-  return true;
+  while (*s)
+    if (!isdigit(*s++))
+      return 0;
+  return 1;
 }
 
-char *trim(char *s) {
-  if (!s)
-    return NULL;
-  char *end;
-  while (isspace((unsigned char)*s))
+static char *trim(char *s) {
+  while (isspace(*s))
     s++;
-  if (*s == 0)
-    return s;
-  end = s + strlen(s) - 1;
-  while (end > s && isspace((unsigned char)*end))
-    end--;
-  *(end + 1) = '\0';
+  char *end = s + strlen(s) - 1;
+  while (end > s && isspace(*end))
+    *end-- = 0;
   return s;
 }
 
-char **smart_split(const char *text, const char *delim, int *num_cols) {
-  char *text_copy = strdup(text);
-  if (!text_copy) {
-    perror("strdup");
-    exit(EXIT_FAILURE);
-  }
-  char **cols = NULL;
-  *num_cols = 0;
-
-  char *token;
-  char *rest = text_copy;
-
-  if (strcmp(delim, "\t") == 0 || strcmp(delim, ";") == 0 ||
-      strlen(delim) == 1) {
-    char *current_token_start = text_copy;
-    char actual_delim = delim[0];
-
-    for (int i = 0; text_copy[i] != '\0'; ++i) {
-      if (text_copy[i] == actual_delim) {
-        text_copy[i] = '\0'; // Null-terminate current token
-        token = trim(current_token_start);
-        cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
-        if (!cols) {
-          perror("realloc");
-          exit(EXIT_FAILURE);
-        }
-        cols[*num_cols - 1] = strdup(token);
-        if (!cols[*num_cols - 1]) {
-          perror("strdup");
-          exit(EXIT_FAILURE);
-        }
-        current_token_start = &text_copy[i + 1];
-      }
-    }
-    // Add the last token
-    token = trim(current_token_start);
-    cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
-    if (!cols) {
-      perror("realloc");
-      exit(EXIT_FAILURE);
-    }
-    cols[*num_cols - 1] = strdup(token);
-    if (!cols[*num_cols - 1]) {
-      perror("strdup");
-      exit(EXIT_FAILURE);
-    }
-
-  } else { // Multi-character delimiter fallback
-    while ((token = strstr(rest, delim)) != NULL) {
-      *token = '\0'; // Null-terminate current segment
-      cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
-      if (!cols) {
-        perror("realloc");
-        exit(EXIT_FAILURE);
-      }
-      cols[*num_cols - 1] = strdup(trim(rest));
-      if (!cols[*num_cols - 1]) {
-        perror("strdup");
-        exit(EXIT_FAILURE);
-      }
-      rest = token + strlen(delim);
-    }
-    // Add the last part
-    if (strlen(rest) > 0 ||
-        *num_cols == 0) { // Add last part or if no delimiters found
-      cols = (char **)realloc(cols, (++(*num_cols)) * sizeof(char *));
-      if (!cols) {
-        perror("realloc");
-        exit(EXIT_FAILURE);
-      }
-      cols[*num_cols - 1] = strdup(trim(rest));
-      if (!cols[*num_cols - 1]) {
-        perror("strdup");
-        exit(EXIT_FAILURE);
-      }
-    }
-  }
-
-  free(text_copy);
-  return cols;
-}
-
-void free_cols(char **columns, int num_cols) {
-  if (!columns)
-    return;
-  for (int i = 0; i < num_cols; i++)
-    free(columns[i]);
-  free(columns);
-}
-
 int main(int argc, char *argv[]) {
-  char *in_delim = strdup("\t");
-  char *out_delim = strdup("\t");
-  int arg_index = 1;
+  char *in_delim = "\t", *out_delim = "\t";
+  int arg = 1;
 
-  if (arg_index < argc && !isint(argv[arg_index])) {
-    free(in_delim);
-    in_delim = strdup(argv[arg_index++]);
-  }
-  if (arg_index < argc && !isint(argv[arg_index])) {
-    free(out_delim);
-    out_delim = strdup(argv[arg_index++]);
-  }
+  // Parse delimiters
+  if (arg < argc && !is_number(argv[arg]))
+    in_delim = argv[arg++];
+  if (arg < argc && !is_number(argv[arg]))
+    out_delim = argv[arg++];
 
-  int *indexes = NULL;
-  int numIndexes = 0;
-  for (int i = arg_index; i < argc; i++) {
-    if (isint(argv[i])) {
+  // Parse column indexes
+  int cols[argc], ncols = 0;
+  for (int i = arg; i < argc; i++) {
+    if (is_number(argv[i])) {
       int val = atoi(argv[i]);
-      if (val != 0) {
-        indexes = (int *)realloc(indexes, (++numIndexes) * sizeof(int));
-        if (!indexes) {
-          perror("realloc");
-          exit(EXIT_FAILURE);
-        }
-        indexes[numIndexes - 1] = val;
-      }
+      if (val)
+        cols[ncols++] = val;
     }
   }
 
-  char *line = NULL;
-  size_t len = 0;
-  ssize_t read;
+  char line[8192];
+  while (fgets(line, sizeof(line), stdin)) {
+    // Remove newline
+    line[strcspn(line, "\n")] = 0;
 
-  while ((read = getline(&line, &len, stdin)) != -1) {
-    if (read > 0 && line[read - 1] == '\n')
-      line[read - 1] = '\0';
-
-    int numColumns = 0;
-    char **columns = smart_split(line, in_delim, &numColumns);
-    if (!columns && numColumns > 0) {
-      perror("smart_split returned NULL with non-zero columns");
-      exit(EXIT_FAILURE);
+    // Split line into tokens
+    char *tokens[256];
+    int ntokens = 0;
+    char *token = strtok(line, in_delim);
+    while (token && ntokens < 256) {
+      tokens[ntokens++] = trim(token);
+      token = strtok(NULL, in_delim);
     }
 
-    if (numIndexes == 0) {
-      for (int i = 0; i < numColumns; i++) {
-        printf("%s%s", columns[i], (i == numColumns - 1) ? "" : out_delim);
+    // Output selected columns or all
+    if (ncols == 0) {
+      for (int i = 0; i < ntokens; i++) {
+        if (i > 0)
+          printf("%s", out_delim);
+        printf("%s", tokens[i]);
       }
-      printf("\n");
     } else {
-      bool skipRow = false;
-      char **selected = NULL;
-      int numSelected = 0;
-
-      for (int i = 0; i < numIndexes; i++) {
-        int idx = indexes[i];
+      int valid = 1;
+      for (int i = 0; i < ncols && valid; i++) {
+        int idx = cols[i];
         if (idx < 0)
-          idx = numColumns + 1 + idx;
-        if (idx <= 0 || idx > numColumns) {
-          skipRow = true;
+          idx = ntokens + 1 + idx; // negative indexing
+        if (idx <= 0 || idx > ntokens) {
+          valid = 0;
           break;
         }
-        selected = (char **)realloc(selected, (++numSelected) * sizeof(char *));
-        if (!selected) {
-          perror("realloc");
-          exit(EXIT_FAILURE);
-        }
-        selected[numSelected - 1] = columns[idx - 1];
+        if (i > 0)
+          printf("%s", out_delim);
+        printf("%s", tokens[idx - 1]);
       }
-
-      if (!skipRow) {
-        for (int i = 0; i < numSelected; i++) {
-          printf("%s%s", selected[i], (i == numSelected - 1) ? "" : out_delim);
-        }
-        printf("\n");
-      }
-      free(selected);
+      if (!valid)
+        continue; // skip invalid rows
     }
-    free_cols(columns, numColumns);
+    printf("\n");
   }
 
-  free(line);
-  free(in_delim);
-  free(out_delim);
-  free(indexes);
   return 0;
 }
