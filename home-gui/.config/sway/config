@@ -139,6 +139,7 @@ exec {
   blueman-applet
   fcitx5 -d
   dunst
+  foot --server
 }
 
 bar {
