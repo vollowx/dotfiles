@@ -1,19 +1,10 @@
 # dotfiles
 
-_GNU/Stow-managed dotfiles for *nix systems_
+_Stow-managed dotfiles for *nix systems_
 
 [TODO](./TODO.md)
 
 *Package names are those in Arch Linux and AUR by default
-
-## Showcasee
-
-<img width="2560" height="1440" alt="qutebrowser and newsboat" src="https://github.com/user-attachments/assets/9773a6a8-13d9-4ad7-93f2-6d9a515e4688" />
-<img width="2560" height="1440" alt="Neovim checking dwl source code and lf previewing image" src="https://github.com/user-attachments/assets/f9ae9a7e-47a9-4593-8d97-10a605f93074" />
-<img width="2560" height="1440" alt="lf previewing PDF and zathura viewing PDF, with dmenu selecting default audio input/output at the bottom of the screen" src="https://github.com/user-attachments/assets/ba42e4f5-afdf-4579-a71e-69f2af48ce08" />
-
-I don't use floating windows so often actually, this is just for a better look
-in screenshots.
 
 ## Installation
 
