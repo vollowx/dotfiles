@@ -95,7 +95,6 @@ require('catppuccin').setup({
         Pmenu = { bg = c.mantle },
         PmenuSbar = { bg = c.crust },
         PmenuThumb = { bg = c.surface0 },
-        BlinkCmpDocBorder = { bg = c.mantle, fg = c.blue },
         VertSplit = { fg = c.base },
         StatusLine = { bg = c.mantle, fg = c.subtext1 },
 

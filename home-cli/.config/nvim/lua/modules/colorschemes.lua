@@ -1,7 +1,6 @@
 return {
   {
-    'uncenter/ctp-nvim',
-    branch = 'patch-1',
+    'catppuccin/nvim',
     name = 'catppuccin',
     config = function()
       require('configs.catppuccin')
