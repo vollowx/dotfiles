@@ -1,5 +1,4 @@
 return {
-  { 'sainnhe/everforest' },
   {
     'uncenter/ctp-nvim',
     branch = 'patch-1',

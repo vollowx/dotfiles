@@ -14,6 +14,7 @@ return {
         'cpp',
         'csv',
         'diff',
+        'gitcommit',
         'go',
         'html',
         'javascript',
