@@ -34,7 +34,6 @@ window#waybar {
   color: @text;
   font-family: monospace;
   background-color: transparent;
-  /* Workaround for https://github.com/Alexays/Waybar/issues/3750 */
 }
 
 #workspaces button {
@@ -45,7 +44,7 @@ window#waybar {
 
 #workspaces button.focused {
   font-weight: bold;
-  color: @lavender;
+  color: @teal;
 }
 
 #workspaces button.urgent {

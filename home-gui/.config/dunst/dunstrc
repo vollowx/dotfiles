@@ -1,6 +1,6 @@
 [global]
 follow                   = "mouse"
-font                     = "sans-serif 10"
+font                     = "monospace 10"
 format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
@@ -20,7 +20,7 @@ show_age_threshold       = 60
 idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
-dmenu                    = "dmenu notification>"
+dmenu                    = "notification>"
 background               = "#000000"
 foreground               = "#ffffff"
 highlight                = "#78a9ff"
