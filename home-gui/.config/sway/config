@@ -139,7 +139,6 @@ exec {
   blueman-applet
   fcitx5 -d
   dunst
-  bongocat --config ~/.config/bongocat.conf
   foot --server
 }
 
