@@ -9,10 +9,10 @@ choice=${choice:-N}
 case $choice in
 [Yy]*) ;;
 [Nn]*)
-  return 0
+  exit
   ;;
 *)
-  return 0
+  exit
   ;;
 esac
 
