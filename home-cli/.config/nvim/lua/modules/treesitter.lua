@@ -5,7 +5,7 @@ return {
     lazy = false,
     build = ':TSUpdate',
     config = function()
-      local languages = {
+      local langs = {
         'astro',
         'bash',
         'c',
@@ -33,11 +33,11 @@ return {
         'yaml',
       }
 
-      require('nvim-treesitter').install(languages)
+      require('nvim-treesitter').install(langs)
 
-      for _, server in ipairs(languages) do
+      for _, lang in ipairs(langs) do
         vim.api.nvim_create_autocmd('FileType', {
-          pattern = { server },
+          pattern = { lang },
           callback = function()
             vim.treesitter.start()
             vim.wo.fdm = 'expr'
@@ -63,6 +63,7 @@ return {
 
   {
     'tronikelis/ts-autotag.nvim',
+    branch = 'fix/8/experimental_live_rename',
     event = 'InsertEnter',
     dependencies = 'nvim-treesitter/nvim-treesitter',
     config = true,
