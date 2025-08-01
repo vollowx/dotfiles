@@ -8,18 +8,24 @@ return {
     'brenoprata10/nvim-highlight-colors',
     enabled = vim.g.has_gui,
     event = 'VeryLazy',
-    config = load_plugin('highlight-colors'),
+    config = function()
+      require('configs.highlight-colors')
+    end,
   },
 
   {
     'tzachar/local-highlight.nvim',
     event = 'VeryLazy',
-    config = load_plugin('local-highlight'),
+    config = function()
+      require('configs.local-highlight')
+    end,
   },
 
   {
     'Aasim-A/scrollEOF.nvim',
     event = { 'CursorMoved', 'WinScrolled' },
-    config = load_plugin('scroll-eof'),
+    config = function()
+      require('configs.scroll-eof')
+    end,
   },
 }

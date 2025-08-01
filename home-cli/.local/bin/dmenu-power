@@ -2,7 +2,7 @@
 
 choice="$(echo -e "exit\nlock\nsuspend\nhibernate\nlogout\nreboot\nshutdown" | dmenu power\>)"
 
-[[ -z "$command" ]] && exit
+[[ -z "$choice" ]] && exit
 
 case "$choice" in
 "lock")
@@ -13,6 +13,9 @@ case "$choice" in
   ;;
 "logout")
   loginctl terminate-user $USER
+  ;;
+"shutdown")
+  shutdown -h now
   ;;
 *)
   exec $choice

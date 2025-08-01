@@ -2,7 +2,9 @@ return {
   {
     'Wansmer/symbol-usage.nvim',
     event = 'LspAttach',
-    config = load_plugin('symbol-usage'),
+    config = function ()
+      require('configs.symbol-usage')
+    end
   },
 
   -- TODO: Configure this in jsonls

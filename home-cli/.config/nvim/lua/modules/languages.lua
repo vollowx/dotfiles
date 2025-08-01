@@ -4,19 +4,25 @@ return {
     enabled = vim.g.has_gui,
     ft = 'markdown',
     build = 'cd app && npm install && cd - && git restore .',
-    config = load_plugin('markdown-preview'),
+    config = function ()
+      require('configs.markdown-preview')
+    end
   },
 
   {
     'dhruvasagar/vim-table-mode',
     cmd = 'TableModToggle',
     ft = 'markdown',
-    config = load_plugin('table-mode'),
+    config = function ()
+      require('configs.table-mode')
+    end
   },
 
   {
     'lukas-reineke/headlines.nvim',
     ft = { 'markdown', 'norg', 'rmd', 'org' },
-    config = load_plugin('headlines', true),
+    config = function ()
+      require('configs.headlines')
+    end
   },
 }

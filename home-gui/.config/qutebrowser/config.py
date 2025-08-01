@@ -13,7 +13,6 @@ c.editor.command = ["foot", "--app-id", "gterm", "nvim", "{file}"]
 c.statusbar.padding = {"top": 4, "bottom": 4, "left": 4, "right": 4}
 c.tabs.show = "never"
 
-c.content.canvas_reading = False
 c.content.geolocation = False
 c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 

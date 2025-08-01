@@ -1,3 +1,5 @@
+local icons = require('utils.icons')
+
 local config = {
   root = vim.g.package_path,
   lockfile = vim.g.package_lock,

@@ -1,8 +1,11 @@
 return {
   { 'sainnhe/everforest' },
   {
-    'catppuccin/nvim',
+    'uncenter/ctp-nvim',
+    branch = 'patch-1',
     name = 'catppuccin',
-    config = load_plugin('catppuccin'),
+    config = function()
+      require('configs.catppuccin')
+    end,
   },
 }

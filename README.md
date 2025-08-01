@@ -22,7 +22,7 @@ The ones run in command line
 
 `htop fd ripgrep newsboat neomutt`
 
-`mpd mpc ncmpcpp`
+`mpd mpc ncmpcpp mpd-discord-rpc`
 
 `lf bat catimg chafa ffmpegthumbnailer transmission-cli`
 

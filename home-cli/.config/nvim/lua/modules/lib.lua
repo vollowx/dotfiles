@@ -5,8 +5,8 @@ return {
     'rachartier/tiny-devicons-auto-colors.nvim',
     dependencies = 'vollowx/nvim-web-devicons',
     event = 'VeryLazy',
-    config = load_plugin('devicons-auto-colors'),
+    config = function ()
+      require('configs.devicons-auto-colors')
+    end
   },
-
-  { 'nvzone/volt' },
 }

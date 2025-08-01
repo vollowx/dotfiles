@@ -3,6 +3,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local oil = require('oil')
+local icons = require('utils.icons')
 local icon_file = vim.trim(icons.kinds.File)
 local icon_dir = vim.trim(icons.kinds.Folder)
 
