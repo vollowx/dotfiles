@@ -1,0 +1,186 @@
+# vim: ft=dosini
+
+[general]
+mode = viewer
+size = 1280,720
+position = auto
+overlay = yes
+decoration = no
+sigusr1 = reload
+sigusr2 = next_file
+app_id = swayimg
+
+[viewer]
+window = #161616ff
+transparency = grid
+scale = optimal
+position = center
+antialiasing = mks13
+loop = yes
+history = 1
+preload = 1
+
+[slideshow]
+time = 3
+window = auto
+transparency = #161616ff
+scale = fit
+position = center
+antialiasing = mks13
+
+[gallery]
+size = 200
+cache = 100
+preload = no
+pstore = no
+fill = yes
+antialiasing = mks13
+window = #161616ff
+background = #2e2e2eff
+select = #404040ff
+border = #4f4f4fff
+shadow = #00000000
+
+[list]
+order = alpha
+reverse = no
+recursive = no
+all = no
+fsmon = yes
+
+[font]
+name = monospace
+size = 12
+color = #ffffffff
+shadow = #00000000
+background = #161616ff
+
+[info]
+show = yes
+info_timeout = 5
+status_timeout = 3
+
+# Display scheme for viewer mode (position = content)
+[info.viewer]
+top_left = +name,+format,+filesize,+imagesize,+exif
+top_right = index
+bottom_left = scale,frame
+bottom_right = status
+
+# Display scheme for slideshow mode (position = content)
+[info.slideshow]
+top_left = none
+top_right = none
+bottom_left = none
+bottom_right = dir,status
+
+# Display scheme for gallery mode (position = content)
+[info.gallery]
+top_left = none
+top_right = index
+bottom_left = none
+bottom_right = name,status
+
+[keys.viewer]
+F1 = help
+g = first_file
+Shift+g = last_file
+p = prev_file
+n = next_file
+Space = next_file
+Shift+r = rand_file
+Shift+d = prev_dir
+Shift+n = next_dir
+comma = prev_frame
+period = next_frame
+c = skip_file
+s = mode slideshow
+Space = animation
+f = fullscreen
+o = mode gallery
+h = step_left 10
+r = step_right 10
+u = step_up 10
+d = step_down 10
+Equal = zoom +10
+Minus = zoom -10
+w = zoom width
+Shift+w = zoom height
+z = zoom fit
+Shift+z = zoom fill
+0 = zoom real
+BackSpace = zoom optimal
+k = zoom keep
+Alt+s = zoom
+Shift+r = rotate_left
+r = rotate_right
+m = flip_vertical
+Shift+m = flip_horizontal
+a = antialiasing
+r = reload
+i = info
+Shift+Delete = exec rm -f '%' && echo "File removed: %"; skip_file
+Escape = exit
+q = exit
+# Mouse related
+ScrollLeft = step_right 5
+ScrollRight = step_left 5
+ScrollUp = step_up 5
+ScrollDown = step_down 5
+Ctrl+ScrollUp = zoom +10
+Ctrl+ScrollDown = zoom -10
+Shift+ScrollUp = prev_file
+Shift+ScrollDown = next_file
+Alt+ScrollUp = prev_frame
+Alt+ScrollDown = next_frame
+MouseLeft = drag
+MouseSide = prev_file
+MouseExtra = next_file
+
+[keys.slideshow]
+F1 = help
+g = first_file
+Shift+g = last_file
+p = prev_file
+n = next_file
+r = rand_file
+j = prev_dir
+k = next_dir
+Space = pause
+i = info
+f = fullscreen
+Return = mode
+Escape = exit
+q = exit
+
+[keys.gallery]
+F1 = help
+g = first_file
+Shift+g = last_file
+h = step_left
+l = step_right
+k = step_up
+j = step_down
+Prior = page_up
+Next = page_down
+d = skip_file
+s = mode slideshow
+f = fullscreen
+o = mode viewer
+a = antialiasing
+r = reload
+i = info
+Equal = thumb +20
+Plus = thumb +20
+Minus = thumb -20
+Shift+Delete = exec rm -f '%' && echo "File removed: %"; skip_file
+Escape = exit
+q = exit
+# Mouse related
+ScrollLeft = step_right
+ScrollRight = step_left
+ScrollUp = step_up
+ScrollDown = step_down
+Ctrl+ScrollUp = thumb +20
+Ctrl+ScrollDown = thumb -20
+MouseLeft = mode viewer
