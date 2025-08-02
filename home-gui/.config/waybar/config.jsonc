@@ -7,7 +7,7 @@
   "height": 24,
 
   "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode", "custom/swayidle"],
-  "modules-center": [],
+  "modules-center": ["mpd"],
   "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "custom/gpu", "memory", "network", "clock"],
 
   "custom/swayidle": {
@@ -28,6 +28,35 @@
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
+
+  "mpd": {
+    "format": "<span color='#33b1ff' font-weight='bold'>{title} </span>[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-paused": "<span color='#4f4f4f' font-weight='bold'>{title} [{repeatIcon}{randomIcon}{singleIcon}]</span>",
+    "format-stopped": "<span color='#4f4f4f' font-weight='bold'>[{repeatIcon}{randomIcon}{singleIcon}]</span>",
+    "format-disconnected": "<span color='#4f4f4f' font-weight='bold'>oops, where is the music</span>",
+    "title-len": 24,
+    "interval": 10,
+    "repeat-icons": {
+      "off": "-",
+      "on": "r"
+    },
+    "random-icons": {
+      "off": "-",
+      "on": "z"
+    },
+    "single-icons": {
+      "off": "-",
+      "on": "s"
+    },
+    "on-scroll-up": "mpc prev",
+    "on-scroll-down": "mpc next",
+    "on-click": "mpc toggle",
+    "on-click-middle": "mpc prev",
+    "on-click-right": "mpc next",
+    "tooltip-format": "{artist} - {album} - {title}",
+    "tooltip-format-disconnected": "MPD is disconnected"
+  },
+
   "tray": {
     "icon-size": 14,
     "spacing": 8
