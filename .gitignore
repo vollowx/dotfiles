@@ -1,5 +1,6 @@
 **/__pycache__/
 home-cli/.config/mpd/mpd.db
+home-cli/.config/ncmpcpp/playlists/**
 home-gui/.config/gtk-3.0/bookmarks
 home-gui/.config/qutebrowser/bookmarks/urls
 home-gui/.config/qutebrowser/quickmarks

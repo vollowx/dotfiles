@@ -1,9 +1,14 @@
+def_key "y"
+  dummy
+
 def_key "f"
   seek_forward
 def_key "b"
   seek_backward
 def_key "p"
   pause
+def_key "backspace"
+  stop
 def_key "["
   previous
 def_key "]"
