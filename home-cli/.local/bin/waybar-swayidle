@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-swayidle=$(ps aux | grep swayidle | grep -v grep | grep -v wp-swayidle | grep -v waybar-swayidle)
+swayidle=$(ps aux | grep "swayidle timeout" | grep -v grep | grep -v wp-swayidle | grep -v waybar-swayidle)
 
 [[ ! -z $swayidle ]] && echo "idle"
