@@ -50,7 +50,7 @@ set {
 output {
   * bg ~/Pictures/wallpaper fill
   eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync on
+  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync off
 }
 
 input type:keyboard {
