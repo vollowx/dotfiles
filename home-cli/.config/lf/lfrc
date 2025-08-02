@@ -47,7 +47,7 @@ cmd open &{{
       mpv --loop $fx
       ;;
     audio/*)
-      [ "$XDG_SESSION_TYPE" = "tty" ] && mpv --loop --audio-display=no $fx || footclient mpv --loop --audio-display=no $fx
+      [ "$XDG_SESSION_TYPE" = "tty" ] && mpv --loop --audio-display=no $fx || foot mpv --loop --audio-display=no $fx
       ;;
     */pdf|*/epub*)
       zathura $fx
