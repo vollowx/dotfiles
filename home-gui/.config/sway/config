@@ -32,16 +32,6 @@ set {
   $down      j
   $up        k
   $right     l
-  $ws1       number 1
-  $ws2       number 2
-  $ws3       number 3
-  $ws4       number 4
-  $ws5       number 5
-  # $ws6       number 6
-  # $ws7       number 7
-  # $ws8       number 8
-  # $ws9       number 9
-  # $ws10      number 10
   $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 }
 
@@ -84,7 +74,6 @@ for_window {
   [window_type="dialog"]                           floating enable
   [shell="xwayland"]                               title_format "%title [XWayland]"
   # [app_id=$term_id]                              floating enable, move to scratchpad, scratchpad show
-  [app_id="gterm"]                                 floating enable
   [app_id="^launcher$"]                            floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
   [app_id="blueman-manager"]                       floating enable
   [app_id="qutebrowser"]                           inhibit_idle fullscreen
@@ -139,7 +128,6 @@ exec {
   blueman-applet
   fcitx5 -d
   dunst
-  foot --server
 }
 
 bar {
@@ -148,6 +136,11 @@ bar {
   modifier Mod4
   position bottom
 }
+
+for_window [app_id="gncmpcpp"] floating on, move position 5 ppt 10 ppt, move workspace 0
+exec foot --app-id gncmpcpp ncmpcpp
+workspace 1
+exec qutebrowser
 
 ### Key bindings
 
@@ -193,26 +186,18 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-# bindsym $mod+6 workspace $ws6
-# bindsym $mod+7 workspace $ws7
-# bindsym $mod+8 workspace $ws8
-# bindsym $mod+9 workspace $ws9
-# bindsym $mod+0 workspace $ws10
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-# bindsym $mod+Shift+6 move container to workspace $ws6
-# bindsym $mod+Shift+7 move container to workspace $ws7
-# bindsym $mod+Shift+8 move container to workspace $ws8
-# bindsym $mod+Shift+9 move container to workspace $ws9
-# bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Grave workspace number 0
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+Shift+Grave move container to workspace number 0
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
 
 bindsym $mod+n splith
 bindsym $mod+m splitv
