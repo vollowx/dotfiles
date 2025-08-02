@@ -6,9 +6,15 @@
   "position": "bottom",
   "height": 24,
 
-  "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
+  "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode", "custom/swayidle"],
   "modules-center": [],
   "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "custom/gpu", "memory", "network", "clock"],
+
+  "custom/swayidle": {
+    "exec": "waybar-swayidle",
+    "interval": 3,
+    "format": "<span color='#33b1ff' font-weight='bold'>{text}</span>"
+  },
 
   "sway/workspaces": {
     "all-outputs": true,
