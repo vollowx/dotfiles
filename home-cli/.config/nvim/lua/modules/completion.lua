@@ -6,7 +6,7 @@ return {
       'xzbdmw/colorful-menu.nvim',
     },
     version = 'v1.*',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()
       require('configs.blink-cmp')
     end,

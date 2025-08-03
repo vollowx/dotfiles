@@ -91,10 +91,6 @@ require('catppuccin').setup({
     all = function(c)
       return {
         CursorLineNr = { fg = c.lavender, style = { 'bold' } },
-        PmenuSel = { bg = c.surface0, fg = '' },
-        Pmenu = { bg = c.mantle },
-        PmenuSbar = { bg = c.crust },
-        PmenuThumb = { bg = c.surface0 },
         VertSplit = { fg = c.base },
         StatusLine = { bg = c.mantle, fg = c.subtext1 },
 
