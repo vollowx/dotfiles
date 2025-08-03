@@ -1,4 +1,12 @@
-vim.lsp.enable({ 'clangd', 'qmlls', 'lua_ls' })
+vim.lsp.enable({
+  'astro',
+  'clangd',
+  'cssls',
+  'jsonls',
+  'lua_ls',
+  'qmlls',
+  'ts_ls',
+})
 
 local utils = require('utils')
 
