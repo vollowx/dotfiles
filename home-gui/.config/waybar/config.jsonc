@@ -5,22 +5,36 @@
   "layer": "top",
   "position": "bottom",
   "height": 24,
-
-  "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode", "custom/swayidle"],
-  "modules-center": ["mpd"],
-  "modules-right": ["tray", "wireplumber", "temperature", "disk", "cpu", "custom/gpu", "memory", "network", "clock"],
-
+  "modules-left": [
+    "sway/workspaces",
+    "sway/scratchpad",
+    "sway/mode",
+    "custom/swayidle"
+  ],
+  "modules-center": [
+    "mpd"
+  ],
+  "modules-right": [
+    "tray",
+    "wireplumber",
+    "temperature",
+    "disk",
+    "cpu",
+    "custom/gpu",
+    "memory",
+    "network",
+    "clock"
+  ],
   "custom/swayidle": {
     "exec": "waybar-swayidle",
     "interval": 3,
     "format": "<span color='#33b1ff' font-weight='bold'>{text}</span>"
   },
-
   "sway/workspaces": {
-    "all-outputs": true,
+    "all-outputs": true
   },
   "sway/mode": {
-    "format": "<span color='#33b1ff' font-weight='bold'>mod</span> {}",
+    "format": "<span color='#33b1ff' font-weight='bold'>mod</span> {}"
   },
   "sway/scratchpad": {
     "format": "<span color='#33b1ff' font-weight='bold'>pad</span> {count}",
@@ -28,7 +42,6 @@
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
-
   "mpd": {
     "format": "<span color='#33b1ff' font-weight='bold'>{title} </span>[{repeatIcon}{randomIcon}{singleIcon}]",
     "format-paused": "<span color='#4f4f4f' font-weight='bold'>{title} [{repeatIcon}{randomIcon}{singleIcon}]</span>",
@@ -56,7 +69,6 @@
     "tooltip-format": "{artist} - {album} - {title}",
     "tooltip-format-disconnected": "MPD is disconnected"
   },
-
   "tray": {
     "icon-size": 14,
     "spacing": 8
@@ -67,7 +79,7 @@
     "format-muted": "<span color='#33b1ff' font-weight='bold'>mut</span>"
   },
   "disk": {
-    "format": "<span color='#33b1ff' font-weight='bold'>dis</span> {percentage_used}%",
+    "format": "<span color='#33b1ff' font-weight='bold'>dis</span> {percentage_used}%"
   },
   "cpu": {
     "format": "<span color='#33b1ff' font-weight='bold'>cpu</span> {usage}%",
