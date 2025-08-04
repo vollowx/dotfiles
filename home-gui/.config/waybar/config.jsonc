@@ -17,11 +17,6 @@
   "modules-right": [
     "tray",
     "wireplumber",
-    "temperature",
-    "disk",
-    "cpu",
-    "custom/gpu",
-    "memory",
     "network",
     "clock"
   ],
@@ -77,29 +72,6 @@
     "scroll-step": 5,
     "format": "<span color='#33b1ff' font-weight='bold'>vol</span> {volume}%",
     "format-muted": "<span color='#33b1ff' font-weight='bold'>mut</span>"
-  },
-  "disk": {
-    "format": "<span color='#33b1ff' font-weight='bold'>dis</span> {percentage_used}%"
-  },
-  "cpu": {
-    "format": "<span color='#33b1ff' font-weight='bold'>cpu</span> {usage}%",
-    "interval": 2,
-    "tooltip": true
-  },
-  "custom/gpu": {
-    "exec": "cat /sys/class/hwmon/hwmon2/device/gpu_busy_percent",
-    "format": "<span color='#33b1ff' font-weight='bold'>gpu</span> {}%",
-    "return-type": "",
-    "interval": 2
-  },
-  "memory": {
-    "format": "<span color='#33b1ff' font-weight='bold'>mem</span> {}%",
-    "interval": 2
-  },
-  "temperature": {
-    "format": "<span color='#33b1ff' font-weight='bold'>tem</span> {temperatureC}°C",
-    "interval": 2,
-    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input"
   },
   "network": {
     "format-wifi": "<span color='#33b1ff' font-weight='bold'>{essid}</span> {signalStrength}%",
