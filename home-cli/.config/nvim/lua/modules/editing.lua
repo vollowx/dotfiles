@@ -36,8 +36,8 @@ return {
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-    config = function ()
+    config = function()
       require('configs.conform')
-    end
+    end,
   },
 }

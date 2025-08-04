@@ -1,21 +1,16 @@
 require('blink.cmp').setup({
   completion = {
     list = {
-      selection = {
-        preselect = false,
-        auto_insert = true,
-      },
+      selection = { preselect = false, auto_insert = true },
     },
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 0,
-      window = {
-        border = 'solid',
-      },
+      window = { border = 'solid' },
     },
     menu = {
       draw = {
-        columns = { { 'label', gap = 2 }, { 'kind' } },
+        columns = { { 'label', gap = 1 }, { 'kind' } },
         components = {
           label = {
             text = function(ctx)
@@ -29,7 +24,10 @@ require('blink.cmp').setup({
       },
     },
   },
-  signature = { enabled = true },
+  signature = {
+    enabled = true,
+    window = { border = 'single' },
+  },
   keymap = { preset = 'default' },
   sources = { default = { 'lsp', 'path', 'snippets' } },
   snippets = {
