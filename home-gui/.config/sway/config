@@ -161,8 +161,8 @@ bindsym $mod+Delete exec swaylock
 
 bindsym $mod+Space exec fcitx5-remote -t && notify-send -r 668 -t 1000 "IME" $(fcitx5-remote -n)
 
-bindsym $mod+p exec /usr/share/sway-contrib/grimshot savecopy screen $shot_path
-bindsym $mod+Shift+p exec /usr/share/sway-contrib/grimshot savecopy anything $shot_path
+bindsym $mod+p exec grimshot savecopy screen $shot_path
+bindsym $mod+Shift+p exec grimshot savecopy anything $shot_path
 
 bindsym $mod+z exec dunstctl history-pop
 bindsym $mod+x exec dunstctl close
