@@ -142,7 +142,7 @@ do
       contents,
       syntax,
       vim.tbl_deep_extend('force', opts, {
-        border = 'solid',
+        border = 'single',
         max_width = math.max(80, math.ceil(vim.go.columns * 0.75)),
         max_height = math.max(20, math.ceil(vim.go.lines * 0.4)),
         close_events = {
@@ -166,4 +166,16 @@ do
       loclist = true,
     })
   end
+end
+
+-- Disable semantic tokens
+do
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if client then
+        client.server_capabilities.semanticTokensProvider = nil
+      end
+    end,
+  })
 end

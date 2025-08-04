@@ -1,11 +1,11 @@
 local o = vim.opt
-local go = vim.go
 local g = vim.g
 
 -- stylua: ignore start
+o.background     = 'dark'
 o.cursorlineopt  = 'both'
 o.cursorline     = true
-o.foldcolumn     = 'auto'
+o.foldcolumn     = '0'
 o.foldlevelstart = 99
 o.foldtext       = ''
 o.helpheight     = 10
@@ -97,5 +97,6 @@ g.loaded_zip               = 0
 g.loaded_zipPlugin         = 0
 -- stylua: ignore end
 
-go.statusline = [[%!v:lua.require'core._internal.statusline'.get()]]
-go.tabline = [[%!v:lua.require'core._internal.tabline'.get()]]
+o.tabline = "%!v:lua.require'core._internal.tabline'()"
+o.statusline = "%!v:lua.require'core._internal.statusline'()"
+o.statuscolumn = "%!v:lua.require'core._internal.statuscolumn'()"

@@ -1,5 +1,10 @@
 return {
   {
+    'dstein64/vim-startuptime',
+    lazy = false,
+  },
+
+  {
     'wakatime/vim-wakatime',
     event = { 'BufReadPre', 'BufNewFile' },
   },
@@ -72,9 +77,9 @@ return {
         end,
       })
     end,
-    config = function ()
+    config = function()
       require('configs.oil')
-    end
+    end,
   },
 
   {
@@ -93,9 +98,9 @@ return {
         desc = 'Line blame',
       },
     },
-    config = function ()
+    config = function()
       require('configs.gitsigns')
-    end
+    end,
   },
 
   {
@@ -193,9 +198,9 @@ return {
       { '<Leader>fSR', desc = 'Find symbol locations' },
       { '<Leader>fF', desc = 'Find all available pickers' },
     },
-    config = function ()
+    config = function()
       require('configs.fzf')
-    end
+    end,
   },
 
   {

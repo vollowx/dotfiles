@@ -11,7 +11,7 @@ local config = {
   ui = {
     backdrop = 100,
     size = { width = 0.7, height = 0.74 },
-    border = settings.ui.border,
+    border = 'single',
     icons = {
       cmd = icons.ui.Cmd,
       config = icons.ft.Config,

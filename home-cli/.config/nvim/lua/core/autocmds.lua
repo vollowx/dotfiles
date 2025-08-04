@@ -176,18 +176,6 @@ augroup('AutoCreateDir', {
   },
 })
 
-augroup('StatusColumn', {
-  { 'BufWritePost', 'BufWinEnter' },
-  {
-    desc = 'Init statuscolumn plugin.',
-    once = true,
-    callback = function()
-      require('core._internal.statuscolumn').setup()
-      return true
-    end,
-  },
-})
-
 augroup('TerminalSettings', {
   'TermOpen',
   {

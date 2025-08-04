@@ -2,7 +2,7 @@ local icons = require('utils.icons')
 
 require('gitsigns').setup({
   preview_config = {
-    border = settings.ui.border_preview,
+    border = 'single',
     style = 'minimal',
   },
   signs = {

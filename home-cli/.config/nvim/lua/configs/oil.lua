@@ -274,7 +274,7 @@ local type_hlgroups = setmetatable({
   end,
 })
 
-local border = settings.ui.border
+local border = 'single'
 
 oil.setup({
   columns = {

@@ -15,7 +15,7 @@ require('blink.cmp').setup({
     },
     menu = {
       draw = {
-        columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+        columns = { { 'label', gap = 2 }, { 'kind' } },
         components = {
           label = {
             text = function(ctx)
@@ -29,11 +29,9 @@ require('blink.cmp').setup({
       },
     },
   },
-  keymap = {
-    ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
-    ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-  },
   signature = { enabled = true },
+  keymap = { preset = 'default' },
+  sources = { default = { 'lsp', 'path', 'snippets' } },
   snippets = {
     preset = pcall(require, 'luasnip') and 'luasnip' or 'default',
   },
