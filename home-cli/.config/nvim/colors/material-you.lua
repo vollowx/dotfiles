@@ -204,21 +204,21 @@ local hlgroups = {
   -- }}}2
 
   -- Syntax {{{2
-  Comment = { fg = c_onSurfaceVariant, italic = true },
+  Comment = { fg = c_onSurfaceVariant },
   Constant = { fg = c_tertiary },
   String = { fg = c_secondary },
   Character = { link = 'String' },
-  Number = { fg = c_tertiary },
+  Number = { fg = c_primary },
   Boolean = { fg = c_tertiary },
   Float = { link = 'Number' },
   Function = { fg = c_primary },
   Identifier = { link = 'Normal' },
   Statement = { fg = c_secondary },
-  Keyword = { fg = c_secondary, italic = true },
+  Keyword = { fg = c_tertiary },
   Operator = { fg = c_onBackground },
-  PreProc = { fg = c_secondary },
-  Type = { fg = c_secondary, italic = true },
-  Special = { fg = c_tertiary },
+  PreProc = { fg = c_tertiary },
+  Type = { fg = c_error },
+  Special = { fg = c_primary },
   Underlined = { fg = c_primary, underline = true },
   Error = { fg = c_error, bg = c_errorContainer },
   ErrorMsg = { fg = c_error },
@@ -226,6 +226,7 @@ local hlgroups = {
   Todo = { bg = c_warningColor, fg = c_warningOnColor, bold = true },
   Title = { fg = c_primary, bold = true },
   Delimiter = { fg = c_outline },
+  Property = { fg = c_onSurfaceVariant },
   -- }}}
 
   -- Treesitter syntax {{{2
@@ -240,7 +241,7 @@ local hlgroups = {
   ['@punctuation.delimiter'] = { link = 'Delimiter' },
   ['@string.escape'] = { fg = c_tertiaryFixed },
   ['@string.regexp'] = { fg = c_warningColor },
-  ['@tag.attribute'] = { fg = c_secondary },
+  ['@tag.attribute'] = { fg = c_tertiary },
   ['@tag.delimiter'] = { link = 'Delimiter' },
   ['@markup.strong'] = { bold = true },
   ['@markup.emphasis'] = { italic = true },
@@ -285,14 +286,22 @@ local hlgroups = {
   DiagnosticUnderlineInfo = { sp = c_primary, undercurl = true },
   DiagnosticUnderlineHint = { sp = c_secondary, undercurl = true },
   DiagnosticUnderlineOk = { sp = c_secondary, undercurl = true },
-  DiagnosticVirtualTextError = { fg = c_error },
-  DiagnosticVirtualTextWarn = { fg = c_warningColor },
-  DiagnosticVirtualTextInfo = { fg = c_secondary },
-  DiagnosticVirtualTextHint = { fg = c_tertiary },
-  DiagnosticVirtualLinesError = { fg = c_error },
-  DiagnosticVirtualLinesWarn = { fg = c_warningColor },
-  DiagnosticVirtualLinesInfo = { fg = c_secondary },
-  DiagnosticVirtualLinesHint = { fg = c_tertiary },
+  DiagnosticVirtualTextError = {
+    fg = c_onErrorContainer,
+    bg = c_errorContainer,
+  },
+  DiagnosticVirtualTextWarn = {
+    fg = c_warningOnColorContainer,
+    bg = c_warningColorContainer,
+  },
+  DiagnosticVirtualTextInfo = {
+    fg = c_onSecondaryContainer,
+    bg = c_secondaryContainer,
+  },
+  DiagnosticVirtualTextHint = {
+    fg = c_onTertiaryContainer,
+    bg = c_tertiaryContainer,
+  },
   -- }}}
 
   -- Plugins {{{2
