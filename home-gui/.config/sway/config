@@ -154,11 +154,6 @@ bar {
   position bottom
 }
 
-for_window [app_id="gncmpcpp"] floating on, move position 5 ppt 10 ppt, move workspace 0
-exec foot --app-id gncmpcpp ncmpcpp
-workspace 1
-exec qutebrowser
-
 ### Key bindings
 
 bindsym $mod+d exec dmenu-app
