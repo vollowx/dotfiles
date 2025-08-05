@@ -1,3 +1,5 @@
+# vim:ft=dosini
+
 ncmpcpp_directory = ~/.config/ncmpcpp
 lyrics_directory = ~/Music/.lyrics
 
