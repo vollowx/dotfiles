@@ -1,15 +1,34 @@
-local autopair_utils = require('ultimate-autopair.utils')
-local _getsmartft = autopair_utils.getsmartft
+local ap_utils = require('ultimate-autopair.utils')
 
----Always use `notree`
----Setting `opts.extensions.filetype.tree` to `false` does not always work
----There are multiple places where `getsmartft()` is called with `notree`
----omitted when it should be `true`
----TODO: report this bug to upstream
----@diagnostic disable-next-line: duplicate-set-field, unused-local
-autopair_utils.getsmartft = function(o, _notree, ...)
-  return _getsmartft(o, true, ...)
+---Filetype options memoization
+---@type table<string, table<string, string|integer|boolean|table>>
+local ft_opts = vim.defaulttable(function()
+  return {}
+end)
+
+---Get option value for given filetype, with memoization for performance
+---This fixes sluggish `<CR>` in markdown files
+---TODO: upstream to ultimate-autopair
+---@param ft string
+---@param opt string
+---@diagnostic disable-next-line: duplicate-set-field
+ap_utils.ft_get_option = function(ft, opt)
+  local opts = ft_opts[ft]
+  local opt_val = opts[opt]
+  if opt_val ~= nil then
+    return opt_val
+  end
+
+  opt_val = vim.F.npcall(vim.filetype.get_option, ft, opt) or vim.bo[opt]
+  opts[opt] = opt_val
+  return opt_val
 end
+
+ap_utils.getsmartft = (function(cb)
+  return function(o, notree, ...)
+    return cb(o, vim.b.bigfile or notree, ...)
+  end
+end)(ap_utils.getsmartft)
 
 ---Record previous cmdline completion types,
 ---`cmdcompltype[1]` is the current completion type,
@@ -30,43 +49,24 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
   end,
 })
 
----Get next two characters after cursor, whether in cmdline or normal buffer
----@return string: next two characters
-local function get_next_two_chars()
-  local col, line
-  if vim.fn.mode():match('^c') then
-    col = vim.fn.getcmdpos()
-    line = vim.fn.getcmdline()
-  else
-    col = vim.fn.col('.')
-    line = vim.api.nvim_get_current_line()
-  end
-  return line:sub(col, col + 1)
-end
-
--- Matches strings that start with:
--- keywords: \k
--- opening pairs: (, [, {, \(, \[, \{
-local IGNORE_REGEX = vim.regex([=[^\%(\k\|\\\?[([{]\)]=])
-
 require('ultimate-autopair').setup({
   extensions = {
     suround = false,
     -- Improve performance when typing fast, see
     -- https://github.com/altermo/ultimate-autopair.nvim/issues/74
     utf8 = false,
-    filetype = { tree = false },
     cond = {
       cond = function(f)
         return not f.in_macro()
-          -- Disable autopairs if followed by a keyword or an opening pair
-          and not IGNORE_REGEX:match_str(get_next_two_chars())
+          and (
+            not f.in_cmdline()
+            -- Disable autopairs when inserting a regex, e.g.
+            -- `:s/{pattern}/{string}/[flags]` or `:g/{pattern}/[cmd]`, etc.
+            or (compltype[2] ~= 'command' or compltype[1] ~= '')
+          )
       end,
     },
   },
-  { '\\(', '\\)' },
-  { '\\[', '\\]' },
-  { '\\{', '\\}' },
   { '[=[', ']=]', ft = { 'lua' } },
   { '<<<', '>>>', ft = { 'cuda' } },
   {

@@ -12,6 +12,8 @@ return {
     },
   },
 
+  -- FIXME: this makes blink-cmp window continue to appear even the first
+  -- token of command is finished and <Space> is pressed.
   {
     'altermo/ultimate-autopair.nvim',
     event = { 'InsertEnter', 'CmdlineEnter' },

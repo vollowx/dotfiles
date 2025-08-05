@@ -213,7 +213,7 @@ local hlgroups = {
   ErrorMsg = { fg = c_error },
   Float = { link = 'Number' },
   Function = { fg = c_primary },
-  Identifier = { link = 'Normal' },
+  Identifier = { fg = c_onBackground },
   Keyword = { fg = c_tertiary },
   Number = { fg = c_primary },
   Operator = { fg = c_onBackground },
@@ -325,6 +325,7 @@ local hlgroups = {
 
   -- blink
   BlinkCmpDocBorder = { link = 'FloatBorder' },
+  BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
   BlinkCmpKindText = { fg = c_secondary },
   BlinkCmpKindMethod = { fg = c_primary },
   BlinkCmpKindFunction = { fg = c_primary },
