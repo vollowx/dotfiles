@@ -2,10 +2,7 @@ vim.g.loaded_fzf_file_explorer = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-local icons = require('utils.icons')
 local oil = require('oil')
-local icon_file = vim.trim(icons.kinds.File)
-local icon_dir = vim.trim(icons.kinds.Folder)
 
 local preview_wins = {} ---@type table<integer, integer>
 local preview_bufs = {} ---@type table<integer, integer>
@@ -304,12 +301,6 @@ oil.setup({
     },
     { 'size', highlight = 'Special' },
     { 'mtime', highlight = 'Number' },
-    {
-      'icon',
-      default_file = icon_file,
-      directory = icon_dir,
-      add_padding = false,
-    },
   },
   win_options = {
     number = false,
