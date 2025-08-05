@@ -112,7 +112,7 @@ for_window [class="steam_app_244210"]                       floating enable
 
 #                       titlebar border    titlebar                   titlebar text         overlay            border
 client.focused          $primary           $primary_container         $on_primary_container $primary_container $primary
-client.focused_inactive $secondary         $surface_container_lowest  $on_background        $primary_container $secondary
+client.focused_inactive $outline           $surface_container_lowest  $on_background        $primary_container $outline
 client.unfocused        $outline_variant   $surface_container_lowest  $on_background        $primary_container $outline_variant
 client.urgent           $warning_color     $on_background             $warning_color        $primary_container $warning_color
 client.placeholder      $surface_container $background                $on_background        $primary_container $outline_variant
