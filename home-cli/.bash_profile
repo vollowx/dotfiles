@@ -16,11 +16,11 @@ export PATH=$GOPATH/bin:$PATH
 
 export BAT_THEME="base16"
 export FZF_DEFAULT_OPTS="--info hidden \
---color=bg+:#2e2e2e,bg:#161616,spinner:#be95ff,hl:#ff8389 \
---color=fg:#ffffff,header:#be95ff,pointer:#be95ff \
---color=marker:#ab8600,fg+:#ffffff,prompt:#78a9ff,hl+:#ff8389 \
---color=selected-bg:#383838 \
---color=border:#2e2e2e,label:#ffffff"
+--color=fg:#e2e3d8,bg:#12140e,hl:#b1d18a \
+--color=fg+:#e2e3d8,bg+:#282b24,hl+:#b1d18a \
+--color=info:#c5c8ba,prompt:#b1d18a,pointer:#b1d18a \
+--color=marker:#cdeda3,spinner:#bfcbad,header:#bfcbad \
+--color=border:#8f9285"
 eval $(dircolors "$HOME/.config/dircolors")
 export QT_STYLE_OVERRIDE='kvantum'
 

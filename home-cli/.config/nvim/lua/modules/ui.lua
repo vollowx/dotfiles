@@ -28,4 +28,12 @@ return {
       require('configs.scroll-eof')
     end,
   },
+
+  {
+    'https://github.com/folke/which-key.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('configs.which-key')
+    end,
+  },
 }

@@ -1,47 +1,70 @@
 ### Variables
 
-set {
-  $rosewater #ff8389
-  $flamingo  #ff8389
-  $pink      #ff7eb6
-  $mauve     #be95ff
-  $red       #ff8389
-  $maroon    #ff8389
-  $peach     #d44a1c
-  $yellow    #ab8600
-  $green     #08bdba
-  $teal      #33b1ff
-  $sky       #33b1ff
-  $sapphire  #33b1ff
-  $blue      #78a9ff
-  $lavender  #78a9ff
-  $text      #ffffff
-  $subtext1  #f4f4f4
-  $subtext0  #e0e0e0
-  $overlay2  #adadad
-  $overlay1  #949494
-  $overlay0  #7a7a7a
-  $surface2  #4f4f4f
-  $surface1  #383838
-  $surface0  #2e2e2e
-  $base      #161616
-  $mantle    #0d0d0d
-  $crust     #000000
-  $mod       Mod4
-  $left      h
-  $down      j
-  $up        k
-  $right     l
-  $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
-}
+set $primary #b1d18a
+set $surface_tint #b1d18a
+set $on_primary #1f3701
+set $primary_container #354e16
+set $on_primary_container #cdeda3
+set $secondary #bfcbad
+set $on_secondary #2a331e
+set $secondary_container #404a33
+set $on_secondary_container #dce7c8
+set $tertiary #a0d0cb
+set $on_tertiary #003735
+set $tertiary_container #1f4e4b
+set $on_tertiary_container #bcece7
+set $error #ffb4ab
+set $on_error #690005
+set $error_container #93000a
+set $on_error_container #ffdad6
+set $background #12140e
+set $on_background #e2e3d8
+set $surface #12140e
+set $on_surface #e2e3d8
+set $surface_variant #44483d
+set $on_surface_variant #c5c8ba
+set $outline #8f9285
+set $outline_variant #44483d
+set $shadow #000000
+set $scrim #000000
+set $inverse_surface #e2e3d8
+set $inverse_on_surface #2f312a
+set $inverse_primary #4c662b
+set $primary_fixed #cdeda3
+set $on_primary_fixed #102000
+set $primary_fixed_dim #b1d18a
+set $on_primary_fixed_variant #354e16
+set $secondary_fixed #dce7c8
+set $on_secondary_fixed #151e0b
+set $secondary_fixed_dim #bfcbad
+set $on_secondary_fixed_variant #404a33
+set $tertiary_fixed #bcece7
+set $on_tertiary_fixed #00201e
+set $tertiary_fixed_dim #a0d0cb
+set $on_tertiary_fixed_variant #1f4e4b
+set $surface_dim #12140e
+set $surface_bright #383a32
+set $surface_container_lowest #0c0f09
+set $surface_container_low #1a1c16
+set $surface_container #1e201a
+set $surface_container_high #282b24
+set $surface_container_highest #33362e
+set $warning_color #d9c76f
+set $warning_on_color #393000
+set $warning_color_container #524700
+set $warning_on_color_container #f6e388
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 
 ### Core
 
-output {
-  * bg ~/Pictures/wallpaper fill
-  eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-  "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync off
-}
+output * bg ~/Pictures/wallpaper fill
+output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
+output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync off
 
 input type:keyboard {
   xkb_layout us
@@ -67,38 +90,33 @@ seat * hide_cursor 10000
 seat * hide_cursor when-typing enable
 seat * xcursor_theme macOS 24
 
-for_window {
-  [window_role="pop-up"]                           floating enable
-  [window_role="bubble"]                           floating enable
-  [window_role="dialog"]                           floating enable
-  [window_type="dialog"]                           floating enable
-  [shell="xwayland"]                               title_format "%title [XWayland]"
-  # [app_id=$term_id]                              floating enable, move to scratchpad, scratchpad show
-  [app_id="^launcher$"]                            floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
-  [app_id="blueman-manager"]                       floating enable
-  [app_id="qutebrowser"]                           inhibit_idle fullscreen
-  [class="discord"]                                floating enable
-  [class="QQ"]                                     floating enable
-  [class="Pinentry-gtk"]                           floating enable
-}
-# Firefox PiP: bottom-right, 12px from the corner of the window
+for_window [window_role="pop-up"]                           floating enable
+for_window [window_role="bubble"]                           floating enable
+for_window [window_role="dialog"]                           floating enable
+for_window [window_type="dialog"]                           floating enable
+for_window [shell="xwayland"]                               title_format "%title [XWayland]"
+# for_window [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
+for_window [app_id="^launcher$"]                            floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
+for_window [app_id="blueman-manager"]                       floating enable
+for_window [app_id="qutebrowser"]                           inhibit_idle fullscreen
+for_window [class="discord"]                                floating enable
+for_window [class="QQ"]                                     floating enable
+for_window [class="Pinentry-gtk"]                           floating enable
 
-for_window {
-  [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0, move left 332, move down 100
-  [class="steam" title="Game Servers"]             floating enable
-  [class="steam" title="Players"]                  floating enable
-  [class="steam" title="Recordings & Screenshots"] floating enable
-  [class="steam" title="Steam Settings"]           floating enable
-  [class="steam_app_244210"]                       floating enable
-}
+for_window [class="steam" title="Friends List"]             floating enable, resize set 320 800, move position 100 ppt 0, move left 332, move down 100
+for_window [class="steam" title="Game Servers"]             floating enable
+for_window [class="steam" title="Players"]                  floating enable
+for_window [class="steam" title="Recordings & Screenshots"] floating enable
+for_window [class="steam" title="Steam Settings"]           floating enable
+for_window [class="steam_app_244210"]                       floating enable
 
-#                       tb border titlebar  tb text overlay    border
-client.focused          $surface2 $base     $text   $overlay0  $surface2
-client.focused_inactive $surface1 $mantle   $text   $overlay0  $surface1
-client.unfocused        $surface0 $crust    $text   $overlay0  $surface0
-client.urgent           $peach    $surface2 $peach  $overlay0  $peach
-client.placeholder      $overlay0 $base     $text   $overlay0  $overlay0
-client.background       $base
+#                       titlebar border    titlebar                   titlebar text         overlay            border
+client.focused          $primary           $primary_container         $on_primary_container $primary_container $primary
+client.focused_inactive $secondary         $surface_container_lowest  $on_background        $primary_container $secondary
+client.unfocused        $outline_variant   $surface_container_lowest  $on_background        $primary_container $outline_variant
+client.urgent           $warning_color     $on_background             $warning_color        $primary_container $warning_color
+client.placeholder      $surface_container $background                $on_background        $primary_container $outline_variant
+client.background       $background
 
 font pango:monospace 8
 default_border pixel 1
@@ -107,8 +125,6 @@ for_window [class=".*"]  border pixel 1
 for_window [app_id=".*"] border pixel 1
 # Clients who want to draw their own CSD doesn't follow this when floating
 
-workspace_auto_back_and_forth yes
-workspace_layout tabbed
 gaps inner 16
 
 exec_always {

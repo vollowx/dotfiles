@@ -105,25 +105,8 @@ return {
 
   {
     'ibhagwan/fzf-lua',
-    event = 'LspAttach',
-    cmd = {
-      'FzfLua',
-      'FZF',
-      'Ls',
-      'Args',
-      'Tabs',
-      'Tags',
-      'Files',
-      'Marks',
-      'Jumps',
-      'Autocmd',
-      'Buffers',
-      'Changes',
-      'Display',
-      'Oldfiles',
-      'Registers',
-      'Highlight',
-    },
+    event = 'VeryLazy',
+    cmd = 'FzfLua',
     keys = {
       { '<Leader>.', desc = 'Find files' },
       { "<Leader>'", desc = 'Resume last picker' },
@@ -198,6 +181,66 @@ return {
       { '<Leader>fSR', desc = 'Find symbol locations' },
       { '<Leader>fF', desc = 'Find all available pickers' },
     },
+    init = function()
+      -- Disable fzf's default vim plugin
+      vim.g.loaded_fzf = 1
+
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.select = function(...)
+        local fzf_ui = require('fzf-lua.providers.ui_select')
+        -- Register fzf as custom `vim.ui.select()` function if not yet
+        -- registered
+        if not fzf_ui.is_registered() then
+          local ui_select = fzf_ui.ui_select
+
+          ---Overriding fzf-lua's default `ui_select()` function to use a
+          ---custom prompt
+          ---@diagnostic disable-next-line: duplicate-set-field
+          fzf_ui.ui_select = function(items, opts, on_choice)
+            -- Hack: use nbsp after ':' here because currently fzf-lua does
+            -- not allow custom prompt and force substitute pattern ':%s?$'
+            -- in `opts.prompt` to '> ' as the fzf prompt. We WANT the column
+            -- in the prompt, so use nbsp to avoid this substitution.
+            -- Also, don't use `opts.prompt:gsub(':?%s*$', ':\xc2\xa0')` here
+            -- because it does a non-greedy match and will not substitute
+            -- ':' at the end of the prompt, e.g. if `opts.prompt` is
+            -- 'foobar: ' then result will be 'foobar: : ', interestingly
+            -- this behavior changes in Lua 5.4, where the match becomes
+            -- greedy, i.e. given the same string and substitution above the
+            -- result becomes 'foobar> ' as expected.
+            opts.prompt = opts.prompt
+              and vim.fn.substitute(opts.prompt, ':\\?\\s*$', ':\xc2\xa0', '')
+            ui_select(items, opts, on_choice)
+          end
+
+          -- Use the register function provided by fzf-lua. We are using this
+          -- wrapper instead of directly replacing `vim.ui.selct()` with fzf
+          -- select function because in this way we can pass a callback to this
+          -- `register()` function to generate fzf opts in different contexts,
+          -- see https://github.com/ibhagwan/fzf-lua/issues/755
+          -- Here we use the callback to achieve adaptive height depending on
+          -- the number of items, with a max height of 10, the `split` option
+          -- is basically the same as that used in fzf config file:
+          -- lua/configs/fzf-lua.lua
+          fzf_ui.register(function(_, items)
+            local height = #items + 1
+            return {
+              winopts = {
+                split = string.format(
+                  -- Don't shrink size if a quickfix list is closed for fzf
+                  -- window to avoid window resizing and content shifting
+                  '%s | if get(g:, "_fzf_qfclosed", "") == "" && %d < winheight(0) | resize %d | endif',
+                  vim.trim(require('fzf-lua.config').setup_opts.winopts.split),
+                  height,
+                  height
+                ),
+              },
+            }
+          end)
+        end
+        vim.ui.select(...)
+      end
+    end,
     config = function()
       require('configs.fzf')
     end,

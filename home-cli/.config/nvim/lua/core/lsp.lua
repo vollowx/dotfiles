@@ -74,16 +74,16 @@ do
       })
     end
   end
-  vim.keymap.set({ 'n', 'x' }, '[d', c(diag_jump('prev')))
-  vim.keymap.set({ 'n', 'x' }, ']d', c(diag_jump('next')))
-  vim.keymap.set({ 'n', 'x' }, '[e', c(diag_jump('prev', 'ERROR')))
-  vim.keymap.set({ 'n', 'x' }, ']e', c(diag_jump('next', 'ERROR')))
-  vim.keymap.set({ 'n', 'x' }, '[w', c(diag_jump('prev', 'WARN')))
-  vim.keymap.set({ 'n', 'x' }, ']w', c(diag_jump('next', 'WARN')))
-  vim.keymap.set({ 'n', 'x' }, '[i', c(diag_jump('prev', 'INFO')))
-  vim.keymap.set({ 'n', 'x' }, ']i', c(diag_jump('next', 'INFO')))
-  vim.keymap.set({ 'n', 'x' }, '[h', c(diag_jump('prev', 'HINT')))
-  vim.keymap.set({ 'n', 'x' }, ']h', c(diag_jump('next', 'HINT')))
+  vim.keymap.set({ 'n', 'x' }, '[d', c(diag_jump('prev')), { desc = 'Previous diagnostic' })
+  vim.keymap.set({ 'n', 'x' }, ']d', c(diag_jump('next')), { desc = 'Next diagnostic' })
+  vim.keymap.set({ 'n', 'x' }, '[e', c(diag_jump('prev', 'ERROR')), { desc = 'Previous diag error' })
+  vim.keymap.set({ 'n', 'x' }, ']e', c(diag_jump('next', 'ERROR')), { desc = 'Next diag error' })
+  vim.keymap.set({ 'n', 'x' }, '[w', c(diag_jump('prev', 'WARN')), { desc = 'Previous diag warning' })
+  vim.keymap.set({ 'n', 'x' }, ']w', c(diag_jump('next', 'WARN')), { desc = 'Next diag warning' })
+  vim.keymap.set({ 'n', 'x' }, '[i', c(diag_jump('prev', 'INFO')), { desc = 'Previous diag info' })
+  vim.keymap.set({ 'n', 'x' }, ']i', c(diag_jump('next', 'INFO')), { desc = 'Next diag info' })
+  vim.keymap.set({ 'n', 'x' }, '[h', c(diag_jump('prev', 'HINT')), { desc = 'Previous diag hint' })
+  vim.keymap.set({ 'n', 'x' }, ']h', c(diag_jump('next', 'HINT')), { desc = 'Next diag hint' })
 end
 
 -- Show notification if no references, definition, declaration,

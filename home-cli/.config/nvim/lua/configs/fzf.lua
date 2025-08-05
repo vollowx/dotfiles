@@ -1,3 +1,8 @@
+if vim.fn.executable('fzf') == 0 then
+  vim.notify('[Fzf-lua] command `fzf` not found', vim.log.levels.ERROR)
+  return
+end
+
 local actions = require('fzf-lua.actions')
 local config = require('fzf-lua.config')
 local core = require('fzf-lua.core')
@@ -328,12 +333,11 @@ fzf.setup({
       hidden = 'hidden',
     },
   },
-  fzf_colors = true,
   fzf_opts = {
     ['--no-scrollbar'] = '',
     ['--no-separator'] = '',
     ['--info'] = 'inline-right',
-    ['--layout'] = 'reverse',
+    ['--layout'] = 'default',
     ['--marker'] = '+',
     ['--prompt'] = '/ ',
     ['--border'] = 'none',
@@ -379,6 +383,7 @@ fzf.setup({
   defaults = {
     headers = {},
     git_icons = false,
+    file_icons = false,
     actions = {
       ['ctrl-]'] = actions.switch_provider,
     },

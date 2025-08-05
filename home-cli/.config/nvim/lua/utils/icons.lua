@@ -1,11 +1,11 @@
 -- stylua: ignore start
 return {
   diagnostics = {
-    DiagnosticSignError = '󰅚 ',
-    DiagnosticSignHint  = '󰌶 ',
-    DiagnosticSignInfo  = '󰋽 ',
-    DiagnosticSignOk    = '󰄬 ',
-    DiagnosticSignWarn  = '󰀪 ',
+    DiagnosticSignError = '● ',
+    DiagnosticSignHint  = '● ',
+    DiagnosticSignInfo  = '● ',
+    DiagnosticSignOk    = '● ',
+    DiagnosticSignWarn  = '● ',
   },
   kinds       = {
     Array             = '󰅪 ',

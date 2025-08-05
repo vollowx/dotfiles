@@ -2,302 +2,208 @@
 
 
 def setup(c, flavour):
-    palette = {}
-
-    # flavours {{{
-    if flavour == "oxocarbon-dark":
-        palette = {
-            "rosewater": "#ff8389",
-            "flamingo": "#ff8389",
-            "red": "#ff8389",
-            "maroon": "#ff8389",
-            "pink": "#ff7eb6",
-            "mauve": "#be95ff",
-            "peach": "#d44a1c",
-            "yellow": "#ab8600",
-            "green": "#08bdba",
-            "teal": "#33b1ff",
-            "sky": "#33b1ff",
-            "sapphire": "#33b1ff",
-            "blue": "#78a9ff",
-            "lavender": "#78a9ff",
-            "text": "#ffffff",
-            "subtext1": "#f4f4f4",
-            "subtext0": "#e0e0e0",
-            "overlay2": "#adadad",
-            "overlay1": "#949494",
-            "overlay0": "#7a7a7a",
-            "surface2": "#4f4f4f",
-            "surface1": "#383838",
-            "surface0": "#2e2e2e",
-            "base": "#161616",
-            "mantle": "#0d0d0d",
-            "crust": "#000000",
-        }
-    elif flavour == "catppuccin-latte":
-        palette = {
-            "rosewater": "#dc8a78",
-            "flamingo": "#dd7878",
-            "pink": "#ea76cb",
-            "mauve": "#8839ef",
-            "red": "#d20f39",
-            "maroon": "#e64553",
-            "peach": "#fe640b",
-            "yellow": "#df8e1d",
-            "green": "#40a02b",
-            "teal": "#179299",
-            "sky": "#04a5e5",
-            "sapphire": "#209fb5",
-            "blue": "#1e66f5",
-            "lavender": "#7287fd",
-            "text": "#4c4f69",
-            "subtext1": "#5c5f77",
-            "subtext0": "#6c6f85",
-            "overlay2": "#7c7f93",
-            "overlay1": "#8c8fa1",
-            "overlay0": "#9ca0b0",
-            "surface2": "#acb0be",
-            "surface1": "#bcc0cc",
-            "surface0": "#ccd0da",
-            "base": "#eff1f5",
-            "mantle": "#e6e9ef",
-            "crust": "#dce0e8",
-        }
-    elif flavour == "catppuccin-frappe":
-        palette = {
-            "rosewater": "#f2d5cf",
-            "flamingo": "#eebebe",
-            "pink": "#f4b8e4",
-            "mauve": "#ca9ee6",
-            "red": "#e78284",
-            "maroon": "#ea999c",
-            "peach": "#ef9f76",
-            "yellow": "#e5c890",
-            "green": "#a6d189",
-            "teal": "#81c8be",
-            "sky": "#99d1db",
-            "sapphire": "#85c1dc",
-            "blue": "#8caaee",
-            "lavender": "#babbf1",
-            "text": "#c6d0f5",
-            "subtext1": "#b5bfe2",
-            "subtext0": "#a5adce",
-            "overlay2": "#949cbb",
-            "overlay1": "#838ba7",
-            "overlay0": "#737994",
-            "surface2": "#626880",
-            "surface1": "#51576d",
-            "surface0": "#414559",
-            "base": "#303446",
-            "mantle": "#292c3c",
-            "crust": "#232634",
-        }
-    elif flavour == "catppuccin-macchiato":
-        palette = {
-            "rosewater": "#f4dbd6",
-            "flamingo": "#f0c6c6",
-            "pink": "#f5bde6",
-            "mauve": "#c6a0f6",
-            "red": "#ed8796",
-            "maroon": "#ee99a0",
-            "peach": "#f5a97f",
-            "yellow": "#eed49f",
-            "green": "#a6da95",
-            "teal": "#8bd5ca",
-            "sky": "#91d7e3",
-            "sapphire": "#7dc4e4",
-            "blue": "#8aadf4",
-            "lavender": "#b7bdf8",
-            "text": "#cad3f5",
-            "subtext1": "#b8c0e0",
-            "subtext0": "#a5adcb",
-            "overlay2": "#939ab7",
-            "overlay1": "#8087a2",
-            "overlay0": "#6e738d",
-            "surface2": "#5b6078",
-            "surface1": "#494d64",
-            "surface0": "#363a4f",
-            "base": "#24273a",
-            "mantle": "#1e2030",
-            "crust": "#181926",
-        }
-    elif flavour == "catppuccin-latte":
-        palette = {
-            "rosewater": "#f5e0dc",
-            "flamingo": "#f2cdcd",
-            "pink": "#f5c2e7",
-            "mauve": "#cba6f7",
-            "red": "#f38ba8",
-            "maroon": "#eba0ac",
-            "peach": "#fab387",
-            "yellow": "#f9e2af",
-            "green": "#a6e3a1",
-            "teal": "#94e2d5",
-            "sky": "#89dceb",
-            "sapphire": "#74c7ec",
-            "blue": "#89b4fa",
-            "lavender": "#b4befe",
-            "text": "#cdd6f4",
-            "subtext1": "#bac2de",
-            "subtext0": "#a6adc8",
-            "overlay2": "#9399b2",
-            "overlay1": "#7f849c",
-            "overlay0": "#6c7086",
-            "surface2": "#585b70",
-            "surface1": "#45475a",
-            "surface0": "#313244",
-            "base": "#1e1e2e",
-            "mantle": "#181825",
-            "crust": "#11111b",
-        }
-    # }}}
+    palette = {
+        "primary": "#b1d18a",
+        "surface_tint": "#b1d18a",
+        "on_primary": "#1f3701",
+        "primary_container": "#354e16",
+        "on_primary_container": "#cdeda3",
+        "secondary": "#bfcbad",
+        "on_secondary": "#2a331e",
+        "secondary_container": "#404a33",
+        "on_secondary_container": "#dce7c8",
+        "tertiary": "#a0d0cb",
+        "on_tertiary": "#003735",
+        "tertiary_container": "#1f4e4b",
+        "on_tertiary_container": "#bcece7",
+        "error": "#ffb4ab",
+        "on_error": "#690005",
+        "error_container": "#93000a",
+        "on_error_container": "#ffdad6",
+        "background": "#12140e",
+        "on_background": "#e2e3d8",
+        "surface": "#12140e",
+        "on_surface": "#e2e3d8",
+        "surface_variant": "#44483d",
+        "on_surface_variant": "#c5c8ba",
+        "outline": "#8f9285",
+        "outline_variant": "#44483d",
+        "shadow": "#000000",
+        "scrim": "#000000",
+        "inverse_surface": "#e2e3d8",
+        "inverse_on_surface": "#2f312a",
+        "inverse_primary": "#4c662b",
+        "primary_fixed": "#cdeda3",
+        "on_primary_fixed": "#102000",
+        "primary_fixed_dim": "#b1d18a",
+        "on_primary_fixed_variant": "#354e16",
+        "secondary_fixed": "#dce7c8",
+        "on_secondary_fixed": "#151e0b",
+        "secondary_fixed_dim": "#bfcbad",
+        "on_secondary_fixed_variant": "#404a33",
+        "tertiary_fixed": "#bcece7",
+        "on_tertiary_fixed": "#00201e",
+        "tertiary_fixed_dim": "#a0d0cb",
+        "on_tertiary_fixed_variant": "#1f4e4b",
+        "surface_dim": "#12140e",
+        "surface_bright": "#383a32",
+        "surface_container_lowest": "#0c0f09",
+        "surface_container_low": "#1a1c16",
+        "surface_container": "#1e201a",
+        "surface_container_high": "#282b24",
+        "surface_container_highest": "#33362e",
+        "warning_color": "#d9c76f",
+        "warning_on_color": "#393000",
+        "warning_color_container": "#524700",
+        "warning_on_color_container": "#f6e388",
+    }
 
     # completion {{{
-    c.colors.completion.category.bg = palette["base"]
-    c.colors.completion.category.border.bottom = palette["mantle"]
-    c.colors.completion.category.border.top = palette["surface2"]
-    c.colors.completion.category.fg = palette["lavender"]
-    c.colors.completion.even.bg = palette["mantle"]
+    c.colors.completion.category.bg = palette["background"]
+    c.colors.completion.category.border.bottom = palette["surface_container"]
+    c.colors.completion.category.border.top = palette["surface_container_high"]
+    c.colors.completion.category.fg = palette["primary"]
+    c.colors.completion.even.bg = palette["surface_container"]
     c.colors.completion.odd.bg = c.colors.completion.even.bg
-    c.colors.completion.fg = palette["subtext0"]
+    c.colors.completion.fg = palette["on_surface"]
 
-    c.colors.completion.item.selected.bg = palette["surface2"]
-    c.colors.completion.item.selected.border.bottom = palette["surface2"]
-    c.colors.completion.item.selected.border.top = palette["surface2"]
-    c.colors.completion.item.selected.fg = palette["subtext0"]
-    c.colors.completion.item.selected.match.fg = palette["text"]
-    c.colors.completion.match.fg = palette["text"]
+    c.colors.completion.item.selected.bg = palette["surface_container_high"]
+    c.colors.completion.item.selected.border.bottom = palette["surface_container_high"]
+    c.colors.completion.item.selected.border.top = palette["surface_container_high"]
+    c.colors.completion.item.selected.fg = palette["on_surface"]
+    c.colors.completion.item.selected.match.fg = palette["primary"]
+    c.colors.completion.match.fg = palette["primary"]
 
-    c.colors.completion.scrollbar.bg = palette["crust"]
-    c.colors.completion.scrollbar.fg = palette["surface2"]
+    c.colors.completion.scrollbar.bg = palette["surface_container_lowest"]
+    c.colors.completion.scrollbar.fg = palette["surface_container_high"]
     # }}}
 
     # downloads {{{
-    c.colors.downloads.bar.bg = palette["base"]
-    c.colors.downloads.error.bg = palette["base"]
-    c.colors.downloads.start.bg = palette["base"]
-    c.colors.downloads.stop.bg = palette["base"]
+    c.colors.downloads.bar.bg = palette["background"]
+    c.colors.downloads.error.bg = palette["background"]
+    c.colors.downloads.start.bg = palette["background"]
+    c.colors.downloads.stop.bg = palette["background"]
 
-    c.colors.downloads.error.fg = palette["red"]
-    c.colors.downloads.start.fg = palette["blue"]
-    c.colors.downloads.stop.fg = palette["green"]
+    c.colors.downloads.error.fg = palette["error"]
+    c.colors.downloads.start.fg = palette["primary"]
+    c.colors.downloads.stop.fg = palette["primary"]
     c.colors.downloads.system.fg = "none"
     c.colors.downloads.system.bg = "none"
     # }}}
 
     # hints {{{
-    c.colors.hints.bg = palette["peach"]
-    c.colors.hints.fg = palette["crust"]
+    c.colors.hints.bg = palette["primary_container"]
+    c.colors.hints.fg = palette["on_primary_container"]
 
-    c.hints.border = "1px solid " + palette["crust"]
+    c.hints.border = "1px solid " + palette["outline"]
 
-    c.colors.hints.match.fg = palette["subtext1"]
+    c.colors.hints.match.fg = palette["primary"]
     # }}}
 
     # keyhints {{{
-    c.colors.keyhint.bg = palette["mantle"]
-    c.colors.keyhint.fg = palette["text"]
+    c.colors.keyhint.bg = palette["surface_container"]
+    c.colors.keyhint.fg = palette["on_surface"]
 
-    c.colors.keyhint.suffix.fg = palette["subtext1"]
+    c.colors.keyhint.suffix.fg = palette["on_surface_variant"]
     # }}}
 
     # messages {{{
-    c.colors.messages.error.bg = palette["overlay0"]
-    c.colors.messages.info.bg = palette["overlay0"]
-    c.colors.messages.warning.bg = palette["overlay0"]
+    c.colors.messages.error.bg = palette["error_container"]
+    c.colors.messages.info.bg = palette["surface_container"]
+    c.colors.messages.warning.bg = palette["warning_color_container"]
 
-    c.colors.messages.error.border = palette["mantle"]
-    c.colors.messages.info.border = palette["mantle"]
-    c.colors.messages.warning.border = palette["mantle"]
+    c.colors.messages.error.border = palette["error_container"]
+    c.colors.messages.info.border = palette["surface_container"]
+    c.colors.messages.warning.border = palette["warning_color_container"]
 
-    c.colors.messages.error.fg = palette["red"]
-    c.colors.messages.info.fg = palette["text"]
-    c.colors.messages.warning.fg = palette["peach"]
+    c.colors.messages.error.fg = palette["on_error_container"]
+    c.colors.messages.info.fg = palette["on_surface"]
+    c.colors.messages.warning.fg = palette["warning_on_color_container"]
     # }}}
 
     # prompts {{{
-    c.colors.prompts.bg = palette["mantle"]
-    c.colors.prompts.border = "1px solid " + palette["overlay0"]
-    c.colors.prompts.fg = palette["text"]
+    c.colors.prompts.bg = palette["surface_container"]
+    c.colors.prompts.border = "1px solid " + palette["outline"]
+    c.colors.prompts.fg = palette["on_surface"]
 
-    c.colors.prompts.selected.bg = palette["surface2"]
-    c.colors.prompts.selected.fg = palette["rosewater"]
+    c.colors.prompts.selected.bg = palette["surface_container_high"]
+    c.colors.prompts.selected.fg = palette["primary"]
     # }}}
 
     # statusbar {{{
-    c.colors.statusbar.normal.bg = palette["mantle"]
-    c.colors.statusbar.insert.bg = palette["mantle"]
-    c.colors.statusbar.command.bg = palette["mantle"]
-    c.colors.statusbar.caret.bg = palette["mantle"]
-    c.colors.statusbar.caret.selection.bg = palette["mantle"]
+    c.colors.statusbar.normal.bg = palette["surface_container"]
+    c.colors.statusbar.insert.bg = palette["primary_container"]
+    c.colors.statusbar.command.bg = palette["surface_container"]
+    c.colors.statusbar.caret.bg = palette["tertiary_container"]
+    c.colors.statusbar.caret.selection.bg = palette["tertiary_container"]
 
-    c.colors.statusbar.progress.bg = palette["base"]
-    c.colors.statusbar.passthrough.bg = palette["base"]
+    c.colors.statusbar.progress.bg = palette["background"]
+    c.colors.statusbar.passthrough.bg = palette["secondary_container"]
 
-    c.colors.statusbar.normal.fg = palette["text"]
-    c.colors.statusbar.insert.fg = palette["rosewater"]
-    c.colors.statusbar.command.fg = palette["text"]
-    c.colors.statusbar.passthrough.fg = palette["peach"]
-    c.colors.statusbar.caret.fg = palette["peach"]
-    c.colors.statusbar.caret.selection.fg = palette["peach"]
+    c.colors.statusbar.normal.fg = palette["on_surface"]
+    c.colors.statusbar.insert.fg = palette["on_primary_container"]
+    c.colors.statusbar.command.fg = palette["on_surface"]
+    c.colors.statusbar.passthrough.fg = palette["on_secondary_container"]
+    c.colors.statusbar.caret.fg = palette["on_tertiary_container"]
+    c.colors.statusbar.caret.selection.fg = palette["on_tertiary_container"]
 
-    c.colors.statusbar.url.error.fg = palette["red"]
+    c.colors.statusbar.url.error.fg = palette["error"]
 
-    c.colors.statusbar.url.fg = palette["text"]
+    c.colors.statusbar.url.fg = palette["on_surface"]
 
-    c.colors.statusbar.url.hover.fg = palette["sky"]
+    c.colors.statusbar.url.hover.fg = palette["primary"]
 
-    c.colors.statusbar.url.success.http.fg = palette["teal"]
-    c.colors.statusbar.url.success.https.fg = palette["green"]
+    c.colors.statusbar.url.success.http.fg = palette["primary"]
+    c.colors.statusbar.url.success.https.fg = palette["primary"]
 
-    c.colors.statusbar.url.warn.fg = palette["yellow"]
+    c.colors.statusbar.url.warn.fg = palette["warning_color"]
 
-    c.colors.statusbar.private.bg = palette["mantle"]
-    c.colors.statusbar.private.fg = palette["subtext1"]
-    c.colors.statusbar.command.private.bg = palette["base"]
-    c.colors.statusbar.command.private.fg = palette["subtext1"]
+    c.colors.statusbar.private.bg = palette["surface_container"]
+    c.colors.statusbar.private.fg = palette["on_surface_variant"]
+    c.colors.statusbar.command.private.bg = palette["surface_container"]
+    c.colors.statusbar.command.private.fg = palette["on_surface_variant"]
 
     # }}}
 
     # tabs {{{
-    c.colors.tabs.bar.bg = palette["crust"]
-    c.colors.tabs.even.bg = palette["crust"]
-    c.colors.tabs.odd.bg = palette["crust"]
+    c.colors.tabs.bar.bg = palette["surface_container_lowest"]
+    c.colors.tabs.even.bg = palette["surface_container_lowest"]
+    c.colors.tabs.odd.bg = palette["surface_container_lowest"]
 
-    c.colors.tabs.even.fg = palette["overlay2"]
-    c.colors.tabs.odd.fg = palette["overlay2"]
+    c.colors.tabs.even.fg = palette["on_surface_variant"]
+    c.colors.tabs.odd.fg = palette["on_surface_variant"]
 
-    c.colors.tabs.indicator.error = palette["red"]
-    c.colors.tabs.indicator.start = palette["blue"]
-    c.colors.tabs.indicator.stop = palette["green"]
+    c.colors.tabs.indicator.error = palette["error"]
+    c.colors.tabs.indicator.start = palette["primary"]
+    c.colors.tabs.indicator.stop = palette["primary"]
     c.colors.tabs.indicator.system = "none"
 
-    c.colors.tabs.selected.even.bg = palette["base"]
-    c.colors.tabs.selected.odd.bg = palette["base"]
+    c.colors.tabs.selected.even.bg = palette["background"]
+    c.colors.tabs.selected.odd.bg = palette["background"]
 
-    c.colors.tabs.selected.even.fg = palette["text"]
-    c.colors.tabs.selected.odd.fg = palette["text"]
+    c.colors.tabs.selected.even.fg = palette["on_background"]
+    c.colors.tabs.selected.odd.fg = palette["on_background"]
 
-    c.colors.tabs.pinned.even.bg = palette["crust"]
-    c.colors.tabs.pinned.odd.bg = palette["crust"]
+    c.colors.tabs.pinned.even.bg = palette["surface_container_lowest"]
+    c.colors.tabs.pinned.odd.bg = palette["surface_container_lowest"]
 
-    c.colors.tabs.pinned.even.fg = palette["overlay2"]
-    c.colors.tabs.pinned.odd.fg = palette["overlay2"]
+    c.colors.tabs.pinned.even.fg = palette["on_surface_variant"]
+    c.colors.tabs.pinned.odd.fg = palette["on_surface_variant"]
 
-    c.colors.tabs.pinned.selected.even.bg = palette["base"]
-    c.colors.tabs.pinned.selected.odd.bg = palette["base"]
+    c.colors.tabs.pinned.selected.even.bg = palette["background"]
+    c.colors.tabs.pinned.selected.odd.bg = palette["background"]
 
-    c.colors.tabs.pinned.selected.even.fg = palette["text"]
-    c.colors.tabs.pinned.selected.odd.fg = palette["text"]
+    c.colors.tabs.pinned.selected.even.fg = palette["on_background"]
+    c.colors.tabs.pinned.selected.odd.fg = palette["on_background"]
     # }}}
 
     # context menus {{{
-    c.colors.contextmenu.menu.bg = palette["base"]
-    c.colors.contextmenu.menu.fg = palette["text"]
+    c.colors.contextmenu.menu.bg = palette["surface_container"]
+    c.colors.contextmenu.menu.fg = palette["on_surface"]
 
-    c.colors.contextmenu.disabled.bg = palette["mantle"]
-    c.colors.contextmenu.disabled.fg = palette["overlay0"]
+    c.colors.contextmenu.disabled.bg = palette["surface_container_low"]
+    c.colors.contextmenu.disabled.fg = palette["on_surface_variant"]
 
-    c.colors.contextmenu.selected.bg = palette["overlay0"]
-    c.colors.contextmenu.selected.fg = palette["rosewater"]
+    c.colors.contextmenu.selected.bg = palette["surface_container_high"]
+    c.colors.contextmenu.selected.fg = palette["primary"]
     # }}}

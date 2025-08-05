@@ -2,7 +2,7 @@ import theme
 
 config.load_autoconfig(False)
 
-theme.setup(c, "oxocarbon-dark")
+theme.setup(c, "catppuccin-mocha")
 
 c.auto_save.session = True
 c.colors.webpage.preferred_color_scheme = "dark"

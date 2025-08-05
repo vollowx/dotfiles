@@ -6,9 +6,11 @@ require('blink.cmp').setup({
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 0,
-      window = { border = 'solid' },
+      window = { border = 'single' },
     },
     menu = {
+      min_width = vim.go.pumwidth,
+      max_height = vim.go.pumheight,
       draw = {
         columns = { { 'label', gap = 1 }, { 'kind' } },
         components = {

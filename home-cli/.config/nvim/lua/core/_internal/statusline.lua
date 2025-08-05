@@ -45,7 +45,7 @@ end
 
 -- stylua: ignore start
 local modes = {
-  ['n']      = '**',
+  ['n']      = 'NO',
   ['no']     = 'OP',
   ['nov']    = 'OC',
   ['noV']    = 'OL',
@@ -364,8 +364,8 @@ local function set_default_hlgroups()
   sethl('StatusLineDiagnosticInfo', { fg = 'DiagnosticSignInfo' })
   sethl('StatusLineDiagnosticWarn', { fg = 'DiagnosticSignWarn' })
   sethl('StatusLineDiagnosticError', { fg = 'DiagnosticSignError' })
-  sethl('StatusLineHeader', { fg = 'Function', bg = 'TabLine', bold = true })
-  sethl('StatusLineHeaderModified', { fg = 'Keyword', bg = 'TabLine', bold = true })
+  sethl('StatusLineHeader', { fg = 'Function', bg = 'TabLine' })
+  sethl('StatusLineHeaderModified', { fg = 'Keyword', bg = 'TabLine' })
   -- stylua: ignore end
 end
 set_default_hlgroups()

@@ -1,37 +1,60 @@
-@define-color base   #161616;
-@define-color mantle #0d0d0d;
-@define-color crust  #000000;
-
-@define-color text     #ffffff;
-@define-color subtext0 #e0e0e0;
-@define-color subtext1 #f4f4f4;
-
-@define-color surface0 #2e2e2e;
-@define-color surface1 #383838;
-@define-color surface2 #4f4f4f;
-
-@define-color overlay0 #7a7a7a;
-@define-color overlay1 #949494;
-@define-color overlay2 #adadad;
-
-@define-color blue      #78a9ff;
-@define-color lavender  #78a9ff;
-@define-color sapphire  #33b1ff;
-@define-color sky       #33b1ff;
-@define-color teal      #33b1ff;
-@define-color green     #08bdba;
-@define-color yellow    #ab8600;
-@define-color peach     #d44a1c;
-@define-color maroon    #ff8389;
-@define-color red       #ff8389;
-@define-color mauve     #be95ff;
-@define-color pink      #ff7eb6;
-@define-color flamingo  #ff8389;
-@define-color rosewater #ff8389;
+@define-color primary #b1d18a;
+@define-color surface-tint #b1d18a;
+@define-color on-primary #1f3701;
+@define-color primary-container #354e16;
+@define-color on-primary-container #cdeda3;
+@define-color secondary #bfcbad;
+@define-color on-secondary #2a331e;
+@define-color secondary-container #404a33;
+@define-color on-secondary-container #dce7c8;
+@define-color tertiary #a0d0cb;
+@define-color on-tertiary #003735;
+@define-color tertiary-container #1f4e4b;
+@define-color on-tertiary-container #bcece7;
+@define-color error #ffb4ab;
+@define-color on-error #690005;
+@define-color error-container #93000a;
+@define-color on-error-container #ffdad6;
+@define-color background #12140e;
+@define-color on-background #e2e3d8;
+@define-color surface #12140e;
+@define-color on-surface #e2e3d8;
+@define-color surface-variant #44483d;
+@define-color on-surface-variant #c5c8ba;
+@define-color outline #8f9285;
+@define-color outline-variant #44483d;
+@define-color shadow #000000;
+@define-color scrim #000000;
+@define-color inverse-surface #e2e3d8;
+@define-color inverse-on-surface #2f312a;
+@define-color inverse-primary #4c662b;
+@define-color primary-fixed #cdeda3;
+@define-color on-primary-fixed #102000;
+@define-color primary-fixed-dim #b1d18a;
+@define-color on-primary-fixed-variant #354e16;
+@define-color secondary-fixed #dce7c8;
+@define-color on-secondary-fixed #151e0b;
+@define-color secondary-fixed-dim #bfcbad;
+@define-color on-secondary-fixed-variant #404a33;
+@define-color tertiary-fixed #bcece7;
+@define-color on-tertiary-fixed #00201e;
+@define-color tertiary-fixed-dim #a0d0cb;
+@define-color on-tertiary-fixed-variant #1f4e4b;
+@define-color surface-dim #12140e;
+@define-color surface-bright #383a32;
+@define-color surface-container-lowest #0c0f09;
+@define-color surface-container-low #1a1c16;
+@define-color surface-container #1e201a;
+@define-color surface-container-high #282b24;
+@define-color surface-container-highest #33362e;
+@define-color warning-color #d9c76f;
+@define-color warning-on-color #393000;
+@define-color warning-color-container #524700;
+@define-color warning-on-color-container #f6e388;
 
 window#waybar {
   background: transparent;
-  color: @text;
+  color: @on-surface;
   font-family: monospace;
   background-color: transparent;
 }
@@ -39,17 +62,17 @@ window#waybar {
 #workspaces button {
   all: unset;
   padding: 0 4px;
-  color: @subtext0;
+  color: @on-surface-varient;
 }
 
 #workspaces button.focused {
   font-weight: bold;
-  color: @teal;
+  color: @primary;
 }
 
 #workspaces button.urgent {
   font-weight: bold;
-  color: @peach;
+  color: @warning-color;
 }
 
 #workspaces,

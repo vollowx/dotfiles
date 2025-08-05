@@ -10,4 +10,9 @@ return {
   {
     'nyoom-engineering/oxocarbon.nvim',
   },
+
+  {
+    'everviolet/nvim',
+    name = 'evergarden',
+  },
 }

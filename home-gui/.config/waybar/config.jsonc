@@ -23,22 +23,22 @@
   "custom/swayidle": {
     "exec": "waybar-swayidle",
     "interval": 3,
-    "format": "<span color='#33b1ff' font-weight='bold'>{text}</span>"
+    "format": "<span color='#b1d18a' font-weight='bold'>{text}</span>"
   },
   "sway/workspaces": {
     "all-outputs": true
   },
   "sway/mode": {
-    "format": "<span color='#33b1ff' font-weight='bold'>mod</span> {}"
+    "format": "<span color='#b1d18a' font-weight='bold'>mod</span> {}"
   },
   "sway/scratchpad": {
-    "format": "<span color='#33b1ff' font-weight='bold'>pad</span> {count}",
+    "format": "<span color='#b1d18a' font-weight='bold'>pad</span> {count}",
     "show-empty": false,
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
   "mpd": {
-    "format": "<span color='#33b1ff' font-weight='bold'>{title} </span>[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format": "<span color='#b1d18a' font-weight='bold'>{title} </span>[{repeatIcon}{randomIcon}{singleIcon}]",
     "format-paused": "<span color='#4f4f4f' font-weight='bold'>{title} [{repeatIcon}{randomIcon}{singleIcon}]</span>",
     "format-stopped": "<span color='#4f4f4f' font-weight='bold'>[{repeatIcon}{randomIcon}{singleIcon}]</span>",
     "format-disconnected": "<span color='#4f4f4f' font-weight='bold'>oops, where is the music</span>",
@@ -70,16 +70,16 @@
   },
   "wireplumber": {
     "scroll-step": 5,
-    "format": "<span color='#33b1ff' font-weight='bold'>vol</span> {volume}%",
-    "format-muted": "<span color='#33b1ff' font-weight='bold'>mut</span>"
+    "format": "<span color='#b1d18a' font-weight='bold'>vol</span> {volume}%",
+    "format-muted": "<span color='#b1d18a' font-weight='bold'>mut</span>"
   },
   "network": {
-    "format-wifi": "<span color='#33b1ff' font-weight='bold'>{essid}</span> {signalStrength}%",
-    "format-disconnected": "<span color='#33b1ff' font-weight='bold'>dis</span>",
+    "format-wifi": "<span color='#b1d18a' font-weight='bold'>{essid}</span> {signalStrength}%",
+    "format-disconnected": "<span color='#b1d18a' font-weight='bold'>dis</span>",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "clock": {
-    "format": "<span color='#33b1ff' font-weight='bold' text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
+    "format": "<span color='#b1d18a' font-weight='bold' text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }
