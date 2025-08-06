@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# This script silently reads terminal escape sequences from ~/.cache/sequences.txt,
+# filters out comments, removes newlines, and applies the result
+# to all open pseudo-terminals (pts).
+
+# Define the path to the input file
+SEQUENCES_FILE="$HOME/.cache/md3-generated/sequences.txt"
+
+# --- Safety Check ---
+# Ensure the sequence file exists before proceeding. Exit silently on failure.
+if [ ! -f "$SEQUENCES_FILE" ]; then
+  exit 1
+fi
+
+# --- Main Logic ---
+# *** THE FIX IS HERE ***
+# 1. 'grep' removes all lines starting with '#'.
+# 2. 'tr -d '\n'' deletes all newline characters from the remaining output.
+# This creates a single, unbroken string of escape sequences.
+sequences=$(grep -v '^#' "$SEQUENCES_FILE" | tr -d '\n')
+
+# Exit if there are no sequences to apply after filtering.
+if [ -z "$sequences" ]; then
+    exit 0
+fi
+
+# Loop through all pseudo-terminals in /dev/pts/
+for file in /dev/pts/*; do
+  # Check if the entry is a character device and a valid pts file (e.g., /dev/pts/0)
+  if [[ -c $file && $file =~ ^/dev/pts/[0-9]+$ ]]; then
+    # Apply the filtered, single-line sequences.
+    # Redirect stderr to /dev/null as a final precaution.
+    printf '%b' "$sequences" > "$file" 2>/dev/null &
+  fi
+done
+
+# Wait for all background 'printf' jobs to complete before exiting.
+wait
+
+exit 0

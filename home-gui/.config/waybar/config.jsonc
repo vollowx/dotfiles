@@ -12,18 +12,21 @@
     "custom/swayidle"
   ],
   "modules-center": [
-    "mpd"
+    "mpd#hl",
+    "mpd#nm"
   ],
   "modules-right": [
     "tray",
-    "wireplumber",
-    "network",
+    "wireplumber#hl",
+    "wireplumber#nm",
+    "network#hl",
+    "network#nm",
     "clock"
   ],
   "custom/swayidle": {
     "exec": "waybar-swayidle",
     "interval": 3,
-    "format": "<span color='#b1d18a' font-weight='bold'>{text}</span>"
+    "format": "{text}"
   },
   "sway/workspaces": {
     "all-outputs": true
@@ -37,12 +40,21 @@
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
-  "mpd": {
-    "format": "<span color='#b1d18a' font-weight='bold'>{title} </span>[{repeatIcon}{randomIcon}{singleIcon}]",
-    "format-paused": "<span color='#4f4f4f' font-weight='bold'>{title} [{repeatIcon}{randomIcon}{singleIcon}]</span>",
-    "format-stopped": "<span color='#4f4f4f' font-weight='bold'>[{repeatIcon}{randomIcon}{singleIcon}]</span>",
-    "format-disconnected": "<span color='#4f4f4f' font-weight='bold'>oops, where is the music</span>",
-    "title-len": 24,
+  "mpd#hl": {
+    "format": "{title}",
+    "format-paused": "{title}",
+    "format-stopped": "",
+    "format-disconnected": "oops, where is the music",
+    "title-len": 56,
+    "interval": 10,
+    "on-click": "mpc toggle",
+    "tooltip": false
+  },
+  "mpd#nm": {
+    "format": " [{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-paused": " [{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-stopped": "[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-disconnected": "",
     "interval": 10,
     "repeat-icons": {
       "off": "-",
@@ -56,30 +68,33 @@
       "off": "-",
       "on": "s"
     },
-    "on-scroll-up": "mpc prev",
-    "on-scroll-down": "mpc next",
     "on-click": "mpc toggle",
-    "on-click-middle": "mpc prev",
-    "on-click-right": "mpc next",
-    "tooltip-format": "{artist} - {album} - {title}",
-    "tooltip-format-disconnected": "MPD is disconnected"
+    "tooltip": false
   },
   "tray": {
     "icon-size": 14,
     "spacing": 8
   },
-  "wireplumber": {
+  "wireplumber#hl": {
     "scroll-step": 5,
-    "format": "<span color='#b1d18a' font-weight='bold'>vol</span> {volume}%",
-    "format-muted": "<span color='#b1d18a' font-weight='bold'>mut</span>"
+    "format": "vol",
+    "format-muted": "mut"
   },
-  "network": {
-    "format-wifi": "<span color='#b1d18a' font-weight='bold'>{essid}</span> {signalStrength}%",
-    "format-disconnected": "<span color='#b1d18a' font-weight='bold'>dis</span>",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  "wireplumber#nm": {
+    "scroll-step": 5,
+    "format": " {volume}%",
+    "format-muted": ""
+  },
+  "network#hl": {
+    "format-wifi": "{essid}",
+    "format-disconnected": "dis"
+  },
+  "network#nm": {
+    "format-wifi": " {signalStrength}%",
+    "format-disconnected": ""
   },
   "clock": {
-    "format": "<span color='#b1d18a' font-weight='bold' text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
+    "format": "<span text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }

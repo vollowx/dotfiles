@@ -15,12 +15,23 @@ export PATH=~/.local/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
 export BAT_THEME="base16"
-export FZF_DEFAULT_OPTS="--info hidden \
---color=fg:#e2e3d8,bg:#12140e,hl:#b1d18a \
---color=fg+:#e2e3d8,bg+:#282b24,hl+:#b1d18a \
---color=info:#c5c8ba,prompt:#b1d18a,pointer:#b1d18a \
---color=marker:#cdeda3,spinner:#bfcbad,header:#bfcbad \
---color=border:#8f9285"
+export FZF_DEFAULT_OPTS="--info=inline-right \
+  --no-scrollbar \
+  --no-separator \
+  --border=none \
+  --preview-border=none \
+  --height=~75% \
+  --reverse \
+  --multi \
+  --ansi \
+  --color=fg:-1,bg:-1,hl:bold:cyan \
+  --color=fg+:-1,bg+:-1,hl+:bold:cyan \
+  --color=border:white,preview-border:white \
+  --color=marker:bold:cyan,prompt:bold:green,pointer:bold:green \
+  --color=gutter:-1,info:bold:green,spinner:yellow,header:white"
+export FZF_DEFAULT_COMMAND="fd -p -H -L -td -tf -tl -c=always"
+export FZF_ALT_C_COMMAND="$fd -p -H -L -td -c=always"
+export FZF_CTRL_R_OPTS=--no-preview
 eval $(dircolors "$HOME/.config/dircolors")
 export QT_STYLE_OVERRIDE='kvantum'
 

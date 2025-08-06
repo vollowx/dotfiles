@@ -1,58 +1,7 @@
+include ~/.cache/md3-generated/sway-colors.conf
+
 ### Variables
 
-set $primary #b1d18a
-set $surface_tint #b1d18a
-set $on_primary #1f3701
-set $primary_container #354e16
-set $on_primary_container #cdeda3
-set $secondary #bfcbad
-set $on_secondary #2a331e
-set $secondary_container #404a33
-set $on_secondary_container #dce7c8
-set $tertiary #a0d0cb
-set $on_tertiary #003735
-set $tertiary_container #1f4e4b
-set $on_tertiary_container #bcece7
-set $error #ffb4ab
-set $on_error #690005
-set $error_container #93000a
-set $on_error_container #ffdad6
-set $background #12140e
-set $on_background #e2e3d8
-set $surface #12140e
-set $on_surface #e2e3d8
-set $surface_variant #44483d
-set $on_surface_variant #c5c8ba
-set $outline #8f9285
-set $outline_variant #44483d
-set $shadow #000000
-set $scrim #000000
-set $inverse_surface #e2e3d8
-set $inverse_on_surface #2f312a
-set $inverse_primary #4c662b
-set $primary_fixed #cdeda3
-set $on_primary_fixed #102000
-set $primary_fixed_dim #b1d18a
-set $on_primary_fixed_variant #354e16
-set $secondary_fixed #dce7c8
-set $on_secondary_fixed #151e0b
-set $secondary_fixed_dim #bfcbad
-set $on_secondary_fixed_variant #404a33
-set $tertiary_fixed #bcece7
-set $on_tertiary_fixed #00201e
-set $tertiary_fixed_dim #a0d0cb
-set $on_tertiary_fixed_variant #1f4e4b
-set $surface_dim #12140e
-set $surface_bright #383a32
-set $surface_container_lowest #0c0f09
-set $surface_container_low #1a1c16
-set $surface_container #1e201a
-set $surface_container_high #282b24
-set $surface_container_highest #33362e
-set $warning_color #d9c76f
-set $warning_on_color #393000
-set $warning_color_container #524700
-set $warning_on_color_container #f6e388
 set $mod Mod4
 set $left h
 set $down j
@@ -110,14 +59,6 @@ for_window [class="steam" title="Recordings & Screenshots"] floating enable
 for_window [class="steam" title="Steam Settings"]           floating enable
 for_window [class="steam_app_244210"]                       floating enable
 
-#                       titlebar border    titlebar                   titlebar text         overlay            border
-client.focused          $primary           $primary_container         $on_primary_container $primary_container $primary
-client.focused_inactive $outline           $surface_container_lowest  $on_background        $primary_container $outline
-client.unfocused        $outline_variant   $surface_container_lowest  $on_background        $primary_container $outline_variant
-client.urgent           $warning_color     $on_background             $warning_color        $primary_container $warning_color
-client.placeholder      $surface_container $background                $on_background        $primary_container $outline_variant
-client.background       $background
-
 font pango:monospace 8
 default_border pixel 1
 default_floating_border pixel 1
@@ -127,7 +68,7 @@ for_window [app_id=".*"] border pixel 1
 
 gaps inner 16
 
-exec_always {
+exec {
   systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
   hash dbus-update-activation-environment 2>/dev/null
   dbus-update-activation-environment --systemd SWAYSOCK WAYLAND_DISPLAY 2>/dev/null
@@ -144,7 +85,10 @@ exec {
   wl-paste --watch cliphist store
   blueman-applet
   fcitx5 -d
-  dunst
+}
+
+exec_always {
+  pkill dunst; dunst
 }
 
 bar {
