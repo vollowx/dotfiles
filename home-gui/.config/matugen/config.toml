@@ -1,0 +1,18 @@
+[config]
+
+[templates.terminal]
+input_path = './templates/terminal-sequences.txt'
+output_path = '~/.cache/md3-generated/sequences.txt'
+post_hook = 'update-term-colors'
+
+[templates.dunst]
+input_path = './templates/dunstrc'
+output_path = '~/.config/dunst/dunstrc'
+
+[templates.sway]
+input_path = './templates/sway-colors.conf'
+output_path = '~/.cache/md3-generated/sway-colors.conf'
+
+[templates.gtk-css]
+input_path = './templates/colors.css'
+output_path = '~/.cache/md3-generated/gtk-colors.css'

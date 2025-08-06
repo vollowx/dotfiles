@@ -1,0 +1,41 @@
+[global]
+follow                   = "mouse"
+font                     = "monospace 10"
+format                   = "<span font-weight='bold'>%s %p</span>\n%b"
+line_height              = 8
+width                    = 320
+offset                   = (32, 32)
+origin                   = "bottom-right"
+icon_position            = "left"
+min_icon_size            = 48
+max_icon_size            = 48
+padding                  = 24
+horizontal_padding       = 24
+frame_width              = 1
+separator_height         = 1
+sort                     = true
+show_indicators          = true
+indicate_hidden          = yes
+show_age_threshold       = 60
+idle_threshold           = 120
+notification_limit       = 8
+markup                   = "full"
+dmenu                    = "notification>"
+background               = "{{colors.surface.default.hex}}"
+foreground               = "{{colors.on_surface.default.hex}}"
+highlight                = "{{colors.primary_container.default.hex}}"
+frame_color              = "{{colors.primary.default.hex}}"
+
+[urgency_low]
+timeout = 8
+
+[urgency_normal]
+timeout = 8
+
+[urgency_critical]
+timeout = 8
+highlight = "{{colors.error.default.hex}}"
+
+[play_sound]
+summary = "*"
+script = notify-sound
