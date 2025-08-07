@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+for sock in $(nvim-socks); do
+  nvim --clean --headless --server "$sock" --remote-send \
+    "<Cmd>if exists('g:colors_name') && g:colors_name ==# 'material-you' | let g:script_update_colors=1 | colorscheme material-you | unlet g:script_update_colors | endif<CR>" \
+    +qa! 2>/dev/null
+done

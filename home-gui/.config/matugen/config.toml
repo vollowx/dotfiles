@@ -3,7 +3,12 @@
 [templates.terminal]
 input_path = './templates/terminal-sequences.txt'
 output_path = '~/.cache/md3-generated/sequences.txt'
-post_hook = 'update-term-colors'
+post_hook = 'update-colors-term'
+
+[templates.neovim]
+input_path = './templates/colors.json'
+output_path = '~/.cache/md3-generated/colors.json'
+post_hook = 'update-colors-nvim'
 
 [templates.dunst]
 input_path = './templates/dunstrc'
@@ -14,5 +19,5 @@ input_path = './templates/sway-colors.conf'
 output_path = '~/.cache/md3-generated/sway-colors.conf'
 
 [templates.gtk-css]
-input_path = './templates/colors.css'
+input_path = './templates/gtk-colors.css'
 output_path = '~/.cache/md3-generated/gtk-colors.css'

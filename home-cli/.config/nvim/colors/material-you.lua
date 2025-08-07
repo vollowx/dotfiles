@@ -7,352 +7,201 @@ vim.g.colors_name = 'material-you'
 -- }}}
 
 -- Palette {{{
--- stylua: ignore start
-local c_primary
-local c_surfaceTint
-local c_onPrimary
-local c_primaryContainer
-local c_onPrimaryContainer
-local c_secondary
-local c_onSecondary
-local c_secondaryContainer
-local c_onSecondaryContainer
-local c_tertiary
-local c_onTertiary
-local c_tertiaryContainer
-local c_onTertiaryContainer
-local c_error
-local c_onError
-local c_errorContainer
-local c_onErrorContainer
-local c_background
-local c_onBackground
-local c_surface
-local c_onSurface
-local c_surfaceVariant
-local c_onSurfaceVariant
-local c_outline
-local c_outlineVariant
-local c_shadow
-local c_scrim
-local c_inverseSurface
-local c_inverseOnSurface
-local c_inversePrimary
-local c_primaryFixed
-local c_onPrimaryFixed
-local c_primaryFixedDim
-local c_onPrimaryFixedVariant
-local c_secondaryFixed
-local c_onSecondaryFixed
-local c_secondaryFixedDim
-local c_onSecondaryFixedVariant
-local c_tertiaryFixed
-local c_onTertiaryFixed
-local c_tertiaryFixedDim
-local c_onTertiaryFixedVariant
-local c_surfaceDim
-local c_surfaceBright
-local c_surfaceContainerLowest
-local c_surfaceContainerLow
-local c_surfaceContainer
-local c_surfaceContainerHigh
-local c_surfaceContainerHighest
-local c_warningColor
-local c_warningOnColor
-local c_warningColorContainer
-local c_warningOnColorContainer
+local json_path = os.getenv("XDG_CACHE_HOME") .. '/md3-generated/colors.json'
+local content = table.concat(vim.fn.readfile(json_path), '\n')
+local palette = vim.fn.json_decode(content)
 
-if vim.go.bg == 'dark' then
-  c_primary                   = { '#DBB9F9', nil }
-  c_surfaceTint               = { '#DBB9F9', nil }
-  c_onPrimary                 = { '#3F2458', nil }
-  c_primaryContainer          = { '#563A70', nil }
-  c_onPrimaryContainer        = { '#F0DBFF', nil }
-  c_secondary                 = { '#D0C1D9', nil }
-  c_onSecondary               = { '#362C3F', nil }
-  c_secondaryContainer        = { '#4E4356', nil }
-  c_onSecondaryContainer      = { '#EDDDF6', nil }
-  c_tertiary                  = { '#F3B7BD', nil }
-  c_onTertiary                = { '#4B252A', nil }
-  c_tertiaryContainer         = { '#653A40', nil }
-  c_onTertiaryContainer       = { '#FFD9DC', nil }
-  c_error                     = { '#FFB4AB', nil }
-  c_onError                   = { '#690005', nil }
-  c_errorContainer            = { '#93000A', nil }
-  c_onErrorContainer          = { '#FFDAD6', nil }
-  c_background                = { '#151217', nil }
-  c_onBackground              = { '#E8E0E8', nil }
-  c_surface                   = { '#151217', nil }
-  c_onSurface                 = { '#E8E0E8', nil }
-  c_surfaceVariant            = { '#4A454E', nil }
-  c_onSurfaceVariant          = { '#CCC4CE', nil }
-  c_outline                   = { '#968E98', nil }
-  c_outlineVariant            = { '#4A454E', nil }
-  c_shadow                    = { '#000000', nil }
-  c_scrim                     = { '#000000', nil }
-  c_inverseSurface            = { '#E8E0E8', nil }
-  c_inverseOnSurface          = { '#332F35', nil }
-  c_inversePrimary            = { '#6F528A', nil }
-  c_primaryFixed              = { '#F0DBFF', nil }
-  c_onPrimaryFixed            = { '#280D42', nil }
-  c_primaryFixedDim           = { '#DBB9F9', nil }
-  c_onPrimaryFixedVariant     = { '#563A70', nil }
-  c_secondaryFixed            = { '#EDDDF6', nil }
-  c_onSecondaryFixed          = { '#211829', nil }
-  c_secondaryFixedDim         = { '#D0C1D9', nil }
-  c_onSecondaryFixedVariant   = { '#4E4356', nil }
-  c_tertiaryFixed             = { '#FFD9DC', nil }
-  c_onTertiaryFixed           = { '#321016', nil }
-  c_tertiaryFixedDim          = { '#F3B7BD', nil }
-  c_onTertiaryFixedVariant    = { '#653A40', nil }
-  c_surfaceDim                = { '#151217', nil }
-  c_surfaceBright             = { '#3C383E', nil }
-  c_surfaceContainerLowest    = { '#100D12', nil }
-  c_surfaceContainerLow       = { '#1E1A20', nil }
-  c_surfaceContainer          = { '#221E24', nil }
-  c_surfaceContainerHigh      = { '#2C292E', nil }
-  c_surfaceContainerHighest   = { '#373339', nil }
-  c_warningColor              = { '#827200', nil }
-  c_warningOnColor            = { '#393000', nil }
-  c_warningColorContainer     = { '#524700', nil }
-  c_warningOnColorContainer   = { '#f6e388', nil }
-else
-  c_primary                   = { '#6F528A', nil }
-  c_surfaceTint               = { '#6F528A', nil }
-  c_onPrimary                 = { '#FFFFFF', nil }
-  c_primaryContainer          = { '#F0DBFF', nil }
-  c_onPrimaryContainer        = { '#563A70', nil }
-  c_secondary                 = { '#665A6F', nil }
-  c_onSecondary               = { '#FFFFFF', nil }
-  c_secondaryContainer        = { '#EDDDF6', nil }
-  c_onSecondaryContainer      = { '#4E4356', nil }
-  c_tertiary                  = { '#805157', nil }
-  c_onTertiary                = { '#FFFFFF', nil }
-  c_tertiaryContainer         = { '#FFD9DC', nil }
-  c_onTertiaryContainer       = { '#653A40', nil }
-  c_error                     = { '#BA1A1A', nil }
-  c_onError                   = { '#FFFFFF', nil }
-  c_errorContainer            = { '#FFDAD6', nil }
-  c_onErrorContainer          = { '#93000A', nil }
-  c_background                = { '#FFF7FE', nil }
-  c_onBackground              = { '#1E1A20', nil }
-  c_surface                   = { '#FFF7FE', nil }
-  c_onSurface                 = { '#1E1A20', nil }
-  c_surfaceVariant            = { '#E9DFEB', nil }
-  c_onSurfaceVariant          = { '#4A454E', nil }
-  c_outline                   = { '#7C757E', nil }
-  c_outlineVariant            = { '#CCC4CE', nil }
-  c_shadow                    = { '#000000', nil }
-  c_scrim                     = { '#000000', nil }
-  c_inverseSurface            = { '#332F35', nil }
-  c_inverseOnSurface          = { '#F7EEF6', nil }
-  c_inversePrimary            = { '#DBB9F9', nil }
-  c_primaryFixed              = { '#F0DBFF', nil }
-  c_onPrimaryFixed            = { '#280D42', nil }
-  c_primaryFixedDim           = { '#DBB9F9', nil }
-  c_onPrimaryFixedVariant     = { '#563A70', nil }
-  c_secondaryFixed            = { '#EDDDF6', nil }
-  c_onSecondaryFixed          = { '#211829', nil }
-  c_secondaryFixedDim         = { '#D0C1D9', nil }
-  c_onSecondaryFixedVariant   = { '#4E4356', nil }
-  c_tertiaryFixed             = { '#FFD9DC', nil }
-  c_onTertiaryFixed           = { '#321016', nil }
-  c_tertiaryFixedDim          = { '#F3B7BD', nil }
-  c_onTertiaryFixedVariant    = { '#653A40', nil }
-  c_surfaceDim                = { '#DFD8DF', nil }
-  c_surfaceBright             = { '#FFF7FE', nil }
-  c_surfaceContainerLowest    = { '#FFFFFF', nil }
-  c_surfaceContainerLow       = { '#F9F1F9', nil }
-  c_surfaceContainer          = { '#F4EBF3', nil }
-  c_surfaceContainerHigh      = { '#EEE6EE', nil }
-  c_surfaceContainerHighest   = { '#E8E0E8', nil }
-  c_warningColor              = { '#827200', nil }
-  c_warningOnColor            = { '#ffffff', nil }
-  c_warningColorContainer     = { '#f6e388', nil }
-  c_warningOnColorContainer   = { '#524700', nil }
+local c = {}
+
+for key, val in pairs(palette) do
+  if val and val ~= '' then
+    c[key] = val
+  end
 end
--- stylua: ignore end
 -- }}}
 
 -- Highlight groups {{{1
 local hlgroups = {
-  -- UI {{{2
-  Normal = { bg = c_background, fg = c_onBackground },
-  NormalFloat = { bg = c_surfaceContainerLowest, fg = c_onSurface },
-  FloatBorder = { bg = c_surfaceContainerLowest, fg = c_outline },
-  ColorColumn = { bg = c_surfaceContainerLow },
-  Cursor = { bg = c_onBackground, fg = c_background },
-  CursorLine = { bg = c_surfaceContainerLow },
-  CursorLineNr = { fg = c_primary, bold = true },
-  LineNr = { fg = c_outline },
-  SignColumn = { fg = c_onSurfaceVariant },
-  VertSplit = { fg = c_outline },
+  -- UI
+  Normal = { bg = c.background, fg = c.on_background },
+  NormalFloat = { bg = c.surface_container_lowest, fg = c.on_surface },
+  FloatBorder = { bg = c.surface_container_lowest, fg = c.outline },
+  ColorColumn = { bg = c.surface_container_low },
+  Cursor = { bg = c.on_background, fg = c.background },
+  CursorLine = { bg = c.surface_container_low },
+  CursorLineNr = { fg = c.primary, bold = true },
+  LineNr = { fg = c.outline },
+  SignColumn = { fg = c.on_surface_variant },
+  VertSplit = { fg = c.outline },
   WinSeparator = { link = 'VertSplit' },
-  StatusLine = { bg = c_surfaceContainer, fg = c_onSurfaceVariant },
-  StatusLineNC = { bg = c_surfaceContainerLow, fg = c_outline },
+  StatusLine = { bg = c.surface_container, fg = c.on_surface_variant },
+  StatusLineNC = { bg = c.surface_container_low, fg = c.outline },
   TabLine = { link = 'StatusLineNC' },
   TabLineFill = { link = 'StatusLineNC' },
-  TabLineSel = { bg = c_background, fg = c_primary },
-  Pmenu = { bg = c_surfaceContainerHigh, fg = c_onSurface },
-  PmenuSel = { bg = c_primary, fg = c_onPrimary },
-  PmenuSbar = { bg = c_surfaceContainerHighest },
-  PmenuThumb = { bg = c_outline },
-  Visual = { bg = c_surfaceContainerHigh },
-  Folded = { bg = c_surfaceContainer, fg = c_onSurfaceVariant },
-  Search = { bg = c_warningColorContainer, fg = c_onBackground },
-  IncSearch = { bg = c_warningColor, fg = c_warningOnColor, bold = true },
-  -- }}}2
+  TabLineSel = { bg = c.background, fg = c.primary },
+  Pmenu = { bg = c.surface_container_high, fg = c.on_surface },
+  PmenuSel = { bg = c.primary, fg = c.on_primary },
+  PmenuSbar = { bg = c.surface_container_highest },
+  PmenuThumb = { bg = c.outline },
+  Visual = { bg = c.surface_container_high },
+  Folded = { bg = c.surface_container, fg = c.on_surface_variant },
+  Search = { bg = c.warning_color_container, fg = c.on_background },
+  IncSearch = {
+    bg = c.warning_color,
+    fg = c.warning_on_color,
+    bold = true,
+  },
 
-  -- Syntax {{{2
-  Boolean = { fg = c_tertiary },
-  Comment = { fg = c_onSurfaceVariant },
-  Constant = { fg = c_tertiary },
+  -- Syntax
+  Boolean = { fg = c.tertiary },
+  Comment = { fg = c.on_surface_variant },
+  Constant = { fg = c.tertiary },
   Character = { link = 'String' },
-  Delimiter = { fg = c_outline },
-  Error = { fg = c_error, bg = c_errorContainer },
-  ErrorMsg = { fg = c_error },
+  Delimiter = { fg = c.outline },
+  Error = { fg = c.error, bg = c.error_container },
+  ErrorMsg = { fg = c.error },
   Float = { link = 'Number' },
-  Function = { fg = c_primary },
-  Identifier = { fg = c_onBackground },
-  Keyword = { fg = c_tertiary },
-  Number = { fg = c_primary },
-  Operator = { fg = c_onBackground },
-  PreProc = { fg = c_tertiary },
-  Property = { fg = c_onSurfaceVariant },
-  Special = { fg = c_primary },
-  Statement = { fg = c_secondary },
-  String = { fg = c_secondary },
-  Todo = { bg = c_warningColor, fg = c_warningOnColor, bold = true },
-  Title = { fg = c_primary, bold = true },
-  Type = { fg = c_error },
-  Underlined = { fg = c_primary, underline = true },
-  WarningMsg = { fg = c_warningColor },
-  -- }}}
+  Function = { fg = c.primary },
+  Identifier = { fg = c.on_background },
+  Keyword = { fg = c.tertiary },
+  Number = { fg = c.primary },
+  Operator = { fg = c.on_background },
+  PreProc = { fg = c.tertiary },
+  Property = { fg = c.on_surface_variant },
+  Special = { fg = c.primary },
+  Statement = { fg = c.secondary },
+  String = { fg = c.secondary },
+  Todo = {
+    bg = c.warning_color,
+    fg = c.warning_on_color,
+    bold = true,
+  },
+  Title = { fg = c.primary, bold = true },
+  Type = { fg = c.error },
+  Underlined = { fg = c.primary, underline = true },
+  WarningMsg = { fg = c.warning_color },
 
-  -- Treesitter syntax {{{2
+  -- Treesitter
   ['@attribute'] = { link = 'Constant' },
-  ['@constructor'] = { fg = c_primary },
+  ['@constructor'] = { fg = c.primary },
   ['@keyword.import'] = { link = 'PreProc' },
-  ['@keyword.operator'] = { bold = true, fg = c_primaryFixedDim },
+  ['@keyword.operator'] = { fg = c.primary_fixed_dim, bold = true },
   ['@keyword.return'] = { link = 'Statement' },
-  ['@module'] = { fg = c_tertiary },
+  ['@module'] = { fg = c.tertiary },
   ['@operator'] = { link = 'Operator' },
   ['@punctuation.bracket'] = { link = 'Delimiter' },
   ['@punctuation.delimiter'] = { link = 'Delimiter' },
-  ['@string.escape'] = { fg = c_tertiaryFixed },
-  ['@string.regexp'] = { fg = c_warningColor },
-  ['@string.plain.css'] = { fg = c_primary },
-  ['@tag.attribute'] = { fg = c_tertiary },
+  ['@string.escape'] = { fg = c.tertiary_fixed },
+  ['@string.regexp'] = { fg = c.warning_color },
+  ['@string.plain.css'] = { fg = c.primary },
+  ['@tag.attribute'] = { fg = c.tertiary },
   ['@tag.delimiter'] = { link = 'Delimiter' },
   ['@type.tag.css'] = { link = '@tag.css' },
   ['@markup.strong'] = { bold = true },
   ['@markup.emphasis'] = { italic = true },
-  ['@markup.heading'] = { fg = c_error },
-  ['@markup.link.url'] = { fg = c_secondary, underline = true },
+  ['@markup.heading'] = { fg = c.error },
+  ['@markup.link.url'] = { fg = c.secondary, underline = true },
   ['@markup.raw'] = { link = 'String' },
   ['@markup.quote'] = { link = 'String' },
-  ['@comment.error'] = { fg = c_onErrorContainer, bg = c_error, bold = true },
+  ['@comment.error'] = {
+    fg = c.on_error_container,
+    bg = c.error,
+    bold = true,
+  },
   ['@comment.warning'] = {
-    fg = c_warningOnColorContainer,
-    bg = c_warningColor,
+    fg = c.warning_on_color_container,
+    bg = c.warning_color,
     bold = true,
   },
   ['@comment.todo'] = { link = 'Todo' },
   ['@variable'] = { link = 'Property' },
-  ['@variable.builtin'] = { fg = c_primaryFixedDim },
-  ['@markup.list.checked'] = { fg = c_onTertiaryContainer, bold = true },
-  ['@markup.list.unchecked'] = { fg = c_tertiary },
+  ['@variable.builtin'] = { fg = c.primary_fixed_dim },
+  ['@markup.list.checked'] = { fg = c.on_tertiary_container, bold = true },
+  ['@markup.list.unchecked'] = { fg = c.tertiary },
   ['@type.astro'] = { link = '@tag.astro' },
-  -- }}}
 
-  -- LSP {{{2
-  LspCodeLens = { fg = c_onSurfaceVariant },
-  LspReferenceRead = { bg = c_surfaceContainerHigh },
-  LspReferenceText = { bg = c_surfaceContainerHigh },
-  LspReferenceWrite = { bg = c_surfaceContainerHigh, underline = true },
-  LspSignatureActiveParameter = { fg = c_warningColor, bold = true },
-  -- }}}
+  -- LSP
+  LspCodeLens = { fg = c.on_surface_variant },
+  LspReferenceRead = { bg = c.surface_container_high },
+  LspReferenceText = { bg = c.surface_container_high },
+  LspReferenceWrite = { bg = c.surface_container_high, underline = true },
+  LspSignatureActiveParameter = { fg = c.primary, bold = true },
 
-  -- Diagnostic {{{2
-  DiagnosticError = { fg = c_error },
-  DiagnosticWarn = { fg = c_warningColor },
-  DiagnosticInfo = { fg = c_secondary },
-  DiagnosticHint = { fg = c_tertiary },
-  DiagnosticOk = { fg = c_outline },
-  DiagnosticSignError = { fg = c_error },
-  DiagnosticSignWarn = { fg = c_warningColor },
-  DiagnosticSignInfo = { fg = c_secondary },
-  DiagnosticSignHint = { fg = c_tertiary },
-  DiagnosticSignOk = { fg = c_outline },
-  DiagnosticUnderlineError = { sp = c_error, undercurl = true },
-  DiagnosticUnderlineWarn = { sp = c_warningColor, undercurl = true },
-  DiagnosticUnderlineInfo = { sp = c_primary, undercurl = true },
-  DiagnosticUnderlineHint = { sp = c_secondary, undercurl = true },
-  DiagnosticUnderlineOk = { sp = c_secondary, undercurl = true },
+  -- Diagnostic
+  DiagnosticError = { fg = c.error },
+  DiagnosticWarn = { fg = c.warning_color },
+  DiagnosticInfo = { fg = c.secondary },
+  DiagnosticHint = { fg = c.tertiary },
+  DiagnosticOk = { fg = c.outline },
+  DiagnosticSignError = { fg = c.error },
+  DiagnosticSignWarn = { fg = c.warning_color },
+  DiagnosticSignInfo = { fg = c.secondary },
+  DiagnosticSignHint = { fg = c.tertiary },
+  DiagnosticSignOk = { fg = c.outline },
+  DiagnosticUnderlineError = { sp = c.error, undercurl = true },
+  DiagnosticUnderlineWarn = { sp = c.warning_color, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = c.primary, undercurl = true },
+  DiagnosticUnderlineHint = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineOk = { sp = c.secondary, undercurl = true },
   DiagnosticVirtualTextError = {
-    fg = c_onErrorContainer,
-    bg = c_errorContainer,
+    fg = c.on_error_container,
+    bg = c.error_container,
   },
   DiagnosticVirtualTextWarn = {
-    fg = c_warningOnColorContainer,
-    bg = c_warningColorContainer,
+    fg = c.warning_on_color_container,
+    bg = c.warning_color_container,
   },
   DiagnosticVirtualTextInfo = {
-    fg = c_onSecondaryContainer,
-    bg = c_secondaryContainer,
+    fg = c.on_secondary_container,
+    bg = c.secondary_container,
   },
   DiagnosticVirtualTextHint = {
-    fg = c_onTertiaryContainer,
-    bg = c_tertiaryContainer,
+    fg = c.on_tertiary_container,
+    bg = c.tertiary_container,
   },
-  -- }}}
 
-  -- Plugins {{{2
-  -- statusline
+  -- Plugins
   StatusLineHeader = {
-    fg = c_onSurface,
-    bg = c_surfaceContainerHighest,
+    fg = c.on_surface,
+    bg = c.surface_container_highest,
   },
   StatusLineHeaderModified = {
-    fg = c_onErrorContainer,
-    bg = c_errorContainer,
+    fg = c.on_error_container,
+    bg = c.error_container,
   },
 
-  -- gitsigns
-  GitSignsAdd = { fg = c_primary },
-  GitSignsChange = { fg = c_warningColor },
-  GitSignsDelete = { fg = c_error },
+  GitSignsAdd = { fg = c.primary },
+  GitSignsChange = { fg = c.warning_color },
+  GitSignsDelete = { fg = c.error },
 
-  -- blink
   BlinkCmpDocBorder = { link = 'FloatBorder' },
   BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
-  BlinkCmpKindText = { fg = c_secondary },
-  BlinkCmpKindMethod = { fg = c_primary },
-  BlinkCmpKindFunction = { fg = c_primary },
-  BlinkCmpKindConstructor = { fg = c_primary },
-  BlinkCmpKindField = { fg = c_secondary },
-  BlinkCmpKindVariable = { fg = c_tertiary },
-  BlinkCmpKindClass = { fg = c_warningColor },
-  BlinkCmpKindInterface = { fg = c_warningColor },
-  BlinkCmpKindModule = { fg = c_primary },
-  BlinkCmpKindProperty = { fg = c_primary },
-  BlinkCmpKindUnit = { fg = c_secondary },
-  BlinkCmpKindValue = { fg = c_tertiaryFixedDim },
-  BlinkCmpKindEnum = { fg = c_warningColor },
-  BlinkCmpKindKeyword = { fg = c_primaryFixedDim },
-  BlinkCmpKindSnippet = { fg = c_tertiary },
-  BlinkCmpKindColor = { fg = c_error },
-  BlinkCmpKindFile = { fg = c_primary },
-  BlinkCmpKindReference = { fg = c_error },
-  BlinkCmpKindFolder = { fg = c_primary },
-  BlinkCmpKindEnumMember = { fg = c_secondaryFixedDim },
-  BlinkCmpKindConstant = { fg = c_tertiaryFixedDim },
-  BlinkCmpKindStruct = { fg = c_primary },
-  BlinkCmpKindEvent = { fg = c_primary },
-  BlinkCmpKindOperator = { fg = c_primaryFixed },
-  BlinkCmpKindTypeParameter = { fg = c_tertiaryContainer },
-  BlinkCmpKindCopilot = { fg = c_secondaryFixedDim },
-  -- }}}
+  BlinkCmpKindText = { fg = c.secondary },
+  BlinkCmpKindMethod = { fg = c.primary },
+  BlinkCmpKindFunction = { fg = c.primary },
+  BlinkCmpKindConstructor = { fg = c.primary },
+  BlinkCmpKindField = { fg = c.secondary },
+  BlinkCmpKindVariable = { fg = c.tertiary },
+  BlinkCmpKindClass = { fg = c.warning_color },
+  BlinkCmpKindInterface = { fg = c.warning_color },
+  BlinkCmpKindModule = { fg = c.primary },
+  BlinkCmpKindProperty = { fg = c.primary },
+  BlinkCmpKindUnit = { fg = c.secondary },
+  BlinkCmpKindValue = { fg = c.tertiary_fixed_dim },
+  BlinkCmpKindEnum = { fg = c.warning_color },
+  BlinkCmpKindKeyword = { fg = c.primary_fixed_dim },
+  BlinkCmpKindSnippet = { fg = c.tertiary },
+  BlinkCmpKindColor = { fg = c.error },
+  BlinkCmpKindFile = { fg = c.primary },
+  BlinkCmpKindReference = { fg = c.error },
+  BlinkCmpKindFolder = { fg = c.primary },
+  BlinkCmpKindEnumMember = { fg = c.secondary_fixed_dim },
+  BlinkCmpKindConstant = { fg = c.tertiary_fixed_dim },
+  BlinkCmpKindStruct = { fg = c.primary },
+  BlinkCmpKindEvent = { fg = c.primary },
+  BlinkCmpKindOperator = { fg = c.primary_fixed },
+  BlinkCmpKindTypeParameter = { fg = c.tertiary_container },
+  BlinkCmpKindCopilot = { fg = c.secondary_fixed_dim },
 }
 -- }}}1
 
@@ -364,11 +213,6 @@ end
 
 -- Set highlight groups {{{1
 for name, attr in pairs(hlgroups) do
-  attr.ctermbg = attr.bg and attr.bg[2]
-  attr.ctermfg = attr.fg and attr.fg[2]
-  attr.bg = attr.bg and attr.bg[1]
-  attr.fg = attr.fg and attr.fg[1]
-  attr.sp = attr.sp and attr.sp[1]
   vim.api.nvim_set_hl(0, name, attr)
 end
 -- }}}

@@ -49,4 +49,4 @@ GIT_PS1_DESCRIBE_STYLE=1
 GIT_PS1_SHOWCOLORHINTS=1
 PS1="\[\033[32;1m\]\u@\h\[\033[0m\]:\[\033[34;1m\]\w\[\033[00m\]\$(__git_ps1) \$ "
 
-update-term-colors
+update-colors-term

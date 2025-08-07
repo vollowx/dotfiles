@@ -21,10 +21,10 @@ idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
 dmenu                    = "notification>"
-background               = "#101417"
-foreground               = "#e0e3e8"
-highlight                = "#004b6f"
-frame_color              = "#95cdf8"
+background               = "#12140d"
+foreground               = "#e3e3d7"
+highlight                = "#3c4c0e"
+frame_color              = "#bacf82"
 
 [urgency_low]
 timeout = 8

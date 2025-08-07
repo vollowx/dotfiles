@@ -27,7 +27,7 @@ if test -n "$preview"; then
   command+=("--preview" "'$preview'")
 fi
 
-"$TERMINAL" --app-id launcher sh -c "update-term-colors; ${command[*]} <$in >$out 2>/dev/null" &
+"$TERMINAL" --app-id launcher sh -c "update-colors-term; ${command[*]} <$in >$out 2>/dev/null" &
 defer kill $!
 
 cat <"$out" &
