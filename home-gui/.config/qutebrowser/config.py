@@ -24,16 +24,16 @@ def load_theme():
     c.colors.completion.category.border.bottom = palette["surface_container"]
     c.colors.completion.category.border.top = palette["surface_container_high"]
     c.colors.completion.category.fg = palette["primary"]
-    c.colors.completion.even.bg = palette["surface_container"]
+    c.colors.completion.even.bg = palette["surface_container_high"]
     c.colors.completion.odd.bg = c.colors.completion.even.bg
     c.colors.completion.fg = palette["on_surface"]
 
-    c.colors.completion.item.selected.bg = palette["surface_container_high"]
-    c.colors.completion.item.selected.border.bottom = palette["surface_container_high"]
-    c.colors.completion.item.selected.border.top = palette["surface_container_high"]
-    c.colors.completion.item.selected.fg = palette["on_surface"]
-    c.colors.completion.item.selected.match.fg = palette["primary"]
-    c.colors.completion.match.fg = palette["primary"]
+    c.colors.completion.item.selected.bg = palette["primary"]
+    c.colors.completion.item.selected.border.bottom = palette["primary"]
+    c.colors.completion.item.selected.border.top = palette["primary"]
+    c.colors.completion.item.selected.fg = palette["on_primary"]
+    c.colors.completion.item.selected.match.fg = palette["tertiary_container"]
+    c.colors.completion.match.fg = palette["tertiary"]
 
     c.colors.completion.scrollbar.bg = palette["surface_container_lowest"]
     c.colors.completion.scrollbar.fg = palette["surface_container_high"]
@@ -91,9 +91,9 @@ def load_theme():
     c.colors.statusbar.command.bg = palette["surface_container"]
     c.colors.statusbar.caret.bg = palette["tertiary_container"]
     c.colors.statusbar.caret.selection.bg = palette["tertiary_container"]
-
-    c.colors.statusbar.progress.bg = palette["background"]
     c.colors.statusbar.passthrough.bg = palette["secondary_container"]
+
+    c.colors.statusbar.progress.bg = palette["primary"]
 
     c.colors.statusbar.normal.fg = palette["on_surface"]
     c.colors.statusbar.insert.fg = palette["on_primary_container"]
