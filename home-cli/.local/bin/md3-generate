@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+mkdir -p ~/.cache/md3-generated/
+matugen $@
+ln -sf ~/.cache/md3-generated/dunst-colors.conf ~/.config/dunst/dunstrc.d/99-md3-colors.conf
+
+update-colors-term
+update-colors-nvim
+qutebrowser :config-source
+swaymsg reload

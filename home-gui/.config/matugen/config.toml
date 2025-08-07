@@ -9,8 +9,8 @@ input_path = './templates/colors.json'
 output_path = '~/.cache/md3-generated/colors.json'
 
 [templates.dunst]
-input_path = './templates/dunstrc'
-output_path = '~/.config/dunst/dunstrc'
+input_path = './templates/dunst-colors.conf'
+output_path = '~/.cache/md3-generated/dunst-colors.conf'
 
 [templates.sway]
 input_path = './templates/sway-colors.conf'

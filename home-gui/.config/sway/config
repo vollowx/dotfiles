@@ -92,6 +92,11 @@ exec_always {
   pkill dunst; dunst
 }
 
+exec {
+  vesktop --start-minimized
+  Telegram -startintray
+}
+
 bar {
   swaybar_command waybar
   modifier Mod4
