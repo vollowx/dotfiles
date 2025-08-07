@@ -27,6 +27,7 @@ return {
         'nix',
         'python',
         'qml',
+        'qmljs',
         'rust',
         'toml',
         'typescript',
