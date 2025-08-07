@@ -10,19 +10,6 @@ return {
   },
 
   {
-    'echasnovski/mini.bufremove',
-    keys = {
-      {
-        '<Leader>x',
-        function()
-          require('mini.bufremove').delete()
-        end,
-        desc = 'Close current buffer',
-      },
-    },
-  },
-
-  {
     'tpope/vim-fugitive',
     dependencies = 'tpope/vim-rhubarb',
     event = { 'BufWritePost', 'BufReadPre' },

@@ -50,6 +50,20 @@ map('t', '<M-l>', '<Cmd>wincmd l<CR>', { replace_keycodes = false })
 -- Buffer navigation
 map('n', ']b', '<Cmd>exec v:count1 . "bn"<CR>')
 map('n', '[b', '<Cmd>exec v:count1 . "bp"<CR>')
+map('n', '<Leader>x', function()
+  local bufnr = vim.fn.bufnr('%')
+  local num_bufs = #vim.api.nvim_list_bufs()
+  if num_bufs == 0 then
+    return
+  end
+  if num_bufs == 1 then
+    vim.cmd('new')
+    vim.cmd('windo bp')
+  else
+    vim.cmd('windo if bufnr() == ' .. bufnr .. '|bp|endif')
+  end
+  vim.cmd('bwipeout ' .. bufnr)
+end, { desc = 'Close current buffer' })
 
 -- Correct misspelled word / mark as correct
 map('i', '<C-g>+', '<Esc>[szg`]a')
