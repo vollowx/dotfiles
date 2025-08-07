@@ -15,5 +15,8 @@ fi
 
 ln -sf "$base/Wallpapers/$choice" "$base/wallpaper"
 matugen image "$base/wallpaper"
+update-colors-term
+update-colors-nvim
+qutebrowser :config-source
 swaymsg reload
 notify-send -r 667 -t 1000 "Sway" "$choice\nis the wallpaper now"

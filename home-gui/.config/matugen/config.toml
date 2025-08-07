@@ -3,12 +3,10 @@
 [templates.terminal]
 input_path = './templates/terminal-sequences.txt'
 output_path = '~/.cache/md3-generated/sequences.txt'
-post_hook = 'update-colors-term'
 
-[templates.neovim]
+[templates.general]
 input_path = './templates/colors.json'
 output_path = '~/.cache/md3-generated/colors.json'
-post_hook = 'update-colors-nvim'
 
 [templates.dunst]
 input_path = './templates/dunstrc'
