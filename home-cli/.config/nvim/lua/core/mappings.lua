@@ -77,6 +77,21 @@ map({ 'n', 'x' }, 'g{', function() require('utils.misc').goto_paragraph_firstlin
 map({ 'n', 'x' }, 'g}', function() require('utils.misc').goto_paragraph_lastline() end, { noremap = false })
 -- stylua: ignore end
 
+cmd('CopyGitLink', function()
+  require('core._internal.git-link').copy_url()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes('<Esc>', true, false, true),
+    'n',
+    false
+  )
+end, { range = true })
+map(
+  { 'n', 'x' },
+  '<Leader>gy',
+  '<Cmd>CopyGitLink<CR>',
+  { desc = 'Copy line[s] link' }
+)
+
 -- Sometimes we cannot release Shift so quickly
 cmd('Q', 'q', {})
 cmd('W', 'w', {})
