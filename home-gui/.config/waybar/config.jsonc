@@ -1,14 +1,15 @@
 {
   "name": "main",
-  "id": "bar-0",
-  "ipc": true,
   "layer": "top",
   "position": "bottom",
-  "height": 24,
+  "exclusive": false,
+  "height": 20,
   "modules-left": [
     "sway/workspaces",
-    "sway/scratchpad",
-    "sway/mode",
+    "sway/scratchpad#hl",
+    "sway/scratchpad#nm",
+    "sway/mode#hl",
+    "sway/mode#nm",
     "custom/swayidle"
   ],
   "modules-center": [
@@ -31,14 +32,21 @@
   "sway/workspaces": {
     "all-outputs": true
   },
-  "sway/mode": {
-    "format": "<span color='#b1d18a' font-weight='bold'>mod</span> {}"
+  "sway/mode#hl": {
+    "format": "Mode"
   },
-  "sway/scratchpad": {
-    "format": "<span color='#b1d18a' font-weight='bold'>pad</span> {count}",
+  "sway/mode#nm": {
+    "format": " {}"
+  },
+  "sway/scratchpad#hl": {
+    "format": "SPad",
     "show-empty": false,
-    "tooltip": true,
-    "tooltip-format": "{app}: {title}"
+    "tooltip": false
+  },
+  "sway/scratchpad#nm": {
+    "format": " {count}",
+    "show-empty": false,
+    "tooltip": false
   },
   "mpd#hl": {
     "format": "{title}",
@@ -53,7 +61,7 @@
   "mpd#nm": {
     "format": " [{repeatIcon}{randomIcon}{singleIcon}]",
     "format-paused": " [{repeatIcon}{randomIcon}{singleIcon}]",
-    "format-stopped": "[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-stopped": " [{repeatIcon}{randomIcon}{singleIcon}]",
     "format-disconnected": "",
     "interval": 10,
     "repeat-icons": {
@@ -72,13 +80,13 @@
     "tooltip": false
   },
   "tray": {
-    "icon-size": 14,
+    "icon-size": 12,
     "spacing": 8
   },
   "wireplumber#hl": {
     "scroll-step": 5,
-    "format": "vol",
-    "format-muted": "mut"
+    "format": "Volume",
+    "format-muted": "Muted"
   },
   "wireplumber#nm": {
     "scroll-step": 5,
@@ -87,14 +95,14 @@
   },
   "network#hl": {
     "format-wifi": "{essid}",
-    "format-disconnected": "dis"
+    "format-disconnected": "Disconnected"
   },
   "network#nm": {
     "format-wifi": " {signalStrength}%",
     "format-disconnected": ""
   },
   "clock": {
-    "format": "<span text_transform='lowercase'>{:%A, %d %B %H:%M}</span>",
+    "format": "{:%a %d  %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }

@@ -2,17 +2,16 @@
 
 window#waybar {
   font-family: monospace;
-  background-color: transparent;
+  font-size: 9pt;
+  background: transparent;
   color: @on_surface;
 }
 
 #workspaces,
-#scratchpad,
-#mode,
-#window,
+#custom-swayidle,
 #tray,
 #clock {
-  padding: 0px 8px;
+  padding: 0 8px;
 }
 
 .hl {
@@ -23,29 +22,30 @@ window#waybar {
 }
 
 #workspaces {
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
 #clock {
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 .hl,
+#workspaces button.focused,
 #custom-swayidle,
 #clock {
   color: @primary;
   font-weight: bold;
 }
 
+.nm,
+#workspaces {
+  font-family: SF Mono;
+}
+
 #workspaces button {
   all: unset;
   padding: 0 4px;
   color: @outline;
-}
-
-#workspaces button.focused {
-  font-weight: bold;
-  color: @primary;
 }
 
 #workspaces button.urgent {

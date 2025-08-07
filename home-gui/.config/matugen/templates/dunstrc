@@ -4,7 +4,7 @@ font                     = "monospace 10"
 format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
-offset                   = (32, 32)
+offset                   = (40, 40)
 origin                   = "bottom-right"
 icon_position            = "left"
 min_icon_size            = 48
