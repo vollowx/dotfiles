@@ -22,11 +22,11 @@ window#waybar {
 }
 
 #workspaces {
-  margin-left: 12px;
+  margin-left: 40px;
 }
 
 #clock {
-  margin-right: 12px;
+  margin-right: 40px;
 }
 
 .hl,

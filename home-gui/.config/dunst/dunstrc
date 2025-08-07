@@ -4,7 +4,7 @@ font                     = "monospace 10"
 format                   = "<span font-weight='bold'>%s %p</span>\n%b"
 line_height              = 8
 width                    = 320
-offset                   = (40, 40)
+offset                   = (60, 60)
 origin                   = "bottom-right"
 icon_position            = "left"
 min_icon_size            = 48
@@ -21,10 +21,10 @@ idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
 dmenu                    = "notification>"
-background               = "#111318"
-foreground               = "#e1e2e9"
-highlight                = "#204876"
-frame_color              = "#a4c9fe"
+background               = "#101417"
+foreground               = "#e0e3e8"
+highlight                = "#004b6f"
+frame_color              = "#95cdf8"
 
 [urgency_low]
 timeout = 8

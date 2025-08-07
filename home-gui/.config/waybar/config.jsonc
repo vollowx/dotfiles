@@ -3,7 +3,7 @@
   "layer": "top",
   "position": "bottom",
   "exclusive": false,
-  "height": 20,
+  "height": 48,
   "modules-left": [
     "sway/workspaces",
     "sway/scratchpad#hl",
