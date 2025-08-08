@@ -104,9 +104,10 @@ bar {
 
 ### Key bindings
 
+bindsym $mod+Escape exec dmenu-power
 bindsym $mod+d exec dmenu-app
-bindsym $mod+q exec dmenu-power
 bindsym $mod+i exec dmenu-iwd
+bindsym $mod+m exec dmenu-media
 bindsym $mod+b exec dmenu-bluetooth
 bindsym $mod+v exec dmenu-clipboard
 bindsym $mod+w exec dmenu-wallpaper
@@ -120,8 +121,8 @@ bindsym $mod+Delete exec swaylock
 
 bindsym $mod+Space exec fcitx5-remote -t && notify-ime
 
-bindsym $mod+p exec grimshot savecopy screen $shot_path
-bindsym $mod+Shift+p exec grimshot savecopy anything $shot_path
+bindsym $mod+s exec grimshot savecopy screen $shot_path
+bindsym $mod+Shift+s exec grimshot savecopy anything $shot_path
 
 bindsym $mod+z exec dunstctl history-pop
 bindsym $mod+x exec dunstctl close
@@ -164,18 +165,17 @@ bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 
-bindsym $mod+n splith
-bindsym $mod+m splitv
+bindsym $mod+7 splitv
+bindsym $mod+8 splith
+bindsym $mod+9 layout toggle split
+bindsym $mod+0 layout tabbed
 
-bindsym $mod+t layout tabbed
-bindsym $mod+s layout toggle split
+bindsym $mod+f fullscreen
 
-bindsym $mod+e fullscreen
+bindsym $mod+Shift+a floating toggle
+bindsym $mod+a focus mode_toggle
 
-bindsym $mod+f floating toggle
-bindsym $mod+Shift+f focus mode_toggle
-
-bindsym $mod+a focus parent
+bindsym $mod+Backspace focus parent
 
 bindsym $mod+Shift+Minus move scratchpad
 bindsym $mod+Minus scratchpad show
