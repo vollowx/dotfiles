@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+active=$(fcitx5-remote -n)
+name="Null"
+
+case "$active" in
+"keyboard-us")
+  name="English (Keyboard)"
+  ;;
+"rime")
+  name="Chinese (Rime)"
+  ;;
+*)
+  name="$active"
+  ;;
+esac
+
+notify-send -r 668 -t 1000 \
+  "IME" \
+  "$name"

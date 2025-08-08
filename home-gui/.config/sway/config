@@ -118,7 +118,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c exec swaymsg reload && notify-send -r 667 -t 1000 Sway 'Configuration reloaded'
 bindsym $mod+Delete exec swaylock
 
-bindsym $mod+Space exec fcitx5-remote -t && notify-send -r 668 -t 1000 "IME" $(fcitx5-remote -n)
+bindsym $mod+Space exec fcitx5-remote -t && notify-ime
 
 bindsym $mod+p exec grimshot savecopy screen $shot_path
 bindsym $mod+Shift+p exec grimshot savecopy anything $shot_path
@@ -127,6 +127,11 @@ bindsym $mod+z exec dunstctl history-pop
 bindsym $mod+x exec dunstctl close
 bindsym $mod+Shift+x exec dunstctl close-all
 bindsym $mod+c exec dunstctl context
+
+bindsym --locked XF86AudioMute exec notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%-
+bindsym --locked XF86AudioRaiseVolume exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+
+bindsym --locked XF86AudioMicMute exec notify-volume set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down

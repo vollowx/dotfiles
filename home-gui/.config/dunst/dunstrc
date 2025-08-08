@@ -1,7 +1,7 @@
 [global]
 follow                   = "mouse"
 font                     = "monospace 10"
-format                   = "<span font-weight='bold'>%s %p</span>\n%b"
+format                   = "<span font-weight='bold'>%s</span>\n%b"
 line_height              = 8
 width                    = 320
 offset                   = (60, 60)
@@ -21,10 +21,6 @@ idle_threshold           = 120
 notification_limit       = 8
 markup                   = "full"
 dmenu                    = "notification>"
-background               = "#12140d"
-foreground               = "#e3e3d7"
-highlight                = "#3c4c0e"
-frame_color              = "#bacf82"
 
 [urgency_low]
 timeout = 8
@@ -34,7 +30,6 @@ timeout = 8
 
 [urgency_critical]
 timeout = 8
-highlight = "#ffb4ab"
 
 [play_sound]
 summary = "*"

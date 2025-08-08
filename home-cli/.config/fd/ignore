@@ -1,11 +1,15 @@
 .cache/
 .config/discordcanary/
 .config/QQ/
+.config/unity3d
+.config/vesktop
 .local/share/
 .local/state/
 
 .mozilla/
 .steam/
+.zen/
 
 .git/
 node_modules/
+venv/
