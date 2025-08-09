@@ -1,3 +1,55 @@
+---@class Palette
+---@field background string
+---@field error string
+---@field error_container string
+---@field inverse_on_surface string
+---@field inverse_primary string
+---@field inverse_surface string
+---@field on_background string
+---@field on_error string
+---@field on_error_container string
+---@field on_primary string
+---@field on_primary_container string
+---@field on_primary_fixed string
+---@field on_primary_fixed_variant string
+---@field on_secondary string
+---@field on_secondary_container string
+---@field on_secondary_fixed string
+---@field on_secondary_fixed_variant string
+---@field on_surface string
+---@field on_surface_variant string
+---@field on_tertiary string
+---@field on_tertiary_container string
+---@field on_tertiary_fixed string
+---@field on_tertiary_fixed_variant string
+---@field outline string
+---@field outline_variant string
+---@field primary string
+---@field primary_container string
+---@field primary_fixed string
+---@field primary_fixed_dim string
+---@field scrim string
+---@field secondary string
+---@field secondary_container string
+---@field secondary_fixed string
+---@field secondary_fixed_dim string
+---@field shadow string
+---@field source_color string
+---@field surface string
+---@field surface_bright string
+---@field surface_container string
+---@field surface_container_high string
+---@field surface_container_highest string
+---@field surface_container_low string
+---@field surface_container_lowest string
+---@field surface_dim string
+---@field surface_tint string
+---@field surface_variant string
+---@field tertiary string
+---@field tertiary_container string
+---@field tertiary_fixed string
+---@field tertiary_fixed_dim string
+
 -- Clear hlgroups and set colors_name {{{
 vim.cmd.hi('clear')
 if vim.fn.exists('syntax_on') then
@@ -7,10 +59,12 @@ vim.g.colors_name = 'material-you'
 -- }}}
 
 -- Palette {{{
-local json_path = os.getenv("XDG_CACHE_HOME") .. '/md3-generated/colors.json'
+local json_path = os.getenv('XDG_CACHE_HOME') .. '/md3-generated/colors.json'
 local content = table.concat(vim.fn.readfile(json_path), '\n')
 local palette = vim.fn.json_decode(content)
 
+---@type Palette
+---@diagnostic disable-next-line
 local c = {}
 
 for key, val in pairs(palette) do
@@ -29,7 +83,7 @@ local hlgroups = {
   ColorColumn = { bg = c.surface_container_low },
   Cursor = { bg = c.on_background, fg = c.background },
   CursorLine = { bg = c.surface_container_low },
-  CursorLineNr = { fg = c.primary, bold = true },
+  CursorLineNr = { fg = c.on_surface, bold = true },
   LineNr = { fg = c.outline },
   SignColumn = { fg = c.on_surface_variant },
   VertSplit = { fg = c.outline },
@@ -38,17 +92,22 @@ local hlgroups = {
   StatusLineNC = { bg = c.surface_container_low, fg = c.outline },
   TabLine = { link = 'StatusLineNC' },
   TabLineFill = { link = 'StatusLineNC' },
-  TabLineSel = { bg = c.background, fg = c.primary },
+  TabLineSel = { bg = c.background, fg = c.on_surface },
   Pmenu = { bg = c.surface_container_high, fg = c.on_surface },
   PmenuSel = { bg = c.primary, fg = c.on_primary },
   PmenuSbar = { bg = c.surface_container_highest },
   PmenuThumb = { bg = c.outline },
-  Visual = { bg = c.surface_container_high },
+  Visual = { bg = c.tertiary_container },
   Folded = { bg = c.surface_container, fg = c.on_surface_variant },
-  Search = { bg = c.warning_color_container, fg = c.on_background },
+  Search = { bg = c.tertiary_container, fg = c.on_tertiary_container },
   IncSearch = {
-    bg = c.warning_color,
-    fg = c.warning_on_color,
+    bg = c.on_tertiary_container,
+    fg = c.tertiary_container,
+    bold = true,
+  },
+  CurSearch = {
+    bg = c.tertiary,
+    fg = c.on_tertiary,
     bold = true,
   },
 
@@ -61,25 +120,25 @@ local hlgroups = {
   Error = { fg = c.error, bg = c.error_container },
   ErrorMsg = { fg = c.error },
   Float = { link = 'Number' },
-  Function = { fg = c.primary },
+  Function = { fg = c.on_surface_variant },
   Identifier = { fg = c.on_background },
   Keyword = { fg = c.tertiary },
   Number = { fg = c.primary },
-  Operator = { fg = c.on_background },
+  Operator = { fg = c.on_surface },
   PreProc = { fg = c.tertiary },
-  Property = { fg = c.on_surface_variant },
+  Property = { fg = c.on_surface },
   Special = { fg = c.primary },
   Statement = { fg = c.secondary },
   String = { fg = c.secondary },
   Todo = {
-    bg = c.warning_color,
-    fg = c.warning_on_color,
+    bg = c.secondary_container,
+    fg = c.on_secondary_container,
     bold = true,
   },
   Title = { fg = c.primary, bold = true },
   Type = { fg = c.error },
   Underlined = { fg = c.primary, underline = true },
-  WarningMsg = { fg = c.warning_color },
+  WarningMsg = { fg = c.secondary },
 
   -- Treesitter
   ['@attribute'] = { link = 'Constant' },
@@ -92,7 +151,7 @@ local hlgroups = {
   ['@punctuation.bracket'] = { link = 'Delimiter' },
   ['@punctuation.delimiter'] = { link = 'Delimiter' },
   ['@string.escape'] = { fg = c.tertiary_fixed },
-  ['@string.regexp'] = { fg = c.warning_color },
+  ['@string.regexp'] = { fg = c.tertiary },
   ['@string.plain.css'] = { fg = c.primary },
   ['@tag.attribute'] = { fg = c.tertiary },
   ['@tag.delimiter'] = { link = 'Delimiter' },
@@ -104,13 +163,13 @@ local hlgroups = {
   ['@markup.raw'] = { link = 'String' },
   ['@markup.quote'] = { link = 'String' },
   ['@comment.error'] = {
+    bg = c.error_container,
     fg = c.on_error_container,
-    bg = c.error,
     bold = true,
   },
   ['@comment.warning'] = {
-    fg = c.warning_on_color_container,
-    bg = c.warning_color,
+    fg = c.secondary_container,
+    bg = c.on_secondary_container,
     bold = true,
   },
   ['@comment.todo'] = { link = 'Todo' },
@@ -119,6 +178,7 @@ local hlgroups = {
   ['@markup.list.checked'] = { fg = c.on_tertiary_container, bold = true },
   ['@markup.list.unchecked'] = { fg = c.tertiary },
   ['@type.astro'] = { link = '@tag.astro' },
+  ['@type.builtin.c'] = { link = 'Type' },
 
   -- LSP
   LspCodeLens = { fg = c.on_surface_variant },
@@ -129,49 +189,53 @@ local hlgroups = {
 
   -- Diagnostic
   DiagnosticError = { fg = c.error },
-  DiagnosticWarn = { fg = c.warning_color },
-  DiagnosticInfo = { fg = c.secondary },
+  DiagnosticWarn = { fg = c.secondary },
+  DiagnosticInfo = { fg = c.on_surface_variant },
   DiagnosticHint = { fg = c.tertiary },
-  DiagnosticOk = { fg = c.outline },
+  DiagnosticOk = { fg = c.primary },
   DiagnosticSignError = { fg = c.error },
-  DiagnosticSignWarn = { fg = c.warning_color },
-  DiagnosticSignInfo = { fg = c.secondary },
+  DiagnosticSignWarn = { fg = c.secondary },
+  DiagnosticSignInfo = { fg = c.on_surface_variant },
   DiagnosticSignHint = { fg = c.tertiary },
-  DiagnosticSignOk = { fg = c.outline },
+  DiagnosticSignOk = { fg = c.primary },
   DiagnosticUnderlineError = { sp = c.error, undercurl = true },
-  DiagnosticUnderlineWarn = { sp = c.warning_color, undercurl = true },
-  DiagnosticUnderlineInfo = { sp = c.primary, undercurl = true },
-  DiagnosticUnderlineHint = { sp = c.secondary, undercurl = true },
-  DiagnosticUnderlineOk = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineWarn = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = c.on_surface_variant, undercurl = true },
+  DiagnosticUnderlineHint = { sp = c.tertiary, undercurl = true },
+  DiagnosticUnderlineOk = { sp = c.primary, undercurl = true },
   DiagnosticVirtualTextError = {
-    fg = c.on_error_container,
     bg = c.error_container,
+    fg = c.on_error_container,
   },
   DiagnosticVirtualTextWarn = {
-    fg = c.warning_on_color_container,
-    bg = c.warning_color_container,
+    bg = c.secondary_container,
+    fg = c.on_secondary_container,
   },
   DiagnosticVirtualTextInfo = {
-    fg = c.on_secondary_container,
-    bg = c.secondary_container,
+    bg = c.surface_variant,
+    fg = c.on_surface_variant,
   },
   DiagnosticVirtualTextHint = {
-    fg = c.on_tertiary_container,
     bg = c.tertiary_container,
+    fg = c.on_tertiary_container,
+  },
+  DiagnosticVirtualTextOK = {
+    bg = c.primary_container,
+    fg = c.on_primary_container,
   },
 
   -- Plugins
   StatusLineHeader = {
-    fg = c.on_surface,
     bg = c.surface_container_highest,
+    fg = c.on_surface,
   },
   StatusLineHeaderModified = {
-    fg = c.on_error_container,
     bg = c.error_container,
+    fg = c.on_error_container,
   },
 
   GitSignsAdd = { fg = c.primary },
-  GitSignsChange = { fg = c.warning_color },
+  GitSignsChange = { fg = c.secondary },
   GitSignsDelete = { fg = c.error },
 
   BlinkCmpDocBorder = { link = 'FloatBorder' },
@@ -182,13 +246,13 @@ local hlgroups = {
   BlinkCmpKindConstructor = { fg = c.primary },
   BlinkCmpKindField = { fg = c.secondary },
   BlinkCmpKindVariable = { fg = c.tertiary },
-  BlinkCmpKindClass = { fg = c.warning_color },
-  BlinkCmpKindInterface = { fg = c.warning_color },
+  BlinkCmpKindClass = { fg = c.outline },
+  BlinkCmpKindInterface = { fg = c.outline },
   BlinkCmpKindModule = { fg = c.primary },
   BlinkCmpKindProperty = { fg = c.primary },
   BlinkCmpKindUnit = { fg = c.secondary },
   BlinkCmpKindValue = { fg = c.tertiary_fixed_dim },
-  BlinkCmpKindEnum = { fg = c.warning_color },
+  BlinkCmpKindEnum = { fg = c.outline },
   BlinkCmpKindKeyword = { fg = c.primary_fixed_dim },
   BlinkCmpKindSnippet = { fg = c.tertiary },
   BlinkCmpKindColor = { fg = c.error },
