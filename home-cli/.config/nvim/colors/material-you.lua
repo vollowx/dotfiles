@@ -180,6 +180,10 @@ local hlgroups = {
   ['@type.astro'] = { link = '@tag.astro' },
   ['@type.builtin.c'] = { link = 'Type' },
 
+  -- Markdown
+  CodeBlock = { bg = c.on_surface_variant },
+  ['@nospell.markdown_inline'] = { link = 'CodeBlock' },
+
   -- LSP
   LspCodeLens = { fg = c.on_surface_variant },
   LspReferenceRead = { bg = c.surface_container_high },
