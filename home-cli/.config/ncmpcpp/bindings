@@ -1,5 +1,7 @@
 def_key "y"
   dummy
+def_key "\\"
+  dummy
 
 def_key "f"
   seek_forward

@@ -29,28 +29,26 @@ allow_for_physical_item_deletion = "no"
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = no
 
-colors_enabled        = "yes"
-user_interface        = classic
-playlist_display_mode = "columns"
-volume_color          = "white"
-main_window_color           = "blue"
-current_item_prefix         = "$(blue)$r"
-current_item_suffix         = "$/r$(end)"
+colors_enabled                      = "yes"
+user_interface                      = classic
+playlist_display_mode               = "columns"
+playlist_separate_albums            = yes
+color1                              = "white"
+color2                              = "red"
+volume_color                        = "magenta"
+main_window_color                   = "blue"
+song_columns_list_format            = (20)[white]{a} (6f)[magenta]{NE} (50)[blue]{t|f:Title} (20)[cyan]{b} (7f)[white]{l}
+current_item_prefix                 = "$(blue)$r"
+current_item_suffix                 = "$/r$(end)"
 current_item_inactive_column_prefix = "$(white)$r"
 current_item_inactive_column_suffix = "$/r$(end)"
-color1 = "white"
-color2 = "red"
 
 progressbar_look          = "=>-"
 progressbar_color         = "black"
-progressbar_elapsed_color = "blue"
+progressbar_elapsed_color = "magenta"
 
 visualizer_data_source = /tmp/mpd.fifo
 visualizer_output_name = "mpd_visualizer"
 visualizer_in_stereo   = "yes"
-visualizer_look        = xx
+visualizer_look        = ●▮
 visualizer_type        = "spectrum"
-
-alternative_ui_separator_color        = "black"
-alternative_header_first_line_format  = $b$8{%t}|{%f}$9$/b
-alternative_header_second_line_format = $b{{$2%a$9} - {$7%b$9} {($2%y$9)}}|{%D}$/b

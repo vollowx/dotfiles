@@ -1,4 +1,14 @@
-[config]
+[config.custom_colors.ok]
+color = "#00A64A"
+blend = true
+
+[config.custom_colors.warning]
+color = "#FFDE3F"
+blend = true
+
+[config.custom_colors.hint]
+color = "#5D9BFF"
+blend = true
 
 [templates.terminal]
 input_path = './templates/terminal-sequences.txt'

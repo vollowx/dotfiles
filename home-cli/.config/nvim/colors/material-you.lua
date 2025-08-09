@@ -49,6 +49,18 @@
 ---@field tertiary_container string
 ---@field tertiary_fixed string
 ---@field tertiary_fixed_dim string
+---@field ok string
+---@field ok_container string
+---@field on_ok string
+---@field on_ok_container string
+---@field info string
+---@field info_container string
+---@field on_info string
+---@field on_info_container string
+---@field warning string
+---@field warning_container string
+---@field on_warning string
+---@field on_warning_container string
 
 -- Clear hlgroups and set colors_name {{{
 vim.cmd.hi('clear')
@@ -138,7 +150,7 @@ local hlgroups = {
   Title = { fg = c.primary, bold = true },
   Type = { fg = c.error },
   Underlined = { fg = c.primary, underline = true },
-  WarningMsg = { fg = c.secondary },
+  WarningMsg = { fg = c.warning },
 
   -- Treesitter
   ['@attribute'] = { link = 'Constant' },
@@ -168,8 +180,8 @@ local hlgroups = {
     bold = true,
   },
   ['@comment.warning'] = {
-    fg = c.secondary_container,
-    bg = c.on_secondary_container,
+    fg = c.warning_container,
+    bg = c.on_warning_container,
     bold = true,
   },
   ['@comment.todo'] = { link = 'Todo' },
@@ -193,39 +205,39 @@ local hlgroups = {
 
   -- Diagnostic
   DiagnosticError = { fg = c.error },
-  DiagnosticWarn = { fg = c.secondary },
-  DiagnosticInfo = { fg = c.on_surface_variant },
-  DiagnosticHint = { fg = c.tertiary },
-  DiagnosticOk = { fg = c.primary },
+  DiagnosticWarn = { fg = c.warning },
+  DiagnosticInfo = { fg = c.info },
+  DiagnosticHint = { fg = c.secondary },
+  DiagnosticOk = { fg = c.ok },
   DiagnosticSignError = { fg = c.error },
-  DiagnosticSignWarn = { fg = c.secondary },
-  DiagnosticSignInfo = { fg = c.on_surface_variant },
-  DiagnosticSignHint = { fg = c.tertiary },
-  DiagnosticSignOk = { fg = c.primary },
+  DiagnosticSignWarn = { fg = c.warning },
+  DiagnosticSignInfo = { fg = c.info },
+  DiagnosticSignHint = { fg = c.secondary },
+  DiagnosticSignOk = { fg = c.ok },
   DiagnosticUnderlineError = { sp = c.error, undercurl = true },
-  DiagnosticUnderlineWarn = { sp = c.secondary, undercurl = true },
-  DiagnosticUnderlineInfo = { sp = c.on_surface_variant, undercurl = true },
-  DiagnosticUnderlineHint = { sp = c.tertiary, undercurl = true },
-  DiagnosticUnderlineOk = { sp = c.primary, undercurl = true },
+  DiagnosticUnderlineWarn = { sp = c.warning, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = c.info, undercurl = true },
+  DiagnosticUnderlineHint = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineOk = { sp = c.ok, undercurl = true },
   DiagnosticVirtualTextError = {
     bg = c.error_container,
     fg = c.on_error_container,
   },
   DiagnosticVirtualTextWarn = {
+    bg = c.warning_container,
+    fg = c.on_warning_container,
+  },
+  DiagnosticVirtualTextInfo = {
+    bg = c.info_container,
+    fg = c.on_info_container,
+  },
+  DiagnosticVirtualTextHint = {
     bg = c.secondary_container,
     fg = c.on_secondary_container,
   },
-  DiagnosticVirtualTextInfo = {
-    bg = c.surface_variant,
-    fg = c.on_surface_variant,
-  },
-  DiagnosticVirtualTextHint = {
-    bg = c.tertiary_container,
-    fg = c.on_tertiary_container,
-  },
   DiagnosticVirtualTextOK = {
-    bg = c.primary_container,
-    fg = c.on_primary_container,
+    bg = c.ok_container,
+    fg = c.on_ok_container,
   },
 
   -- Plugins
@@ -250,13 +262,13 @@ local hlgroups = {
   BlinkCmpKindConstructor = { fg = c.primary },
   BlinkCmpKindField = { fg = c.secondary },
   BlinkCmpKindVariable = { fg = c.tertiary },
-  BlinkCmpKindClass = { fg = c.outline },
-  BlinkCmpKindInterface = { fg = c.outline },
+  BlinkCmpKindClass = { fg = c.warning },
+  BlinkCmpKindInterface = { fg = c.warning },
   BlinkCmpKindModule = { fg = c.primary },
   BlinkCmpKindProperty = { fg = c.primary },
   BlinkCmpKindUnit = { fg = c.secondary },
   BlinkCmpKindValue = { fg = c.tertiary_fixed_dim },
-  BlinkCmpKindEnum = { fg = c.outline },
+  BlinkCmpKindEnum = { fg = c.warning },
   BlinkCmpKindKeyword = { fg = c.primary_fixed_dim },
   BlinkCmpKindSnippet = { fg = c.tertiary },
   BlinkCmpKindColor = { fg = c.error },
