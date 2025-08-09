@@ -240,4 +240,13 @@ return {
       require('configs.quicker')
     end,
   },
+
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    build = 'make tiktoken',
+    cmd = 'CopilotChatOpen',
+    config = function()
+      require('configs.copilot-chat')
+    end,
+  },
 }

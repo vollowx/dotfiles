@@ -5,6 +5,11 @@ return {
   },
 
   {
+    'rhysd/clever-f.vim',
+    lazy = false,
+  },
+
+  {
     'junegunn/vim-easy-align',
     lazy = false,
     keys = {
