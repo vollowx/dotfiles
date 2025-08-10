@@ -36,7 +36,7 @@ if /usr/bin/mbsync -a; then
   mv -f "$tmp" "$CACHE_FILE"
 
   notify "Mails" "Synchronized successfully ($count new)"
-  pkill -SIGRTMIN+3 waybar
+  pkill -SIGRTMIN+4 waybar
   exit 0
 else
   notify "Mails" "Synchronization failed"
