@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+MAIL_ROOT="${MAIL_ROOT:-$HOME/Documents/Mail}"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
+CACHE_FILE="$CACHE_DIR/mail_count"
+LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/neomutt-update.lock"
+
+mkdir -p "$CACHE_DIR"
+
+# Avoid concurrent runs
+exec 9>"$LOCKFILE"
+if ! flock -n 9; then
+  # Another run is in progress
+  exit 0
+fi
+
+# Ensure a sane PATH for systemd
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+notify() {
+  # Only notify if notify-send is available and we have a session bus
+  if command -v notify-send >/dev/null 2>&1 && [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]; then
+    notify-send "$@"
+  fi
+}
+
+if /usr/bin/mbsync -a; then
+  # Count new mail files in INBOX and Junk, Maildir layout
+  # Suppress errors if some accounts/folders don't exist
+  count="$(LC_ALL=C find "$MAIL_ROOT"/*/{INBOX,Junk}/new/ -type f 2>/dev/null | wc -l | tr -d '[:space:]')"
+
+  # Atomic cache update
+  tmp="$(mktemp "$CACHE_DIR/.mail_count.XXXXXX")"
+  printf '%s\n' "$count" > "$tmp"
+  mv -f "$tmp" "$CACHE_FILE"
+
+  notify "Mails" "Synchronized successfully ($count new)"
+  pkill -SIGRTMIN+3 waybar
+  exit 0
+else
+  notify "Mails" "Synchronization failed"
+  exit 1
+fi

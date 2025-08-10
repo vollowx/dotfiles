@@ -71,7 +71,7 @@ vim.g.colors_name = 'material-you'
 -- }}}
 
 -- Palette {{{
-local json_path = os.getenv('XDG_CACHE_HOME') .. '/md3-generated/colors.json'
+local json_path = os.getenv('XDG_CACHE_HOME') .. '/dotfiles/md3/colors.json'
 local content = table.concat(vim.fn.readfile(json_path), '\n')
 local palette = vim.fn.json_decode(content)
 

@@ -12,20 +12,20 @@ blend = true
 
 [templates.terminal]
 input_path = './templates/terminal-sequences.txt'
-output_path = '~/.cache/md3-generated/sequences.txt'
+output_path = '~/.cache/dotfiles/md3/sequences.txt'
 
 [templates.general]
 input_path = './templates/colors.json'
-output_path = '~/.cache/md3-generated/colors.json'
+output_path = '~/.cache/dotfiles/md3/colors.json'
 
 [templates.dunst]
 input_path = './templates/dunst-colors.conf'
-output_path = '~/.cache/md3-generated/dunst-colors.conf'
+output_path = '~/.cache/dotfiles/md3/dunst-colors.conf'
 
 [templates.sway]
 input_path = './templates/sway-colors.conf'
-output_path = '~/.cache/md3-generated/sway-colors.conf'
+output_path = '~/.cache/dotfiles/md3/sway-colors.conf'
 
 [templates.gtk-css]
 input_path = './templates/gtk-colors.css'
-output_path = '~/.cache/md3-generated/gtk-colors.css'
+output_path = '~/.cache/dotfiles/md3/gtk-colors.css'

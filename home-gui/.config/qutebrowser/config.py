@@ -4,7 +4,7 @@ import json
 
 def load_color_cache(path=None):
     if path is None:
-        path = os.path.expanduser("~/.cache/md3-generated/colors.json")
+        path = os.path.expanduser("~/.cache/dotfiles/md3/colors.json")
     try:
         with open(path, "r", encoding="utf-8") as fp:
             data = json.load(fp)

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
+CACHE_FILE="$CACHE_DIR/news_count"
+LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/newsboat-update.lock"
+
+mkdir -p "$CACHE_DIR"
+
+# Avoid concurrent runs
+exec 9>"$LOCKFILE"
+flock -n 9 || exit 0
+
+# Ensure PATH is sane when run by systemd
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+notify() {
+  if command -v notify-send >/dev/null 2>&1 && [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]; then
+    notify-send "$@"
+  fi
+}
+
+# Reload feeds, then compute and cache the unread count
+if /usr/bin/newsboat -x reload; then
+  count="$(/usr/bin/newsboat -x print-unread | /usr/bin/grep -oE '[0-9]+' | /usr/bin/head -n1 | /usr/bin/tr -d '[:space:]')"
+  : "${count:=0}"
+
+  tmp="$(/usr/bin/mktemp "$CACHE_DIR/.unread_count.XXXXXX")"
+  printf '%s\n' "$count" > "$tmp"
+  /usr/bin/mv -f "$tmp" "$CACHE_FILE"
+
+  notify "News" "Reloaded: $count unread"
+  exit 0
+  pkill -SIGRTMIN+4 waybar
+else
+  notify "News" "Reload failed"
+  exit 1
+fi

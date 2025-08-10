@@ -1,0 +1,10 @@
+[Unit]
+Description=mbsync mail and update cached mail count
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/neomutt-update
+StandardOutput=journal
+StandardError=journal

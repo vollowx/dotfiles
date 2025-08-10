@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-mkdir -p ~/.cache/md3-generated/
+mkdir -p ~/.cache/dotfiles/md3
 matugen $@
-ln -sf ~/.cache/md3-generated/dunst-colors.conf ~/.config/dunst/dunstrc.d/99-md3-colors.conf
+ln -sf ~/.cache/dotfiles/md3/dunst-colors.conf ~/.config/dunst/dunstrc.d/99-md3-colors.conf
 
 update-colors-term
 update-colors-nvim

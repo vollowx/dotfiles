@@ -1,0 +1,11 @@
+[Unit]
+Description=Run neomutt-update every 15 minutes
+
+[Timer]
+OnCalendar=*:0/15
+RandomizedDelaySec=2m
+Persistent=true
+Unit=neomutt-update.service
+
+[Install]
+WantedBy=default.target

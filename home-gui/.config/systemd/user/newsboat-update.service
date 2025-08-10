@@ -1,0 +1,10 @@
+[Unit]
+Description=Reload Newsboat and update cached unread count
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/newsboat-update
+StandardOutput=journal
+StandardError=journal

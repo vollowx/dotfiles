@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles/mail_count"
+
+if [[ -r "$CACHE_FILE" ]]; then
+  awk 'NR==1{print; exit}' "$CACHE_FILE"
+else
+  echo 0
+fi

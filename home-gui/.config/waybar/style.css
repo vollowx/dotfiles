@@ -1,4 +1,4 @@
-@import "../../.cache/md3-generated/gtk-colors.css";
+@import "../../.cache/dotfiles/md3/gtk-colors.css";
 
 window#waybar {
   font-family: monospace;

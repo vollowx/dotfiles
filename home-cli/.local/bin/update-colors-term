@@ -1,19 +1,13 @@
 #!/usr/bin/env bash
 
-# This script silently reads terminal escape sequences from ~/.cache/sequences.txt,
-# filters out comments, removes newlines, and applies the result
-# to all open pseudo-terminals (pts).
-
 # Define the path to the input file
-SEQUENCES_FILE="$HOME/.cache/md3-generated/sequences.txt"
+SEQUENCES_FILE="$HOME/.cache/dotfiles/md3/sequences.txt"
 
-# --- Safety Check ---
 # Ensure the sequence file exists before proceeding. Exit silently on failure.
 if [ ! -f "$SEQUENCES_FILE" ]; then
   exit 1
 fi
 
-# --- Main Logic ---
 # *** THE FIX IS HERE ***
 # 1. 'grep' removes all lines starting with '#'.
 # 2. 'tr -d '\n'' deletes all newline characters from the remaining output.

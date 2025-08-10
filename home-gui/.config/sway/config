@@ -1,4 +1,4 @@
-include ~/.cache/md3-generated/sway-colors.conf
+include ~/.cache/dotfiles/md3/sway-colors.conf
 
 ### Variables
 

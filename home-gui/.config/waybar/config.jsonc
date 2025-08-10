@@ -14,7 +14,11 @@
   ],
   "modules-center": [
     "mpd#hl",
-    "mpd#nm"
+    "mpd#nm",
+    "custom/newsboat#hl",
+    "custom/newsboat#nm",
+    "custom/neomutt#hl",
+    "custom/neomutt#nm"
   ],
   "modules-right": [
     "tray",
@@ -28,6 +32,22 @@
     "exec": "waybar-swayidle",
     "interval": 3,
     "format": "{text}"
+  },
+  "custom/newsboat#hl": {
+    "format": "News"
+  },
+  "custom/newsboat#nm": {
+    "exec": "newsboat-count",
+    "signal": 3,
+    "format": " {text}"
+  },
+  "custom/neomutt#hl": {
+    "format": "Mails"
+  },
+  "custom/neomutt#nm": {
+    "exec": "neomutt-count",
+    "signal": 4,
+    "format": " {text}"
   },
   "sway/workspaces": {
     "all-outputs": true
