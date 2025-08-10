@@ -2,13 +2,13 @@
 
 set -e
 
-mkdir -p "$XDG_CACHE_HOME/compiled-scripts"
+mkdir -p "$XDG_CACHE_HOME/dotfiles/c-scripts"
 
 src="$(readlink -f "$1")"
 shift
 
 sum=$(sha1sum "$src" | grep -Eo '^\w+')
-bin="$XDG_CACHE_HOME/compiled-scripts/$sum"
+bin="$XDG_CACHE_HOME/dotfiles/c-scripts/$sum"
 
 test -f "$bin" &&
   exec "$bin" "$@"
