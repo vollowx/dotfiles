@@ -4,7 +4,7 @@ mkdir -p ~/.cache/dotfiles/md3
 matugen $@
 ln -sf ~/.cache/dotfiles/md3/dunst-colors.conf ~/.config/dunst/dunstrc.d/99-md3-colors.conf
 
-update-colors-term
+update-colors-term -a
 update-colors-nvim
 qutebrowser :config-source
 swaymsg reload
