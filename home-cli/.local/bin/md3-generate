@@ -1,10 +1,18 @@
 #!/usr/bin/env sh
 
-mkdir -p ~/.cache/dotfiles/md3
-matugen $@
-ln -sf ~/.cache/dotfiles/md3/dunst-colors.conf ~/.config/dunst/dunstrc.d/99-md3-colors.conf
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles/md3"
+DUNST_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc.d"
+DUNST_TARGET="$DUNST_DIR/99-md3-colors.conf"
+MATUGEN_OUT="$CACHE_DIR/dunst-colors.conf"
 
+mkdir -p "$CACHE_DIR" "$DUNST_DIR"
+
+matugen "$@"
+
+ln -sf "$MATUGEN_OUT" "$DUNST_TARGET"
 update-colors-term -a
 update-colors-nvim
-qutebrowser :config-source
+if pgrep -x qutebrowser >/dev/null 2>&1; then
+  qutebrowser :config-source
+fi
 swaymsg reload
