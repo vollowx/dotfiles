@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+newsboat
+newsboat-count-update
+update-colors-term # newsboat resets colors after quitting

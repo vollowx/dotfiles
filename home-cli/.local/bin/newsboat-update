@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
-CACHE_FILE="$CACHE_DIR/news_count"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/newsboat"
 LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/newsboat-update.lock"
 
 mkdir -p "$CACHE_DIR"
@@ -20,19 +19,14 @@ notify() {
   fi
 }
 
-# Reload feeds, then compute and cache the unread count
 if /usr/bin/newsboat -x reload; then
-  count="$(/usr/bin/newsboat -x print-unread | /usr/bin/grep -oE '[0-9]+' | /usr/bin/head -n1 | /usr/bin/tr -d '[:space:]')"
+  count="$(/usr/bin/newsboat -x print-unread | /usr/bin/grep -oE '[0-9]+' | /usr/bin/head -n1 | /usr/bin/tr -d '[:space:]' || true)"
   : "${count:=0}"
+  ~/.local/bin/newsboat-count-update "$count"
 
-  tmp="$(/usr/bin/mktemp "$CACHE_DIR/.unread_count.XXXXXX")"
-  printf '%s\n' "$count" > "$tmp"
-  /usr/bin/mv -f "$tmp" "$CACHE_FILE"
-
-  notify "News" "Reloaded: $count unread"
-  pkill -SIGRTMIN+3 waybar
+  notify "Newsboat" "Reloaded: $count unread"
   exit 0
 else
-  notify "News" "Reload failed"
+  notify "Newsboat" "Reload failed"
   exit 1
 fi

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Cache location
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
+CACHE_FILE="$CACHE_DIR/news_count"
+LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/newsboat-count-update.lock"
+
+mkdir -p "$CACHE_DIR"
+
+# Avoid concurrent cache updates
+exec 9>"$LOCKFILE"
+flock -n 9 || exit 0
+
+# If a numeric count is passed as $1, use it; otherwise query Newsboat
+if [[ "${1-}" =~ ^[0-9]+$ ]]; then
+  count="$1"
+else
+  # Derive unread count from Newsboat
+  count="$(/usr/bin/newsboat -x print-unread | /usr/bin/grep -oE '[0-9]+' | /usr/bin/head -n1 | /usr/bin/tr -d '[:space:]' || true)"
+  : "${count:=0}"
+fi
+
+# Atomic write
+tmp="$(/usr/bin/mktemp "$CACHE_DIR/.news_count.XXXXXX")"
+printf '%s\n' "$count" >"$tmp"
+/usr/bin/mv -f "$tmp" "$CACHE_FILE"
+
+pkill -SIGRTMIN+3 waybar
