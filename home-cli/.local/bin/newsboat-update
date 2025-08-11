@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/newsboat"
 LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/newsboat-update.lock"
-
-mkdir -p "$CACHE_DIR"
 
 # Avoid concurrent runs
 exec 9>"$LOCKFILE"

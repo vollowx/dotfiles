@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Cache location
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
 CACHE_FILE="$CACHE_DIR/news_count"
 LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/newsboat-count-update.lock"

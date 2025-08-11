@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+neomutt
+neomutt-count-update
+update-colors-term # neomutt resets colors after quitting

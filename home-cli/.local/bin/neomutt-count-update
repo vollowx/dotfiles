@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+MAIL_ROOT="${MAIL_ROOT:-$HOME/Documents/Mail}"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
+CACHE_FILE="$CACHE_DIR/mail_count"
+LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/neomutt-count-update.lock"
+
+mkdir -p "$CACHE_DIR"
+
+# Avoid concurrent cache updates
+exec 9>"$LOCKFILE"
+flock -n 9 || exit 0
+
+if [[ "${1-}" =~ ^[0-9]+$ ]]; then
+  count="$1"
+else
+  # Count "new" messages in typical Maildir folders (INBOX and Junk)
+  count="$(/usr/bin/find "$MAIL_ROOT"/*/{INBOX,Junk}/new/ -type f 2>/dev/null | /usr/bin/wc -l | /usr/bin/tr -d '[:space:]' || true)"
+  : "${count:=0}"
+fi
+
+# Atomic write
+tmp="$(/usr/bin/mktemp "$CACHE_DIR/.mail_count.XXXXXX")"
+printf '%s\n' "$count" > "$tmp"
+/usr/bin/mv -f "$tmp" "$CACHE_FILE"
+
+pkill -SIGRTMIN+4 waybar
