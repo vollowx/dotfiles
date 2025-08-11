@@ -30,8 +30,8 @@ if /usr/bin/newsboat -x reload; then
   /usr/bin/mv -f "$tmp" "$CACHE_FILE"
 
   notify "News" "Reloaded: $count unread"
-  exit 0
   pkill -SIGRTMIN+3 waybar
+  exit 0
 else
   notify "News" "Reload failed"
   exit 1
