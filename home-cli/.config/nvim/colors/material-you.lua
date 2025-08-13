@@ -124,8 +124,8 @@ local hlgroups = {
   },
 
   -- Syntax
-  Boolean = { fg = c.tertiary },
-  Comment = { fg = c.on_surface_variant },
+  Boolean = { fg = c.tertiary, bold = true },
+  Comment = { fg = c.outline },
   Constant = { fg = c.tertiary },
   Character = { link = 'String' },
   Delimiter = { fg = c.outline },
