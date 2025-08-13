@@ -15,4 +15,8 @@ return {
     'everviolet/nvim',
     name = 'evergarden',
   },
+
+  {
+    'Mofiqul/vscode.nvim'
+  }
 }

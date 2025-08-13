@@ -6,7 +6,7 @@ local config = {
   defaults = { lazy = true },
   checker = { enabled = false },
   change_detection = { notify = false },
-  install = { colorscheme = { 'catppuccin' } },
+  install = { colorscheme = { 'material-you' } },
   dev = { path = '~/Documents' },
   ui = {
     backdrop = 100,

@@ -53,10 +53,10 @@
 ---@field ok_container string
 ---@field on_ok string
 ---@field on_ok_container string
----@field info string
----@field info_container string
----@field on_info string
----@field on_info_container string
+---@field hint string
+---@field hint_container string
+---@field on_hint string
+---@field on_hint_container string
 ---@field warning string
 ---@field warning_container string
 ---@field on_warning string
@@ -98,7 +98,7 @@ local hlgroups = {
   CursorLineNr = { fg = c.on_surface, bold = true },
   LineNr = { fg = c.outline },
   SignColumn = { fg = c.on_surface_variant },
-  VertSplit = { fg = c.outline },
+  VertSplit = { fg = c.outline_variant },
   WinSeparator = { link = 'VertSplit' },
   StatusLine = { bg = c.surface_container, fg = c.on_surface_variant },
   StatusLineNC = { bg = c.surface_container_low, fg = c.outline },
@@ -206,18 +206,18 @@ local hlgroups = {
   -- Diagnostic
   DiagnosticError = { fg = c.error },
   DiagnosticWarn = { fg = c.warning },
-  DiagnosticInfo = { fg = c.info },
-  DiagnosticHint = { fg = c.secondary },
+  DiagnosticInfo = { fg = c.secondary },
+  DiagnosticHint = { fg = c.hint },
   DiagnosticOk = { fg = c.ok },
   DiagnosticSignError = { fg = c.error },
   DiagnosticSignWarn = { fg = c.warning },
-  DiagnosticSignInfo = { fg = c.info },
-  DiagnosticSignHint = { fg = c.secondary },
+  DiagnosticSignInfo = { fg = c.secondary },
+  DiagnosticSignHint = { fg = c.hint },
   DiagnosticSignOk = { fg = c.ok },
   DiagnosticUnderlineError = { sp = c.error, undercurl = true },
   DiagnosticUnderlineWarn = { sp = c.warning, undercurl = true },
-  DiagnosticUnderlineInfo = { sp = c.info, undercurl = true },
-  DiagnosticUnderlineHint = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineInfo = { sp = c.secondary, undercurl = true },
+  DiagnosticUnderlineHint = { sp = c.hint, undercurl = true },
   DiagnosticUnderlineOk = { sp = c.ok, undercurl = true },
   DiagnosticVirtualTextError = {
     bg = c.error_container,
@@ -228,12 +228,12 @@ local hlgroups = {
     fg = c.on_warning_container,
   },
   DiagnosticVirtualTextInfo = {
-    bg = c.info_container,
-    fg = c.on_info_container,
-  },
-  DiagnosticVirtualTextHint = {
     bg = c.secondary_container,
     fg = c.on_secondary_container,
+  },
+  DiagnosticVirtualTextHint = {
+    bg = c.hint_container,
+    fg = c.on_hint_container,
   },
   DiagnosticVirtualTextOK = {
     bg = c.ok_container,
