@@ -54,6 +54,8 @@ window#waybar {
 }
 
 #mpd.paused,
-#mpd.stopped {
+#mpd.stopped,
+#wireplumber.muted,
+#network.disconnected {
   color: @outline;
 }

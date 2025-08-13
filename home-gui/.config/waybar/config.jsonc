@@ -31,32 +31,39 @@
   "custom/swayidle": {
     "exec": "waybar-swayidle",
     "interval": 3,
-    "format": "{text}"
+    "format": "{text}",
+    "tooltip": false
   },
   "custom/newsboat#hl": {
-    "format": "News"
+    "format": "News",
+    "tooltip": false
   },
   "custom/newsboat#nm": {
     "exec": "newsboat-count",
     "signal": 3,
-    "format": " {text}"
+    "format": " {text}",
+    "tooltip": false
   },
   "custom/neomutt#hl": {
-    "format": "Mails"
+    "format": "Mails",
+    "tooltip": false
   },
   "custom/neomutt#nm": {
     "exec": "neomutt-count",
     "signal": 4,
-    "format": " {text}"
+    "format": " {text}",
+    "tooltip": false
   },
   "sway/workspaces": {
     "all-outputs": true
   },
   "sway/mode#hl": {
-    "format": "Mode"
+    "format": "Mode",
+    "tooltip": false
   },
   "sway/mode#nm": {
-    "format": " {}"
+    "format": " {}",
+    "tooltip": false
   },
   "sway/scratchpad#hl": {
     "format": "SPad",
@@ -73,7 +80,6 @@
     "format-paused": "{title}",
     "format-stopped": "",
     "format-disconnected": "oops, where is the music",
-    "title-len": 56,
     "interval": 10,
     "on-click": "mpc toggle",
     "tooltip": false
@@ -106,23 +112,36 @@
   "wireplumber#hl": {
     "scroll-step": 5,
     "format": "Volume",
-    "format-muted": "Muted"
+    "format-muted": "Muted",
+    "tooltip": false,
+    "on-click": "notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+",
+    "on-scroll-down": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%-"
   },
   "wireplumber#nm": {
     "scroll-step": 5,
     "format": " {volume}%",
-    "format-muted": ""
+    "tooltip": false,
+    "on-click": "notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+",
+    "on-scroll-down": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%-"
   },
   "network#hl": {
+    "format": "{ifname}",
     "format-wifi": "{essid}",
-    "format-disconnected": "Disconnected"
+    "format-ethernet": "{ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip": false
   },
   "network#nm": {
+    "format": "",
     "format-wifi": " {signalStrength}%",
-    "format-disconnected": ""
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "tooltip": false
   },
   "clock": {
     "format": "{:%a %d  %I:%M %p}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "tooltip": false
   }
 }
