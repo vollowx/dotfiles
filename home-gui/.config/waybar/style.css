@@ -37,11 +37,6 @@ window#waybar {
   font-weight: bold;
 }
 
-.nm,
-#workspaces {
-  font-family: SF Mono;
-}
-
 #workspaces button {
   all: unset;
   padding: 0 4px;
