@@ -104,7 +104,7 @@ bar {
 
 ### Key bindings
 
-bindsym $mod+Escape exec dmenu-power
+bindsym $mod+q exec dmenu-power
 bindsym $mod+d exec dmenu-app
 bindsym $mod+i exec dmenu-iwd
 bindsym $mod+m exec dmenu-media
@@ -112,6 +112,7 @@ bindsym $mod+b exec dmenu-bluetooth
 bindsym $mod+v exec dmenu-clipboard
 bindsym $mod+w exec dmenu-wallpaper
 bindsym $mod+o exec dmenu-wireplumber
+bindsym $mod+p exec dmenu-pass
 
 floating_modifier $mod normal
 bindsym $mod+Return exec $TERMINAL
