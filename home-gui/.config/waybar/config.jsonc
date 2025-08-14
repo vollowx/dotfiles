@@ -112,7 +112,6 @@
   "wireplumber#hl": {
     "scroll-step": 5,
     "format": "Volume",
-    "format-muted": "Muted",
     "tooltip": false,
     "on-click": "notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-scroll-up": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+",
