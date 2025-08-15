@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
 
 base=$(xdg-user-dir PICTURES)
 
@@ -7,7 +8,7 @@ if [ ! -d "$base/Wallpapers" ]; then
 fi
 
 cd "$base/Wallpapers/"
-choice=$(find -type f -printf '%P\n' | dmenu wallpaper\>)
+choice=$(find -type f -printf '%P\n' | ${1:-fzf} --prompt "wallpaper> ")
 
 if [ -z "$choice" ]; then
   exit 1

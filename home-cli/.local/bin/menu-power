@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
 
-choice="$(echo -e "exit\nlock\nsuspend\nhibernate\nlogout\nreboot\nshutdown" | dmenu power\>)"
+need swaylock swaymsg suspend hibernate loginctl reboot shutdown
+
+choice="$(echo -e "lock\nexit\nsuspend\nhibernate\nlogout\nreboot\nshutdown" | ${1:-fzf} --prompt 'power> ')"
 
 [[ -z "$choice" ]] && exit
 

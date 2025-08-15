@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-choice="$(xdg-desktop-list | dmenu app\> 1,2)"
-IFS=$'\t' read -r category name command <<<$choice
-
-[[ ! -z "$command" ]] && swaymsg exec -- "$command"

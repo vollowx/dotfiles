@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+need fzf wpctl || exit 127
+
+row="$(
+  wpctl status |
+    sed -E '
+      s/[└─│├]/ /g;
+      s/\[vol.*//;
+      s/\*(.*)/ \1 */;        # move * channel flag
+      s/([0-9 ]{4})\./ \1/;
+      s/:\s*$//;
+    ' |
+    untree |
+    col ' ' ' ' |
+    grep -Ei "^audio (sinks|sources) " |
+    ${1:-fzf} --prompt 'audio> ' --ansi --no-multi
+)" || exit 0
+
+wpctl set-default "$(grep -Eo '[0-9]+' <<<"$row" | head -n1 || true)"

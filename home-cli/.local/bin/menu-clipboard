@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+need fzf cliphist wl-copy chafa || exit 127
+
+if [ "${1:-}" = "--preview" ]; then
+  row="$2"
+  if grep -Pq '^\d+\t\[\[ binary data .* \]\]' <<<"$row"; then
+    cliphist decode <<<"$row" | chafa -f sixel -s "${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}"
+  else
+    cliphist decode <<<"$row"
+  fi
+  exit 0
+fi
+
+selection="$(
+  cliphist list |
+    ${1:-fzf} \
+      --prompt 'clipboard> ' \
+      --delimiter $'\t' \
+      --with-nth 2 \
+      --preview "$0 --preview {}" \
+      --bind "ctrl-x:execute-silent(echo {} | cliphist delete)+reload:(cliphist list)"
+)" || exit 0
+
+cliphist decode <<<"$selection" | wl-copy

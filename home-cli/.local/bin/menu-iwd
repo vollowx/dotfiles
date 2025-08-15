@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+need fzf iwctl pinentry-gtk pinentry || exit 127
+
+station="wlan0"
+
+if [[ "${1:-}" == "--list" ]]; then
+  iwctl station "$station" get-networks 2>/dev/null |
+    strip-escape |
+    sed -E '/(Available networks|Network name|---)/d; /^$/d; s/^......//' |
+    sed -E 's/ {2,}/\t/g; s/\t$//' |
+    awk -F'\t' '
+      {
+        ssid=$1; sec=$2; sig=$3
+        ssid_w=40; sec_w=10
+        orig_ssid=ssid
+        if (length(ssid) > ssid_w) {
+          ssid=substr(ssid,1,ssid_w-1) "…"
+        } else {
+          ssid=sprintf("%-*s", ssid_w, ssid)
+        }
+        if (length(sec) > sec_w) {
+          sec=substr(sec,1,sec_w)
+        } else {
+          sec=sprintf("%-*s", sec_w, sec)
+        }
+        display = sprintf("%s  %s  %3s", ssid, sec, sig)
+        # Emit: display<TAB>rawSSID<TAB>rawSEC<TAB>rawSIG
+        printf "%s\t%s\t%s\t%s\n", display, orig_ssid, $2, $3
+      }' || true
+  exit 0
+fi
+
+scan_cmd="iwctl station $station scan >/dev/null 2>&1"
+list_cmd="$0 --list"
+
+prompt_password() {
+  local ssid="$1" pinentry pass
+  for pinentry in "${PINENTRY:-}" pinentry-gtk pinentry; do
+    [[ -n "$pinentry" ]] || continue
+    command -v "$pinentry" >/dev/null 2>&1 || continue
+    pass="$(
+      {
+        printf 'SETTITLE Wi-Fi Passphrase\n'
+        printf 'SETPROMPT Passphrase\n'
+        printf 'SETDESC Enter passphrase for SSID: %s\n' "$ssid"
+        printf 'GETPIN\n'
+        printf 'BYE\n'
+      } | "$pinentry" 2>/dev/null | awk '/^D /{print substr($0,3); exit}'
+    )"
+    if [[ -n "${pass}" ]]; then
+      printf '%s' "$pass"
+      return 0
+    fi
+  done
+}
+
+try_to_connect() {
+  local ssid="$1" err rc pass
+  if iwctl station "$station" connect "$ssid" >/dev/null 2>&1; then
+    notify-send "Network" "Connected to $ssid"
+    return 0
+  fi
+  # Capture error (maybe indicates need for passphrase)
+  err="$( (iwctl station "$station" connect "$ssid") 2>&1 >/dev/null || true)"
+  rc=$?
+  # If failure, attempt passphrase acquisition
+  pass="$(prompt_password "$ssid" || true)"
+  if [[ -z "${pass}" ]]; then
+    notify-send "Network" "Connection failed (no passphrase available)." "$err"
+    return $rc
+  fi
+  if iwctl --passphrase "$pass" station "$station" connect "$ssid" >/dev/null 2>&1; then
+    unset pass
+    notify-send "Network" "Connected to $ssid"
+    return 0
+  else
+    unset pass
+    notify-send "Network" "Connection with passphrase failed."
+    return 1
+  fi
+}
+
+selection="$(
+  printf '%s\n' 'scanning...' |
+    "${1:-fzf}" \
+      --prompt "wifi> " \
+      --no-multi \
+      --with-nth 1 \
+      --delimiter $'\t' \
+      --bind "start:reload($scan_cmd; $list_cmd)" \
+      --bind "ctrl-r:reload($scan_cmd; $list_cmd)" \
+      --bind "ctrl-x:execute-silent(iwctl station $station disconnect >/dev/null 2>&1)+reload($list_cmd)"
+)"
+
+[[ -z "${selection:-}" ]] && exit 0
+[[ "$selection" == "scanning..." ]] && exit 0
+
+IFS=$'\t' read -r _display ssid security signal <<<"$selection"
+[[ -z "${ssid:-}" ]] && exit 0
+try_to_connect "$ssid"

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+quiet="${NEED_QUIET:-0}"
+
+print_help() {
+  cat <<'EOF'
+need - dependency checker
+
+Usage:
+  need cmd1 [cmd2 ...]
+  need -q cmd1 cmd2      Quiet (no messages, exit status only)
+  need -h                Show help
+
+Exit status:
+  0 if all commands exist
+  1 if any are missing
+
+Example:
+  need git curl || { echo "Missing deps" >&2; exit 1; }
+EOF
+}
+
+# Parse options
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -q | --quiet)
+    quiet=1
+    shift
+    ;;
+  -h | --help)
+    print_help
+    exit 0
+    ;;
+  --)
+    shift
+    break
+    ;;
+  -*)
+    echo "need: unknown option: $1" >&2
+    exit 2
+    ;;
+  *) break ;;
+  esac
+done
+
+# No args -> show help (non-error for convenience)
+if [[ $# -eq 0 ]]; then
+  print_help
+  exit 0
+fi
+
+# De-duplicate args
+declare -A seen=()
+missing=()
+
+for cmd in "$@"; do
+  [[ -z "$cmd" ]] && continue
+  [[ -n "${seen[$cmd]:-}" ]] && continue
+  seen[$cmd]=1
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    missing+=("$cmd")
+  fi
+done
+
+if [[ ${#missing[@]} -gt 0 ]]; then
+  if [[ "$quiet" -ne 1 ]]; then
+    for m in "${missing[@]}"; do
+      printf 'missing command: %s\n' "$m" >&2
+    done
+  fi
+  exit 1
+fi
+
+exit 0

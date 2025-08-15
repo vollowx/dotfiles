@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+need fzf bluetoothctl || exit 127
+
+notify() {
+  notify-send --hint "string:x-dunst-stack-tag:$0" "$1" "$(strip-escape <<<"${*:2}" | lower)"
+}
+
+devices="$(bluetoothctl devices | grep "^Device ")"
+[[ -z "$devices" ]] && exit 1
+
+device="$(printf "%s\n" "$devices" "disconnect" | ${1:-fzf} --prompt 'bluetooth> ')"
+[[ -z "$device" ]] && exit 1
+
+if [[ "$device" == "disconnect" ]]; then
+  bluetoothctl -- disconnect >/dev/null 2>&1
+  exit 0
+fi
+
+device_mac="$(cut -d ' ' -f 2 <<<"$device")"
+device_name="$(cut -d ' ' -f 3- <<<"$device")"
+
+notify "bluetooth $device_name" "$(bluetoothctl -- power on)"
+for ((i = 0; i < 8; i++)); do
+  notify "bluetooth $device_name" "$(bluetoothctl -- connect "$device_mac" | grep -v "^\[")"
+  sleep 1
+done

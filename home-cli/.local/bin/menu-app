@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+need fzf xdg-desktop-list || exit 127
+
+choice="$(
+  xdg-desktop-list | ${1:-fzf} \
+    --prompt 'app> ' \
+    --delimiter $'\t' \
+    --with-nth 1,2
+)" || exit 0
+
+IFS=$'\t' read -r category name command <<<"$choice"
+
+[ -n "${command:-}" ] && swaymsg exec -- "$command"

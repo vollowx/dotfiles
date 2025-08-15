@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
-# Dependencies: pass, wtype
-
 set -Eeuo pipefail
+
+fzf="${1:-fzf}"
 
 die() {
   printf '%s\n' "$*" >&2
   exit 1
 }
 
-command -v pass >/dev/null 2>&1 || die "pass not found"
-command -v wtype >/dev/null 2>&1 || die "wtype not found"
+need fzf pass || exit 127
+
+if [[ -z "${LAUNCHER_DEFER_WTYPE_FILE:-}" ]]; then
+  need wtype || exit 127
+fi
 
 STORE_DIR="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-test -d "$STORE_DIR" || die "Password store not found: $STORE_DIR"
+[[ -d "$STORE_DIR" ]] || die "Password store not found: $STORE_DIR"
 
-# List existing entries
 mapfile -t entries < <(
   find "$STORE_DIR" -type f -name '*.gpg' -printf '%P\n' 2>/dev/null |
     sed 's/\.gpg$//' |
     LC_ALL=C sort -f
 )
 
-export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS-} --print-query"
-
-out="$(printf '%s\n' "${entries[@]}" | dmenu "pass>")" || true
-
-# User cancelled
+out="$(printf '%s\n' "${entries[@]}" | $fzf --prompt 'pass> ' --print-query)" || true
 [ -z "${out:-}" ] && exit 0
 
 query="$(printf '%s' "$out" | sed -n '1p')"
@@ -39,26 +37,19 @@ if [ -n "$selection" ] && exists "$selection"; then
 elif [ -n "$query" ] && exists "$query"; then
   entry="$query"
 else
-  # Create new entry using the typed query (fallback to selection if query empty)
   entry="${query:-$selection}"
 fi
-
-# If still empty, nothing to do
 [ -z "$entry" ] && exit 0
 
-password=""
 if exists "$entry"; then
   password="$(pass show -- "$entry" | head -n1 || true)"
   [ -z "$password" ] && exit 1
 else
-  # Generate only when it does not exist
   pass generate -n -- "$entry" 24 >/dev/null || die "Failed to generate: $entry"
   password="$(pass show -- "$entry" | head -n1)" || die "Failed to read generated password"
 fi
 
-# Let the target window to re-gain focus
 sleep 0.10
-
 printf '%s' "$password" | wtype -
 
 unset password

@@ -133,10 +133,10 @@
     "tooltip": false
   },
   "network#nm": {
-    "format": "",
+    "format": " WLAN",
     "format-wifi": " {signalStrength}%",
-    "format-ethernet": "",
-    "format-disconnected": "",
+    "format-ethernet": " Ethernet",
+    "format-disconnected": " WLAN/Ethernet",
     "tooltip": false
   },
   "clock": {

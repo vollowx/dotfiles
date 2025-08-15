@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+
+need foot fzf || exit 127
+
+out_file="$(mktemp -t fzf-sep-out-XXXXXX)"
+status_file="$(mktemp -t fzf-sep-status-XXXXXX)"
+in_file=""
+
+cleanup() {
+  rm -f -- "$out_file" "$status_file"
+  [ -n "$in_file" ] && rm -f -- "$in_file"
+}
+trap cleanup EXIT INT HUP TERM
+
+# Capture stdin if it is a pipe
+if [ ! -t 0 ]; then
+  in_file="$(mktemp -t fzf-sep-in-XXXXXX)"
+  cat >"$in_file"
+fi
+
+export FZF_SEP_OUT="$out_file" FZF_SEP_STATUS="$status_file" FZF_SEP_IN="$in_file"
+
+# Run fzf inside foot; pass all arguments verbatim via "$@"
+foot --app-id launcher-$(tr -dc 'a-f0-9' </dev/urandom | head -c6) bash -c '
+  update-colors-term
+  if [ -n "$FZF_SEP_IN" ]; then
+    if fzf "$@" <"$FZF_SEP_IN" >"$FZF_SEP_OUT"; then
+      echo 0 >"$FZF_SEP_STATUS"
+    else
+      echo $? >"$FZF_SEP_STATUS"
+    fi
+  else
+    if fzf "$@" >"$FZF_SEP_OUT"; then
+      echo 0 >"$FZF_SEP_STATUS"
+    else
+      echo $? >"$FZF_SEP_STATUS"
+    fi
+  fi
+' fzf-menu "$@" || true
+
+# Relay output
+[ -s "$out_file" ] && cat -- "$out_file"
+
+# Propagate exit code
+if [ -s "$status_file" ] && grep -qE '^[0-9]+$' "$status_file"; then
+  exit "$(cat "$status_file")"
+fi
+exit 1

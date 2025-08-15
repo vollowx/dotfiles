@@ -13,7 +13,7 @@ set $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 
 output * bg ~/Pictures/wallpaper fill
 output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@120Hz position 0 0 adaptive_sync off
+output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync on render_bit_depth 8 hdr off
 
 input type:keyboard {
   xkb_layout us
@@ -45,7 +45,7 @@ for_window [window_role="dialog"]                           floating enable
 for_window [window_type="dialog"]                           floating enable
 for_window [shell="xwayland"]                               title_format "%title [XWayland]"
 # for_window [app_id=$term_id]                                floating enable, move to scratchpad, scratchpad show
-for_window [app_id="^launcher$"]                            floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
+for_window [app_id="^launcher-......$"]                     floating enable, sticky enable, resize set 100 ppt 20 ppt, move position 0 80 ppt
 for_window [app_id="blueman-manager"]                       floating enable
 for_window [app_id="qutebrowser"]                           inhibit_idle fullscreen
 for_window [class="discord"]                                floating enable
@@ -104,14 +104,14 @@ bar {
 
 ### Key bindings
 
-bindsym $mod+q exec dmenu-power
-bindsym $mod+d exec dmenu-app
-bindsym $mod+i exec dmenu-iwd
-bindsym $mod+b exec dmenu-bluetooth
-bindsym $mod+v exec dmenu-clipboard
-bindsym $mod+w exec dmenu-wallpaper
-bindsym $mod+o exec dmenu-wireplumber
-bindsym $mod+p exec dmenu-pass
+bindsym $mod+q exec menu-power       fzf-menu
+bindsym $mod+d exec menu-app         fzf-menu
+bindsym $mod+i exec menu-iwd         fzf-menu
+bindsym $mod+b exec menu-bluetooth   fzf-menu
+bindsym $mod+v exec menu-clipboard   fzf-menu
+bindsym $mod+w exec menu-wallpaper   fzf-menu
+bindsym $mod+o exec menu-wireplumber fzf-menu
+bindsym $mod+p exec menu-pass        fzf-menu
 
 bindsym $mod+comma exec mpc prev
 bindsym $mod+period exec mpc next
