@@ -13,7 +13,7 @@ set $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 
 output * bg ~/Pictures/wallpaper fill
 output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync on render_bit_depth 8 hdr off
+output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync on render_bit_depth 8 hdr on
 
 input type:keyboard {
   xkb_layout us
@@ -68,6 +68,7 @@ for_window [app_id=".*"] border pixel 1
 
 gaps inner 12
 gaps outer 36
+workspace_layout tabbed
 
 exec {
   systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
@@ -89,7 +90,7 @@ exec {
 }
 
 exec_always {
-  pkill dunst; dunst
+  pkill dunst && dunst
 }
 
 exec {
