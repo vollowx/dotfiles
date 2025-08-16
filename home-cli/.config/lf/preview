@@ -51,6 +51,9 @@ application/zip)
 application/gzip)
   zless "$1" | "$PAGER"
   ;;
+application/vnd.rar)
+  unrar l "$1" | "$PAGER"
+  ;;
 application/*tar | application/*zip* | application/zstd | application/*xz)
   tar vvtf "$1" | "$PAGER"
   ;;

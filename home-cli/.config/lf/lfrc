@@ -65,7 +65,7 @@ cmd open &{{
       lf -remote "send $id \$tar vvtf \$f | less -i"
       ;;
     text/html)
-      firejail firefox $fx
+      qutebrowser $fx
       ;;
     text/*|*/json|inode/x-empty|application/javascript)
       lf -remote "send $id \$$EDITOR -p \$fx"
@@ -129,6 +129,7 @@ cmd extract %{{
     case "$f" in
       *.tar)     tar xf "$f" ;;
       *.zip)     unzip "$f" ;;
+      *.rar)     unrar x "$f" ;;
       *.gz)      gunzip -k "$f" ;;
       *.tar.gz)  tar xzf "$f" ;;
       *.tar.bz2) tar xjf "$f" ;;
