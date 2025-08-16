@@ -2,7 +2,6 @@ set shell bash
 set hidden
 set watch
 
-set icons
 set drawbox
 set scrolloff 5
 set info size
