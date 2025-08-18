@@ -3,11 +3,13 @@
 window#waybar {
   font-family: monospace;
   font-size: 9pt;
-  background: transparent;
-  color: @on_surface;
+  background: @surface_container_lowest;
+  color: @on_surface_variant;
 }
 
 #workspaces,
+#mode,
+#scratchpad,
 #custom-swayidle,
 #tray,
 #clock {
@@ -22,16 +24,10 @@ window#waybar {
 }
 
 #workspaces {
-  margin-left: 40px;
-}
-
-#clock {
-  margin-right: 40px;
+  padding: 0px;
 }
 
 .hl,
-#workspaces button.focused,
-#custom-swayidle,
 #clock {
   color: @primary;
   font-weight: bold;
@@ -39,13 +35,42 @@ window#waybar {
 
 #workspaces button {
   all: unset;
-  padding: 0 4px;
+  padding: 0 6px;
+  background-color: @surface_container;
   color: @outline;
+}
+#workspaces button:not(:nth-child(1)) {
+  border-left: 1px solid @surface_container_highest;
+}
+
+#workspaces button.focused {
+  font-weight: bold;
+  background-color: @primary_container;
+  color: @on_primary_container;
 }
 
 #workspaces button.urgent {
   font-weight: bold;
-  color: @tertiary;
+  background-color: @error_container;
+  color: @on_error_container;
+}
+
+#custom-swayidle {
+  font-weight: bold;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
+  border-left: 1px solid @surface_container_highest;
+}
+
+#mode {
+  font-weight: bold;
+  background-color: @tertiary_container;
+  color: @on_tertiary_container;
+  border-left: 1px solid @surface_container_highest;
+}
+
+#mpd.hl {
+  font-style: italic;
 }
 
 #mpd.paused,
@@ -53,4 +78,13 @@ window#waybar {
 #wireplumber.muted,
 #network.disconnected {
   color: @outline;
+}
+
+#wireplumber,
+#network {
+  background-color: @surface_container_low;
+}
+
+#clock {
+  background-color: @surface_container;
 }

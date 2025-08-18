@@ -2,4 +2,4 @@
 
 swayidle=$(ps aux | grep "swayidle timeout" | grep -v grep | grep -v wp-swayidle | grep -v waybar-swayidle)
 
-[[ ! -z $swayidle ]] && echo "Idle"
+[[ ! -z $swayidle ]] && echo "idle"

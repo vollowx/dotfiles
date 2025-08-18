@@ -3,25 +3,21 @@
   "layer": "top",
   "position": "bottom",
   "exclusive": false,
-  "height": 48,
+  "height": 24,
   "modules-left": [
     "sway/workspaces",
-    "sway/scratchpad#hl",
-    "sway/scratchpad#nm",
-    "sway/mode#hl",
-    "sway/mode#nm",
-    "custom/swayidle"
-  ],
-  "modules-center": [
+    "custom/swayidle",
+    "sway/mode",
+    "sway/scratchpad",
     "mpd#hl",
-    "mpd#nm",
-    "custom/newsboat#hl",
-    "custom/newsboat#nm",
-    "custom/neomutt#hl",
-    "custom/neomutt#nm"
+    "mpd#nm"
   ],
   "modules-right": [
     "tray",
+    "custom/newsboat#hl",
+    "custom/newsboat#nm",
+    "custom/neomutt#hl",
+    "custom/neomutt#nm",
     "wireplumber#hl",
     "wireplumber#nm",
     "network#hl",
@@ -57,21 +53,12 @@
   "sway/workspaces": {
     "all-outputs": true
   },
-  "sway/mode#hl": {
-    "format": "Mode",
+  "sway/mode": {
+    "format": "{}",
     "tooltip": false
   },
-  "sway/mode#nm": {
-    "format": " {}",
-    "tooltip": false
-  },
-  "sway/scratchpad#hl": {
-    "format": "SPad",
-    "show-empty": false,
-    "tooltip": false
-  },
-  "sway/scratchpad#nm": {
-    "format": " {count}",
+  "sway/scratchpad": {
+    "format": "[{count}]",
     "show-empty": false,
     "tooltip": false
   },
