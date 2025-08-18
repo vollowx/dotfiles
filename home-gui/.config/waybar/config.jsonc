@@ -9,6 +9,7 @@
     "custom/swayidle",
     "sway/mode",
     "sway/scratchpad",
+    "custom/divider",
     "mpd#hl",
     "mpd#nm"
   ],
@@ -18,12 +19,16 @@
     "custom/newsboat#nm",
     "custom/neomutt#hl",
     "custom/neomutt#nm",
+    "custom/divider",
     "wireplumber#hl",
     "wireplumber#nm",
     "network#hl",
     "network#nm",
     "clock"
   ],
+  "custom/divider": {
+    "format": " "
+  },
   "custom/swayidle": {
     "exec": "waybar-swayidle",
     "interval": 3,
@@ -31,7 +36,7 @@
     "tooltip": false
   },
   "custom/newsboat#hl": {
-    "format": "News",
+    "format": "feed",
     "tooltip": false
   },
   "custom/newsboat#nm": {
@@ -41,7 +46,7 @@
     "tooltip": false
   },
   "custom/neomutt#hl": {
-    "format": "Mails",
+    "format": "mails",
     "tooltip": false
   },
   "custom/neomutt#nm": {
@@ -54,7 +59,7 @@
     "all-outputs": true
   },
   "sway/mode": {
-    "format": "{}",
+    "format": "[{}]",
     "tooltip": false
   },
   "sway/scratchpad": {
@@ -98,7 +103,7 @@
   },
   "wireplumber#hl": {
     "scroll-step": 5,
-    "format": "Volume",
+    "format": "volume",
     "tooltip": false,
     "on-click": "notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-scroll-up": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+",
@@ -127,7 +132,7 @@
     "tooltip": false
   },
   "clock": {
-    "format": "{:%a %d  %I:%M %p}",
+    "format": "{:%a %d %I:%M %p}",
     "tooltip": false
   }
 }

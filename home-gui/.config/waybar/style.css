@@ -23,8 +23,11 @@ window#waybar {
   padding-right: 8px;
 }
 
-#workspaces {
-  padding: 0px;
+#custom-divider {
+  margin: 8px;
+  padding: 0 1px;
+  font-size: 0;
+  background-color: @outline;
 }
 
 .hl,
@@ -33,40 +36,39 @@ window#waybar {
   font-weight: bold;
 }
 
+#workspaces {
+  padding: 2px 0;
+  margin-right: 8px;
+}
+
 #workspaces button {
   all: unset;
   padding: 0 6px;
-  background-color: @surface_container;
+  border-radius: 5px;
+  transition-duration: 240ms;
+  background-color: @surface_container_low;
   color: @outline;
 }
 #workspaces button:not(:nth-child(1)) {
-  border-left: 1px solid @surface_container_highest;
+  margin-left: 2px;
 }
 
 #workspaces button.focused {
   font-weight: bold;
+  border-radius: 10px;
   background-color: @primary_container;
   color: @on_primary_container;
 }
 
 #workspaces button.urgent {
   font-weight: bold;
-  background-color: @error_container;
-  color: @on_error_container;
+  color: @error;
 }
 
-#custom-swayidle {
-  font-weight: bold;
-  background-color: @secondary_container;
-  color: @on_secondary_container;
-  border-left: 1px solid @surface_container_highest;
-}
-
+#custom-swayidle,
 #mode {
   font-weight: bold;
-  background-color: @tertiary_container;
-  color: @on_tertiary_container;
-  border-left: 1px solid @surface_container_highest;
+  color: @tertiary;
 }
 
 #mpd.hl {
@@ -78,13 +80,4 @@ window#waybar {
 #wireplumber.muted,
 #network.disconnected {
   color: @outline;
-}
-
-#wireplumber,
-#network {
-  background-color: @surface_container_low;
-}
-
-#clock {
-  background-color: @surface_container;
 }
