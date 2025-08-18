@@ -25,7 +25,7 @@ window#waybar {
 
 #custom-divider {
   margin: 8px;
-  padding: 0 1px;
+  padding-left: 1px;
   font-size: 0;
   background-color: @outline;
 }
