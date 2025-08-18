@@ -62,7 +62,8 @@ window#waybar {
 
 #workspaces button.urgent {
   font-weight: bold;
-  color: @error;
+  background-color: @error_container;
+  color: @on_error_container;
 }
 
 #custom-swayidle,
