@@ -109,7 +109,7 @@ local hlgroups = {
   PmenuSel = { bg = c.primary, fg = c.on_primary },
   PmenuSbar = { bg = c.surface_container_highest },
   PmenuThumb = { bg = c.outline },
-  Visual = { bg = c.tertiary_container },
+  Visual = { bg = c.surface_container },
   Folded = { bg = c.surface_container, fg = c.on_surface_variant },
   Search = { bg = c.tertiary_container, fg = c.on_tertiary_container },
   IncSearch = {
@@ -249,6 +249,8 @@ local hlgroups = {
     bg = c.error_container,
     fg = c.on_error_container,
   },
+
+  VisualNonText = { bg = c.surface_container, fg = c.surface_variant },
 
   GitSignsAdd = { fg = c.primary },
   GitSignsChange = { fg = c.secondary },
