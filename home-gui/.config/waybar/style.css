@@ -44,20 +44,29 @@ window#waybar {
 #workspaces button {
   all: unset;
   padding: 0 6px;
+  font-weight: bold;
   border-radius: 4px;
-  transition-duration: 240ms;
-  background-color: @surface_container_low;
-  color: @outline;
+  transition-duration: 120ms;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
 }
 #workspaces button:not(:nth-child(1)) {
   margin-left: 2px;
 }
+#workspaces button:nth-child(1) {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+#workspaces button:nth-last-child(1) {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 
 #workspaces button.focused {
-  font-weight: bold;
+ 
   border-radius: 10px;
-  background-color: @primary_container;
-  color: @on_primary_container;
+  background-color: @secondary;
+  color: @on_secondary;
 }
 
 #workspaces button.urgent {

@@ -36,7 +36,7 @@
     "tooltip": false
   },
   "custom/newsboat#hl": {
-    "format": "feed",
+    "format": "Feed",
     "tooltip": false
   },
   "custom/newsboat#nm": {
@@ -46,7 +46,7 @@
     "tooltip": false
   },
   "custom/neomutt#hl": {
-    "format": "mails",
+    "format": "Mails",
     "tooltip": false
   },
   "custom/neomutt#nm": {
@@ -103,7 +103,7 @@
   },
   "wireplumber#hl": {
     "scroll-step": 5,
-    "format": "volume",
+    "format": "Volume",
     "tooltip": false,
     "on-click": "notify-volume set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-scroll-up": "exec notify-volume set-volume @DEFAULT_AUDIO_SINK@ 1%+",
