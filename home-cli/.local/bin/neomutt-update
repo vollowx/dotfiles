@@ -22,7 +22,7 @@ if /usr/bin/mbsync -a; then
   : "${count:=0}"
   "$HOME/.local/bin/neomutt-count-update" "$count"
 
-  notify "Mails" "Synchronized successfully ($count new)"
+  # notify "Mails" "Synchronized successfully ($count new)"
   exit 0
 else
   notify "Mails" "Synchronization failed"
