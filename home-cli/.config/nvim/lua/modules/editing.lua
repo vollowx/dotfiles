@@ -17,6 +17,27 @@ return {
     },
   },
 
+  {
+    'chrisgrieser/nvim-spider',
+    keys = {
+      {
+        'w',
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { 'n', 'o', 'x' },
+      },
+      {
+        'e',
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { 'n', 'o', 'x' },
+      },
+      {
+        'b',
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { 'n', 'o', 'x' },
+      },
+    },
+  },
+
   -- FIXME: this makes blink-cmp window continue to appear even the first
   -- token of command is finished and <Space> is pressed.
   {
