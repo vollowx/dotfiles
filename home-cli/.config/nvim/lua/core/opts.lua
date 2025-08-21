@@ -12,6 +12,7 @@ o.helpheight     = 10
 o.showmode       = false
 o.mousemoveevent = true
 o.number         = true
+o.relativenumber = true
 o.ruler          = true
 o.pumheight      = 16
 o.scrolloff      = 4
@@ -77,6 +78,8 @@ if g.has_gui then
     diff = '╱',
   })
 end
+
+o.shortmess:append('I')
 
 -- Netrw settings
 g.netrw_banner = 0

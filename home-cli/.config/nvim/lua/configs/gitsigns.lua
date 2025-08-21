@@ -14,9 +14,6 @@ require('gitsigns').setup({
     changedelete = { text = vim.trim(icons.ui.GitSignChangedelete) },
   },
   signcolumn = true,
-  current_line_blame = true,
-  current_line_blame_formatter = ' ' .. '<author>, <author_time:%R>',
-  current_line_blame_formatter_nc = ' ' .. '<author>',
-  current_line_blame_opts = { delay = 0 },
+  current_line_blame = false,
   attach_to_untracked = true,
 })

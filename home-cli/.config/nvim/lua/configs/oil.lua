@@ -259,35 +259,10 @@ local permission_hlgroups = setmetatable({
   end,
 })
 
-local type_hlgroups = setmetatable({
-  ['-'] = 'OilTypeFile',
-  ['d'] = 'OilTypeDir',
-  ['p'] = 'OilTypeFifo',
-  ['l'] = 'OilTypeLink',
-  ['s'] = 'OilTypeSocket',
-}, {
-  __index = function()
-    return 'OilTypeFile'
-  end,
-})
-
 local border = 'single'
 
 oil.setup({
   columns = {
-    {
-      'type',
-      icons = {
-        directory = 'd',
-        fifo = 'p',
-        file = '-',
-        link = 'l',
-        socket = 's',
-      },
-      highlight = function(type_str)
-        return type_hlgroups[type_str]
-      end,
-    },
     {
       'permissions',
       highlight = function(permission_str)
@@ -299,22 +274,16 @@ oil.setup({
         return hls
       end,
     },
-    { 'size', highlight = 'Special' },
-    { 'mtime', highlight = 'Number' },
+    { 'size', highlight = 'Normal' },
+    { 'mtime', highlight = 'Normal' },
   },
-  win_options = {
-    number = false,
-    relativenumber = false,
-    signcolumn = 'no',
-    foldcolumn = '0',
-    statuscolumn = '',
-  },
-  cleanup_delay_ms = false,
+  cleanup_delay_ms = 0,
   delete_to_trash = true,
   skip_confirm_for_simple_edits = true,
   prompt_save_on_select_new_entry = true,
   use_default_keymaps = false,
   view_options = {
+    show_hidden = true,
     is_always_hidden = function(name)
       return name == '..'
     end,
@@ -456,9 +425,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
 ---@return nil
 local function oil_sethl()
   local sethl = require('utils.hl').set
-  sethl(0, 'OilDir', { fg = 'Directory' })
+  sethl(0, 'OilDir', { fg = 'Directory', bold = true })
+  sethl(0, 'OilDirHidden', { fg = 'Directory', bold = true })
   sethl(0, 'OilDirIcon', { fg = 'Directory' })
-  sethl(0, 'OilLink', { fg = 'Constant' })
+  sethl(0, 'OilFileHidden', { fg = 'Normal' })
+  sethl(0, 'OilLink', { fg = 'String', bold = true })
+  sethl(0, 'OilLinkHidden', { fg = 'String', bold = true })
   sethl(0, 'OilLinkTarget', { fg = 'Comment' })
   sethl(0, 'OilCopy', { fg = 'DiagnosticSignHint', bold = true })
   sethl(0, 'OilMove', { fg = 'DiagnosticSignWarn', bold = true })
@@ -469,11 +441,6 @@ local function oil_sethl()
   sethl(0, 'OilPermissionRead', { fg = 'DiagnosticSignWarn' })
   sethl(0, 'OilPermissionWrite', { fg = 'DiagnosticSignError' })
   sethl(0, 'OilPermissionExecute', { fg = 'DiagnosticSignOk' })
-  sethl(0, 'OilTypeDir', { fg = 'Directory' })
-  sethl(0, 'OilTypeFifo', { fg = 'Special' })
-  sethl(0, 'OilTypeFile', { fg = 'NonText' })
-  sethl(0, 'OilTypeLink', { fg = 'Constant' })
-  sethl(0, 'OilTypeSocket', { fg = 'OilSocket' })
 end
 oil_sethl()
 

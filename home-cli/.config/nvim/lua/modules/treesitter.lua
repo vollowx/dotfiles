@@ -19,6 +19,7 @@ return {
         'editorconfig',
         'gitcommit',
         'go',
+        'gomod',
         'html',
         'javascript',
         'json',

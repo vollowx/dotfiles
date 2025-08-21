@@ -2,6 +2,7 @@ vim.lsp.enable({
   'astro',
   'clangd',
   'cssls',
+  'gopls',
   'jsonls',
   'lua_ls',
   'qmlls',
