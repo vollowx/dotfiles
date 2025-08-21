@@ -32,7 +32,6 @@ fetch_lyrics_for_current_song_in_background = no
 colors_enabled                      = "yes"
 user_interface                      = classic
 playlist_display_mode               = "columns"
-playlist_separate_albums            = yes
 color1                              = "white"
 color2                              = "red"
 volume_color                        = "magenta"
