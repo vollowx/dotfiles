@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles/news_count"
+CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles/news-count"
 
 if [[ -r "$CACHE_FILE" ]]; then
   awk 'NR==1{print; exit}' "$CACHE_FILE"

@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 MAIL_ROOT="${MAIL_ROOT:-$HOME/Documents/Mail}"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dotfiles"
-CACHE_FILE="$CACHE_DIR/mail_count"
+CACHE_FILE="$CACHE_DIR/mail-count"
 LOCKFILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/neomutt-count-update.lock"
 
 mkdir -p "$CACHE_DIR"
