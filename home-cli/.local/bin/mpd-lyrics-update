@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+echo "$@" >~/.cache/dotfiles/mpd-lyrics 2>&1
+
+pkill -SIGRTMIN+5 waybar

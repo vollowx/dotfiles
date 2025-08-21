@@ -11,6 +11,7 @@ window#waybar {
 #mode,
 #scratchpad,
 #custom-swayidle,
+#custom-mpd-lyrics,
 #tray,
 #clock {
   padding: 0 8px;
@@ -81,7 +82,8 @@ window#waybar {
   color: @tertiary;
 }
 
-#mpd.hl {
+#mpd.hl,
+#custom-mpd-lyrics {
   font-style: italic;
 }
 

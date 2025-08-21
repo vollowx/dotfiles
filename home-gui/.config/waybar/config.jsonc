@@ -13,6 +13,9 @@
     "mpd#hl",
     "mpd#nm"
   ],
+  "modules-center": [
+    "custom/mpd-lyrics"
+  ],
   "modules-right": [
     "tray",
     "custom/newsboat#hl",
@@ -68,8 +71,8 @@
     "tooltip": false
   },
   "mpd#hl": {
-    "format": "{title}",
-    "format-paused": "{title}",
+    "format": "{title} ",
+    "format-paused": "{title} ",
     "format-stopped": "",
     "format-disconnected": "oops, where is the music",
     "interval": 10,
@@ -77,9 +80,9 @@
     "tooltip": false
   },
   "mpd#nm": {
-    "format": " [{repeatIcon}{randomIcon}{singleIcon}]",
-    "format-paused": " [{repeatIcon}{randomIcon}{singleIcon}]",
-    "format-stopped": " [{repeatIcon}{randomIcon}{singleIcon}]",
+    "format": "[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-paused": "[{repeatIcon}{randomIcon}{singleIcon}]",
+    "format-stopped": "[{repeatIcon}{randomIcon}{singleIcon}]",
     "format-disconnected": "",
     "interval": 10,
     "repeat-icons": {
@@ -95,6 +98,12 @@
       "on": "s"
     },
     "on-click": "mpc toggle",
+    "tooltip": false
+  },
+  "custom/mpd-lyrics": {
+    "exec": "waybar-mpd-lyrics",
+    "signal": 5,
+    "format": "{}",
     "tooltip": false
   },
   "tray": {
