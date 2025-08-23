@@ -42,10 +42,9 @@ The ones run in GUI
 
 ### Other Apps
 
-The packages below are neither configured by nor related to this set of
-dotfiles.
+The packages below are not related to this set of dotfiles.
 
-`fcitx5 firefox nemo file-roller mission-center gimp`
+`fcitx5 fcitx5-rime rime-ice rime-pinyin-moegirl gimp`
 
 ### Audio
 
@@ -69,16 +68,6 @@ the `systemd`-based auto-start is already managed in
 
     sudo usermod <username> -aG games
 
-Proton GE is used just because it magically solves this error:
-
-`wine: failed to open "c:\\windows\\system32\\steam.exe": c0000135`
-
-which happens every time I launch a game in Steam, even though I was not
-actually running games in an NTFS drive, yet most of the threads talking about
-this error, they are.
-
-Set Steam > Settings > Compatibility > Default compatibility tool to Proton-GE.
-
 `xpadneo-dkms linux-header`
 
 For Xbox controllers e.g. Xbox Series X/S Controller,
@@ -92,8 +81,6 @@ in that case).
 `adw-gtk-theme`
 
     ./scripts/update-gsettings.sh
-    ./scripts/install-adw-firefox.sh
-    ./scripts/install-adw-steam.sh
 
 ### Hibernate
 
@@ -112,6 +99,8 @@ HOOKS=(...filesystems resume fsck...)
 `kvantum kvantum-theme-libadwaita-git`
 
 ### Virtualization
+
+- [Sharing folder with Windows guest](https://www.debugpoint.com/kvm-share-folder-windows-guest/)
 
 `libvirt qemu-base virt-manager bridge-utils dnsmasq`
 
