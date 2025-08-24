@@ -1,0 +1,36 @@
+#!/bin/bash
+
+TARGETS=("${@:-$PWD}")
+
+for TARGET_DIR in "${TARGETS[@]}"; do
+  if [ ! -d "$TARGET_DIR" ]; then
+    echo "Directory '$TARGET_DIR' does not exist"
+    continue
+  fi
+
+  TARGET_DIR=$(realpath "$TARGET_DIR")
+
+  # Check if acting on system directories (under / except /mnt and /home/$USER)
+  if [[ "$TARGET_DIR" =~ ^/[^/]+ ]] && [[ ! "$TARGET_DIR" =~ ^/mnt ]] && [[ ! "$TARGET_DIR" =~ ^/home/$USER ]]; then
+    echo "You are about to modify permissions in a system directory: $TARGET_DIR"
+    read -p "Continue? (y/N): " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+      echo "Operation cancelled"
+      exit 1
+    fi
+  fi
+
+  # Check if acting on other users' home directories
+  if [[ "$TARGET_DIR" =~ ^/home/[^/]+ ]] && [[ ! "$TARGET_DIR" =~ ^/home/$USER ]]; then
+    echo "You are about to modify permissions in another user's home directory: $TARGET_DIR"
+    read -p "Continue? (y/N): " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+      echo "Operation cancelled"
+      exit 1
+    fi
+  fi
+
+  chmod 755 "$TARGET_DIR"
+  find "$TARGET_DIR" -type d -exec chmod 755 {} \;
+  find "$TARGET_DIR" -type f -exec chmod 644 {} \;
+done
