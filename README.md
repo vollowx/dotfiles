@@ -2,57 +2,48 @@
 
 _Stow-managed dotfiles for *nix systems_
 
+Package names are those in Arch Linux and AUR by default.
+
+This dotfiles will probably not work for you without modifying since there are
+many hard-coded names that doesn't exist on your machine. For reference only.
+
 [TODO](./TODO.md)
 
-*Package names are those in Arch Linux and AUR by default
-
-## Installation
+## Applying
 
     git clone git@github.com:vollowx/dotfiles.git && cd ~/dotfiles
     ./scripts/install-desktop.sh
-
-Basic ones:
 
 `stow bash-completion pkgfile unzip unrar 7zip go`
 
     go install go.senan.xyz/untree@latest
     sudo pkgfile --update
 
-The ones run in command line
-
 `htop fd ripgrep newsboat neomutt`
 
-`mpd mpc ncmpcpp mpd-discord-rpc`
+`mpd` `mpc ncmpcpp mpd-discord-rpc mpdscribble`
 
-`lf bat catimg chafa ffmpegthumbnailer transmission-cli`
+`lf` `bat catimg chafa ffmpegthumbnailer transmission-cli`
 
-`neovim lua-language-server stylua shfmt prettier`
+`neovim` `lua-language-server stylua shfmt prettier`
 
-The ones run in GUI
-
-`sway swaybg swayidle swaylock sway-contrib`
-
-`waybar dunst wofi network-manager-applet blueman`
+`sway` `swaybg swayidle swaylock sway-contrib waybar dunst blueman`
 
 `xdg-desktop-portal-wlr xdg-desktop-portal-gtk polkit-gnome`
 
-`ghostty zathura`
+`foot zathura`
 
-## Addition
+`fcitx5 fcitx5-rime rime-ice rime-pinyin-moegirl qutebrowser gimp`
 
-### Other Apps
-
-`fcitx5 fcitx5-rime rime-ice rime-pinyin-moegirl gimp`
-
-### Audio
+**Audio**
 
 `pipewire pipewire-alsa pipewire-jack pipewire-pulse`
 
 This also installs `pipewire-audio pipewire-session-manager wireplumber`, and
-the `systemd`-based auto-start is already managed in
-`@/stow-gui/.config/systemd`.
+the `systemd`-based auto-start is managed in
+`@/home-gui/.config/systemd`.
 
-### Bluetooth
+**Bluetooth**
 
 `bluez bluez-utils`
 
@@ -60,13 +51,7 @@ the `systemd`-based auto-start is already managed in
 
 `blueman` is for the GUI manager and applet, the applet is used in Waybar.
 
-### Local Network Sharing
-
-`samba`
-
-    sudo systemctl enable --now smb
-
-### Gaming
+**Gaming**
 
 `steam proton-ge-custom-bin`
 
@@ -80,24 +65,36 @@ function remotely. Without it, they can only be used plugging in (`xpad` works
 in that case).
 <del>Stay sway from me cables :)</del>
 
-### GTK
+**GTK**
 
 `adw-gtk-theme`
 
     ./scripts/update-gsettings.sh
 
-### Hibernate
+**Hibernate**
+
+Power button config is in `@/root`
 
 ```
 # /etc/mkinitcpio.conf
 HOOKS=(...filesystems resume fsck...)
 ```
 
-### QT
+**QT**
 
 `kvantum kvantum-theme-libadwaita-git`
 
-### Virtualization
+**Samba**
+
+`samba`
+
+    sudo smbpasswd -a <username>
+    sudo systemctl enable --now smb
+
+- [Samba Arch Wiki](https://wiki.archlinux.org/title/Samba)
+- [Samba folder read only on iOS 18.5+](https://blog.fernvenue.com/archives/samba-read-only-issue-on-ios/)
+
+**Virtualization**
 
 - [Sharing folder with Windows guest](https://www.debugpoint.com/kvm-share-folder-windows-guest/)
 
