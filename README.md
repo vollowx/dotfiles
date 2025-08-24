@@ -42,8 +42,6 @@ The ones run in GUI
 
 ### Other Apps
 
-The packages below are not related to this set of dotfiles.
-
 `fcitx5 fcitx5-rime rime-ice rime-pinyin-moegirl gimp`
 
 ### Audio
@@ -61,6 +59,12 @@ the `systemd`-based auto-start is already managed in
     sudo systemctl enable bluetooth.service
 
 `blueman` is for the GUI manager and applet, the applet is used in Waybar.
+
+### Local Network Sharing
+
+`samba`
+
+    sudo systemctl enable --now smb
 
 ### Gaming
 
@@ -83,11 +87,6 @@ in that case).
     ./scripts/update-gsettings.sh
 
 ### Hibernate
-
-```
-# /etc/systemd/logind.conf
-HandlePowerKey=hibernate
-```
 
 ```
 # /etc/mkinitcpio.conf
