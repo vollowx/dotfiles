@@ -4,6 +4,7 @@ set -Eeuo pipefail
 base=$(xdg-user-dir PICTURES)
 
 if [ ! -d "$base/Wallpapers" ]; then
+  echo "missing folder: $base/Wallpapers"
   exit 1
 fi
 
