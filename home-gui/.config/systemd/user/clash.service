@@ -1,0 +1,12 @@
+[Unit]
+Description=Clash Proxy Service
+After=network.target
+
+[Service]
+ExecStart=/bin/clash-premium
+Restart=on-failure
+RestartSec=5
+User=%u
+
+[Install]
+WantedBy=default.target

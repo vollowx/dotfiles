@@ -9,7 +9,7 @@ export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export TERMINAL="foot"
-export BROWSER="qutebrowser"
+export BROWSER="firefox"
 export GPG_TTY=$(tty)
 export GOPATH="$XDG_DATA_HOME/go"
 
@@ -36,5 +36,8 @@ export FZF_ALT_C_COMMAND="$fd -p -H -L -td -c=always"
 export FZF_CTRL_R_OPTS=--no-preview
 eval $(dircolors "$HOME/.config/dircolors")
 export QT_STYLE_OVERRIDE='kvantum'
+
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
