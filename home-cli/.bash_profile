@@ -30,7 +30,7 @@ export FZF_DEFAULT_OPTS="--info=inline-right \
   --color=fg+:-1,bg+:-1,hl+:bold:cyan \
   --color=border:white,preview-border:white \
   --color=marker:bold:cyan,prompt:bold:blue,pointer:bold:blue \
-  --color=gutter:-1,info:bold:blue,spinner:yellow,header:white"
+  --color=gutter:0,info:bold:blue,spinner:yellow,header:white"
 export FZF_DEFAULT_COMMAND="fd -p -H -L -td -tf -tl -c=always"
 export FZF_ALT_C_COMMAND="$fd -p -H -L -td -c=always"
 export FZF_CTRL_R_OPTS=--no-preview
