@@ -2,7 +2,7 @@ include ~/.cache/dotfiles/md3/sway-colors.conf
 
 ### Variables
 
-set $mod Mod4
+set $mod Mod1
 set $left h
 set $down j
 set $up k
@@ -97,7 +97,7 @@ exec {
 
 bar {
   swaybar_command waybar
-  modifier Mod4
+  modifier $mod
 }
 
 ### Key bindings
