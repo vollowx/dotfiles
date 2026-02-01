@@ -2,7 +2,7 @@ include ~/.cache/dotfiles/md3/sway-colors.conf
 
 ### Variables
 
-set $mod Mod1
+set $mod Mod4
 set $left h
 set $down j
 set $up k
@@ -13,7 +13,7 @@ set $shot_path ~/Pictures/Screenshots/Sway_$(date +'%Y%m%d_%Hh%Mm%Ss.png')
 
 output * bg ~/Pictures/wallpaper fill
 output eDP-1 resolution 1920x1080 position 0 0 scale 1.00
-output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync off render_bit_depth 8 hdr on
+output "ASUSTek COMPUTER INC VG27AQL3A SCLMQS065012" mode 2560x1440@180Hz position 0 0 adaptive_sync off render_bit_depth 8 hdr off
 
 input type:keyboard {
   xkb_layout us
@@ -97,7 +97,7 @@ exec {
 
 bar {
   swaybar_command waybar
-  modifier $mod
+  modifier Mod4
 }
 
 ### Key bindings
