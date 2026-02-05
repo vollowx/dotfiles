@@ -8,8 +8,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 export MANPAGER="nvim +Man!"
-export TERMINAL="foot"
-export BROWSER="firefox"
 export GPG_TTY=$(tty)
 export GOPATH="$XDG_DATA_HOME/go"
 
@@ -35,9 +33,12 @@ export FZF_DEFAULT_COMMAND="fd -p -H -L -td -tf -tl -c=always"
 export FZF_ALT_C_COMMAND="$fd -p -H -L -td -c=always"
 export FZF_CTRL_R_OPTS=--no-preview
 eval $(dircolors "$HOME/.config/dircolors")
-export QT_STYLE_OVERRIDE='kvantum'
 
-export http_proxy="http://127.0.0.1:7890"
-export https_proxy="http://127.0.0.1:7890"
+if [ -n "${WAYLAND_DISPLAY}" ]; then
+  export TERMINAL="foot"
+  export BROWSER="firefox"
+
+  export QT_STYLE_OVERRIDE='kvantum'
+fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
