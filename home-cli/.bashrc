@@ -1,5 +1,9 @@
 [[ $- != *i* ]] && return
 
+if [[ -z "$TMUX" ]]; then
+  exec tmux new-session -s "session$(date +%s)"
+fi
+
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -a'
 alias ll='ls -l'
