@@ -69,7 +69,6 @@ return {
 
   {
     'tronikelis/ts-autotag.nvim',
-    branch = 'fix/8/experimental_live_rename',
     event = 'InsertEnter',
     dependencies = 'nvim-treesitter/nvim-treesitter',
     config = true,
