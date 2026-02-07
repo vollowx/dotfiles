@@ -12,7 +12,6 @@ o.helpheight     = 10
 o.showmode       = false
 o.mousemoveevent = true
 o.number         = true
-o.relativenumber = true
 o.ruler          = true
 o.pumheight      = 16
 o.scrolloff      = 4

@@ -185,3 +185,13 @@ augroup('TerminalSettings', {
     end,
   },
 })
+
+augroup('TmuxSupport', {
+  'UIEnter',
+  {
+    desc = 'Load tmux support.',
+    callback = function()
+      require('core._internal.tmux').setup()
+    end,
+  },
+})

@@ -13,14 +13,6 @@ return {
   },
 
   {
-    'mcauley-penney/visual-whitespace.nvim',
-    event = 'ModeChanged *:[vV\22]',
-    config = function()
-      require('configs.visual-whitespace')
-    end,
-  },
-
-  {
     'Aasim-A/scrollEOF.nvim',
     event = { 'CursorMoved', 'WinScrolled' },
     config = function()

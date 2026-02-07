@@ -1,10 +1,5 @@
 return {
   {
-    'dstein64/vim-startuptime',
-    lazy = false,
-  },
-
-  {
     'wakatime/vim-wakatime',
     event = { 'BufReadPre', 'BufNewFile' },
   },
@@ -238,15 +233,6 @@ return {
     event = 'VeryLazy',
     config = function()
       require('configs.quicker')
-    end,
-  },
-
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    build = 'make tiktoken',
-    cmd = 'CopilotChatOpen',
-    config = function()
-      require('configs.copilot-chat')
     end,
   },
 }
