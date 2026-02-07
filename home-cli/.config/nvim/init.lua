@@ -8,7 +8,11 @@ vim.loader.enable()
 
 vim.g.has_ui = #vim.api.nvim_list_uis() > 0
 vim.g.has_gui = vim.g.has_ui
-  and (vim.env.DISPLAY ~= nil or vim.env.WAYLAND_DISPLAY ~= nil)
+  and (
+    vim.env.DISPLAY ~= nil
+    or vim.env.WAYLAND_DISPLAY ~= nil
+    or vim.env.WSL_DISTRO_NAME ~= nil
+  )
 
 require('core.opts')
 require('core.mappings')
@@ -18,5 +22,5 @@ require('core.diagnostic')
 require('core.plugins')
 
 if vim.g.has_gui and vim.g.has_ui then
-  vim.cmd.colorscheme('material-you')
+  vim.cmd.colorscheme('macro')
 end
