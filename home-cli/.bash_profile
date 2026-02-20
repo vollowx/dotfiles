@@ -3,6 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share:$HOME/.local/share"
+[[ -n "${WSL_DISTRO_NAME}" ]] && export XDG_RUNTIME_DIR="$HOME/.local/runtime"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -34,7 +35,7 @@ export FZF_ALT_C_COMMAND="$fd -p -H -L -td -c=always"
 export FZF_CTRL_R_OPTS=--no-preview
 eval $(dircolors "$HOME/.config/dircolors")
 
-if [ -n "${WAYLAND_DISPLAY}" ]; then
+if [[ ! -n "${WSL_DISTRO_NAME}" ]]; then
   export TERMINAL="foot"
   export BROWSER="firefox"
 

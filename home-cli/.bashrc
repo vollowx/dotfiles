@@ -1,18 +1,10 @@
 [[ $- != *i* ]] && return
 
-if [[ -z "$TMUX" ]]; then
-  exec tmux new-session -s "session$(date +%s)"
-fi
+# Becomes tmux if not in tmux
 
-alias ls='ls --color=auto --group-directories-first'
-alias la='ls -a'
-alias ll='ls -l'
-alias lla='ls -la'
-alias grep='grep --color=auto'
-eval "$(fzf --bash)"
-eval "$(zoxide init bash)"
-[[ -f /etc/profile.d/lfcd.sh ]] && . /etc/profile.d/lfcd.sh
-[[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
+[[ -z "$TMUX" ]] && exec tmux new-session -s "session$(date +%s)"
+
+# Shell-level config
 
 export HISTCONTROL="erasedups:ignorespace"
 
@@ -43,17 +35,35 @@ osc7_cwd() {
 }
 PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%;}; }osc7_cwd
 
-. /usr/share/git/completion/git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM=1
-GIT_PS1_STATESEPARATOR=" "
-GIT_PS1_DESCRIBE_STYLE=1
-GIT_PS1_SHOWCOLORHINTS=1
-PS1="\[\033[32;1m\]\u@\h\[\033[0m\]:\[\033[34;1m\]\w\[\033[00m\]\$(__git_ps1) \$ "
+# Commands and UI
+
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+alias grep='grep --color=auto'
+
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
+[[ -f /etc/profile.d/lfcd.sh ]] && . /etc/profile.d/lfcd.sh
+[[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
+
+# Only when is Arch Linux
+
+if grep -q '^ID=arch' /etc/os-release; then
+  . /usr/share/git/completion/git-prompt.sh
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWSTASHSTATE=1
+  GIT_PS1_SHOWUNTRACKEDFILES=1
+  GIT_PS1_SHOWUPSTREAM=1
+  GIT_PS1_STATESEPARATOR=" "
+  GIT_PS1_DESCRIBE_STYLE=1
+  GIT_PS1_SHOWCOLORHINTS=1
+  PS1="\[\033[32;1m\]\u@\h\[\033[0m\]:\[\033[34;1m\]\w\[\033[00m\]\$(__git_ps1) \$ "
+fi
+
+# GUI utils
 
 if [ -n "${WAYLAND_DISPLAY}" ]; then
   update-colors-term
-  ~/Documents/Programming/gotodo/gotodo list --due
 fi
