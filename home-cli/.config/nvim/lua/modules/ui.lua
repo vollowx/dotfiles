@@ -21,10 +21,16 @@ return {
   },
 
   {
-    'https://github.com/folke/which-key.nvim',
+    'folke/which-key.nvim',
     event = 'VeryLazy',
     config = function()
       require('configs.which-key')
     end,
+  },
+
+  {
+    'nvim-mini/mini.cmdline',
+    event = 'CmdlineEnter',
+    config = true,
   },
 }

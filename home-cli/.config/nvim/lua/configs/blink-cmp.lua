@@ -1,15 +1,5 @@
-local blink_ctx = require('blink.cmp.completion.trigger.context')
-local blink_source_utils = require('blink.cmp.sources.lib.utils')
-
----@return boolean
-local function is_cmd_expr_compl()
-  return vim.tbl_contains(
-    { 'function', 'expression' },
-    blink_source_utils.get_completion_type(blink_ctx.get_mode())
-  )
-end
-
 require('blink.cmp').setup({
+  cmdline = { enabled = false },
   completion = {
     list = { selection = { preselect = false, auto_insert = true } },
     documentation = {
@@ -52,21 +42,6 @@ require('blink.cmp').setup({
         -- - https://github.com/Saghen/blink.cmp/issues/2042
         -- - https://cmp.saghen.dev/configuration/sources.html#show-buffer-completions-with-lsp
         timeout_ms = 500,
-      },
-      cmdline = {
-        -- Don't complete left parenthesis when calling functions or
-        -- expressions in cmdline, e.g. `:call func(...`
-        transform_items = function(_, items)
-          if not is_cmd_expr_compl() then
-            return items
-          end
-
-          for _, item in ipairs(items) do
-            item.textEdit.newText = item.textEdit.newText:gsub('%($', '')
-            item.label = item.textEdit.newText
-          end
-          return items
-        end,
       },
       buffer = {
         -- Keep first letter capitalization on buffer source
