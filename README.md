@@ -7,8 +7,6 @@ Package names are those in Arch Linux and AUR by default.
 This dotfiles will probably not work for you without modifying since there are
 many hard-coded names that doesn't exist on your machine. For reference only.
 
-[TODO](./TODO.md)
-
 ## Applying
 
     git clone git@github.com:vollowx/dotfiles.git && cd ~/dotfiles
