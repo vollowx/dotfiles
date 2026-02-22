@@ -6,7 +6,4 @@ return {
       require('configs.symbol-usage')
     end,
   },
-
-  -- TODO: Configure this in jsonls
-  { 'b0o/schemastore.nvim' },
 }
