@@ -10,7 +10,15 @@ many hard-coded names that doesn't exist on your machine. For reference only.
 ## Applying
 
     git clone git@github.com:vollowx/dotfiles.git && cd ~/dotfiles
-    ./scripts/install-desktop.sh
+    mkdir -p ~/.config ~/.local/share ~/.local/bin
+    mkdir -p ~/Documents/Mail
+    mkdir -p ~/Downloads
+    mkdir -p ~/Music
+    mkdir -p ~/Pictures/Wallpapers
+    mkdir -p ~/Pictures/Screenshots
+    mkdir -p ~/Videos/Screencasts
+    stow -vDt ~ home-cli home-gui
+    sudo cp -r root/. /
 
 `stow bash-completion pkgfile unzip unrar 7zip go`
 
