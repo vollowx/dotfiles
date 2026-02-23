@@ -4,7 +4,7 @@ local config = {
   defaults = { lazy = true },
   checker = { enabled = false },
   change_detection = { notify = false },
-  install = { colorscheme = { 'macro' } },
+  install = { colorscheme = { 'vim' } },
   dev = { path = '~/Documents' },
   ui = {
     backdrop = 100,

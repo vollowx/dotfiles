@@ -22,5 +22,5 @@ require('core.diagnostic')
 require('core.plugins')
 
 if vim.g.has_gui and vim.g.has_ui then
-  vim.cmd.colorscheme('macro')
+  vim.cmd.colorscheme('everforest')
 end

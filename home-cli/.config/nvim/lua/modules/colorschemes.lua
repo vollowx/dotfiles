@@ -7,16 +7,9 @@ return {
     end,
   },
 
-  {
-    'nyoom-engineering/oxocarbon.nvim',
-  },
+  { 'nyoom-engineering/oxocarbon.nvim' },
 
-  {
-    'everviolet/nvim',
-    name = 'evergarden',
-  },
+  { 'sainnhe/everforest' },
 
-  {
-    'Mofiqul/vscode.nvim'
-  }
+  { 'Mofiqul/vscode.nvim' },
 }

@@ -141,6 +141,9 @@ map(
   { desc = 'Copy line[s] link' }
 )
 
+map('n', '<Leader>tt', '<Cmd>TaskConvert<CR>')
+map('n', '<Leader>to', '<Cmd>TaskOpen<CR>')
+
 -- Sometimes we cannot release Shift so quickly
 cmd('Q', 'q', {})
 cmd('W', 'w', {})

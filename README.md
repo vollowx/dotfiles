@@ -17,7 +17,7 @@ many hard-coded names that doesn't exist on your machine. For reference only.
     mkdir -p ~/Pictures/Wallpapers
     mkdir -p ~/Pictures/Screenshots
     mkdir -p ~/Videos/Screencasts
-    stow -vDt ~ home-cli home-gui
+    stow -vRt ~ home-cli home-gui
     sudo cp -r root/. /
 
 `stow bash-completion pkgfile unzip unrar 7zip go`
