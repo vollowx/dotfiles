@@ -18,12 +18,9 @@ endfunction
 function! s:TaskConvert()
   let l:original_line = getline('.')
 
-  " 1. Use gcc to uncomment the line
-  " This reveals the raw TODO: Title text
   execute "normal gcc"
   let l:uncommented_line = getline('.')
 
-  " 2. Match the tag and title
   let l:pattern = '\v(TODO|FIXME|PERF):\s*(.*)'
   let l:match = matchlist(l:uncommented_line, l:pattern)
 
@@ -31,7 +28,6 @@ function! s:TaskConvert()
     let l:tag   = l:match[1]
     let l:title = l:match[2]
 
-    " 3. Run the Shell Command
     let l:cmd = printf(g:task_add_cmd, shellescape(l:title))
     let l:output = system(l:cmd)
 
@@ -40,31 +36,23 @@ function! s:TaskConvert()
       if len(l:lines) >= 2
         let l:id = trim(l:lines[1])
 
-        " 4. Replace the line with the new Task ID format
-        " We use the indent from the uncommented line
         let l:indent = matchstr(l:uncommented_line, '^\s*')
         let l:new_line = l:indent . 'TASK(' . l:id . '): ' . l:title
         call setline('.', l:new_line)
 
-        " 5. Use gcc again to comment the new line back
         execute "normal gcc"
-        echo "Task " . l:id . " created and commented."
+        echo "Task " . l:id . " created. Comment updated."
       else
-        " Error: Command succeeded but output format was wrong
-        " Revert to original state
         call setline('.', l:original_line)
-        echoerr "ID not found in command output. Reverting line."
+        echoerr "ID not found in command output. Reverting."
       endif
     else
-      " Error: Shell command failed
-      " Revert to original state
       call setline('.', l:original_line)
-      echoerr "Command failed. Reverting line."
+      echoerr "Command failed. Reverting."
     endif
   else
-    " No tag found even after uncommenting? Revert.
     call setline('.', l:original_line)
-    echoerr "No TODO/FIXME/PERF tag found."
+    echoerr "No TODO/FIXME/PERF tag found. Reverting."
   endif
 endfunction
 
