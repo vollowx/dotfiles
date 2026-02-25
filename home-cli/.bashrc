@@ -1,9 +1,5 @@
 [[ $- != *i* ]] && return
 
-# Becomes tmux if not in tmux
-
-[[ -z "$TMUX" ]] && exec tmux new-session -s "session$(date +%s)"
-
 # Shell-level config
 
 export HISTCONTROL="erasedups:ignorespace"
