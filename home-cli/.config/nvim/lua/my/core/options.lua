@@ -9,7 +9,7 @@ o.foldcolumn     = '0'
 o.foldlevelstart = 99
 o.foldtext       = ''
 o.helpheight     = 10
-o.showmode       = false
+o.showmode       = true
 o.mousemoveevent = true
 o.number         = true
 o.relativenumber = true
@@ -101,6 +101,8 @@ g.loaded_zip               = 0
 g.loaded_zipPlugin         = 0
 -- stylua: ignore end
 
-o.tabline = "%!v:lua.require'core._internal.tabline'()"
-o.statusline = "%!v:lua.require'core._internal.statusline'()"
-o.statuscolumn = "%!v:lua.require'core._internal.statuscolumn'()"
+g.qf_disable_statusline = 1
+
+o.tabline = "%!v:lua.require'my.core._internal.tabline'()"
+o.statusline = "%!v:lua.require'my.core._internal.statusline'()"
+o.statuscolumn = "%!v:lua.require'my.core._internal.statuscolumn'()"

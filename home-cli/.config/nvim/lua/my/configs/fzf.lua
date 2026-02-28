@@ -7,9 +7,9 @@ local actions = require('fzf-lua.actions')
 local config = require('fzf-lua.config')
 local core = require('fzf-lua.core')
 local fzf = require('fzf-lua')
-local icons = require('utils.icons')
 local path = require('fzf-lua.path')
-local utils = require('utils')
+local icons = require('my.utils.icons')
+local utils = require('my.utils')
 
 local _arg_del = actions.arg_del
 local _vimcmd_buf = actions.vimcmd_buf
@@ -276,8 +276,8 @@ fzf.setup({
     backdrop = 100,
     split = [[
         let tabpage_win_list = nvim_tabpage_list_wins(0) |
-        \ call v:lua.require'utils.win'.saveheights(tabpage_win_list) |
-        \ call v:lua.require'utils.win'.saveviews(tabpage_win_list) |
+        \ call v:lua.require'my.utils.win'.saveheights(tabpage_win_list) |
+        \ call v:lua.require'my.utils.win'.saveviews(tabpage_win_list) |
         \ unlet tabpage_win_list |
         \ let g:_fzf_vim_lines = &lines |
         \ let g:_fzf_leave_win = win_getid(winnr()) |

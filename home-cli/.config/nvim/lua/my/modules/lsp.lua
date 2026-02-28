@@ -3,7 +3,7 @@ return {
     'Wansmer/symbol-usage.nvim',
     event = 'LspAttach',
     config = function()
-      require('configs.symbol-usage')
+      require('my.configs.symbol-usage')
     end,
   },
 }

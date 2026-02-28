@@ -126,4 +126,5 @@ To use tools like OpenSSH with virtual machines, here is how to get the IP:
 
 ## Acknowledgements
 
-[marie's dotfiles](https://github.com/mariesavch/dotfiles), for the Oxocarbon override layer over Catppuccin integrations
+- [marie's dotfiles](https://github.com/mariesavch/dotfiles), for the Oxocarbon override layer over Catppuccin integrations
+- [bekaboo/nvim](https://github.com/Bekaboo/nvim), for many plugins and configurations, tree-wide structure, etc

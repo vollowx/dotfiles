@@ -56,7 +56,7 @@ M.spinner.default_opts = {
   finish_timeout = 1000,
   icons = vim.g.has_gui and {
     progress = { '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽', '⣾' },
-    finish = vim.trim(require('utils.icons').diagnostics.DiagnosticSignOk),
+    finish = vim.trim(require('my.utils.icons').diagnostics.DiagnosticSignOk),
   } or {
     progress = {
       '[    ]',

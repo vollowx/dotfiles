@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require('my.utils')
 
 _G._tabline = {}
 

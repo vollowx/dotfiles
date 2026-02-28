@@ -4,7 +4,7 @@ return {
     cmd = 'TableModToggle',
     ft = 'markdown',
     config = function()
-      require('configs.table-mode')
+      require('my.configs.table-mode')
     end,
   },
 }

@@ -1,4 +1,4 @@
-local icons = require('utils.icons')
+local icons = require('my.utils.icons')
 
 local wk = require('which-key')
 wk.setup({

@@ -5,7 +5,7 @@ local config = {
   checker = { enabled = false },
   change_detection = { notify = false },
   install = { colorscheme = { 'vim' } },
-  dev = { path = '~/Documents' },
+  dev = { path = '~/Documents/Development' },
   ui = {
     backdrop = 100,
     size = { width = 0.7, height = 0.74 },
@@ -32,4 +32,4 @@ local config = {
   },
 }
 
-require('lazy').setup({ import = 'modules' }, config)
+require('lazy').setup({ import = 'my.modules' }, config)

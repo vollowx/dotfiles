@@ -8,7 +8,7 @@ return {
     'tzachar/local-highlight.nvim',
     event = 'VeryLazy',
     config = function()
-      require('configs.local-highlight')
+      require('my.configs.local-highlight')
     end,
   },
 
@@ -16,7 +16,7 @@ return {
     'Aasim-A/scrollEOF.nvim',
     event = { 'CursorMoved', 'WinScrolled' },
     config = function()
-      require('configs.scroll-eof')
+      require('my.configs.scroll-eof')
     end,
   },
 
@@ -24,7 +24,7 @@ return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     config = function()
-      require('configs.which-key')
+      require('my.configs.which-key')
     end,
   },
 }

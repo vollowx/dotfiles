@@ -3,7 +3,7 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     config = function()
-      require('configs.catppuccin')
+      require('my.configs.catppuccin')
     end,
   },
 

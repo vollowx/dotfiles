@@ -9,7 +9,7 @@ vim.lsp.enable({
   'ts_ls',
 })
 
-local utils = require('utils')
+local utils = require('my.utils')
 
 do
   ---Check if there exists an LS that supports the given method

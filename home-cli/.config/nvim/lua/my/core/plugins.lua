@@ -2,7 +2,7 @@ if vim.env.NVIM_NOTHIRDPARTY then
   return
 end
 
-local utils = require('utils')
+local utils = require('my.utils')
 local conf_path = vim.fn.stdpath('config') --[[@as string]]
 local data_path = vim.fn.stdpath('data') --[[@as string]]
 
@@ -36,5 +36,5 @@ local function bootstrap()
 end
 
 if bootstrap() then
-  require('configs.lazy')
+  require('my.configs.lazy')
 end

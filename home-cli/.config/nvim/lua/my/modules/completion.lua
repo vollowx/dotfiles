@@ -8,7 +8,7 @@ return {
     version = 'v1.*',
     event = 'InsertEnter',
     config = function()
-      require('configs.blink-cmp')
+      require('my.configs.blink-cmp')
     end,
   },
 }

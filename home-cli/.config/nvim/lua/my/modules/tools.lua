@@ -60,7 +60,7 @@ return {
       })
     end,
     config = function()
-      require('configs.oil')
+      require('my.configs.oil')
     end,
   },
 
@@ -68,7 +68,7 @@ return {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
     config = function()
-      require('configs.gitsigns')
+      require('my.configs.gitsigns')
     end,
   },
 
@@ -211,7 +211,7 @@ return {
       end
     end,
     config = function()
-      require('configs.fzf')
+      require('my.configs.fzf')
     end,
   },
 
@@ -219,7 +219,7 @@ return {
     'stevearc/quicker.nvim',
     event = 'VeryLazy',
     config = function()
-      require('configs.quicker')
+      require('my.configs.quicker')
     end,
   },
 }

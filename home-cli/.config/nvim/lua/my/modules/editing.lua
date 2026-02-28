@@ -44,7 +44,7 @@ return {
     'altermo/ultimate-autopair.nvim',
     event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()
-      require('configs.ultimate-autopair')
+      require('my.configs.ultimate-autopair')
     end,
   },
 
@@ -65,7 +65,7 @@ return {
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
     config = function()
-      require('configs.conform')
+      require('my.configs.conform')
     end,
   },
 }

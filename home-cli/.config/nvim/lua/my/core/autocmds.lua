@@ -95,7 +95,7 @@ augroup('AutoCwd', {
         end
         vim.api.nvim_win_call(win, function()
           local current_dir = vim.fn.getcwd(0)
-          local target_dir = require('utils').fs.proj_dir(info.file)
+          local target_dir = require('my.utils').fs.root(info.file)
             or vim.fs.dirname(info.file)
           local stat = target_dir and vim.uv.fs_stat(target_dir)
           -- Prevent unnecessary directory change, which triggers
@@ -181,7 +181,7 @@ augroup('TerminalSettings', {
   {
     desc = 'Set terminal settings.',
     callback = function(info)
-      require('core._internal.terminal').setup(info.buf)
+      require('my.core._internal.terminal').setup(info.buf)
     end,
   },
 })
@@ -191,7 +191,7 @@ augroup('TmuxSupport', {
   {
     desc = 'Load tmux support.',
     callback = function()
-      require('core._internal.tmux').setup()
+      require('my.core._internal.tmux').setup()
     end,
   },
 })

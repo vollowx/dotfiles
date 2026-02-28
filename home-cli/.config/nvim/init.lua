@@ -14,12 +14,7 @@ vim.g.has_gui = vim.g.has_ui
     or vim.env.WSL_DISTRO_NAME ~= nil
   )
 
-require('core.opts')
-require('core.mappings')
-require('core.autocmds')
-require('core.lsp')
-require('core.diagnostic')
-require('core.plugins')
+require('my')
 
 if vim.g.has_gui and vim.g.has_ui then
   vim.cmd.colorscheme('everforest')

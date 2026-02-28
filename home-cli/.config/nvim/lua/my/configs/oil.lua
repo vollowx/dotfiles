@@ -424,7 +424,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 ---Set some default hlgroups for oil
 ---@return nil
 local function oil_sethl()
-  local sethl = require('utils.hl').set
+  local sethl = require('my.utils.hl').set
   sethl(0, 'OilDir', { fg = 'Directory', bold = true })
   sethl(0, 'OilDirHidden', { fg = 'Directory', bold = true })
   sethl(0, 'OilDirIcon', { fg = 'Directory' })

@@ -209,7 +209,7 @@ local function yank_url()
   if url then
     copy_to_clipboard(url)
   end
-  vim.vim.fn.mode('normal')
+  vim.fn.mode('normal')
 end
 
 local function open_url()

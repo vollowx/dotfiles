@@ -1,10 +1,8 @@
-local icons = require('utils.icons')
+local icons = require('my.utils.icons')
 
 vim.diagnostic.config({
   severity_sort = true,
-  virtual_text = {
-    spacing = 4,
-    prefix = '',
+  virtual_lines = {
     format = function(diag)
       local clean_src_names = {
         ['Lua Diagnostics.'] = 'lua',
