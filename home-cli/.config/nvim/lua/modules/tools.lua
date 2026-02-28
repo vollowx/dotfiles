@@ -67,19 +67,6 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
-    keys = {
-      { '<Leader>g', '<Nop>', desc = 'Git...' },
-      {
-        '<Leader>gd',
-        '<Cmd>Gitsigns diffthis<CR>',
-        desc = 'Diff',
-      },
-      {
-        '<Leader>gl',
-        '<Cmd>Gitsigns blame_line<CR>',
-        desc = 'Line blame',
-      },
-    },
     config = function()
       require('configs.gitsigns')
     end,

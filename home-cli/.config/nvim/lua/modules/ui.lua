@@ -27,10 +27,4 @@ return {
       require('configs.which-key')
     end,
   },
-
-  {
-    'nvim-mini/mini.cmdline',
-    event = 'CmdlineEnter',
-    config = true,
-  },
 }

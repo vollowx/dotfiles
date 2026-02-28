@@ -2,7 +2,6 @@ local icons = require('utils.icons')
 
 vim.diagnostic.config({
   severity_sort = true,
-  jump = { float = true },
   virtual_text = {
     spacing = 4,
     prefix = '',

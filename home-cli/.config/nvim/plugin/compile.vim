@@ -10,7 +10,7 @@ function! s:run_compile(is_loclist)
   let l:input = input('Compile command: ', g:last_input)
 
   if empty(l:input)
-    echo "\nCompilation cancelled."
+    echo "Compilation cancelled."
     return
   endif
 
