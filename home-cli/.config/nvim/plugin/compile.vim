@@ -1,18 +1,21 @@
-if !exists('g:last_compile_command')
-  let g:last_compile_command = 'make -k'
+if exists('g:loaded_compile')
+  finish
 endif
+let g:loaded_compile = 1
+
+let g:original_makeprg = &g:makeprg
+let g:last_input = 'make -k'
 
 function! s:run_compile(is_loclist)
-  let l:cmd = input('Compile command: ', g:last_compile_command)
+  let l:input = input('Compile command: ', g:last_input)
 
-  if empty(l:cmd)
+  if empty(l:input)
     echo "\nCompilation cancelled."
     return
   endif
 
-  let g:last_compile_command = l:cmd
-  let l:old_makeprg = &l:makeprg
-  let &l:makeprg = l:cmd
+  let g:last_input = l:input
+  let &g:makeprg = l:input
 
   try
     if a:is_loclist
@@ -24,7 +27,7 @@ function! s:run_compile(is_loclist)
     endif
   finally
     " This ensures makeprg is always restored, even if lmake/make errors out
-    let &l:makeprg = l:old_makeprg
+    let &g:makeprg = g:original_makeprg
   endtry
 endfunction
 
