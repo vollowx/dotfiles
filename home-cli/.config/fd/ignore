@@ -5,11 +5,13 @@
 .config/vesktop
 .local/share/
 .local/state/
+.cargo/
 
 .mozilla/
 .steam/
 .zen/
+/go/
 
-.git/
+*.git/
 node_modules/
 venv/

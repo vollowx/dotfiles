@@ -1,8 +1,27 @@
-set number
-set splitbelow
-set splitright
-set termguicolors
+set ttimeout ttimeoutlen=25
+set autoindent shiftwidth=4 softtabstop=-1 expandtab
+set belloff=all shortmess+=IcC
 set background=dark
+set hlsearch incsearch
+set number relativenumber
+set noswapfile
+set splitbelow splitright
+set termguicolors
+set undofile
+set display=lastline smoothscroll sidescroll=1 sidescrolloff=3
+set hlsearch incsearch ignorecase smartcase
+set number relativenumber cursorline cursorlineopt=number signcolumn=number
+set nowrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
+set list listchars=tab:›\ ,nbsp:␣,trail:·,extends:…,precedes:… showbreak=↪
+set fillchars=vert:│,trunc:…
+set completeopt=menu,popup,fuzzy
+set completepopup=border:round pumborder=round
+set completepopup+=highlight:Pmenu,borderhighlight:PmenuBorder
+set previewpopup=border:round,borderhighlight:PmenuBorder
+set autocomplete complete=o^10,.^10,w^5,b^5,u^3,t^3
+set mouse=a
+
+cnoremap <expr> <space> getcmdtype() =~ '[/?]' ? '.\{-}' : "<space>"
 
 let g:netrw_banner = 0
 let g:netrw_cursor = 5
@@ -15,5 +34,5 @@ let g:netrw_localcopydircmd = 'cp -r'
 let g:everforest_background = 'medium'
 let g:everforest_better_performance = 1
 
-colorscheme everforest
+colorscheme wildcharm
 syntax on

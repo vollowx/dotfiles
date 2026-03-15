@@ -1,0 +1,40 @@
+return {
+  {
+    src = 'https://github.com/stevearc/conform.nvim',
+    data = {
+      load = function(data)
+        vim.cmd.packadd(data.spec.name)
+
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        vim.keymap.set('', 'gq', function()
+          require('conform').format({ async = true })
+        end)
+
+        require('conform').setup({
+          formatters_by_ft = {
+            ['_'] = { 'trim_whitespace' },
+            sh = { 'shfmt' },
+            c = { 'clang-format' },
+            cpp = { 'clang-format' },
+            lua = { 'stylua' },
+            python = { 'isort', 'black' },
+            html = { 'prettierd', 'prettier', stop_after_first = true },
+            css = { 'prettierd', 'prettier', stop_after_first = true },
+            scss = { 'prettierd', 'prettier', stop_after_first = true },
+            javascript = { 'prettierd', 'prettier', stop_after_first = true },
+            typescript = { 'prettierd', 'prettier', stop_after_first = true },
+          },
+          default_format_opts = {
+            lsp_format = 'fallback',
+          },
+          -- format_on_save = { timeout_ms = 500 },
+          formatters = {
+            shfmt = {
+              prepend_args = { '-i', '2' },
+            },
+          },
+        })
+      end,
+    },
+  },
+}

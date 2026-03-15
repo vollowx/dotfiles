@@ -426,10 +426,10 @@ end
 ---@type table<string, string>
 local components = {
   align        = [[%=]],
-  diag         = [[%{%v:lua.require'my.core._internal.statusline'.diag()%}]],
-  lsp          = [[%{%v:lua.require'my.core._internal.statusline'.lsp()%}]],
-  fname        = [[%{%v:lua.require'my.core._internal.statusline'.fname()%}]],
-  info         = [[%{%v:lua.require'my.core._internal.statusline'.info()%}]],
+  diag         = [[%{%v:lua.require'my.internal.statusline'.diag()%}]],
+  lsp          = [[%{%v:lua.require'my.internal.statusline'.lsp()%}]],
+  fname        = [[%{%v:lua.require'my.internal.statusline'.fname()%}]],
+  info         = [[%{%v:lua.require'my.internal.statusline'.info()%}]],
   padding      = [[ ]],
   pos          = [[%{%&ru?"%l:%c ":""%}]],
   truncate     = [[%<]],

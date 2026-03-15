@@ -1,5 +1,4 @@
 vim.lsp.enable({
-  'astro',
   'clangd',
   'cssls',
   'gopls',
@@ -143,7 +142,7 @@ do
       contents,
       syntax,
       vim.tbl_deep_extend('force', opts, {
-        border = 'single',
+        border = 'none',
         max_width = math.max(80, math.ceil(vim.go.columns * 0.75)),
         max_height = math.max(20, math.ceil(vim.go.lines * 0.4)),
         close_events = {
