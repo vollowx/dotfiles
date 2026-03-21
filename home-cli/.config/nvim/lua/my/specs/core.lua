@@ -1,6 +1,7 @@
 return {
-  {src = 'https://github.com/sainnhe/everforest'},
-  {src = 'https://github.com/catppuccin/nvim', name = 'catppuccin'},
+  {src = 'https://github.com/sainnhe/everforest', data = {on = 'UIEnter'}},
+  {src = 'https://github.com/catppuccin/nvim', name = 'catppuccin', data = {on = 'UIEnter'}},
+  {src = 'https://github.com/miikanissi/modus-themes.nvim'},
 
   {src = 'https://github.com/romainl/vim-cool'},
   {src = 'https://github.com/rhysd/clever-f.vim'},

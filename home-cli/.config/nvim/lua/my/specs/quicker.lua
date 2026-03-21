@@ -2,9 +2,7 @@ return {
   {
     src = 'https://github.com/stevearc/quicker.nvim',
     data = {
-      load = function(data)
-        vim.cmd.packadd(data.spec.name)
-
+      after = function(_)
         local icons = require('my.utils.icons')
 
         require('quicker').setup({
@@ -23,9 +21,24 @@ return {
             N = icons.diagnostics.DiagnosticSignHint,
             H = icons.diagnostics.DiagnosticSignHint,
           },
+          borders = {
+            vert = ' ',
+            strong_header = '-',
+            strong_cross = '-',
+            strong_end = '-',
+            soft_header = '-',
+            soft_cross = '-',
+            soft_end = '-',
+          },
           max_filename_width = function()
             return math.max(32, math.ceil(vim.go.columns / 4))
           end,
+          keys = {
+            { '>', function() require('quicker').expand({ before = 2, after = 2, add_to_existing = true }) end,
+              desc = 'Expand quickfix context', },
+            { "<", function() require('quicker').collapse() end,
+              desc = 'Collapse quickfix context' },
+          },
         })
       end,
     },

@@ -233,7 +233,7 @@ function _G._statusline.fname()
 
   if vim.bo.bt == '' then
     if bufname == '' then
-      return '[buffer %n]'
+      return 'Draft'
     end
     -- Named normal buffer, show file name, if the file name is not unique,
     -- show local cwd (often project root) after the file name
@@ -249,39 +249,21 @@ function _G._statusline.fname()
     return utils.stl.escape(fname_short)
   end
 
-  if vim.bo.bt == 'terminal' then
-    local path, pid, cmd, comment = parse_term_name(bufname)
-    if not path or not pid or not cmd then
-      return string.format(
-        '[terminal] %s',
-        str_shorten(bufname, fname_max_width)
-      )
-    end
-    return string.format(
-      '[terminal %s] %s [%s]',
-      str_shorten(
-        comment ~= '' and comment or pid,
-        fname_prefix_suffix_max_width
-      ),
-      str_shorten(cmd, fname_max_width),
-      str_shorten(
-        vim.fn.fnamemodify(path, ':~'):gsub('/+$', ''),
-        fname_prefix_suffix_max_width
-      )
-    )
+  if vim.bo.bt == 'quickfix' then
+    return (vim.w.quickfix_title or 'empty') .. '(Quickfix)'
   end
 
-  if vim.bo.bt == 'quickfix' then
-    return '[quickfix]' .. (vim.w.quickfix_title or 'empty')
+  if vim.bo.ft == 'oil' then
+    return require('oil').get_current_dir() or ''
   end
 
   local prefix, main = bufname:match('^%s*(%S+)://(.*)')
   if prefix and main then
     return utils.stl.escape(
       string.format(
-        '[%s] %s',
-        str_shorten(vim.fs.basename(prefix), fname_prefix_suffix_max_width),
-        str_shorten(main, fname_special_max_width)
+        '%s (%s)',
+        str_shorten(main, fname_special_max_width),
+        str_shorten(vim.fs.basename(prefix), fname_prefix_suffix_max_width)
       )
     )
   end
@@ -329,7 +311,9 @@ end
 ---Get current filetype
 ---@return string
 function _G._statusline.ft()
-  return vim.bo.ft == '' and '' or vim.bo.ft
+  local ft = vim.bo.ft == '' and '' or vim.bo.ft
+  if ft == '' then return '' end
+  return ft:sub(1, 1):upper() .. ft:sub(2)
 end
 
 ---Additional info for the current buffer enclosed in parentheses
@@ -426,10 +410,10 @@ end
 ---@type table<string, string>
 local components = {
   align        = [[%=]],
-  diag         = [[%{%v:lua.require'my.internal.statusline'.diag()%}]],
-  lsp          = [[%{%v:lua.require'my.internal.statusline'.lsp()%}]],
-  fname        = [[%{%v:lua.require'my.internal.statusline'.fname()%}]],
-  info         = [[%{%v:lua.require'my.internal.statusline'.info()%}]],
+  diag         = [[%{%v:lua.require'my.statusline'.diag()%}]],
+  lsp          = [[%{%v:lua.require'my.statusline'.lsp()%}]],
+  fname        = [[%{%v:lua.require'my.statusline'.fname()%}]],
+  info         = [[%{%v:lua.require'my.statusline'.info()%}]],
   padding      = [[ ]],
   pos          = [[%{%&ru?"%l:%c ":""%}]],
   truncate     = [[%<]],

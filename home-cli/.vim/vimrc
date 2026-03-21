@@ -15,7 +15,7 @@ set nowrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
 set list listchars=tab:›\ ,nbsp:␣,trail:·,extends:…,precedes:… showbreak=↪
 set fillchars=vert:│,trunc:…
 set completeopt=menu,popup,fuzzy
-set completepopup=border:round pumborder=round
+set completepopup=border:off pumborder=
 set completepopup+=highlight:Pmenu,borderhighlight:PmenuBorder
 set previewpopup=border:round,borderhighlight:PmenuBorder
 set autocomplete complete=o^10,.^10,w^5,b^5,u^3,t^3

@@ -13,3 +13,6 @@
 [submodule "home-cli/.vim/pack/vollowx/start/vinegar"]
 	path = home-cli/.vim/pack/vollowx/start/vinegar
 	url = https://github.com/vollowx/vim-vinegar.git
+[submodule "home-cli/.vim/pack/romainl/start/cool"]
+	path = home-cli/.vim/pack/romainl/start/cool
+	url = https://github.com/romainl/vim-cool.git

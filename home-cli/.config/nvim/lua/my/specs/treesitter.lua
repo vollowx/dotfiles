@@ -1,12 +1,8 @@
 return {
   {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-    branch = 'main',
     data = {
-      -- lazy = false logic: load immediately
-      load = function(data)
-        vim.cmd.packadd(data.spec.name)
-
+      after = function(_)
         local langs = {
           'astro',
           'bash',
@@ -48,7 +44,6 @@ return {
               vim.treesitter.start()
               vim.wo.fdm = 'expr'
               vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-              -- indentation, provided by nvim-treesitter
               vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end,
           })
@@ -60,9 +55,7 @@ return {
   {
     src = 'https://github.com/Wansmer/treesj',
     data = {
-      load = function(data)
-        vim.cmd.packadd(data.spec.name)
-
+      after = function(_)
         vim.keymap.set('n', 'J', function()
           require('treesj').toggle()
         end, { desc = 'Treesitter Join/Split' })

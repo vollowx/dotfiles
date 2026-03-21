@@ -1,23 +1,14 @@
 return {
   {
     src = 'https://github.com/xzbdmw/colorful-menu.nvim',
-    data = { 
-      on = 'InsertEnter',
-      load = function(plug_data) 
-        vim.cmd.packadd(plug_data.spec.name) 
-      end 
-    }
+    data = {on = 'InsertEnter'}
   },
   {
     src = 'https://github.com/saghen/blink.cmp',
     version = vim.version.range('v1.*'),
     data = {
       on = 'InsertEnter',
-      load = function(plug_data)
-        -- Ensure both are loaded
-        vim.cmd.packadd('colorful-menu.nvim')
-        vim.cmd.packadd(plug_data.spec.name)
-
+      after = function(_)
         require('blink.cmp').setup({
           cmdline = { enabled = false },
           completion = {
