@@ -3,7 +3,6 @@ return {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
     version = 'main',
     data = {
-      on = 'FileType',
       after = function(_)
         local langs = {
           'astro',
@@ -42,7 +41,8 @@ return {
         for _, lang in ipairs(langs) do
           vim.api.nvim_create_autocmd('FileType', {
             pattern = { lang },
-            callback = function()
+            callback = function(ev)
+              vim.treesitter.start(ev.buf, lang)
               vim.wo[0][0].fdm = 'expr'
               vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
               vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
@@ -60,8 +60,6 @@ return {
         vim.keymap.set('n', 'J', function()
           require('treesj').toggle()
         end, { desc = 'Treesitter Join/Split' })
-
-        require('treesj').setup({})
       end,
     },
   },
