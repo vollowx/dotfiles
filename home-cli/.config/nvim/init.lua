@@ -32,16 +32,14 @@ local function augroup(group, ...)
   end
 end
 
-
 -- options {{{1
 
 -- stylua: ignore start
-o.background     = 'dark'
+o.autowriteall   = true
 o.foldcolumn     = '0'
 o.foldlevelstart = 99
 o.foldtext       = ''
 o.helpheight     = 10
-o.showmode       = true
 o.mousemoveevent = true
 o.number         = true
 o.relativenumber = true
@@ -50,8 +48,6 @@ o.pumheight      = 16
 o.scrolloff      = 4
 o.sidescrolloff  = 8
 o.signcolumn     = 'yes:1'
-o.laststatus     = 2
-o.cmdheight      = 1
 o.splitright     = true
 o.splitbelow     = true
 o.swapfile       = false
@@ -59,7 +55,6 @@ o.undofile       = true
 o.updatetime     = 100
 o.wrap           = false
 o.linebreak      = true
-o.breakindent    = true
 o.smoothscroll   = true
 o.ignorecase     = true
 o.smartcase      = true
@@ -67,9 +62,9 @@ o.conceallevel   = 2
 o.tabstop        = 2
 o.softtabstop    = 2
 o.shiftwidth     = 2
+o.breakindent    = true
+o.smartindent    = true
 o.expandtab      = true
-o.autoindent     = true
-o.autowriteall   = true
 o.virtualedit    = 'block'
 o.completeopt    = 'menuone,noinsert,popup'
 o.jumpoptions    = 'stack,view'

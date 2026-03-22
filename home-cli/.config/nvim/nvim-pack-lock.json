@@ -6,7 +6,7 @@
       "version": "1.0.0 - 2.0.0"
     },
     "catppuccin": {
-      "rev": "384f304c8b04664c9e0091fbfb3923c5f97c1bcf",
+      "rev": "50c34a2cf18776a77f770fcf5df777de6fe69e08",
       "src": "https://github.com/catppuccin/nvim"
     },
     "clever-f.vim": {
@@ -30,16 +30,17 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "modus-themes.nvim": {
-      "rev": "c57c2c56c9f0af04f3b609d11caa840880074784",
+      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
       "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nvim": {
-      "rev": "384f304c8b04664c9e0091fbfb3923c5f97c1bcf",
+      "rev": "50c34a2cf18776a77f770fcf5df777de6fe69e08",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-treesitter": {
       "rev": "e5f65e31a5ec0e8526b2311ff8c7aaea4a581c82",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
     },
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",

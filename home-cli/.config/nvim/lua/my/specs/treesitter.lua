@@ -1,7 +1,9 @@
 return {
   {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    version = 'main',
     data = {
+      on = 'FileType',
       after = function(_)
         local langs = {
           'astro',
@@ -41,9 +43,8 @@ return {
           vim.api.nvim_create_autocmd('FileType', {
             pattern = { lang },
             callback = function()
-              vim.treesitter.start()
-              vim.wo.fdm = 'expr'
-              vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+              vim.wo[0][0].fdm = 'expr'
+              vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
               vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end,
           })
