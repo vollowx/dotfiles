@@ -35,6 +35,8 @@ end
 -- options {{{1
 
 -- stylua: ignore start
+o.cursorline     = true
+o.cursorlineopt  = 'number'
 o.autowriteall   = true
 o.foldcolumn     = '0'
 o.foldlevelstart = 99
