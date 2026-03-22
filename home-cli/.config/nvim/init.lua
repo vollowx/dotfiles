@@ -50,6 +50,7 @@ o.sidescrolloff  = 8
 o.signcolumn     = 'yes:1'
 o.splitright     = true
 o.splitbelow     = true
+o.splitkeep      = 'topline'
 o.swapfile       = false
 o.undofile       = true
 o.updatetime     = 100
