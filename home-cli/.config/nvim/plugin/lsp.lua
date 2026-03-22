@@ -10,33 +10,6 @@ vim.lsp.enable({
 
 local utils = require('my.utils')
 
-do
-  local c = utils.keymap.count_wrap
-  ---@param direction 'prev'|'next'
-  ---@param level ('ERROR'|'WARN'|'INFO'|'HINT')?
-  ---@return function
-  local function diag_jump(direction, level)
-    return function()
-      vim.diagnostic.jump(level and {
-        count = direction == 'next' and 1 or -1,
-        severity = vim.diagnostic.severity[level],
-      } or {
-        count = direction == 'next' and 1 or -1,
-      })
-    end
-  end
-  vim.keymap.set({ 'n', 'x' }, '[d', c(diag_jump('prev')), { desc = 'Previous diagnostic' })
-  vim.keymap.set({ 'n', 'x' }, ']d', c(diag_jump('next')), { desc = 'Next diagnostic' })
-  vim.keymap.set({ 'n', 'x' }, '[e', c(diag_jump('prev', 'ERROR')), { desc = 'Previous diag error' })
-  vim.keymap.set({ 'n', 'x' }, ']e', c(diag_jump('next', 'ERROR')), { desc = 'Next diag error' })
-  vim.keymap.set({ 'n', 'x' }, '[w', c(diag_jump('prev', 'WARN')), { desc = 'Previous diag warning' })
-  vim.keymap.set({ 'n', 'x' }, ']w', c(diag_jump('next', 'WARN')), { desc = 'Next diag warning' })
-  vim.keymap.set({ 'n', 'x' }, '[i', c(diag_jump('prev', 'INFO')), { desc = 'Previous diag info' })
-  vim.keymap.set({ 'n', 'x' }, ']i', c(diag_jump('next', 'INFO')), { desc = 'Next diag info' })
-  vim.keymap.set({ 'n', 'x' }, '[h', c(diag_jump('prev', 'HINT')), { desc = 'Previous diag hint' })
-  vim.keymap.set({ 'n', 'x' }, ']h', c(diag_jump('next', 'HINT')), { desc = 'Next diag hint' })
-end
-
 -- Show notification if no references, definition, declaration,
 -- implementation or type definition is found
 do
