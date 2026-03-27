@@ -3,7 +3,7 @@
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.validate = function() end
 vim.loader.enable()
-require('vim._core.ui2').enable({enable = true})
+require('vim._core.ui2').enable({ enable = true })
 
 -- global variables {{{1
 vim.g.has_ui = #vim.api.nvim_list_uis() > 0
@@ -127,7 +127,6 @@ g.loaded_2html_plugin      = 0
 g.loaded_gzip              = 0
 g.loaded_tar               = 0
 g.loaded_tarPlugin         = 0
-g.loaded_tutor_mode_plugin = 0
 g.loaded_zip               = 0
 g.loaded_zipPlugin         = 0
 -- stylua: ignore end
@@ -135,9 +134,7 @@ g.loaded_zipPlugin         = 0
 g.qf_disable_statusline = 1
 o.grepprg = 'rg --vimgrep -uu'
 
--- o.tabline = "%!v:lua.require'my.tabline'()"
 o.statusline = "%!v:lua.require'my.statusline'()"
--- o.statuscolumn = "%!v:lua.require'my.statuscolumn'()"
 
 -- }}}1
 
@@ -156,6 +153,15 @@ map('x', 'I', function()
 end, { expr = true })
 map('x', 'A', function()
   return vim.fn.mode() == 'V' and '$<C-v>A' or 'A'
+end, { expr = true })
+
+-- Map space to wildcard in search mode
+map('c', '<Space>', function()
+  if vim.fn.getcmdtype():match('[/?]') then
+    return '.\\{-}'
+  else
+    return '<Space>'
+  end
 end, { expr = true })
 
 -- More consistent behavior of j/k when &wrap is set
@@ -242,23 +248,29 @@ map('t', '<M-l>', '<Cmd>wincmd l<CR>', { replace_keycodes = false })
 map('n', ']b', '<Cmd>exec v:count1 . "bn"<CR>')
 map('n', '[b', '<Cmd>exec v:count1 . "bp"<CR>')
 map('n', '<Leader>x', function()
-  local bufnr = vim.fn.bufnr('%')
-  local num_bufs = #vim.api.nvim_list_bufs()
-  if num_bufs == 0 then
-    return
-  end
-  if num_bufs == 1 then
-    vim.cmd('new')
-    vim.cmd('windo bp')
-  else
-    vim.cmd('windo if bufnr() == ' .. bufnr .. '|bp|endif')
-  end
-  vim.cmd('bwipeout ' .. bufnr)
-end, { desc = 'Close current buffer' })
+  local cur_buf = vim.api.nvim_get_current_buf()
+  local all_bufs = vim.fn.getbufinfo({ buflisted = 1 })
 
--- Correct misspelled word / mark as correct
-map('i', '<C-g>+', '<Esc>[szg`]a')
-map('i', '<C-g>=', '<C-g>u<Esc>[s1z=`]a<C-G>u')
+  local replacement = nil
+  for _, buf in ipairs(all_bufs) do
+    if buf.bufnr ~= cur_buf then
+      replacement = buf.bufnr
+      break
+    end
+  end
+
+  if not replacement then
+    replacement = vim.api.nvim_create_buf(false, true)
+  end
+
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_buf(win) == cur_buf then
+      vim.api.nvim_win_set_buf(win, replacement)
+    end
+  end
+
+  vim.cmd('confirm bwipeout ' .. cur_buf)
+end, { desc = 'Close current buffer' })
 
 -- }}}1
 
@@ -383,20 +395,6 @@ augroup('KeepWinRatio', {
     desc = 'Keep window ratio after resizing nvim.',
     callback = function()
       vim.cmd.wincmd('=')
-    end,
-  },
-})
-
-augroup('AutoCreateDir', {
-  'BufWritePre',
-  {
-    desc = 'Auto create directory when does not exist.',
-    callback = function(info)
-      if info.match:match('^%w%w+://') then
-        return
-      end
-      local file = vim.uv.fs_realpath(info.match) or info.match
-      vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
   },
 })
