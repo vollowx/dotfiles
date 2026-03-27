@@ -14,22 +14,27 @@ local function _load(plug_data)
   local spec = plug_data.spec
   local data = spec.data or {}
 
+  if type(data.init) == 'function' then
+    data.init()
+  end
+
   if data.on then -- Event-based loading
     local events = type(data.on) == 'string' and { data.on } or data.on
     vim.api.nvim_create_autocmd(events, {
       once = true,
+      pattern = data.pattern or '*',
       callback = function()
         vim.cmd.packadd(spec.name)
-        if type(data.after) == 'function' then
-          data.after(plug_data)
+        if type(data.postload) == 'function' then
+          data.postload(plug_data)
         end
       end,
     })
     return
   else -- Immediate loading
     vim.cmd.packadd(spec.name)
-    if type(data.after) == 'function' then
-      data.after(plug_data)
+    if type(data.postload) == 'function' then
+      data.postload(plug_data)
     end
   end
 end

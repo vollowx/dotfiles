@@ -2,7 +2,8 @@ return {
   {
     src = 'https://github.com/stevearc/quicker.nvim',
     data = {
-      after = function(_)
+      on = 'UIEnter',
+      postload = function(_)
         local icons = require('my.utils.icons')
 
         require('quicker').setup({

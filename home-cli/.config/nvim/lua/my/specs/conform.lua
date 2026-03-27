@@ -2,7 +2,7 @@ return {
   {
     src = 'https://github.com/stevearc/conform.nvim',
     data = {
-      after = function(_)
+      postload = function(_)
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         vim.keymap.set('', 'gq', function()
           require('conform').format({ async = true })

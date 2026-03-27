@@ -3,7 +3,7 @@ return {
     src = 'https://github.com/lewis6991/gitsigns.nvim',
     data = {
       on = 'BufReadPre',
-      after = function(_)
+      postload = function(_)
         local icons = require('my.utils.icons')
 
         require('gitsigns').setup({

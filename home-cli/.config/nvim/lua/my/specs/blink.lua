@@ -1,14 +1,14 @@
 return {
   {
     src = 'https://github.com/xzbdmw/colorful-menu.nvim',
-    data = {on = 'InsertEnter'}
+    data = { on = 'InsertEnter' }
   },
   {
     src = 'https://github.com/saghen/blink.cmp',
     version = vim.version.range('v1.*'),
     data = {
       on = 'InsertEnter',
-      after = function(_)
+      postload = function(_)
         require('blink.cmp').setup({
           cmdline = { enabled = false },
           completion = {

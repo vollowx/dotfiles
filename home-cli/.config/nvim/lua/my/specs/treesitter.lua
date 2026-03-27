@@ -3,7 +3,7 @@ return {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
     version = 'main',
     data = {
-      after = function(_)
+      postload = function(_)
         local langs = {
           'astro',
           'bash',
@@ -56,7 +56,7 @@ return {
   {
     src = 'https://github.com/Wansmer/treesj',
     data = {
-      after = function(_)
+      postload = function(_)
         vim.keymap.set('n', 'J', function()
           require('treesj').toggle()
         end, { desc = 'Treesitter Join/Split' })

@@ -2,11 +2,11 @@ return {
   {
     src = 'https://github.com/stevearc/oil.nvim',
     data = {
-      after = function(_)
-        -- TODO: Should be in something like before = function()
+      init = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
-
+      end,
+      postload = function(_)
         local oil = require('oil')
 
         local border = 'none'
