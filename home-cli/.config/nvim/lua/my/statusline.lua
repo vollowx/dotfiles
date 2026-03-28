@@ -1,66 +1,7 @@
-local icons = require('my.utils.icons')
 local utils = require('my.utils')
 local groupid = vim.api.nvim_create_augroup('StatusLine', {})
 
 _G._statusline = {}
-
--- Maximum widths
-local gitbranch_max_width = 0.2
-local fname_max_width = 0.4
-local fname_special_max_width = 0.8
-local fname_ext_max_width = 0.2
-local fname_prefix_suffix_max_width = 0.2
-
----Shorten string to a percentage of statusline width
----@param str string
----@param percent number
----@param str_alt? string alternate string to use when `str` exceeds max width
----@return string
-local function str_shorten(str, percent, str_alt)
-  str = tostring(str)
-
-  local stl_width = vim.go.laststatus == 3 and vim.go.columns
-    or vim.api.nvim_win_get_width(0)
-  local max_width = math.ceil(stl_width * percent)
-  local str_width = vim.fn.strdisplaywidth(str)
-  if str_width <= max_width then
-    return str
-  end
-
-  if str_alt then
-    return str_alt
-  end
-
-  local ellipsis = vim.trim(icons.Ellipsis)
-  local ellipsis_width = vim.fn.strdisplaywidth(ellipsis)
-  local max_substr_width = max_width - ellipsis_width
-
-  -- Ellipsis itself is wider than allowed substring width
-  if max_substr_width <= 0 then
-    return str:sub(1, 1)
-  end
-
-  -- Since a character can have length >= 1, we can only truncate more not less
-  -- than desired
-  local width_diff = str_width - max_substr_width
-  local substr_nchars = math.max(1, vim.fn.strcharlen(str) - width_diff)
-
-  return vim.fn.strcharpart(str, 0, substr_nchars) .. ellipsis
-end
-
----@param bufname string
----@return string path
----@return string pid
----@return string cmd
----@return string name
-local function parse_term_name(bufname)
-  local path, pid, cmd, name =
-    bufname:match('^term://(.*)//(%d+):([^#]*)%s*#?%s*(.*)')
-  return vim.fn.fnamemodify(vim.trim(path or ''), ':p'),
-    vim.trim(pid or ''),
-    vim.trim(cmd or ''),
-    vim.trim(name or '')
-end
 
 ---Record file name of normal buffers, key:val = fname:buffers_with_fname
 ---@type table<string, number[]>
@@ -98,8 +39,14 @@ local function add_buf(buf)
   if not buf_visible(buf) then
     return
   end
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  if bufname == '' then
+    return
+  end
 
-  local fname = vim.fs.basename(vim.api.nvim_buf_get_name(buf))
+  local clean = bufname:gsub('^%s*%S+://', ''):gsub('/$', '')
+  local fname = vim.fs.basename(clean)
+
   if fname == '' then
     return
   end
@@ -124,8 +71,10 @@ local function remove_buf(buf, bufname)
     return
   end
 
-  bufname = vim.fs.basename(bufname)
-  local bufs = fnames[bufname] -- buffers with the same name as the removed buf
+  local clean = bufname:gsub('^%s*%S+://', ''):gsub('/$', '')
+  local fname_key = vim.fs.basename(clean)
+
+  local bufs = fnames[fname_key]
   if not bufs then
     return
   end
@@ -139,10 +88,11 @@ local function remove_buf(buf, bufname)
 
   local num_bufs = #bufs
   if num_bufs == 0 then
-    fnames[bufname] = nil
+    fnames[fname_key] = nil
     return
   end
 
+  -- If only one buffer remains with this name, it no longer needs a path diff
   if num_bufs == 1 then
     if vim.api.nvim_buf_is_valid(bufs[1]) then
       vim.b[bufs[1]]._stl_pdiff = nil
@@ -150,8 +100,7 @@ local function remove_buf(buf, bufname)
     return
   end
 
-  -- Still have multiple buffers with the same file name,
-  -- update path diffs for the remaining buffers
+  -- Still have multiple buffers with the same name, update their diffs
   update_pdiffs(bufs)
 end
 
@@ -218,65 +167,99 @@ vim.api.nvim_create_autocmd('WinClosed', {
   end,
 })
 
----Get file name
----@return string
-function _G._statusline.fname()
+local function raw_fname()
   local bufname = vim.api.nvim_buf_get_name(0)
-  local fname_root = vim.fn.fnamemodify(bufname, ':t:r')
-  local fname_ext = vim.fn.fnamemodify(bufname, ':e')
-  local fname_short = string.format(
-    '%s%s%s',
-    str_shorten(fname_root, fname_max_width),
-    fname_root ~= '' and fname_ext ~= '' and '.' or '',
-    str_shorten(fname_ext, fname_ext_max_width)
-  )
+  if bufname == '' then
+    return '[No Name]'
+  end
 
-  if vim.bo.bt == '' then
-    if bufname == '' then
-      return 'Draft'
-    end
-    -- Named normal buffer, show file name, if the file name is not unique,
-    -- show local cwd (often project root) after the file name
-    local pdiff_short = vim.b._stl_pdiff
-      and str_shorten(vim.b._stl_pdiff, fname_prefix_suffix_max_width)
-    if pdiff_short then
-      return string.format(
-        '%s [%s]',
-        utils.stl.escape(fname_short),
-        utils.stl.escape(pdiff_short)
-      )
-    end
-    return utils.stl.escape(fname_short)
+  local clean = bufname:gsub('^%s*%S+://', ''):gsub('/$', '')
+  local display_name = vim.fs.basename(clean)
+
+  if display_name == '' then
+    display_name = clean
   end
 
   if vim.bo.bt == 'quickfix' then
-    return (vim.w.quickfix_title or 'empty') .. '(Quickfix)'
+    return vim.w.quickfix_title or '[No Name]'
   end
 
-  if vim.bo.ft == 'oil' then
-    return require('oil').get_current_dir() or ''
+  if vim.bo.ft == 'fugitive' then
+    local path = vim.fs.root(0, '.git') or ''
+    path = vim.fn.fnamemodify(path, ':~')
+    return string.format('%s', path)
   end
 
-  local prefix, main = bufname:match('^%s*(%S+)://(.*)')
-  if prefix and main then
-    return utils.stl.escape(
-      string.format(
-        '%s (%s)',
-        str_shorten(main, fname_special_max_width),
-        str_shorten(vim.fs.basename(prefix), fname_prefix_suffix_max_width)
-      )
-    )
+  local pdiff = vim.b._stl_pdiff
+  if pdiff and pdiff ~= '' then
+    display_name = string.format('%s [%s]', display_name, pdiff)
   end
 
-  return str_shorten(
-    vim.api.nvim_eval_statusline('%F', {}).str,
-    fname_max_width
-  )
+  return utils.stl.escape(display_name)
+end
+
+---Get Emacs-like position: "Scroll (Line,Col)   "
+---@return string
+function _G._statusline.pos()
+  local line = vim.fn.line('.')
+  local col = vim.fn.virtcol('.')
+  local total = vim.fn.line('$')
+
+  local win_top = vim.fn.line('w0')
+  local win_bot = vim.fn.line('w$')
+  local win_h = vim.api.nvim_win_get_height(0)
+
+  local view
+  if win_top == 1 and win_bot == total then
+    view = 'All'
+  elseif win_top == 1 then
+    view = 'Top'
+  elseif win_bot == total then
+    view = 'Bot'
+  else
+    local percentage = math.floor((win_top - 1) / (total - win_h) * 100)
+    view = string.format('%2d%%%%', math.max(0, math.min(99, percentage)))
+  end
+
+  local str = string.format('%s  (%d,%d)', view, line, col)
+
+  return string.format('%-20s   ', str)
+end
+
+---Get Emacs-like state block
+---@return string
+function _G._statusline.state()
+  local fenc = (vim.bo.fenc ~= '' and vim.bo.fenc or vim.o.enc):upper()
+  local encoding_part = fenc:sub(1, 1) -- i.e. 'U' for UTF-8
+
+  local ff = vim.bo.fileformat
+  local format_part = ff == 'unix' and '(Unix)'
+    or (ff == 'dos' and '\\' or '(Mac)')
+
+  local rw_part = vim.bo.readonly and '%%%%'
+    or vim.bo.modified and '**'
+    or '--'
+
+  local is_remote = false -- TODO: To be implemented
+  local remote_part = is_remote and '@' or '-'
+
+  -- Format: U(Unix)---
+  local state_str =
+    string.format('%s%s%s%s', encoding_part, format_part, rw_part, remote_part)
+
+  return string.format('%s  ', state_str)
+end
+
+---Get file name
+---@return string
+function _G._statusline.fname()
+  return string.format('%-30s   ', raw_fname())
 end
 
 ---Get diff stats for current buffer
+---@param nc boolean
 ---@return string
-function _G._statusline.gitdiff()
+function _G._statusline.gitdiff(nc)
   -- Integration with gitsigns.nvim
   ---@diagnostic disable-next-line: undefined-field
   local diff = vim.b.gitsigns_status_dict
@@ -289,9 +272,15 @@ function _G._statusline.gitdiff()
   end
   return string.format(
     '+%s~%s-%s',
-    utils.stl.hl(tostring(added), 'StatusLineGitAdded'),
-    utils.stl.hl(tostring(changed), 'StatusLineGitChanged'),
-    utils.stl.hl(tostring(removed), 'StatusLineGitRemoved')
+    utils.stl.hl(tostring(added), 'StatusLineGitAdded' .. (nc and 'NC' or '')),
+    utils.stl.hl(
+      tostring(changed),
+      'StatusLineGitChanged' .. (nc and 'NC' or '')
+    ),
+    utils.stl.hl(
+      tostring(removed),
+      'StatusLineGitRemoved' .. (nc and 'NC' or '')
+    )
   )
 end
 
@@ -305,37 +294,7 @@ function _G._statusline.gitbranch()
     return ''
   end
 
-  return '#' .. utils.stl.escape(str_shorten(branch, gitbranch_max_width))
-end
-
----Get current filetype
----@return string
-function _G._statusline.ft()
-  local ft = vim.bo.ft == '' and '' or vim.bo.ft
-  if ft == '' then return '' end
-  return ft:sub(1, 1):upper() .. ft:sub(2)
-end
-
----Additional info for the current buffer enclosed in parentheses
----@return string
-function _G._statusline.info()
-  if vim.bo.bt ~= '' then
-    return ''
-  end
-
-  local info = {}
-  ---@param section string
-  local function add_section(section)
-    if section ~= '' then
-      table.insert(info, section)
-    end
-  end
-
-  add_section(_G._statusline.ft())
-  add_section(_G._statusline.gitbranch())
-  add_section(_G._statusline.gitdiff())
-  return vim.tbl_isempty(info) and ''
-    or string.format('(%s) ', table.concat(info, ', '))
+  return '#' .. utils.stl.escape(branch)
 end
 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
@@ -349,99 +308,97 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
         + 1
     end
     b.diag_str_cache = nil
+    b.diag_str_cache_nc = nil
     b.diag_cnt_cache = diag_cnt_cache
   end,
 })
 
 ---Get string representation of diagnostics for current buffer
+---@param nc boolean
 ---@return string
-function _G._statusline.diag()
-  if vim.b.diag_str_cache then
-    return vim.b.diag_str_cache
+function _G._statusline.diag(nc)
+  local cache_name = 'diag_str_cache' .. (nc and '_nc' or '')
+  if vim.b[cache_name] then
+    return vim.b[cache_name]
   end
   local str = ''
   local buf_cnt = vim.b.diag_cnt_cache or {}
   for serverity_nr, severity in ipairs({ 'Error', 'Warn', 'Info', 'Hint' }) do
     local cnt = buf_cnt[serverity_nr] or 0
     if cnt > 0 then
-      local icon_hl = 'StatusLineDiagnostic' .. severity
-      str = str .. (str == '' and '' or ' ') .. utils.stl.hl(cnt, icon_hl)
+      local hl = 'StatusLineDiagnostic' .. severity .. (nc and 'NC' or '')
+      str = str .. (str == '' and '' or ' ') .. utils.stl.hl(cnt, hl)
     end
   end
-  if str:find('%S') then
-    str = str .. ' '
-  end
-  vim.b.diag_str_cache = str
+  vim.b[cache_name] = str
   return str
 end
 
-vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
-  group = groupid,
-  desc = 'Update lsp cache for the status line.',
-  callback = function(info)
-    local b = vim.b[info.buf]
-    local clients = vim.lsp.get_clients({ bufnr = info.buf })
-    local names = {}
-    vim.iter(clients):each(function(client)
-      table.insert(names, client.name)
-    end)
-    b.lsp_str_cache = nil
-    b.lsp_names_cache = names
-  end,
-})
-
+---Get current filetype
 ---@return string
-function _G._statusline.lsp()
-  if vim.b.lsp_str_cache then
-    return vim.b.lsp_str_cache
+function _G._statusline.ft()
+  local ft = vim.bo.ft == '' and '' or vim.bo.ft
+  if ft == '' then
+    return ''
   end
-  local str = ''
-  local names = vim.b.lsp_names_cache or {}
-  str = table.concat(names, ', ')
-  if str:find('%S') then
-    str = str .. ' '
+  return ft:sub(1, 1):upper() .. ft:sub(2)
+end
+
+---Additional info for the current buffer enclosed in parentheses
+---@param nc boolean
+---@return string
+function _G._statusline.info(nc)
+  local info = {}
+  ---@param section string
+  local function add_section(section)
+    if section ~= '' then
+      table.insert(info, section)
+    end
   end
-  vim.b.lsp_str_cache = str
-  return str
+
+  add_section(_G._statusline.ft())
+  add_section(_G._statusline.gitbranch())
+  add_section(_G._statusline.gitdiff(nc))
+  add_section(_G._statusline.diag(nc))
+  return vim.tbl_isempty(info) and ''
+    or string.format('(%s) ', table.concat(info, ', '))
 end
 
 -- stylua: ignore start
 ---Statusline components
 ---@type table<string, string>
 local components = {
-  align        = [[%=]],
-  diag         = [[%{%v:lua.require'my.statusline'.diag()%}]],
-  lsp          = [[%{%v:lua.require'my.statusline'.lsp()%}]],
+  state        = [[%{%v:lua.require'my.statusline'.state()%}]],
   fname        = [[%{%v:lua.require'my.statusline'.fname()%}]],
-  info         = [[%{%v:lua.require'my.statusline'.info()%}]],
+  info         = [[%{%v:lua.require'my.statusline'.info(v:false)%}]],
+  info_nc      = [[%{%v:lua.require'my.statusline'.info(v:true)%}]],
+  pos          = [[%{%v:lua.require'my.statusline'.pos()%}]],
+  align        = [[%=]],
   padding      = [[ ]],
-  pos          = [[%{%&ru?"%l:%c ":""%}]],
   truncate     = [[%<]],
 }
 -- stylua: ignore end
 
 local stl = table.concat({
   components.padding,
+  components.state,
   components.fname,
-  components.padding,
+  components.pos,
   components.info,
   components.align,
   components.truncate,
-  components.lsp,
-  components.diag,
-  components.pos,
+  components.padding,
 })
 
 local stl_nc = table.concat({
   components.padding,
+  components.state,
   components.fname,
-  components.padding,
-  components.info,
+  components.pos,
+  components.info_nc,
   components.align,
   components.truncate,
-  components.lsp,
-  components.diag,
-  components.pos,
+  components.padding,
 })
 
 setmetatable(_G._statusline, {
@@ -461,13 +418,20 @@ local function set_default_hlgroups()
     link = false,
     winhl_link = false,
   })
+  local default_nc_attr = utils.hl.get(0, {
+    name = 'StatusLineNC',
+    link = false,
+    winhl_link = false,
+  })
 
   ---@param hlgroup_name string
   ---@param attr table
   ---@return nil
   local function sethl(hlgroup_name, attr)
     local merged_attr = vim.tbl_deep_extend('keep', attr, default_attr)
+    local merged_nc_attr = vim.tbl_deep_extend('keep', attr, default_nc_attr)
     utils.hl.set_default(0, hlgroup_name, merged_attr)
+    utils.hl.set_default(0, hlgroup_name .. 'NC', merged_nc_attr)
   end
   -- stylua: ignore start
   sethl('StatusLineGitAdded', { fg = 'GitSignsAdd' })
