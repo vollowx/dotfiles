@@ -2,14 +2,15 @@
 
 _Stow-managed dotfiles for *nix systems_
 
-Package names are those in Arch Linux and AUR by default.
+Package names are those in [Arch Linux](https://archlinux.org/) and
+[AUR](https://aur.archlinux.org/) by default.
 
 This dotfiles will probably not work for you without modifying since there are
 many hard-coded names that doesn't exist on your machine. For reference only.
 
 ## Applying
 
-    git clone git@github.com:vollowx/dotfiles.git && cd ~/dotfiles
+    git clone git@github.com:vollowx/dotfiles.git && cd ./dotfiles
     mkdir -p ~/.config ~/.local/share ~/.local/bin
     mkdir -p ~/Documents/Mail
     mkdir -p ~/Downloads
@@ -126,4 +127,4 @@ To use tools like OpenSSH with virtual machines, here is how to get the IP:
 
 ## Acknowledgements
 
-- [bekaboo/nvim](https://github.com/Bekaboo/nvim), for many plugins and configurations, tree-wide structure, etc
+- [bekaboo/dots](https://github.com/Bekaboo/dots), for many Neovim plugins and configurations, etc

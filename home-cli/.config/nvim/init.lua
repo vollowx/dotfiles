@@ -35,17 +35,15 @@ end
 -- options {{{1
 
 -- stylua: ignore start
+o.autowriteall   = true
 o.cursorline     = true
 o.cursorlineopt  = 'number'
-o.autowriteall   = true
-o.foldcolumn     = '0'
 o.foldlevelstart = 99
 o.foldtext       = ''
+o.grepprg        = 'rg --vimgrep -uu'
 o.helpheight     = 10
-o.mousemoveevent = true
 o.number         = true
 o.relativenumber = true
-o.ruler          = true
 o.pumheight      = 16
 o.scrolloff      = 4
 o.sidescrolloff  = 8
@@ -123,7 +121,6 @@ g.netrw_liststyle = 1
 g.netrw_localcopydircmd = 'cp -r'
 
 -- stylua: ignore start
-g.loaded_2html_plugin      = 0
 g.loaded_gzip              = 0
 g.loaded_tar               = 0
 g.loaded_tarPlugin         = 0
@@ -132,7 +129,6 @@ g.loaded_zipPlugin         = 0
 -- stylua: ignore end
 
 g.qf_disable_statusline = 1
-o.grepprg = 'rg --vimgrep -uu'
 
 o.statusline = "%!v:lua.require'my.statusline'()"
 
