@@ -19,6 +19,7 @@ return {
           'gitcommit',
           'go',
           'gomod',
+          'haskell',
           'html',
           'javascript',
           'json',

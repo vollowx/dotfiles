@@ -1,7 +1,7 @@
 [user]
   name = Vollow
-  email = vollow.zhao@outlook.com
-  signingkey = vollow.zhao@outlook.com
+  email = vollowx@outlook.com
+  signingkey = vollowx@outlook.com
 [commit]
   gpgsign = true
 [filter "lfs"]
