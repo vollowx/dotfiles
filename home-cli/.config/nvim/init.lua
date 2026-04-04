@@ -1,4 +1,4 @@
--- vim: fdm=marker
+-- vim: fdm=marker fdl=0
 
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.validate = function() end
@@ -15,6 +15,7 @@ vim.g.has_gui = vim.g.has_ui
   )
 -- }}}1
 
+-- helpers {{{1
 local o = vim.opt
 local g = vim.g
 local map = vim.keymap.set
@@ -31,6 +32,7 @@ local function augroup(group, ...)
     autocmd(unpack(a))
   end
 end
+-- }}}1
 
 -- options {{{1
 
@@ -47,6 +49,8 @@ o.relativenumber = true
 o.pumheight      = 16
 o.scrolloff      = 4
 o.sidescrolloff  = 8
+o.showcmd        = false -- TODO: Integrate visual mode info into statusline
+o.showmode       = false -- TODO: Integrate mode info into statusline
 o.signcolumn     = 'yes:1'
 o.splitright     = true
 o.splitbelow     = true
@@ -289,7 +293,6 @@ augroup('BigFileSettings', {
         vim.opt_local.statuscolumn = ''
         vim.opt_local.signcolumn = 'no'
         vim.opt_local.foldcolumn = '0'
-        vim.opt_local.winbar = ''
         vim.cmd.syntax('off')
       end
     end,

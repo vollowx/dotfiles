@@ -1,7 +1,7 @@
-if vim.g.loaded_git_remote_line then
+if vim.g.loaded_git_link then
   return
 end
-vim.g.loaded_git_remote_line = true
+vim.g.loaded_git_link = true
 
 local rules = {
   -- HTTPS URLs (input: https://host/org/repo)

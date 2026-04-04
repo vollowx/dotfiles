@@ -223,7 +223,7 @@ function _G._statusline.pos()
 
   local str = string.format('%s  (%d,%d)', view, line, col)
 
-  return string.format('%-20s   ', str)
+  return string.format('%-16s   ', str)
 end
 
 ---Get Emacs-like state block
