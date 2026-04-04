@@ -8,8 +8,6 @@ vim.lsp.enable({
   'ts_ls',
 })
 
-local utils = require('my.utils')
-
 -- Show notification if no references, definition, declaration,
 -- implementation or type definition is found
 do
@@ -66,7 +64,6 @@ do
       contents,
       syntax,
       vim.tbl_deep_extend('force', opts, {
-        border = 'none',
         max_width = math.max(80, math.ceil(vim.go.columns * 0.75)),
         max_height = math.max(20, math.ceil(vim.go.lines * 0.4)),
         close_events = {

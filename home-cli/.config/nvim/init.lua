@@ -1,7 +1,5 @@
 -- vim: fdm=marker fdl=0
 
----@diagnostic disable-next-line: duplicate-set-field
-vim.validate = function() end
 vim.loader.enable()
 require('vim._core.ui2').enable({ enable = true })
 
@@ -398,6 +396,24 @@ augroup('KeepWinRatio', {
   },
 })
 
+augroup('LspSettings', {
+  'FileType',
+  {
+    callback = function()
+      require('my.lsp')
+    end,
+  },
+})
+
+augroup('DiagnosticSettings', {
+  'DiagnosticChanged',
+  {
+    callback = function()
+      require('my.diagnostic')
+    end,
+  },
+})
+
 augroup('TerminalSettings', {
   'TermOpen',
   {
@@ -420,8 +436,8 @@ augroup('TmuxSupport', {
 
 -- }}}1
 
-require('my.pack').source('@/lua/my/specs')
-require('my.pack').ensure()
+require('my.utils.pack').source('@/lua/my/specs')
+require('my.utils.pack').ensure()
 
 if vim.g.has_gui and vim.g.has_ui then
   vim.cmd.colorscheme('modus')
