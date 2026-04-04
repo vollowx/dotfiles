@@ -8,7 +8,7 @@ return {
 
         require('gitsigns').setup({
           preview_config = {
-            border = 'single',
+            border = 'none',
             style = 'minimal',
           },
           signs = {
