@@ -1,12 +1,12 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "451168851e8e2466bc97ee3e026c3dcb9141ce07",
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
     "catppuccin": {
-      "rev": "16408d203973da7e43fab87c6f9d3bf7fa98fa8b",
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim"
     },
     "clever-f.vim": {
@@ -26,7 +26,7 @@
       "src": "https://github.com/sainnhe/everforest"
     },
     "gitsigns.nvim": {
-      "rev": "944ef13cc8d8fe8b846c91f36041c8dfb85ca000",
+      "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "modus-themes.nvim": {
@@ -47,7 +47,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "symbol-usage.nvim": {
-      "rev": "e07c07dfe7504295a369281e95a24e1afa14b243",
+      "rev": "6a449e6b37be61a110606e9a67a7a308774f120f",
       "src": "https://github.com/Wansmer/symbol-usage.nvim"
     },
     "treesj": {

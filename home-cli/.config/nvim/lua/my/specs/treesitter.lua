@@ -10,9 +10,11 @@ return {
           'c',
           'cmake',
           'comment',
+          'commonlisp',
           'cpp',
           'css',
           'csv',
+          'd',
           'desktop',
           'diff',
           'editorconfig',
@@ -38,18 +40,6 @@ return {
         }
 
         require('nvim-treesitter').install(langs)
-
-        for _, lang in ipairs(langs) do
-          vim.api.nvim_create_autocmd('FileType', {
-            pattern = { lang },
-            callback = function(ev)
-              vim.treesitter.start(ev.buf, lang)
-              vim.wo[0][0].fdm = 'expr'
-              vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-              vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-            end,
-          })
-        end
       end,
     },
   },

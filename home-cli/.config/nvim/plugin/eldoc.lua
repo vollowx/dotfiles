@@ -25,7 +25,9 @@ local function handle_signature_help(err, result)
     label = label:sub(1, max_w) .. '…'
   end
 
-  if label == last_message then return end
+  if label == last_message then
+    return
+  end
 
   last_message = label
 
@@ -35,7 +37,13 @@ end
 
 local function handle_cursor_hold()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
-  if #clients == 0 then return end
+  if #clients == 0 then
+    return
+  end
+
+  if not clients[1]:supports_method('textDocument/signatureHelp') then
+    return
+  end
 
   local params =
     vim.lsp.util.make_position_params(0, clients[1].offset_encoding)

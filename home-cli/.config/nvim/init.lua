@@ -33,7 +33,6 @@ end
 -- }}}1
 
 -- options {{{1
-
 -- stylua: ignore start
 o.autowriteall   = true
 o.cursorline     = true
@@ -131,13 +130,9 @@ g.loaded_zipPlugin         = 0
 -- stylua: ignore end
 
 g.qf_disable_statusline = 1
-
-o.statusline = "%!v:lua.require'my.statusline'()"
-
 -- }}}1
 
 -- key-mappings {{{1
-
 g.mapleader = ' '
 g.maplocalleader = ' '
 
@@ -269,11 +264,9 @@ map('n', '<Leader>x', function()
 
   vim.cmd('confirm bwipeout ' .. cur_buf)
 end, { desc = 'Close current buffer' })
-
 -- }}}1
 
 -- autocmds {{{1
-
 augroup('BigFileSettings', {
   'BufReadPre',
   {
@@ -356,7 +349,7 @@ augroup('AutoCwd', {
         end
         vim.api.nvim_win_call(win, function()
           local current_dir = vim.fn.getcwd(0)
-          local target_dir = require('my.utils').fs.root(info.file)
+          local target_dir = require('my.utils.fs').root(info.file)
             or vim.fs.dirname(info.file)
           local stat = target_dir and vim.uv.fs_stat(target_dir)
           -- Prevent unnecessary directory change, which triggers
@@ -374,18 +367,6 @@ augroup('AutoCwd', {
   },
 })
 
-augroup('PromptBufKeymaps', {
-  'BufEnter',
-  {
-    desc = 'Undo automatic <C-w> remap in prompt buffers.',
-    callback = function(info)
-      if vim.bo[info.buf].buftype == 'prompt' then
-        vim.keymap.set('i', '<C-w>', '<C-S-W>', { buffer = info.buf })
-      end
-    end,
-  },
-})
-
 augroup('KeepWinRatio', {
   { 'VimResized', 'TabEnter' },
   {
@@ -395,46 +376,11 @@ augroup('KeepWinRatio', {
     end,
   },
 })
-
-augroup('LspSettings', {
-  'FileType',
-  {
-    callback = function()
-      require('my.lsp')
-    end,
-  },
-})
-
-augroup('DiagnosticSettings', {
-  'DiagnosticChanged',
-  {
-    callback = function()
-      require('my.diagnostic')
-    end,
-  },
-})
-
-augroup('TerminalSettings', {
-  'TermOpen',
-  {
-    desc = 'Set terminal settings.',
-    callback = function(info)
-      require('my.terminal').setup(info.buf)
-    end,
-  },
-})
-
-augroup('TmuxSupport', {
-  'UIEnter',
-  {
-    desc = 'Load tmux support.',
-    callback = function()
-      require('my.tmux').setup()
-    end,
-  },
-})
-
 -- }}}1
+
+require('my.core.treesitter')
+require('my.core.lsp')
+require('my.core.diagnostic')
 
 require('my.utils.pack').source('@/lua/my/specs')
 require('my.utils.pack').ensure()

@@ -13,14 +13,6 @@ function M.hl(str, hl, restore)
     or table.concat({ '%#', hl, '#', str })
 end
 
----Make a winbar string clickable
----@param str string
----@param callback string
----@return string
-function M.make_clickable(str, callback)
-  return string.format('%%@%s@%s%%X', callback, str)
-end
-
 ---Escape '%' with '%' in a string to avoid it being treated as a statusline
 ---field, see `:h 'statusline'`
 ---@param str string

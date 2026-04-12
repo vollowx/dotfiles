@@ -80,40 +80,6 @@ function M.root(source, marker)
   end
 end
 
----Read file contents
----@param path string
----@return string?
-function M.read_file(path)
-  local file = io.open(path, 'r')
-  if not file then
-    return nil
-  end
-  local content = file:read('*a')
-  file:close()
-  return content or ''
-end
-
----Write string into file
----@param path string
----@return boolean success
-function M.write_file(path, str)
-  local file = io.open(path, 'w')
-  if not file then
-    return false
-  end
-  file:write(str)
-  file:close()
-  return true
-end
-
----Check if a path is empty
----@param path string
----@return boolean
-function M.is_empty(path)
-  local stat = vim.uv.fs_stat(path)
-  return not stat or stat.size == 0
-end
-
 ---Given a list of paths, return a list of path heads that uniquely distinguish each path
 ---e.g. { 'a/b/c', 'a/b/d', 'a/e/f' } -> { 'c', 'd', 'f' }
 ---     { 'a/b/c', 'd/b/c', 'e/c' } -> { 'a/b', 'd/b', 'e' }
@@ -170,54 +136,6 @@ function M.diff(paths)
     end
   end
   return diffs
-end
-
----Check if a given directory contains a file or subdirectory
----@param parent string directory path
----@param sub string sub file or directory path
----@param strict? boolean whether to return false if `parent` == `sub`, default false
-function M.contains(parent, sub, strict)
-  -- `fnamemodify()` adds trailing `/` to directories
-  -- `parent` must end with `/`, else when `sub` is `/foo/bar-baz/file.txt` and
-  -- `parent` is `/foo/bar`, the function gives false positive
-  parent = vim.fn.fnamemodify(vim.fs.normalize(parent), ':p')
-  sub = vim.fn.fnamemodify(vim.fs.normalize(sub), ':p')
-  if strict and parent == sub then
-    return false
-  end
-  return vim.startswith(sub, parent)
-end
-
----Check if given directory is root directory
----@param dir string
----@return boolean
-function M.is_root_dir(dir)
-  return dir == vim.fs.dirname(dir)
-end
-
----Home directory
----@type string?
-local home
-
----Check if given directory is home directory
----@param dir string
----@return boolean
-function M.is_home_dir(dir)
-  if not home then
-    home = vim.uv.os_homedir()
-    home = home and vim.fs.normalize(home)
-  end
-  return vim.fs.normalize(dir) == home
-end
-
----Check if a path is full path
----@param path string
----@return boolean
-function M.is_full_path(path)
-  -- Use `fs.normalize()` to trim trailing slashes so that
-  -- `foo/` and `foo` are treated equally
-  return vim.fs.normalize(vim.fn.fnamemodify(path, ':p'))
-    == vim.fs.normalize(path)
 end
 
 return M

@@ -1,4 +1,8 @@
-local utils = require('my.utils')
+local utils = {
+  fs = require('my.utils.fs'),
+  hl = require('my.utils.hl'),
+  stl = require('my.utils.stl'),
+}
 local groupid = vim.api.nvim_create_augroup('StatusLine', {})
 
 _G._statusline = {}
@@ -368,11 +372,11 @@ end
 ---Statusline components
 ---@type table<string, string>
 local components = {
-  state        = [[%{%v:lua.require'my.statusline'.state()%}]],
-  fname        = [[%{%v:lua.require'my.statusline'.fname()%}]],
-  info         = [[%{%v:lua.require'my.statusline'.info(v:false)%}]],
-  info_nc      = [[%{%v:lua.require'my.statusline'.info(v:true)%}]],
-  pos          = [[%{%v:lua.require'my.statusline'.pos()%}]],
+  state        = [[%{%v:lua.require'my.plugins.eline'.state()%}]],
+  fname        = [[%{%v:lua.require'my.plugins.eline'.fname()%}]],
+  info         = [[%{%v:lua.require'my.plugins.eline'.info(v:false)%}]],
+  info_nc      = [[%{%v:lua.require'my.plugins.eline'.info(v:true)%}]],
+  pos          = [[%{%v:lua.require'my.plugins.eline'.pos()%}]],
   align        = [[%=]],
   padding      = [[ ]],
   truncate     = [[%<]],
