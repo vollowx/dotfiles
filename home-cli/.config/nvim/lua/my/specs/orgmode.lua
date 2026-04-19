@@ -9,7 +9,7 @@ return {
           org_todo_keywords = {
             'TODO',
             'NEXT',
-            'STARTED',
+            'STRT',
             '|',
             'DONE',
             'DELEGATED',

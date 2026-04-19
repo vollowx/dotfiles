@@ -22,7 +22,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "everforest": {
-      "rev": "b03a03148c8b34c24c96960b93da9c8883d11f54",
+      "rev": "aeef62ee97872d2557d25904d160ec93a4a355f8",
       "src": "https://github.com/sainnhe/everforest"
     },
     "gitsigns.nvim": {
@@ -43,7 +43,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "orgmode": {
-      "rev": "1ab7b456020de8bdaed7d8135b5376a0b4419b11",
+      "rev": "a214db3c8ed7eb68cb74924575b91ffc658e7d82",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "quicker.nvim": {
@@ -55,7 +55,7 @@
       "src": "https://github.com/Wansmer/symbol-usage.nvim"
     },
     "treesj": {
-      "rev": "26bc2a8432ba3ea79ed6aa346fba780a3d372570",
+      "rev": "5fa4e7ba3517f8fe743bb4488f9e9c7ce83330fc",
       "src": "https://github.com/Wansmer/treesj"
     },
     "vim-cool": {
@@ -75,7 +75,7 @@
       "src": "https://github.com/tpope/vim-sleuth"
     },
     "vim-wakatime": {
-      "rev": "d7973b157a632d1edeff01818f18d67e584eeaff",
+      "rev": "cb7ba055330245b3a9d29f8bb4b82aeb2d52e580",
       "src": "https://github.com/wakatime/vim-wakatime"
     },
     "vimwiki": {
