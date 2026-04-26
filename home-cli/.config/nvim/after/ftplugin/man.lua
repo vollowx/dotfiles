@@ -7,6 +7,7 @@ vim.opt_local.list = false
 vim.opt_local.number = false
 vim.opt_local.relativenumber = false
 vim.opt_local.scrolloff = 999
+vim.opt_local.scrolloffpad = 1
 vim.opt_local.signcolumn = 'no'
 vim.opt_local.spell = false
 vim.opt_local.statuscolumn = ''

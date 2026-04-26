@@ -1,4 +1,6 @@
 return {
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+
   {
     src = 'https://github.com/miikanissi/modus-themes.nvim',
     data = {

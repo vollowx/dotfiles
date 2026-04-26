@@ -127,8 +127,6 @@ g.loaded_tarPlugin         = 0
 g.loaded_zip               = 0
 g.loaded_zipPlugin         = 0
 -- stylua: ignore end
-
-g.qf_disable_statusline = 1
 -- }}}1
 
 -- key-mappings {{{1
