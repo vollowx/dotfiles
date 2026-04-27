@@ -6,8 +6,9 @@ return {
     data = {
       postload = function()
         require('modus-themes').setup({
-          line_nr_column_background = false,
-          sign_column_background = false,
+          -- line_nr_column_background = false,
+          -- sign_column_background = false,
+          styles = { comments = { italic = false }, keywords = { italic = false } },
           on_highlights = function(highlight, color)
             highlight['@org.headline.level1']       = { fg = color.magenta_cooler }
             highlight['@org.headline.level2']       = { fg = color.magenta_warmer }
@@ -24,10 +25,10 @@ return {
             highlight['@org.agenda.scheduled']      = { fg = color.yellow }
             highlight['@org.agenda.scheduled_past'] = { fg = color.yellow_faint }
             highlight['@org.agenda.time_grid']      = { fg = color.fg_dim }
-            highlight['@org.agenda.day']            = { fg = color.cyan }
-            highlight['@org.agenda.today']          = { fg = color.cyan, underline = true }
-            highlight['@org.agenda.weekend']        = { fg = color.magenta }
-            highlight['@org.agenda.weekend.today']  = { fg = color.magenta, underline = true }
+            highlight['@org.agenda.day']            = { fg = color.cyan, bold = true }
+            highlight['@org.agenda.today']          = { fg = color.cyan, bold = true,    underline = true }
+            highlight['@org.agenda.weekend']        = { fg = color.magenta, bold = true }
+            highlight['@org.agenda.weekend.today']  = { fg = color.magenta, bold = true, underline = true }
           end,
         })
       end,
