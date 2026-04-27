@@ -25,8 +25,9 @@ return {
             highlight['@org.agenda.scheduled_past'] = { fg = color.yellow_faint }
             highlight['@org.agenda.time_grid']      = { fg = color.fg_dim }
             highlight['@org.agenda.day']            = { fg = color.cyan }
-            highlight['@org.agenda.today']          = { fg = color.magenta, underline = true }
+            highlight['@org.agenda.today']          = { fg = color.cyan, underline = true }
             highlight['@org.agenda.weekend']        = { fg = color.magenta }
+            highlight['@org.agenda.weekend.today']  = { fg = color.magenta, underline = true }
           end,
         })
       end,
