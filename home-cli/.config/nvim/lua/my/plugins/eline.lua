@@ -14,10 +14,9 @@ local function make_segment(len, text)
   local ok, status_info =
     pcall(vim.api.nvim_eval_statusline, text, { winid = 0 })
   local visual_width = ok and status_info.width or 0
-
   local padding_len = math.max(0, len - visual_width)
 
-  return text .. string.rep(' ', padding_len) .. '   '
+  return text .. string.rep(' ', padding_len) .. '  '
 end
 
 -- stylua: ignore start
@@ -66,32 +65,43 @@ function _G._statusline.mode()
   return string.format('<%s>   ', modes[vim.fn.mode()])
 end
 
----Get Emacs-like position: "Scroll (Line,Col)   "
+---Get window scroll percentage
+---@return string
+function _G._statusline.win_scroll()
+  local total = vim.api.nvim_buf_line_count(0)
+
+  local win_info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
+  local win_top = win_info.topline
+  local win_bot = win_info.botline
+
+  if win_top == 1 and win_bot == total then
+    return make_segment(3, 'All')
+  elseif win_top == 1 then
+    return make_segment(3, 'Top')
+  elseif win_bot == total then
+    return make_segment(3, 'Bot')
+  end
+
+  local denominator = total - (win_bot - win_top + 1)
+  if denominator <= 0 then
+    return make_segment(3, 'All')
+  end
+
+  local percentage = math.floor((win_top - 1) / denominator * 100)
+  local str = string.format('%2d%%%%', math.max(0, math.min(99, percentage)))
+
+  return make_segment(3, str)
+end
+
+---Get "(line,col)  "
 ---@return string
 function _G._statusline.pos()
   local line = vim.fn.line('.')
   local col = vim.fn.virtcol('.')
-  local total = vim.fn.line('$')
 
-  local win_top = vim.fn.line('w0')
-  local win_bot = vim.fn.line('w$')
-  local win_h = vim.api.nvim_win_get_height(0)
+  local str = string.format('(%d,%d)', line, col)
 
-  local view
-  if win_top == 1 and win_bot == total then
-    view = 'All'
-  elseif win_top == 1 then
-    view = 'Top'
-  elseif win_bot == total then
-    view = 'Bot'
-  else
-    local percentage = math.floor((win_top - 1) / (total - win_h) * 100)
-    view = string.format('%2d%%%%', math.max(0, math.min(99, percentage)))
-  end
-
-  local str = string.format('%s  (%d,%d)', view, line, col)
-
-  return make_segment(16, str)
+  return make_segment(9, str)
 end
 
 ---Get Emacs-like state block
@@ -101,8 +111,7 @@ function _G._statusline.state()
   local encoding_part = fenc:sub(1, 1) -- i.e. 'U' for UTF-8
 
   local ff = vim.bo.fileformat
-  local format_part = ff == 'unix' and ':'
-    or (ff == 'dos' and '\\' or '/')
+  local format_part = ff == 'unix' and ':' or (ff == 'dos' and '\\' or '/')
 
   local rw_part = (vim.bo.readonly or not vim.bo.ma) and '%%%%'
     or vim.bo.modified and '**'
@@ -255,8 +264,8 @@ function _G._statusline.info(nc)
   add_section(_G._statusline.diag(nc))
   return make_segment(
     24,
-    vim.tbl_isempty(info) and '(Nop)'
-      or string.format('(%s)', table.concat(info, ' '))
+    vim.tbl_isempty(info) and '(Nope)'
+      or string.format('(%s)', table.concat(info, ', '))
   )
 end
 
@@ -269,6 +278,7 @@ local components = {
   fname        = [[%{%v:lua.require'my.plugins.eline'.fname()%}]],
   info         = [[%{%v:lua.require'my.plugins.eline'.info(v:false)%}]],
   info_nc      = [[%{%v:lua.require'my.plugins.eline'.info(v:true)%}]],
+  win_scroll   = [[%{%v:lua.require'my.plugins.eline'.win_scroll()%}]],
   pos          = [[%{%v:lua.require'my.plugins.eline'.pos()%}]],
   align        = [[%=]],
   padding      = [[ ]],
@@ -280,6 +290,7 @@ local stl = table.concat({
   components.padding,
   components.state,
   components.fname,
+  components.win_scroll,
   components.pos,
   components.info,
   components.mode,
@@ -292,6 +303,7 @@ local stl_nc = table.concat({
   components.padding,
   components.state,
   components.fname,
+  components.win_scroll,
   components.pos,
   components.info_nc,
   components.mode,
