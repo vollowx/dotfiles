@@ -273,13 +273,13 @@ end
 ---Statusline components
 ---@type table<string, string>
 local components = {
-  mode         = [[%{%v:lua.require'my.plugins.eline'.mode()%}]],
-  state        = [[%{%v:lua.require'my.plugins.eline'.state()%}]],
-  fname        = [[%{%v:lua.require'my.plugins.eline'.fname()%}]],
-  info         = [[%{%v:lua.require'my.plugins.eline'.info(v:false)%}]],
-  info_nc      = [[%{%v:lua.require'my.plugins.eline'.info(v:true)%}]],
-  win_scroll   = [[%{%v:lua.require'my.plugins.eline'.win_scroll()%}]],
-  pos          = [[%{%v:lua.require'my.plugins.eline'.pos()%}]],
+  mode         = [[%{%v:lua.require'my.plugin.emoline'.mode()%}]],
+  state        = [[%{%v:lua.require'my.plugin.emoline'.state()%}]],
+  fname        = [[%{%v:lua.require'my.plugin.emoline'.fname()%}]],
+  info         = [[%{%v:lua.require'my.plugin.emoline'.info(v:false)%}]],
+  info_nc      = [[%{%v:lua.require'my.plugin.emoline'.info(v:true)%}]],
+  win_scroll   = [[%{%v:lua.require'my.plugin.emoline'.win_scroll()%}]],
+  pos          = [[%{%v:lua.require'my.plugin.emoline'.pos()%}]],
   align        = [[%=]],
   padding      = [[ ]],
   truncate     = [[%<]],

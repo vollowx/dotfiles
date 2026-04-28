@@ -75,4 +75,20 @@ local function setup(buf)
   })
 end
 
-return { setup = setup }
+-- stylua: ignore start
+vim.keymap.set('t', '<C-^>', '<Cmd>b#<CR>',            { replace_keycodes = false })
+vim.keymap.set('t', '<C-6>', '<Cmd>b#<CR>',            { replace_keycodes = false })
+vim.keymap.set('t', '<Esc>', '<Cmd>stopi<CR>',         { replace_keycodes = false })
+vim.keymap.set('t', '<C-w><C-h>', '<Cmd>wincmd h<CR>', { replace_keycodes = false })
+vim.keymap.set('t', '<C-w><C-j>', '<Cmd>wincmd j<CR>', { replace_keycodes = false })
+vim.keymap.set('t', '<C-w><C-k>', '<Cmd>wincmd k<CR>', { replace_keycodes = false })
+vim.keymap.set('t', '<C-w><C-l>', '<Cmd>wincmd l<CR>', { replace_keycodes = false })
+-- stylua: ignore end
+
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  group = vim.api.nvim_create_augroup('TermOpts', {}),
+  desc = 'Set terminal options.',
+  callback = function(info)
+    setup(info.buf)
+  end,
+})
