@@ -1,8 +1,8 @@
 * dotfiles
 
-Dotfiles for *nix and Windows systems.
+Dotfiles for *nix systems and Windows.
 
-- ~managed-*~ are for Linux, managed by GNUStow
+- ~managed-*~ are for *nix, managed by GNU Stow
 - ~unmanaged-*~ are not specified
 
 Package names are those in [[https://archlinux.org/][Arch Linux]] and
