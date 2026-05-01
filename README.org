@@ -22,7 +22,7 @@ mkdir -p ~/Music
 mkdir -p ~/Pictures/Wallpapers
 mkdir -p ~/Pictures/Screenshots
 mkdir -p ~/Videos/Screencasts
-stow -vRt ~ managed-cli managed-gui
+stow -vRt ~ managed-terminal managed-neovim managed-desktop
 sudo cp -r unmanaged-root/. /
 #+END_SRC
 
