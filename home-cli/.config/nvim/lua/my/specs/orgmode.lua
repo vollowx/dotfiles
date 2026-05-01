@@ -1,6 +1,6 @@
 return {
   {
-    src = 'https://github.com/vollowx/nvim-orgmode',
+    src = 'https://github.com/nvim-orgmode/orgmode',
     data = {
       postload = function(_)
         require('orgmode').setup({

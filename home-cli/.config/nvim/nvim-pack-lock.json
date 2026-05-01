@@ -34,12 +34,8 @@
       "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "8fde495949782bb61c2605174e231d145a048d8c",
+      "rev": "6419b36f50c42420cbbf1d3ffba573094cf414c8",
       "src": "https://github.com/neovim/nvim-lspconfig"
-    },
-    "nvim-orgmode": {
-      "rev": "310b25120191a345d59a6450ef571fffb84d59da",
-      "src": "https://github.com/vollowx/nvim-orgmode"
     },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
@@ -55,7 +51,7 @@
       "src": "https://github.com/nvim-orgmode/org-bullets.nvim"
     },
     "orgmode": {
-      "rev": "a214db3c8ed7eb68cb74924575b91ffc658e7d82",
+      "rev": "2ed4742a68555d938919f8b2fe78e905b983a838",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "quicker.nvim": {
@@ -87,12 +83,8 @@
       "src": "https://github.com/tpope/vim-sleuth"
     },
     "vim-wakatime": {
-      "rev": "8217dfb5a5a3ad3a509365d8a39d7daca12b1745",
+      "rev": "5f458398a217735b908ae40d1c2851cc69e7d817",
       "src": "https://github.com/wakatime/vim-wakatime"
-    },
-    "vimwiki": {
-      "rev": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8",
-      "src": "https://github.com/vimwiki/vimwiki"
     }
   }
 }
