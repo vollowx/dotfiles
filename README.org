@@ -55,7 +55,7 @@ sudo pkgfile --update
 
 This also installs ~pipewire-audio pipewire-session-manager wireplumber~,
 and the ~systemd~-based auto-start is managed in
-~@/home-gui/.config/systemd~.
+~@/managed-desktop/.config/systemd~.
 
 *** Bluetooth
 
@@ -92,7 +92,7 @@ works in that case). +Stay sway from me cables :)+
 
 *** Hibernate
 
-Power button config is in ~@/root~
+Power button config is in ~@/unmanaged-root~
 
 #+BEGIN_SRC
 # /etc/mkinitcpio.conf

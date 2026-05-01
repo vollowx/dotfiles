@@ -1,8 +1,8 @@
 **/__pycache__/
-home-cli/.config/mpd/mpd.db
-home-cli/.config/mpd/playlists/**
-home-cli/.config/ncmpcpp/error.log
-home-gui/.config/gtk-3.0/bookmarks
-home-gui/.config/qutebrowser/bookmarks/urls
-home-gui/.config/qutebrowser/quickmarks
-home-gui/.config/qutebrowser/qsettings/QtProject.conf
+home-desktop/.config/gtk-3.0/bookmarks
+home-desktop/.config/qutebrowser/bookmarks/urls
+home-desktop/.config/qutebrowser/quickmarks
+home-desktop/.config/qutebrowser/qsettings/QtProject.conf
+home-terminal/.config/mpd/mpd.db
+home-terminal/.config/mpd/playlists/**
+home-terminal/.config/ncmpcpp/error.log
