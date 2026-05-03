@@ -2,8 +2,8 @@
 
 Dotfiles for *nix systems and Windows.
 
-- ~managed-*~ are for *nix, managed by GNU Stow
-- ~unmanaged-*~ are not specified
+- ~unmanaged~ are not specified
+- The rest are for *nix, managed by GNU Stow
 
 Package names are those in [[https://archlinux.org/][Arch Linux]] and
 [[https://aur.archlinux.org/][AUR]] if not otherwise noted.
@@ -22,8 +22,8 @@ mkdir -p ~/Music
 mkdir -p ~/Pictures/Wallpapers
 mkdir -p ~/Pictures/Screenshots
 mkdir -p ~/Videos/Screencasts
-stow -vRt ~ managed-terminal managed-neovim managed-desktop
-sudo cp -r unmanaged-root/. /
+stow -vRt ~ headless neovim graphical
+sudo cp -r unmanaged/root/. /
 #+END_SRC
 
 ~stow bash-completion pkgfile unzip unrar 7zip go~
@@ -92,7 +92,7 @@ works in that case). +Stay sway from me cables :)+
 
 *** Hibernate
 
-Power button config is in ~@/unmanaged-root~
+Power button config is in ~@/unmanaged/root~
 
 #+BEGIN_SRC
 # /etc/mkinitcpio.conf
