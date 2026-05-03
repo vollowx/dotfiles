@@ -1,8 +1,8 @@
 **/__pycache__/
-home-desktop/.config/gtk-3.0/bookmarks
-home-desktop/.config/qutebrowser/bookmarks/urls
-home-desktop/.config/qutebrowser/quickmarks
-home-desktop/.config/qutebrowser/qsettings/QtProject.conf
-home-terminal/.config/mpd/mpd.db
-home-terminal/.config/mpd/playlists/**
-home-terminal/.config/ncmpcpp/error.log
+graphical/.config/gtk-3.0/bookmarks
+graphical/.config/qutebrowser/bookmarks/urls
+graphical/.config/qutebrowser/quickmarks
+graphical/.config/qutebrowser/qsettings/QtProject.conf
+headless/.config/mpd/mpd.db
+headless/.config/mpd/playlists/**
+headless/.config/ncmpcpp/error.log
