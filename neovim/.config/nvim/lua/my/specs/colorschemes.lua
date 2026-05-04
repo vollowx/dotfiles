@@ -8,6 +8,15 @@ return {
           sign_column_background = false,
           styles = { comments = { italic = false }, keywords = { italic = false } },
           on_highlights = function(highlight, color)
+            highlight['WinBarNC'] = { link = 'TabLineSel' }
+
+            highlight['CompileModeError']         = { fg = color.error }
+            highlight['CompileModeInfo']          = { fg = color.info }
+            highlight['CompileModeWarning']       = { fg = color.warning }
+            highlight['CompileModeCommandOutput'] = { fg = color.blue_faint }
+            highlight['CompileModeMessageRow']    = { fg = color.magenta, bold = true }
+            highlight['CompileModeMessageCol']    = { fg = color.cyan, bold = true }
+
             highlight['@org.headline.level1']          = { fg = color.magenta_cooler }
             highlight['@org.headline.level2']          = { fg = color.magenta_warmer }
             highlight['@org.headline.level3']          = { fg = color.blue }
@@ -21,7 +30,7 @@ return {
             highlight['@org.drawer']                   = { fg = color.magenta }
             highlight['@org.agenda.header']            = { fg = color.blue_faint, bold = true }
             highlight['@org.agenda.deadline']          = { fg = color.red_cooler }
-            -- highlight['@org.agenda.deadline.upcoming'] = { fg = color.red_faint }
+            highlight['@org.agenda.deadline.upcoming'] = { fg = color.red_faint }
             highlight['@org.agenda.scheduled']         = { fg = color.yellow_faint }
             highlight['@org.agenda.scheduled_past']    = { fg = color.yellow_faint }
             highlight['@org.agenda.time_grid']         = { fg = color.fg_dim }

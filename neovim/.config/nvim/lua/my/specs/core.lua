@@ -1,4 +1,6 @@
 return {
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+
   { src = 'https://github.com/neovim/nvim-lspconfig' },
 
   -- NOTE: `*:c` catches commands and search

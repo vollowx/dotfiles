@@ -24,6 +24,9 @@ local function _load(plug_data)
       once = true,
       pattern = data.pattern or '*',
       callback = function()
+        if type(data.preload) == 'function' then
+          data.preload(plug_data)
+        end
         vim.cmd.packadd(spec.name)
         if type(data.postload) == 'function' then
           data.postload(plug_data)
@@ -32,6 +35,9 @@ local function _load(plug_data)
     })
     return
   else -- Immediate loading
+    if type(data.preload) == 'function' then
+      data.preload(plug_data)
+    end
     vim.cmd.packadd(spec.name)
     if type(data.postload) == 'function' then
       data.postload(plug_data)
