@@ -13,6 +13,14 @@ return {
             'DONE',
             'DELEGATED',
           },
+          org_agenda_sorting_strategy = {
+            agenda = {
+              'time-up',
+              'todo-state-up',
+              'priority-down',
+              'category-keep',
+            },
+          },
         })
 
         vim.lsp.enable('org')
