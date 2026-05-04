@@ -10,6 +10,7 @@ return {
           on_highlights = function(highlight, color)
             highlight['WinBarNC'] = { link = 'TabLineSel' }
 
+            -- stylua: ignore start
             highlight['CompileModeError']         = { fg = color.error }
             highlight['CompileModeInfo']          = { fg = color.info }
             highlight['CompileModeWarning']       = { fg = color.warning }
@@ -38,6 +39,7 @@ return {
             highlight['@org.agenda.today']             = { fg = color.cyan, bold = true,    underline = true }
             highlight['@org.agenda.weekend']           = { fg = color.magenta, bold = true }
             highlight['@org.agenda.weekend.today']     = { fg = color.magenta, bold = true, underline = true }
+            -- stylua: ignore end
           end,
         })
       end,
