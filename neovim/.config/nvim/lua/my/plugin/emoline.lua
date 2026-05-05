@@ -306,7 +306,6 @@ local stl_nc = table.concat({
   components.win_scroll,
   components.pos,
   components.info_nc,
-  components.mode,
   components.align,
   components.truncate,
   components.padding,
