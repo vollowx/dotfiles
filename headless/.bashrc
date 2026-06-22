@@ -60,6 +60,6 @@ fi
 
 # GUI utils
 
-if [ -n "${WAYLAND_DISPLAY}" ]; then
+if [ -n "${WAYLAND_DISPLAY}" ]&& [ "${WSL2_GUI_APPS_ENABLED}" != "1" ]; then
   update-colors-term
 fi
