@@ -6,7 +6,7 @@
       "version": "1.0.0 - 2.0.0"
     },
     "catppuccin": {
-      "rev": "49a926655a2f5579e9c276470fc300baaa49e524",
+      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim"
     },
     "colorful-menu.nvim": {
@@ -21,17 +21,9 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
-    "coop.nvim": {
-      "rev": "b156e541316aee14be4ae64c93ed8bddb6d03bc1",
-      "src": "https://github.com/gregorias/coop.nvim"
-    },
     "everforest": {
       "rev": "85a86eb62409e3ec88713bff3d1b9d7374e112e4",
       "src": "https://github.com/sainnhe/everforest"
-    },
-    "feed.nvim": {
-      "rev": "4e0903343c47b13aa5355ed267dbd58300bff8be",
-      "src": "https://github.com/neo451/feed.nvim"
     },
     "gitsigns.nvim": {
       "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
@@ -42,11 +34,11 @@
       "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
+      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-spider": {
-      "rev": "4fdd56a4f45bca13a607632e15a6f9f8d1b1f99e",
+      "rev": "7f021426d4a615ea8f11cabed434b1f20376abae",
       "src": "https://github.com/chrisgrieser/nvim-spider"
     },
     "nvim-treesitter": {
@@ -63,7 +55,7 @@
       "src": "https://github.com/nvim-orgmode/org-bullets.nvim"
     },
     "orgmode": {
-      "rev": "f5485be9a4301ab535f99f2dc30601c47305dde7",
+      "rev": "4f99b3780950370e49d6ab88d041b2afe4da2566",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "plenary.nvim": {
@@ -73,6 +65,10 @@
     "quicker.nvim": {
       "rev": "4a6883cb13fe097a20a046eb55f6dffd239276e3",
       "src": "https://github.com/stevearc/quicker.nvim"
+    },
+    "substitute.nvim": {
+      "rev": "0d2077398552f069abccbd964a26dd7cd26882cd",
+      "src": "https://github.com/gbprod/substitute.nvim"
     },
     "symbol-usage.nvim": {
       "rev": "6a449e6b37be61a110606e9a67a7a308774f120f",
@@ -97,10 +93,6 @@
     "vim-sleuth": {
       "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
       "src": "https://github.com/tpope/vim-sleuth"
-    },
-    "vim-sneak": {
-      "rev": "feea86adcfbf8e6b5e71fdd5f4f5736fd8819fdb",
-      "src": "https://github.com/justinmk/vim-sneak"
     },
     "vim-surround": {
       "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
