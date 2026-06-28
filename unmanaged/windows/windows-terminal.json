@@ -2,10 +2,11 @@
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [],
-    "alwaysShowTabs": false,
+    "alwaysShowTabs": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{d9d8ea90-0c53-5be1-9455-9c77a2786ee4}",
+    "defaultInputScope": "alphanumericHalfWidth",
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "disableAnimations": true,
     "initialCols": 120,
     "initialRows": 36,
@@ -144,6 +145,7 @@
             "keys": "alt+9"
         }
     ],
+    "launchMode": "default",
     "newTabMenu": 
     [
         {
@@ -154,6 +156,8 @@
     {
         "defaults": 
         {
+            "backgroundImage": null,
+            "backgroundImageOpacity": 0.12,
             "bellStyle": "none",
             "colorScheme": "Modus Vivendi",
             "cursorShape": "filledBox",
@@ -161,7 +165,8 @@
             {
                 "cellHeight": "1.25",
                 "cellWidth": "0.5",
-                "face": "Sarasa Term SC"
+                "face": "Iosevka Nah",
+                "size": 12
             },
             "padding": "12",
             "scrollbarState": "hidden"
@@ -185,12 +190,6 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
-                "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
             },
             {
                 "guid": "{d9d8ea90-0c53-5be1-9455-9c77a2786ee4}",
@@ -227,9 +226,9 @@
             "yellow": "#D0BC00"
         }
     ],
-    "showTabsInTitlebar": false,
+    "showTabsInTitlebar": true,
     "tabWidthMode": "equal",
     "theme": "dark",
     "themes": [],
-    "useAcrylicInTabRow": false
+    "useAcrylicInTabRow": true
 }
